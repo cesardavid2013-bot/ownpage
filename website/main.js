@@ -76,6 +76,56 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ---- The light: darkness over the portraits, cleared where the visitor's light falls ----
+  (function light() {
+    var hero = document.querySelector('.lumen');
+    if (!hero) return;
+    var cv = hero.querySelector('canvas.dark');
+    var ctx = cv.getContext('2d');
+    var pos = { x: 0.7, y: 0.4 }, target = { x: 0.7, y: 0.4 }, lastMove = 0, visible = true;
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(hero.clientWidth * dpr); cv.height = Math.round(hero.clientHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function frame(t) {
+      var w = hero.clientWidth, h = hero.clientHeight;
+      if (performance.now() - lastMove > 2500) {
+        // Idle: the light wanders slowly between faces.
+        target.x = 0.5 + 0.36 * Math.sin(t / 3100); target.y = 0.42 + 0.22 * Math.sin(t / 2300 + 1);
+      }
+      pos.x += (target.x - pos.x) * 0.08; pos.y += (target.y - pos.y) * 0.08;
+      var x = pos.x * w, y = pos.y * h, r = Math.max(220, Math.min(w, h) * 0.34);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(10,10,12,0.955)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'destination-out';
+      var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.45, 'rgba(0,0,0,0.85)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+      // warm tint of candlelight
+      ctx.globalCompositeOperation = 'source-over';
+      var warm = ctx.createRadialGradient(x, y, 0, x, y, r * 0.9);
+      warm.addColorStop(0, 'rgba(233,190,130,0.16)'); warm.addColorStop(1, 'rgba(233,190,130,0)');
+      ctx.fillStyle = warm; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+      if (visible && !reduceMotion()) requestAnimationFrame(frame);
+    }
+    hero.addEventListener('pointermove', function (e) {
+      var b = hero.getBoundingClientRect();
+      target.x = (e.clientX - b.left) / b.width; target.y = (e.clientY - b.top) / b.height; lastMove = performance.now();
+    });
+    window.addEventListener('resize', function () { size(); if (reduceMotion()) frame(0); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        var was = visible; visible = es[0].isIntersecting;
+        if (visible && !was && !reduceMotion()) requestAnimationFrame(frame);
+      }).observe(hero);
+    }
+    size();
+    if (reduceMotion()) frame(0); else requestAnimationFrame(frame);
+  })();
+
   // ---- Interactive demo: swipe real-looking profiles right on the page ----
   (function demo() {
     var root = document.getElementById('demo');

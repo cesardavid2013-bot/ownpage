@@ -12,7 +12,7 @@ window.LUMI_I18N = {
     'nav.features': 'Features', 'nav.premium': 'Premium', 'nav.safety': 'Safety', 'nav.faq': 'FAQ', 'nav.open': 'Open Lumi',
     'hero.eyebrow': 'Where sparks find their light', 'hero.title1': 'Meet people', 'hero.title2': 'worth meeting.',
     'hero.lead': 'Verified profiles, real conversations and a premium experience — in 20 languages, on iPhone, Android and the web.',
-    'hero.start': 'Start for free', 'hero.premium': 'Explore memberships',
+    'hero.start': 'Start for free',
     'store.apple': 'Download on the', 'store.google': 'Get it on', 'store.web': 'Use it now in your', 'store.webBig': 'Browser', 'store.soon': 'Coming soon to',
     'chip.match': "It's a match!", 'chip.super': 'Super Liked you',
     'stats.langs': 'languages', 'stats.platforms': 'one account everywhere', 'stats.realtime': 'real-time chat & matches', 'stats.adults': 'adults only, safety first',
@@ -51,7 +51,7 @@ window.LUMI_I18N = {
     'nav.features': 'Funciones', 'nav.premium': 'Premium', 'nav.safety': 'Seguridad', 'nav.faq': 'Preguntas', 'nav.open': 'Abrir Lumi',
     'hero.eyebrow': 'Donde las chispas encuentran su luz', 'hero.title1': 'Conoce a personas', 'hero.title2': 'que valen la pena.',
     'hero.lead': 'Perfiles verificados, conversaciones reales y una experiencia premium — en 20 idiomas, en iPhone, Android y la web.',
-    'hero.start': 'Empieza gratis', 'hero.premium': 'Ver membresías',
+    'hero.start': 'Empieza gratis',
     'store.apple': 'Descárgalo en el', 'store.google': 'Disponible en', 'store.web': 'Úsalo ya en tu', 'store.webBig': 'Navegador', 'store.soon': 'Muy pronto en',
     'chip.match': '¡Es un match!', 'chip.super': 'Te dio Super Like',
     'stats.langs': 'idiomas', 'stats.platforms': 'una cuenta en todas partes', 'stats.realtime': 'chat y matches en tiempo real', 'stats.adults': 'solo adultos, seguridad primero',
@@ -90,7 +90,7 @@ window.LUMI_I18N = {
     'nav.features': 'Recursos', 'nav.premium': 'Premium', 'nav.safety': 'Segurança', 'nav.faq': 'Dúvidas', 'nav.open': 'Abrir o Lumi',
     'hero.eyebrow': 'Onde as faíscas encontram sua luz', 'hero.title1': 'Conheça pessoas', 'hero.title2': 'que valem a pena.',
     'hero.lead': 'Perfis verificados, conversas reais e uma experiência premium — em 20 idiomas, no iPhone, Android e na web.',
-    'hero.start': 'Comece grátis', 'hero.premium': 'Conheça o Premium',
+    'hero.start': 'Comece grátis',
     'store.apple': 'Baixar na', 'store.google': 'Disponível no', 'store.web': 'Use agora no seu', 'store.webBig': 'Navegador', 'store.soon': 'Em breve na',
     'chip.match': 'Deu match!', 'chip.super': 'Te deu Super Like',
     'stats.langs': 'idiomas', 'stats.platforms': 'uma conta em todo lugar', 'stats.realtime': 'chat e matches em tempo real', 'stats.adults': 'só adultos, segurança em primeiro lugar',
@@ -129,7 +129,7 @@ window.LUMI_I18N = {
     'nav.features': 'Fonctionnalités', 'nav.premium': 'Premium', 'nav.safety': 'Sécurité', 'nav.faq': 'FAQ', 'nav.open': 'Ouvrir Lumi',
     'hero.eyebrow': 'Là où les étincelles trouvent leur lumière', 'hero.title1': 'Rencontrez des personnes', 'hero.title2': 'qui en valent la peine.',
     'hero.lead': 'Profils vérifiés, vraies conversations et une expérience premium — en 20 langues, sur iPhone, Android et le web.',
-    'hero.start': 'Commencer gratuitement', 'hero.premium': 'Découvrir Premium',
+    'hero.start': 'Commencer gratuitement',
     'store.apple': 'Télécharger dans l’', 'store.google': 'Disponible sur', 'store.web': 'Utilisez-le dans votre', 'store.webBig': 'Navigateur', 'store.soon': 'Bientôt sur',
     'chip.match': "C'est un match !", 'chip.super': 'Vous a envoyé un Super Like',
     'stats.langs': 'langues', 'stats.platforms': 'un seul compte partout', 'stats.realtime': 'chat et matchs en temps réel', 'stats.adults': 'réservé aux adultes, sécurité avant tout',
@@ -171,7 +171,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Funktionen', 'nav.premium': 'Premium', 'nav.safety': 'Sicherheit', 'nav.faq': 'FAQ', 'nav.open': 'Lumi öffnen',
     'hero.eyebrow': 'Wo Funken ihr Licht finden', 'hero.title1': 'Triff Menschen,', 'hero.title2': 'die es wert sind.',
     'hero.lead': 'Verifizierte Profile, echte Gespräche und ein Premium-Erlebnis — in 20 Sprachen, auf iPhone, Android und im Web.',
-    'hero.start': 'Kostenlos starten', 'hero.premium': 'Premium entdecken',
+    'hero.start': 'Kostenlos starten',
     'store.apple': 'Laden im', 'store.google': 'Jetzt bei', 'store.web': 'Sofort nutzen im', 'store.webBig': 'Browser', 'store.soon': 'Bald im',
     'chip.match': 'Es ist ein Match!', 'chip.super': 'Hat dir ein Super Like gegeben',
     'stats.langs': 'Sprachen', 'stats.platforms': 'ein Konto überall', 'stats.realtime': 'Chat & Matches in Echtzeit', 'stats.adults': 'nur für Erwachsene, Sicherheit zuerst',
@@ -210,7 +210,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Funzioni', 'nav.premium': 'Premium', 'nav.safety': 'Sicurezza', 'nav.faq': 'FAQ', 'nav.open': 'Apri Lumi',
     'hero.eyebrow': 'Dove le scintille trovano la loro luce', 'hero.title1': 'Incontra persone', 'hero.title2': 'che valgono la pena.',
     'hero.lead': 'Profili verificati, conversazioni vere e un’esperienza premium — in 20 lingue, su iPhone, Android e sul web.',
-    'hero.start': 'Inizia gratis', 'hero.premium': 'Scopri Premium',
+    'hero.start': 'Inizia gratis',
     'store.apple': 'Scarica su', 'store.google': 'Disponibile su', 'store.web': 'Usalo subito nel tuo', 'store.webBig': 'Browser', 'store.soon': 'Presto su',
     'chip.match': 'È un match!', 'chip.super': 'Ti ha mandato un Super Like',
     'stats.langs': 'lingue', 'stats.platforms': 'un solo account ovunque', 'stats.realtime': 'chat e match in tempo reale', 'stats.adults': 'solo adulti, sicurezza prima di tutto',
@@ -249,7 +249,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Functies', 'nav.premium': 'Premium', 'nav.safety': 'Veiligheid', 'nav.faq': 'FAQ', 'nav.open': 'Open Lumi',
     'hero.eyebrow': 'Waar vonken hun licht vinden', 'hero.title1': 'Ontmoet mensen', 'hero.title2': 'die het waard zijn.',
     'hero.lead': 'Geverifieerde profielen, echte gesprekken en een premium ervaring — in 20 talen, op iPhone, Android en het web.',
-    'hero.start': 'Gratis beginnen', 'hero.premium': 'Ontdek Premium',
+    'hero.start': 'Gratis beginnen',
     'store.apple': 'Download in de', 'store.google': 'Ontdek het op', 'store.web': 'Nu te gebruiken in je', 'store.webBig': 'Browser', 'store.soon': 'Binnenkort in',
     'chip.match': 'Het is een match!', 'chip.super': 'Gaf je een Super Like',
     'stats.langs': 'talen', 'stats.platforms': 'één account overal', 'stats.realtime': 'realtime chat & matches', 'stats.adults': 'alleen volwassenen, veiligheid voorop',
@@ -288,7 +288,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Funkcje', 'nav.premium': 'Premium', 'nav.safety': 'Bezpieczeństwo', 'nav.faq': 'FAQ', 'nav.open': 'Otwórz Lumi',
     'hero.eyebrow': 'Tam, gdzie iskry odnajdują swoje światło', 'hero.title1': 'Poznawaj ludzi,', 'hero.title2': 'których warto poznać.',
     'hero.lead': 'Zweryfikowane profile, prawdziwe rozmowy i doświadczenie premium — w 20 językach, na iPhonie, Androidzie i w przeglądarce.',
-    'hero.start': 'Zacznij za darmo', 'hero.premium': 'Poznaj Premium',
+    'hero.start': 'Zacznij za darmo',
     'store.apple': 'Pobierz z', 'store.google': 'Pobierz z', 'store.web': 'Używaj teraz w', 'store.webBig': 'Przeglądarce', 'store.soon': 'Wkrótce w',
     'chip.match': 'Macie parę!', 'chip.super': 'Dał(a) Ci Super Like',
     'stats.langs': 'języków', 'stats.platforms': 'jedno konto wszędzie', 'stats.realtime': 'czat i pary w czasie rzeczywistym', 'stats.adults': 'tylko dla dorosłych, bezpieczeństwo przede wszystkim',
@@ -330,7 +330,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Возможности', 'nav.premium': 'Premium', 'nav.safety': 'Безопасность', 'nav.faq': 'Вопросы', 'nav.open': 'Открыть Lumi',
     'hero.eyebrow': 'Там, где искры находят свой свет', 'hero.title1': 'Знакомьтесь с теми,', 'hero.title2': 'кто этого стоит.',
     'hero.lead': 'Проверенные профили, настоящие разговоры и премиальный опыт — на 20 языках, на iPhone, Android и в браузере.',
-    'hero.start': 'Начать бесплатно', 'hero.premium': 'Узнать о Premium',
+    'hero.start': 'Начать бесплатно',
     'store.apple': 'Загрузите в', 'store.google': 'Доступно в', 'store.web': 'Уже работает в', 'store.webBig': 'Браузере', 'store.soon': 'Скоро в',
     'chip.match': 'Это пара!', 'chip.super': 'Поставил(а) вам суперлайк',
     'stats.langs': 'языков', 'stats.platforms': 'один аккаунт везде', 'stats.realtime': 'чат и пары в реальном времени', 'stats.adults': 'только для взрослых, безопасность прежде всего',
@@ -369,7 +369,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Можливості', 'nav.premium': 'Premium', 'nav.safety': 'Безпека', 'nav.faq': 'Питання', 'nav.open': 'Відкрити Lumi',
     'hero.eyebrow': 'Там, де іскри знаходять своє світло', 'hero.title1': 'Знайомтеся з тими,', 'hero.title2': 'хто цього вартий.',
     'hero.lead': 'Перевірені профілі, справжні розмови та преміальний досвід — 20 мовами, на iPhone, Android і в браузері.',
-    'hero.start': 'Почати безкоштовно', 'hero.premium': 'Дізнатися про Premium',
+    'hero.start': 'Почати безкоштовно',
     'store.apple': 'Завантажте в', 'store.google': 'Доступно в', 'store.web': 'Вже працює в', 'store.webBig': 'Браузері', 'store.soon': 'Незабаром у',
     'chip.match': 'Це пара!', 'chip.super': 'Поставив(ла) вам суперлайк',
     'stats.langs': 'мов', 'stats.platforms': 'один акаунт усюди', 'stats.realtime': 'чат і пари в реальному часі', 'stats.adults': 'лише для дорослих, безпека понад усе',
@@ -408,7 +408,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Özellikler', 'nav.premium': 'Premium', 'nav.safety': 'Güvenlik', 'nav.faq': 'SSS', 'nav.open': 'Lumi’yi aç',
     'hero.eyebrow': 'Kıvılcımların ışığını bulduğu yer', 'hero.title1': 'Tanışmaya değer', 'hero.title2': 'insanlarla tanış.',
     'hero.lead': 'Doğrulanmış profiller, gerçek sohbetler ve premium bir deneyim — 20 dilde, iPhone, Android ve web’de.',
-    'hero.start': 'Ücretsiz başla', 'hero.premium': 'Premium’u keşfet',
+    'hero.start': 'Ücretsiz başla',
     'store.apple': 'Şuradan indir:', 'store.google': 'Şurada edinin:', 'store.web': 'Hemen kullan:', 'store.webBig': 'Tarayıcı', 'store.soon': 'Çok yakında:',
     'chip.match': 'Eşleştiniz!', 'chip.super': 'Sana Süper Beğeni gönderdi',
     'stats.langs': 'dil', 'stats.platforms': 'her yerde tek hesap', 'stats.realtime': 'gerçek zamanlı sohbet ve eşleşme', 'stats.adults': 'yalnızca yetişkinler, önce güvenlik',
@@ -447,7 +447,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'المزايا', 'nav.premium': 'Premium', 'nav.safety': 'الأمان', 'nav.faq': 'الأسئلة', 'nav.open': 'افتح Lumi',
     'hero.eyebrow': 'حيث تجد الشرارات نورها', 'hero.title1': 'تعرّف على أشخاص', 'hero.title2': 'يستحقون المعرفة.',
     'hero.lead': 'ملفات موثّقة، ومحادثات حقيقية، وتجربة مميزة — بـ20 لغة، على iPhone وAndroid والويب.',
-    'hero.start': 'ابدأ مجانًا', 'hero.premium': 'اكتشف Premium',
+    'hero.start': 'ابدأ مجانًا',
     'store.apple': 'حمّله من', 'store.google': 'احصل عليه من', 'store.web': 'استخدمه الآن في', 'store.webBig': 'المتصفح', 'store.soon': 'قريبًا على',
     'chip.match': 'إنه تطابق!', 'chip.super': 'أرسل لك إعجابًا فائقًا',
     'stats.langs': 'لغة', 'stats.platforms': 'حساب واحد في كل مكان', 'stats.realtime': 'دردشة وتطابقات فورية', 'stats.adults': 'للبالغين فقط، والأمان أولًا',
@@ -489,7 +489,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'सुविधाएँ', 'nav.premium': 'प्रीमियम', 'nav.safety': 'सुरक्षा', 'nav.faq': 'सवाल-जवाब', 'nav.open': 'Lumi खोलें',
     'hero.eyebrow': 'जहाँ चिंगारियाँ अपनी रोशनी पाती हैं', 'hero.title1': 'ऐसे लोगों से मिलें', 'hero.title2': 'जिनसे मिलना सार्थक हो।',
     'hero.lead': 'सत्यापित प्रोफ़ाइल, असली बातचीत और प्रीमियम अनुभव — 20 भाषाओं में, iPhone, Android और वेब पर।',
-    'hero.start': 'मुफ़्त शुरू करें', 'hero.premium': 'प्रीमियम देखें',
+    'hero.start': 'मुफ़्त शुरू करें',
     'store.apple': 'डाउनलोड करें', 'store.google': 'पाएँ', 'store.web': 'अभी इस्तेमाल करें', 'store.webBig': 'ब्राउज़र', 'store.soon': 'जल्द आ रहा है',
     'chip.match': 'यह एक मैच है!', 'chip.super': 'आपको सुपर लाइक किया',
     'stats.langs': 'भाषाएँ', 'stats.platforms': 'हर जगह एक खाता', 'stats.realtime': 'रीयल-टाइम चैट और मैच', 'stats.adults': 'केवल वयस्क, सुरक्षा पहले',
@@ -528,7 +528,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': '功能', 'nav.premium': '会员', 'nav.safety': '安全', 'nav.faq': '常见问题', 'nav.open': '打开 Lumi',
     'hero.eyebrow': '让火花找到属于它的光', 'hero.title1': '遇见', 'hero.title2': '值得遇见的人。',
     'hero.lead': '真实认证的资料、真诚的对话和高端体验——支持 20 种语言，iPhone、Android 和网页皆可使用。',
-    'hero.start': '免费开始', 'hero.premium': '了解会员',
+    'hero.start': '免费开始',
     'store.apple': '下载于', 'store.google': '下载于', 'store.web': '立即在此使用', 'store.webBig': '浏览器', 'store.soon': '即将上线',
     'chip.match': '配对成功！', 'chip.super': '超级喜欢了你',
     'stats.langs': '种语言', 'stats.platforms': '一个账号，处处可用', 'stats.realtime': '实时聊天与配对', 'stats.adults': '仅限成年人，安全第一',
@@ -567,7 +567,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': '機能', 'nav.premium': 'プレミアム', 'nav.safety': '安全', 'nav.faq': 'よくある質問', 'nav.open': 'Lumi を開く',
     'hero.eyebrow': '火花が、光に出会う場所', 'hero.title1': '出会う価値のある人と、', 'hero.title2': '出会おう。',
     'hero.lead': '認証済みのプロフィール、本物の会話、プレミアムな体験 — 20言語対応、iPhone・Android・Web で。',
-    'hero.start': '無料ではじめる', 'hero.premium': 'プレミアムを見る',
+    'hero.start': '無料ではじめる',
     'store.apple': 'ダウンロード', 'store.google': '入手する', 'store.web': '今すぐ使える', 'store.webBig': 'ブラウザ', 'store.soon': '近日公開',
     'chip.match': 'マッチしました！', 'chip.super': 'スーパーライクが届きました',
     'stats.langs': '言語', 'stats.platforms': 'ひとつのアカウントでどこでも', 'stats.realtime': 'リアルタイムのチャットとマッチ', 'stats.adults': '18歳以上限定、安全第一',
@@ -606,7 +606,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': '기능', 'nav.premium': '프리미엄', 'nav.safety': '안전', 'nav.faq': 'FAQ', 'nav.open': 'Lumi 열기',
     'hero.eyebrow': '불꽃이 빛을 만나는 곳', 'hero.title1': '만날 가치가 있는', 'hero.title2': '사람을 만나세요.',
     'hero.lead': '인증된 프로필, 진짜 대화, 프리미엄 경험 — 20개 언어로, iPhone·Android·웹에서.',
-    'hero.start': '무료로 시작하기', 'hero.premium': '프리미엄 알아보기',
+    'hero.start': '무료로 시작하기',
     'store.apple': '다운로드', 'store.google': '다운로드', 'store.web': '지금 바로 사용', 'store.webBig': '브라우저', 'store.soon': '곧 출시',
     'chip.match': '매치 성공!', 'chip.super': '슈퍼 좋아요를 받았어요',
     'stats.langs': '개 언어', 'stats.platforms': '하나의 계정으로 어디서나', 'stats.realtime': '실시간 채팅과 매치', 'stats.adults': '성인 전용, 안전 최우선',
@@ -671,7 +671,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Fitur', 'nav.premium': 'Premium', 'nav.safety': 'Keamanan', 'nav.faq': 'FAQ', 'nav.open': 'Buka Lumi',
     'hero.eyebrow': 'Tempat percikan menemukan cahayanya', 'hero.title1': 'Temui orang-orang', 'hero.title2': 'yang layak ditemui.',
     'hero.lead': 'Profil terverifikasi, percakapan nyata, dan pengalaman premium — dalam 20 bahasa, di iPhone, Android, dan web.',
-    'hero.start': 'Mulai gratis', 'hero.premium': 'Lihat keanggotaan',
+    'hero.start': 'Mulai gratis',
     'store.apple': 'Unduh di', 'store.google': 'Dapatkan di', 'store.web': 'Pakai sekarang di', 'store.webBig': 'Browser', 'store.soon': 'Segera hadir di',
     'chip.match': 'Kalian match!', 'chip.super': 'Memberimu Super Like',
     'stats.langs': 'bahasa', 'stats.platforms': 'satu akun di mana saja', 'stats.realtime': 'obrolan & match real-time', 'stats.adults': 'khusus dewasa, keamanan utama',
@@ -712,7 +712,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Tính năng', 'nav.premium': 'Premium', 'nav.safety': 'An toàn', 'nav.faq': 'Hỏi đáp', 'nav.open': 'Mở Lumi',
     'hero.eyebrow': 'Nơi những tia lửa tìm thấy ánh sáng', 'hero.title1': 'Gặp gỡ những người', 'hero.title2': 'đáng để gặp.',
     'hero.lead': 'Hồ sơ đã xác minh, trò chuyện thật và trải nghiệm cao cấp — bằng 20 ngôn ngữ, trên iPhone, Android và web.',
-    'hero.start': 'Bắt đầu miễn phí', 'hero.premium': 'Xem các gói thành viên',
+    'hero.start': 'Bắt đầu miễn phí',
     'store.apple': 'Tải về trên', 'store.google': 'Tải trên', 'store.web': 'Dùng ngay trên', 'store.webBig': 'Trình duyệt', 'store.soon': 'Sắp có trên',
     'chip.match': 'Tương hợp rồi!', 'chip.super': 'Đã Siêu thích bạn',
     'stats.langs': 'ngôn ngữ', 'stats.platforms': 'một tài khoản ở mọi nơi', 'stats.realtime': 'trò chuyện & tương hợp tức thì', 'stats.adults': 'chỉ dành cho người lớn, an toàn trên hết',
@@ -753,7 +753,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'ฟีเจอร์', 'nav.premium': 'พรีเมียม', 'nav.safety': 'ความปลอดภัย', 'nav.faq': 'คำถาม', 'nav.open': 'เปิด Lumi',
     'hero.eyebrow': 'ที่ซึ่งประกายไฟได้พบแสงสว่าง', 'hero.title1': 'พบกับคนที่', 'hero.title2': 'คุ้มค่าแก่การรู้จัก',
     'hero.lead': 'โปรไฟล์ที่ยืนยันแล้ว บทสนทนาที่จริงใจ และประสบการณ์ระดับพรีเมียม — ใน 20 ภาษา บน iPhone, Android และเว็บ',
-    'hero.start': 'เริ่มต้นฟรี', 'hero.premium': 'ดูสมาชิกภาพ',
+    'hero.start': 'เริ่มต้นฟรี',
     'store.apple': 'ดาวน์โหลดบน', 'store.google': 'ดาวน์โหลดบน', 'store.web': 'ใช้งานได้เลยบน', 'store.webBig': 'เบราว์เซอร์', 'store.soon': 'เร็วๆ นี้บน',
     'chip.match': 'แมตช์แล้ว!', 'chip.super': 'ส่งซูเปอร์ไลก์ให้คุณ',
     'stats.langs': 'ภาษา', 'stats.platforms': 'บัญชีเดียวใช้ได้ทุกที่', 'stats.realtime': 'แชทและแมตช์แบบเรียลไทม์', 'stats.adults': 'เฉพาะผู้ใหญ่ ปลอดภัยไว้ก่อน',
@@ -794,7 +794,7 @@ Object.assign(window.LUMI_I18N, {
     'nav.features': 'Funktioner', 'nav.premium': 'Premium', 'nav.safety': 'Säkerhet', 'nav.faq': 'Frågor', 'nav.open': 'Öppna Lumi',
     'hero.eyebrow': 'Där gnistor hittar sitt ljus', 'hero.title1': 'Träffa människor', 'hero.title2': 'värda att träffa.',
     'hero.lead': 'Verifierade profiler, riktiga samtal och en premiumupplevelse — på 20 språk, på iPhone, Android och webben.',
-    'hero.start': 'Börja gratis', 'hero.premium': 'Se medlemskapen',
+    'hero.start': 'Börja gratis',
     'store.apple': 'Hämta i', 'store.google': 'Hämta på', 'store.web': 'Använd direkt i din', 'store.webBig': 'Webbläsare', 'store.soon': 'Kommer snart till',
     'chip.match': 'Det är en match!', 'chip.super': 'Gav dig en Super Like',
     'stats.langs': 'språk', 'stats.platforms': 'ett konto överallt', 'stats.realtime': 'chatt och matchningar i realtid', 'stats.adults': 'endast vuxna, säkerheten först',
@@ -1175,6 +1175,400 @@ Object.assign(window.LUMI_I18N, {
   "demo.q1": "Min perfekta söndag",
   "demo.q2": "Den perfekta första dejten",
   "demo.q3": "Jag söker någon som"
+ }
+};
+  Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
+})(window.LUMI_I18N);
+
+/* Light hero + Try section */
+(function (d) {
+  var add = {
+ "en": {
+  "hero.light": "Move your light",
+  "hero.try": "Try it now",
+  "try.eyebrow": "Try it",
+  "try.title": "Swipe a few. No account needed.",
+  "try.text": "This is the real Lumi card. Drag it, like someone, and see what happens when it's mutual."
+ },
+ "es": {
+  "hero.light": "Mueve tu luz",
+  "hero.try": "Pruébalo ahora",
+  "try.eyebrow": "Pruébalo",
+  "try.title": "Desliza un par. Sin crear cuenta.",
+  "try.text": "Esta es la tarjeta real de Lumi. Arrástrala, dale like a alguien y mira qué pasa cuando es mutuo."
+ },
+ "pt": {
+  "hero.light": "Mova sua luz",
+  "hero.try": "Experimente agora",
+  "try.eyebrow": "Experimente",
+  "try.title": "Deslize alguns. Sem criar conta.",
+  "try.text": "Este é o cartão real do Lumi. Arraste, curta alguém e veja o que acontece quando é recíproco."
+ },
+ "fr": {
+  "hero.light": "Déplacez votre lumière",
+  "hero.try": "Essayer maintenant",
+  "try.eyebrow": "Essayez",
+  "try.title": "Swipez-en quelques-uns. Sans compte.",
+  "try.text": "Voici la vraie carte Lumi. Faites-la glisser, likez quelqu’un et voyez ce qui se passe quand c’est réciproque."
+ },
+ "de": {
+  "hero.light": "Bewege dein Licht",
+  "hero.try": "Jetzt ausprobieren",
+  "try.eyebrow": "Ausprobieren",
+  "try.title": "Swipe ein paar. Ganz ohne Konto.",
+  "try.text": "Das ist die echte Lumi-Karte. Zieh sie, like jemanden und sieh, was passiert, wenn es gegenseitig ist."
+ },
+ "it": {
+  "hero.light": "Muovi la tua luce",
+  "hero.try": "Provalo ora",
+  "try.eyebrow": "Provalo",
+  "try.title": "Scorri qualche profilo. Senza account.",
+  "try.text": "Questa è la vera scheda di Lumi. Trascinala, metti like a qualcuno e guarda cosa succede quando è reciproco."
+ },
+ "nl": {
+  "hero.light": "Beweeg je licht",
+  "hero.try": "Probeer het nu",
+  "try.eyebrow": "Probeer het",
+  "try.title": "Swipe er een paar. Geen account nodig.",
+  "try.text": "Dit is de echte Lumi-kaart. Sleep hem, like iemand en zie wat er gebeurt als het wederzijds is."
+ },
+ "pl": {
+  "hero.light": "Przesuń swoje światło",
+  "hero.try": "Wypróbuj teraz",
+  "try.eyebrow": "Wypróbuj",
+  "try.title": "Przesuń kilka. Bez zakładania konta.",
+  "try.text": "To prawdziwa karta Lumi. Przeciągnij ją, polub kogoś i zobacz, co się dzieje, gdy to wzajemne."
+ },
+ "ru": {
+  "hero.light": "Двигайте свет",
+  "hero.try": "Попробовать",
+  "try.eyebrow": "Попробуйте",
+  "try.title": "Посвайпайте. Без регистрации.",
+  "try.text": "Это настоящая карточка Lumi. Потяните её, лайкните кого-нибудь и посмотрите, что будет при взаимности."
+ },
+ "uk": {
+  "hero.light": "Рухайте світло",
+  "hero.try": "Спробувати",
+  "try.eyebrow": "Спробуйте",
+  "try.title": "Посвайпайте. Без реєстрації.",
+  "try.text": "Це справжня картка Lumi. Потягніть її, вподобайте когось і подивіться, що буде, коли це взаємно."
+ },
+ "tr": {
+  "hero.light": "Işığını gezdir",
+  "hero.try": "Şimdi dene",
+  "try.eyebrow": "Dene",
+  "try.title": "Birkaç kişiyi kaydır. Hesap gerekmez.",
+  "try.text": "Bu gerçek Lumi kartı. Sürükle, birini beğen ve karşılıklı olunca ne olduğunu gör."
+ },
+ "ar": {
+  "hero.light": "حرّك ضوءك",
+  "hero.try": "جرّبه الآن",
+  "try.eyebrow": "جرّبه",
+  "try.title": "تصفّح بعضهم. دون إنشاء حساب.",
+  "try.text": "هذه بطاقة Lumi الحقيقية. اسحبها، وأعجب بأحدهم، وشاهد ما يحدث عندما يكون الإعجاب متبادلًا."
+ },
+ "hi": {
+  "hero.light": "अपनी रोशनी घुमाएँ",
+  "hero.try": "अभी आज़माएँ",
+  "try.eyebrow": "आज़माएँ",
+  "try.title": "कुछ प्रोफ़ाइल स्वाइप करें। खाते की ज़रूरत नहीं।",
+  "try.text": "यह Lumi का असली कार्ड है। इसे खींचें, किसी को लाइक करें और देखें कि पसंद आपसी होने पर क्या होता है।"
+ },
+ "zh": {
+  "hero.light": "移动你的光",
+  "hero.try": "立即试试",
+  "try.eyebrow": "试一试",
+  "try.title": "滑几个看看，无需注册。",
+  "try.text": "这就是真实的 Lumi 卡片。拖动它，喜欢一个人，看看彼此喜欢时会发生什么。"
+ },
+ "ja": {
+  "hero.light": "光を動かしてみて",
+  "hero.try": "今すぐ試す",
+  "try.eyebrow": "試してみる",
+  "try.title": "何人かスワイプしてみて。登録は不要です。",
+  "try.text": "これが本物の Lumi カード。ドラッグして、誰かにいいねして、両想いになると何が起きるか見てみてください。"
+ },
+ "ko": {
+  "hero.light": "빛을 움직여 보세요",
+  "hero.try": "지금 체험하기",
+  "try.eyebrow": "체험하기",
+  "try.title": "몇 명 스와이프해 보세요. 가입 없이도 돼요.",
+  "try.text": "진짜 Lumi 카드예요. 드래그해서 좋아요를 누르고, 서로 좋아하면 어떤 일이 일어나는지 확인해 보세요."
+ },
+ "id": {
+  "hero.light": "Gerakkan cahayamu",
+  "hero.try": "Coba sekarang",
+  "try.eyebrow": "Coba",
+  "try.title": "Geser beberapa. Tanpa akun.",
+  "try.text": "Ini kartu Lumi yang asli. Seret, sukai seseorang, dan lihat apa yang terjadi jika saling suka."
+ },
+ "vi": {
+  "hero.light": "Di chuyển ánh sáng của bạn",
+  "hero.try": "Thử ngay",
+  "try.eyebrow": "Thử ngay",
+  "try.title": "Vuốt vài người. Không cần tài khoản.",
+  "try.text": "Đây là thẻ Lumi thật. Kéo nó, thích ai đó và xem điều gì xảy ra khi cả hai cùng thích."
+ },
+ "th": {
+  "hero.light": "ขยับแสงของคุณ",
+  "hero.try": "ลองเลย",
+  "try.eyebrow": "ลองดู",
+  "try.title": "ลองปัดสักสองสามคน ไม่ต้องสมัคร",
+  "try.text": "นี่คือการ์ด Lumi ของจริง ลากเลย ถูกใจใครสักคน แล้วดูว่าจะเกิดอะไรขึ้นเมื่อต่างฝ่ายต่างถูกใจ"
+ },
+ "sv": {
+  "hero.light": "Flytta ditt ljus",
+  "hero.try": "Testa nu",
+  "try.eyebrow": "Testa",
+  "try.title": "Swipea några. Inget konto behövs.",
+  "try.text": "Det här är det riktiga Lumi-kortet. Dra det, gilla någon och se vad som händer när det är ömsesidigt."
+ }
+};
+  Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
+})(window.LUMI_I18N);
+
+/* Voice pass: plainer, more specific copy (overrides earlier strings). */
+(function (d) {
+  var add = {
+ "en": {
+  "hero.lead": "A dating app for people who notice things. Profiles lead with how someone thinks, not only how they photograph.",
+  "features.eyebrow": "Inside Lumi",
+  "features.title": "Small details, on purpose.",
+  "features.subtitle": "Every screen exists to get you from a first look to a first date, with less noise in between.",
+  "premium.title": "Three ways to be a member.",
+  "premium.subtitle": "Lumi is free to use. Membership adds reach, control and privacy. Cancel whenever you like.",
+  "safety.title": "Nobody gets a second chance to make you uncomfortable.",
+  "safety.subtitle": "One tap blocks and reports. A real team reads every report.",
+  "cta.title": "See who’s out there tonight.",
+  "cta.text": "Free on iPhone, Android and the web."
+ },
+ "es": {
+  "hero.lead": "Una app de citas para quienes se fijan en los detalles. Los perfiles muestran cómo piensa alguien, no solo cómo sale en las fotos.",
+  "features.eyebrow": "Dentro de Lumi",
+  "features.title": "Detalles pequeños, a propósito.",
+  "features.subtitle": "Cada pantalla existe para llevarte de la primera mirada a la primera cita, con menos ruido entre medias.",
+  "premium.title": "Tres formas de ser miembro.",
+  "premium.subtitle": "Lumi es gratis. La membresía suma alcance, control y privacidad. Cancela cuando quieras.",
+  "safety.title": "Nadie tiene una segunda oportunidad para incomodarte.",
+  "safety.subtitle": "Un toque bloquea y denuncia. Un equipo real lee cada denuncia.",
+  "cta.title": "Mira quién anda por ahí esta noche.",
+  "cta.text": "Gratis en iPhone, Android y la web."
+ },
+ "pt": {
+  "hero.lead": "Um app de namoro para quem repara nos detalhes. Os perfis mostram como a pessoa pensa, não só como sai nas fotos.",
+  "features.eyebrow": "Por dentro do Lumi",
+  "features.title": "Detalhes pequenos, de propósito.",
+  "features.subtitle": "Cada tela existe para te levar do primeiro olhar ao primeiro encontro, com menos ruído no caminho.",
+  "premium.title": "Três formas de ser membro.",
+  "premium.subtitle": "O Lumi é gratuito. A assinatura traz mais alcance, controle e privacidade. Cancele quando quiser.",
+  "safety.title": "Ninguém tem uma segunda chance de te deixar desconfortável.",
+  "safety.subtitle": "Um toque bloqueia e denuncia. Uma equipe de verdade lê cada denúncia.",
+  "cta.title": "Veja quem está por aí esta noite.",
+  "cta.text": "Grátis no iPhone, Android e na web."
+ },
+ "fr": {
+  "hero.lead": "Une app de rencontre pour celles et ceux qui remarquent les détails. Les profils montrent comment on pense, pas seulement comment on pose.",
+  "features.eyebrow": "Dans Lumi",
+  "features.title": "De petits détails, voulus.",
+  "features.subtitle": "Chaque écran existe pour vous mener du premier regard au premier rendez-vous, avec moins de bruit entre les deux.",
+  "premium.title": "Trois façons d’être membre.",
+  "premium.subtitle": "Lumi est gratuit. L’abonnement ajoute visibilité, contrôle et discrétion. Résiliable à tout moment.",
+  "safety.title": "Personne n’a de seconde chance de vous mettre mal à l’aise.",
+  "safety.subtitle": "Un geste bloque et signale. Une vraie équipe lit chaque signalement.",
+  "cta.title": "Voyez qui est là ce soir.",
+  "cta.text": "Gratuit sur iPhone, Android et le web."
+ },
+ "de": {
+  "hero.lead": "Eine Dating-App für Menschen, denen Details auffallen. Profile zeigen, wie jemand denkt, nicht nur, wie er auf Fotos wirkt.",
+  "features.eyebrow": "In Lumi",
+  "features.title": "Kleine Details, mit Absicht.",
+  "features.subtitle": "Jeder Screen soll dich vom ersten Blick zum ersten Date bringen, mit weniger Lärm dazwischen.",
+  "premium.title": "Drei Arten, Mitglied zu sein.",
+  "premium.subtitle": "Lumi ist kostenlos. Eine Mitgliedschaft bringt mehr Reichweite, Kontrolle und Privatsphäre. Jederzeit kündbar.",
+  "safety.title": "Niemand bekommt eine zweite Chance, dir ein ungutes Gefühl zu geben.",
+  "safety.subtitle": "Ein Tipp blockiert und meldet. Ein echtes Team liest jede Meldung.",
+  "cta.title": "Sieh, wer heute Abend unterwegs ist.",
+  "cta.text": "Kostenlos auf iPhone, Android und im Web."
+ },
+ "it": {
+  "hero.lead": "Un’app di incontri per chi nota i dettagli. I profili mostrano come pensa una persona, non solo come viene in foto.",
+  "features.eyebrow": "Dentro Lumi",
+  "features.title": "Piccoli dettagli, voluti.",
+  "features.subtitle": "Ogni schermata serve a portarti dal primo sguardo al primo appuntamento, con meno rumore nel mezzo.",
+  "premium.title": "Tre modi per essere membro.",
+  "premium.subtitle": "Lumi è gratis. L’abbonamento aggiunge visibilità, controllo e privacy. Disdici quando vuoi.",
+  "safety.title": "Nessuno ha una seconda occasione per metterti a disagio.",
+  "safety.subtitle": "Un tocco blocca e segnala. Un team vero legge ogni segnalazione.",
+  "cta.title": "Guarda chi c’è stasera.",
+  "cta.text": "Gratis su iPhone, Android e sul web."
+ },
+ "nl": {
+  "hero.lead": "Een datingapp voor mensen die details opmerken. Profielen laten zien hoe iemand denkt, niet alleen hoe iemand op foto’s staat.",
+  "features.eyebrow": "Binnen Lumi",
+  "features.title": "Kleine details, met opzet.",
+  "features.subtitle": "Elk scherm brengt je van een eerste blik naar een eerste date, met minder ruis daartussen.",
+  "premium.title": "Drie manieren om lid te zijn.",
+  "premium.subtitle": "Lumi is gratis. Een lidmaatschap geeft meer bereik, controle en privacy. Altijd opzegbaar.",
+  "safety.title": "Niemand krijgt een tweede kans om je ongemakkelijk te laten voelen.",
+  "safety.subtitle": "Eén tik blokkeert en meldt. Een echt team leest elke melding.",
+  "cta.title": "Zie wie er vanavond is.",
+  "cta.text": "Gratis op iPhone, Android en het web."
+ },
+ "pl": {
+  "hero.lead": "Aplikacja randkowa dla ludzi, którzy zauważają szczegóły. Profile pokazują, jak ktoś myśli, a nie tylko jak wychodzi na zdjęciach.",
+  "features.eyebrow": "Wewnątrz Lumi",
+  "features.title": "Drobne szczegóły, celowo.",
+  "features.subtitle": "Każdy ekran prowadzi od pierwszego spojrzenia do pierwszej randki, z mniejszym szumem po drodze.",
+  "premium.title": "Trzy sposoby na członkostwo.",
+  "premium.subtitle": "Lumi jest darmowe. Członkostwo daje większy zasięg, kontrolę i prywatność. Anuluj, kiedy chcesz.",
+  "safety.title": "Nikt nie dostaje drugiej szansy, by sprawić Ci dyskomfort.",
+  "safety.subtitle": "Jedno dotknięcie blokuje i zgłasza. Prawdziwy zespół czyta każde zgłoszenie.",
+  "cta.title": "Zobacz, kto jest dziś w pobliżu.",
+  "cta.text": "Za darmo na iPhonie, Androidzie i w przeglądarce."
+ },
+ "ru": {
+  "hero.lead": "Приложение для знакомств для тех, кто замечает детали. Профили показывают, как человек думает, а не только как он выглядит на фото.",
+  "features.eyebrow": "Внутри Lumi",
+  "features.title": "Мелочи, продуманные нарочно.",
+  "features.subtitle": "Каждый экран ведёт от первого взгляда к первому свиданию — с меньшим шумом по пути.",
+  "premium.title": "Три способа стать участником.",
+  "premium.subtitle": "Lumi бесплатен. Подписка добавляет охват, контроль и приватность. Отменить можно когда угодно.",
+  "safety.title": "Никто не получит второго шанса сделать вам неприятно.",
+  "safety.subtitle": "Одно касание — блокировка и жалоба. Каждую жалобу читает живая команда.",
+  "cta.title": "Посмотрите, кто рядом сегодня вечером.",
+  "cta.text": "Бесплатно на iPhone, Android и в браузере."
+ },
+ "uk": {
+  "hero.lead": "Застосунок для знайомств для тих, хто помічає деталі. Профілі показують, як людина думає, а не лише як вона виглядає на фото.",
+  "features.eyebrow": "Усередині Lumi",
+  "features.title": "Дрібниці, продумані навмисно.",
+  "features.subtitle": "Кожен екран веде від першого погляду до першого побачення — з меншим шумом дорогою.",
+  "premium.title": "Три способи стати учасником.",
+  "premium.subtitle": "Lumi безкоштовний. Підписка додає охоплення, контроль і приватність. Скасувати можна будь-коли.",
+  "safety.title": "Ніхто не отримає другого шансу зробити вам неприємно.",
+  "safety.subtitle": "Один дотик — блокування і скарга. Кожну скаргу читає жива команда.",
+  "cta.title": "Подивіться, хто поруч сьогодні ввечері.",
+  "cta.text": "Безкоштовно на iPhone, Android і в браузері."
+ },
+ "tr": {
+  "hero.lead": "Ayrıntıları fark eden insanlar için bir flört uygulaması. Profiller birinin fotoğraflarda nasıl göründüğünü değil, nasıl düşündüğünü öne çıkarır.",
+  "features.eyebrow": "Lumi’nin içinden",
+  "features.title": "Küçük ayrıntılar, bilerek.",
+  "features.subtitle": "Her ekran seni ilk bakıştan ilk buluşmaya, arada daha az gürültüyle götürmek için var.",
+  "premium.title": "Üye olmanın üç yolu.",
+  "premium.subtitle": "Lumi ücretsiz. Üyelik daha fazla erişim, kontrol ve gizlilik sağlar. İstediğin zaman iptal et.",
+  "safety.title": "Kimse seni rahatsız etmek için ikinci bir şans bulamaz.",
+  "safety.subtitle": "Tek dokunuş engeller ve şikâyet eder. Her şikâyeti gerçek bir ekip okur.",
+  "cta.title": "Bu gece kimlerin ortalıkta olduğuna bak.",
+  "cta.text": "iPhone, Android ve web’de ücretsiz."
+ },
+ "ar": {
+  "hero.lead": "تطبيق مواعدة لمن ينتبهون إلى التفاصيل. تُظهر الملفات كيف يفكر الشخص، لا كيف يبدو في الصور فقط.",
+  "features.eyebrow": "داخل Lumi",
+  "features.title": "تفاصيل صغيرة، عن قصد.",
+  "features.subtitle": "كل شاشة موجودة لتنقلك من النظرة الأولى إلى الموعد الأول، بضجيج أقل بينهما.",
+  "premium.title": "ثلاث طرق لتكون عضوًا.",
+  "premium.subtitle": "Lumi مجاني. تضيف العضوية مدى أوسع وتحكمًا وخصوصية. ألغِها متى شئت.",
+  "safety.title": "لا أحد يحصل على فرصة ثانية ليزعجك.",
+  "safety.subtitle": "لمسة واحدة للحظر والإبلاغ. فريق حقيقي يقرأ كل بلاغ.",
+  "cta.title": "اكتشف من هنا الليلة.",
+  "cta.text": "مجاني على iPhone وAndroid والويب."
+ },
+ "hi": {
+  "hero.lead": "उन लोगों के लिए डेटिंग ऐप जो बारीकियों पर ध्यान देते हैं। प्रोफ़ाइल बताती हैं कि कोई कैसे सोचता है, सिर्फ़ यह नहीं कि फ़ोटो में कैसा दिखता है।",
+  "features.eyebrow": "Lumi के अंदर",
+  "features.title": "छोटी बातें, सोच-समझकर।",
+  "features.subtitle": "हर स्क्रीन आपको पहली नज़र से पहली डेट तक ले जाने के लिए है, बीच में कम शोर के साथ।",
+  "premium.title": "सदस्य बनने के तीन तरीके।",
+  "premium.subtitle": "Lumi मुफ़्त है। सदस्यता ज़्यादा पहुँच, नियंत्रण और निजता देती है। जब चाहें रद्द करें।",
+  "safety.title": "किसी को आपको असहज करने का दूसरा मौका नहीं मिलता।",
+  "safety.subtitle": "एक टैप से ब्लॉक और रिपोर्ट। हर रिपोर्ट एक असली टीम पढ़ती है।",
+  "cta.title": "देखें आज रात कौन आसपास है।",
+  "cta.text": "iPhone, Android और वेब पर मुफ़्त।"
+ },
+ "zh": {
+  "hero.lead": "一款写给在意细节的人的约会应用。资料先展示一个人怎么想，而不只是照片里的样子。",
+  "features.eyebrow": "Lumi 里面",
+  "features.title": "小细节，都是用心的。",
+  "features.subtitle": "每一个界面，都是为了让你从第一眼走到第一次约会，中间少一点噪音。",
+  "premium.title": "成为会员的三种方式。",
+  "premium.subtitle": "Lumi 免费使用。会员带来更多曝光、掌控和隐私，可随时取消。",
+  "safety.title": "没有人能第二次让你不舒服。",
+  "safety.subtitle": "一键屏蔽并举报。每一条举报都有真人团队阅读。",
+  "cta.title": "看看今晚谁在附近。",
+  "cta.text": "iPhone、Android 和网页均可免费使用。"
+ },
+ "ja": {
+  "hero.lead": "細部に気づく人のためのデーティングアプリ。プロフィールは写真の見た目だけでなく、その人の考え方を伝えます。",
+  "features.eyebrow": "Lumi の中身",
+  "features.title": "小さなこだわりを、意図して。",
+  "features.subtitle": "すべての画面は、最初のひと目から最初のデートまで、余計なノイズを減らして導くためにあります。",
+  "premium.title": "メンバーシップは3種類。",
+  "premium.subtitle": "Lumi は無料で使えます。メンバーシップで露出、コントロール、プライバシーが広がります。いつでも解約できます。",
+  "safety.title": "あなたを不快にさせた人に、二度目のチャンスはありません。",
+  "safety.subtitle": "ワンタップでブロックと通報。すべての通報を実際のチームが確認します。",
+  "cta.title": "今夜、近くにいる人を見てみよう。",
+  "cta.text": "iPhone、Android、Web で無料。"
+ },
+ "ko": {
+  "hero.lead": "디테일을 알아보는 사람들을 위한 데이팅 앱. 프로필은 사진 속 모습만이 아니라 그 사람의 생각을 먼저 보여 줘요.",
+  "features.eyebrow": "Lumi 안으로",
+  "features.title": "작은 디테일, 의도해서.",
+  "features.subtitle": "모든 화면은 첫눈에서 첫 데이트까지, 그 사이의 소음을 줄이기 위해 존재해요.",
+  "premium.title": "멤버가 되는 세 가지 방법.",
+  "premium.subtitle": "Lumi는 무료예요. 멤버십은 더 넓은 노출, 통제, 프라이버시를 더해요. 언제든 해지할 수 있어요.",
+  "safety.title": "누구도 당신을 불편하게 만들 두 번째 기회는 없어요.",
+  "safety.subtitle": "탭 한 번으로 차단과 신고. 모든 신고는 실제 팀이 읽어요.",
+  "cta.title": "오늘 밤 근처에 누가 있는지 확인해 보세요.",
+  "cta.text": "iPhone, Android, 웹에서 무료."
+ },
+ "id": {
+  "hero.lead": "Aplikasi kencan untuk orang yang memperhatikan detail. Profil menunjukkan cara seseorang berpikir, bukan hanya penampilannya di foto.",
+  "features.eyebrow": "Di dalam Lumi",
+  "features.title": "Detail kecil, disengaja.",
+  "features.subtitle": "Setiap layar ada untuk membawamu dari pandangan pertama ke kencan pertama, dengan lebih sedikit kebisingan di antaranya.",
+  "premium.title": "Tiga cara menjadi anggota.",
+  "premium.subtitle": "Lumi gratis. Keanggotaan menambah jangkauan, kendali, dan privasi. Batalkan kapan saja.",
+  "safety.title": "Tak ada yang mendapat kesempatan kedua untuk membuatmu tidak nyaman.",
+  "safety.subtitle": "Sekali ketuk untuk blokir dan lapor. Tim sungguhan membaca setiap laporan.",
+  "cta.title": "Lihat siapa yang ada malam ini.",
+  "cta.text": "Gratis di iPhone, Android, dan web."
+ },
+ "vi": {
+  "hero.lead": "Ứng dụng hẹn hò cho những người để ý từng chi tiết. Hồ sơ cho thấy một người nghĩ gì, không chỉ trông thế nào trong ảnh.",
+  "features.eyebrow": "Bên trong Lumi",
+  "features.title": "Những chi tiết nhỏ, có chủ đích.",
+  "features.subtitle": "Mỗi màn hình đều để đưa bạn từ ánh nhìn đầu tiên đến buổi hẹn đầu tiên, bớt ồn ào ở giữa.",
+  "premium.title": "Ba cách để trở thành thành viên.",
+  "premium.subtitle": "Lumi miễn phí. Gói thành viên thêm phạm vi, quyền kiểm soát và riêng tư. Hủy bất cứ lúc nào.",
+  "safety.title": "Không ai có cơ hội thứ hai để khiến bạn khó chịu.",
+  "safety.subtitle": "Một chạm để chặn và báo cáo. Một đội ngũ thật đọc mọi báo cáo.",
+  "cta.title": "Xem ai đang ở quanh đây tối nay.",
+  "cta.text": "Miễn phí trên iPhone, Android và web."
+ },
+ "th": {
+  "hero.lead": "แอปหาคู่สำหรับคนที่ใส่ใจรายละเอียด โปรไฟล์บอกว่าคนนั้นคิดอย่างไร ไม่ใช่แค่ดูดีในรูปแค่ไหน",
+  "features.eyebrow": "ข้างใน Lumi",
+  "features.title": "รายละเอียดเล็กๆ ที่ตั้งใจ",
+  "features.subtitle": "ทุกหน้าจอมีไว้เพื่อพาคุณจากแวบแรกไปถึงเดทแรก โดยมีสิ่งรบกวนน้อยลง",
+  "premium.title": "สามวิธีในการเป็นสมาชิก",
+  "premium.subtitle": "Lumi ใช้ฟรี สมาชิกภาพช่วยเพิ่มการมองเห็น การควบคุม และความเป็นส่วนตัว ยกเลิกได้ทุกเมื่อ",
+  "safety.title": "ไม่มีใครได้โอกาสที่สองในการทำให้คุณอึดอัด",
+  "safety.subtitle": "แตะครั้งเดียวเพื่อบล็อกและรายงาน ทีมงานตัวจริงอ่านทุกรายงาน",
+  "cta.title": "ดูว่าคืนนี้มีใครอยู่แถวนี้",
+  "cta.text": "ใช้ฟรีบน iPhone, Android และเว็บ"
+ },
+ "sv": {
+  "hero.lead": "En dejtingapp för människor som lägger märke till detaljer. Profilerna visar hur någon tänker, inte bara hur de ser ut på bild.",
+  "features.eyebrow": "Inuti Lumi",
+  "features.title": "Små detaljer, med avsikt.",
+  "features.subtitle": "Varje skärm finns för att ta dig från första blicken till första dejten, med mindre brus däremellan.",
+  "premium.title": "Tre sätt att vara medlem.",
+  "premium.subtitle": "Lumi är gratis. Medlemskap ger mer räckvidd, kontroll och integritet. Säg upp när du vill.",
+  "safety.title": "Ingen får en andra chans att få dig att känna dig obekväm.",
+  "safety.subtitle": "Ett tryck blockerar och anmäler. Ett riktigt team läser varje anmälan.",
+  "cta.title": "Se vem som är ute i kväll.",
+  "cta.text": "Gratis på iPhone, Android och webben."
  }
 };
   Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
