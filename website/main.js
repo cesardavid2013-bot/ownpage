@@ -54,12 +54,12 @@
     var html =
       store(cfg.appStoreUrl, APPLE, cfg.appStoreUrl ? t(lang, 'store.apple') : soon, 'App Store') +
       store(cfg.playStoreUrl, PLAY, cfg.playStoreUrl ? t(lang, 'store.google') : soon, 'Google Play') +
-      store(cfg.appUrl, WEB, t(lang, 'store.web'), t(lang, 'store.webBig'));
+      store(cfg.appUrl, WEB, cfg.appUrl ? t(lang, 'store.web') : soon, t(lang, 'store.webBig'));
     document.querySelectorAll('[data-stores]').forEach(function (el) { el.innerHTML = html; });
   }
 
   document.querySelectorAll('[data-app-link]').forEach(function (a) {
-    a.href = (cfg.appUrl || '#') + (a.getAttribute('data-app-path') || '');
+    a.href = cfg.appUrl ? cfg.appUrl + (a.getAttribute('data-app-path') || '') : '#get';
   });
 
   var select = document.getElementById('lang');

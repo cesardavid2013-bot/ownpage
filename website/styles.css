@@ -267,3 +267,5 @@ footer a:hover { color: var(--text); }
 }
 [dir='rtl'] .extra + .extra { padding-left: 0; padding-right: 30px; border-left: 0; border-right: 1px solid var(--line); }
 @media (prefers-reduced-motion: reduce) { .typing i { animation: none; } }
+.legal ol li { color: var(--muted); margin-bottom: 8px; }
+.legal strong { color: var(--text); font-weight: 600; }
