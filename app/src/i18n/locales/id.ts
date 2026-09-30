@@ -7,7 +7,7 @@ const id = {
   },
   welcome: {
     title: 'Temui orang-orang yang layak ditemui',
-    subtitle: 'Profil terverifikasi, percakapan nyata, dan pengalaman premium dalam 20 bahasa.',
+    subtitle: "Aplikasi kencan untuk orang yang memperhatikan detail. Profil menunjukkan cara seseorang berpikir, bukan hanya penampilannya di foto.",
     createAccount: 'Buat akun', haveAccount: 'Saya sudah punya akun',
     terms: 'Dengan melanjutkan, kamu menyetujui Ketentuan dan Kebijakan Privasi kami. Kamu harus berusia 18 tahun atau lebih.',
   },
@@ -81,7 +81,7 @@ const id = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Lebih banyak match. Match yang lebih baik. Lebih sedikit menunggu.',
+    title: 'Lumi Premium', subtitle: "Lumi gratis. Keanggotaan menambah jangkauan, kendali, dan privasi. Batalkan kapan saja.",
     perMonth: '/bulan', current: 'Paket saat ini', choose: 'Pilih {{plan}}', upgrade: 'Upgrade',
     activeUntil: 'Aktif hingga {{date}}', success: 'Selamat datang di {{plan}}! ✨', cancelled: 'Pembelian dibatalkan',
     devNotice: 'Mode uji: pembelian disimulasikan, tanpa biaya sungguhan.',

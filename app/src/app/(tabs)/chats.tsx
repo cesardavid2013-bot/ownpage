@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
+import { RowsSkeleton } from '@/components/Skeleton';
 import { Button, Muted, Title } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { useAuth } from '@/lib/auth';
@@ -20,13 +21,13 @@ export default function Chats() {
 
   if (!matches) {
     return (
-      <Screen edges={['top']} style={{ justifyContent: 'center', gap: space(4) }}>
+      <Screen edges={['top']} padded={false} style={{ justifyContent: error ? 'center' : 'flex-start', gap: space(4) }}>
         {error ? (
           <>
             <Muted style={{ textAlign: 'center' }}>{errorMessage(error)}</Muted>
             <Button title={t('common.retry')} variant="secondary" onPress={reload} />
           </>
-        ) : <ActivityIndicator color={colors.primary} />}
+        ) : <RowsSkeleton />}
       </Screen>
     );
   }

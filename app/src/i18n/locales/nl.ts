@@ -7,7 +7,7 @@ const nl = {
   },
   welcome: {
     title: 'Ontmoet mensen die het waard zijn',
-    subtitle: 'Geverifieerde profielen, echte gesprekken en een premium ervaring in 20 talen.',
+    subtitle: "Een datingapp voor mensen die details opmerken. Profielen laten zien hoe iemand denkt, niet alleen hoe iemand op foto’s staat.",
     createAccount: 'Account aanmaken', haveAccount: 'Ik heb al een account',
     terms: 'Door verder te gaan ga je akkoord met onze Voorwaarden en ons Privacybeleid. Je moet 18 jaar of ouder zijn.',
   },
@@ -81,7 +81,7 @@ const nl = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Meer matches. Betere matches. Minder wachten.',
+    title: 'Lumi Premium', subtitle: "Lumi is gratis. Een lidmaatschap geeft meer bereik, controle en privacy. Altijd opzegbaar.",
     perMonth: '/maand', current: 'Huidig abonnement', choose: 'Kies {{plan}}', upgrade: 'Upgraden',
     activeUntil: 'Actief tot {{date}}', success: 'Welkom bij {{plan}}! ✨', cancelled: 'Aankoop geannuleerd',
     devNotice: 'Testmodus: aankopen worden gesimuleerd, er wordt niets afgeschreven.',

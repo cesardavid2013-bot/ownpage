@@ -7,7 +7,7 @@ const en = {
   },
   welcome: {
     title: 'Meet people worth meeting',
-    subtitle: 'Verified profiles, real conversations and a premium experience in 20 languages.',
+    subtitle: "A dating app for people who notice things. Profiles lead with how someone thinks, not only how they photograph.",
     createAccount: 'Create account', haveAccount: 'I already have an account',
     terms: 'By continuing you agree to our Terms and Privacy Policy. You must be 18 or older.',
   },
@@ -80,7 +80,7 @@ const en = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'More matches. Better matches. Less waiting.',
+    title: 'Lumi Premium', subtitle: "Lumi is free to use. Membership adds reach, control and privacy. Cancel whenever you like.",
     perMonth: '/month', current: 'Current plan', choose: 'Choose {{plan}}', upgrade: 'Upgrade',
     activeUntil: 'Active until {{date}}', success: 'Welcome to {{plan}}! ✨', cancelled: 'Purchase cancelled',
     devNotice: 'Test mode: purchases are simulated, no real charge.',

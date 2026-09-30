@@ -7,7 +7,7 @@ const zh = {
   },
   welcome: {
     title: '遇见值得遇见的人',
-    subtitle: '真实认证的资料、真诚的对话，以及支持 20 种语言的高端体验。',
+    subtitle: "一款写给在意细节的人的约会应用。资料先展示一个人怎么想，而不只是照片里的样子。",
     createAccount: '创建账号', haveAccount: '我已有账号',
     terms: '继续即表示你同意我们的服务条款和隐私政策。你必须年满 18 周岁。',
   },
@@ -81,7 +81,7 @@ const zh = {
     premiumOnly: '会员',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: '更多配对，更好的配对，更少等待。',
+    title: 'Lumi Premium', subtitle: "Lumi 免费使用。会员带来更多曝光、掌控和隐私，可随时取消。",
     perMonth: '/月', current: '当前方案', choose: '选择 {{plan}}', upgrade: '升级',
     activeUntil: '有效期至 {{date}}', success: '欢迎加入 {{plan}}！✨', cancelled: '购买已取消',
     devNotice: '测试模式：购买为模拟，不会产生实际扣费。',

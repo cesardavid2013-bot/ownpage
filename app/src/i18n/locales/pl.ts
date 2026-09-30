@@ -7,7 +7,7 @@ const pl = {
   },
   welcome: {
     title: 'Poznawaj ludzi, których warto poznać',
-    subtitle: 'Zweryfikowane profile, prawdziwe rozmowy i doświadczenie premium w 20 językach.',
+    subtitle: "Aplikacja randkowa dla ludzi, którzy zauważają szczegóły. Profile pokazują, jak ktoś myśli, a nie tylko jak wychodzi na zdjęciach.",
     createAccount: 'Utwórz konto', haveAccount: 'Mam już konto',
     terms: 'Kontynuując, akceptujesz nasz Regulamin i Politykę prywatności. Musisz mieć ukończone 18 lat.',
   },
@@ -82,7 +82,7 @@ const pl = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Więcej par. Lepsze pary. Mniej czekania.',
+    title: 'Lumi Premium', subtitle: "Lumi jest darmowe. Członkostwo daje większy zasięg, kontrolę i prywatność. Anuluj, kiedy chcesz.",
     perMonth: '/mies.', current: 'Obecny plan', choose: 'Wybierz {{plan}}', upgrade: 'Ulepsz',
     activeUntil: 'Aktywny do {{date}}', success: 'Witaj w {{plan}}! ✨', cancelled: 'Zakup anulowany',
     devNotice: 'Tryb testowy: zakupy są symulowane, bez prawdziwych opłat.',

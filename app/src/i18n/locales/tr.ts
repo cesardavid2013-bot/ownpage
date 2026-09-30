@@ -7,7 +7,7 @@ const tr = {
   },
   welcome: {
     title: 'Tanışmaya değer insanlarla tanış',
-    subtitle: 'Doğrulanmış profiller, gerçek sohbetler ve 20 dilde premium bir deneyim.',
+    subtitle: "Ayrıntıları fark eden insanlar için bir flört uygulaması. Profiller birinin fotoğraflarda nasıl göründüğünü değil, nasıl düşündüğünü öne çıkarır.",
     createAccount: 'Hesap oluştur', haveAccount: 'Zaten bir hesabım var',
     terms: 'Devam ederek Koşullarımızı ve Gizlilik Politikamızı kabul etmiş olursun. 18 yaşında veya daha büyük olmalısın.',
   },
@@ -81,7 +81,7 @@ const tr = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Daha fazla eşleşme. Daha iyi eşleşmeler. Daha az bekleme.',
+    title: 'Lumi Premium', subtitle: "Lumi ücretsiz. Üyelik daha fazla erişim, kontrol ve gizlilik sağlar. İstediğin zaman iptal et.",
     perMonth: '/ay', current: 'Mevcut plan', choose: '{{plan}} seç', upgrade: 'Yükselt',
     activeUntil: '{{date}} tarihine kadar aktif', success: '{{plan}} planına hoş geldin! ✨', cancelled: 'Satın alma iptal edildi',
     devNotice: 'Test modu: satın alımlar simüle edilir, gerçek ücret alınmaz.',

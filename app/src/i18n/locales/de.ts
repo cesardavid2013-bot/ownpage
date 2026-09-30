@@ -7,7 +7,7 @@ const de = {
   },
   welcome: {
     title: 'Triff Menschen, die es wert sind',
-    subtitle: 'Verifizierte Profile, echte Gespräche und ein Premium-Erlebnis in 20 Sprachen.',
+    subtitle: "Eine Dating-App für Menschen, denen Details auffallen. Profile zeigen, wie jemand denkt, nicht nur, wie er auf Fotos wirkt.",
     createAccount: 'Konto erstellen', haveAccount: 'Ich habe bereits ein Konto',
     terms: 'Mit dem Fortfahren akzeptierst du unsere AGB und Datenschutzrichtlinie. Du musst mindestens 18 Jahre alt sein.',
   },
@@ -81,7 +81,7 @@ const de = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Mehr Matches. Bessere Matches. Weniger Warten.',
+    title: 'Lumi Premium', subtitle: "Lumi ist kostenlos. Eine Mitgliedschaft bringt mehr Reichweite, Kontrolle und Privatsphäre. Jederzeit kündbar.",
     perMonth: '/Monat', current: 'Aktueller Plan', choose: '{{plan}} wählen', upgrade: 'Upgrade',
     activeUntil: 'Aktiv bis {{date}}', success: 'Willkommen bei {{plan}}! ✨', cancelled: 'Kauf abgebrochen',
     devNotice: 'Testmodus: Käufe werden simuliert, es wird nichts berechnet.',

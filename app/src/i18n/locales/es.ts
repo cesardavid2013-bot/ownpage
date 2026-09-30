@@ -7,7 +7,7 @@ const es = {
   },
   welcome: {
     title: 'Conoce a personas que valen la pena',
-    subtitle: 'Perfiles verificados, conversaciones reales y una experiencia premium en 20 idiomas.',
+    subtitle: "Una app de citas para quienes se fijan en los detalles. Los perfiles muestran cómo piensa alguien, no solo cómo sale en las fotos.",
     createAccount: 'Crear cuenta', haveAccount: 'Ya tengo una cuenta',
     terms: 'Al continuar aceptas nuestros Términos y la Política de privacidad. Debes tener 18 años o más.',
   },
@@ -81,7 +81,7 @@ const es = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Más matches. Mejores matches. Menos espera.',
+    title: 'Lumi Premium', subtitle: "Lumi es gratis. La membresía suma alcance, control y privacidad. Cancela cuando quieras.",
     perMonth: '/mes', current: 'Plan actual', choose: 'Elegir {{plan}}', upgrade: 'Mejorar plan',
     activeUntil: 'Activo hasta el {{date}}', success: '¡Bienvenido a {{plan}}! ✨', cancelled: 'Compra cancelada',
     devNotice: 'Modo de prueba: las compras son simuladas, sin cargos reales.',

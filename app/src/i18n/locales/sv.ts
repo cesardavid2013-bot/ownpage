@@ -7,7 +7,7 @@ const sv = {
   },
   welcome: {
     title: 'Träffa människor som är värda att träffa',
-    subtitle: 'Verifierade profiler, riktiga samtal och en premiumupplevelse på 20 språk.',
+    subtitle: "En dejtingapp för människor som lägger märke till detaljer. Profilerna visar hur någon tänker, inte bara hur de ser ut på bild.",
     createAccount: 'Skapa konto', haveAccount: 'Jag har redan ett konto',
     terms: 'Genom att fortsätta godkänner du våra Villkor och vår Integritetspolicy. Du måste vara minst 18 år.',
   },
@@ -81,7 +81,7 @@ const sv = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Fler matchningar. Bättre matchningar. Mindre väntan.',
+    title: 'Lumi Premium', subtitle: "Lumi är gratis. Medlemskap ger mer räckvidd, kontroll och integritet. Säg upp när du vill.",
     perMonth: '/mån', current: 'Nuvarande plan', choose: 'Välj {{plan}}', upgrade: 'Uppgradera',
     activeUntil: 'Aktiv till {{date}}', success: 'Välkommen till {{plan}}! ✨', cancelled: 'Köpet avbröts',
     devNotice: 'Testläge: köp simuleras, inga riktiga debiteringar.',

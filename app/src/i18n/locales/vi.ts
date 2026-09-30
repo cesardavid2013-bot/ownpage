@@ -7,7 +7,7 @@ const vi = {
   },
   welcome: {
     title: 'Gặp gỡ những người đáng để gặp',
-    subtitle: 'Hồ sơ đã xác minh, trò chuyện thật và trải nghiệm cao cấp bằng 20 ngôn ngữ.',
+    subtitle: "Ứng dụng hẹn hò cho những người để ý từng chi tiết. Hồ sơ cho thấy một người nghĩ gì, không chỉ trông thế nào trong ảnh.",
     createAccount: 'Tạo tài khoản', haveAccount: 'Tôi đã có tài khoản',
     terms: 'Khi tiếp tục, bạn đồng ý với Điều khoản và Chính sách quyền riêng tư của chúng tôi. Bạn phải từ 18 tuổi trở lên.',
   },
@@ -81,7 +81,7 @@ const vi = {
     premiumOnly: 'Premium',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'Nhiều tương hợp hơn. Tương hợp tốt hơn. Ít chờ đợi hơn.',
+    title: 'Lumi Premium', subtitle: "Lumi miễn phí. Gói thành viên thêm phạm vi, quyền kiểm soát và riêng tư. Hủy bất cứ lúc nào.",
     perMonth: '/tháng', current: 'Gói hiện tại', choose: 'Chọn {{plan}}', upgrade: 'Nâng cấp',
     activeUntil: 'Có hiệu lực đến {{date}}', success: 'Chào mừng đến với {{plan}}! ✨', cancelled: 'Đã hủy giao dịch',
     devNotice: 'Chế độ thử nghiệm: giao dịch là mô phỏng, không tính phí thật.',

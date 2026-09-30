@@ -7,7 +7,7 @@ const ko = {
   },
   welcome: {
     title: '만날 가치가 있는 사람을 만나세요',
-    subtitle: '인증된 프로필, 진짜 대화, 그리고 20개 언어로 즐기는 프리미엄 경험.',
+    subtitle: "디테일을 알아보는 사람들을 위한 데이팅 앱. 프로필은 사진 속 모습만이 아니라 그 사람의 생각을 먼저 보여 줘요.",
     createAccount: '계정 만들기', haveAccount: '이미 계정이 있어요',
     terms: '계속하면 이용약관 및 개인정보처리방침에 동의하게 됩니다. 만 18세 이상이어야 합니다.',
   },
@@ -81,7 +81,7 @@ const ko = {
     premiumOnly: '프리미엄',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: '더 많은 매치. 더 좋은 매치. 더 짧은 기다림.',
+    title: 'Lumi Premium', subtitle: "Lumi는 무료예요. 멤버십은 더 넓은 노출, 통제, 프라이버시를 더해요. 언제든 해지할 수 있어요.",
     perMonth: '/월', current: '현재 플랜', choose: '{{plan}} 선택', upgrade: '업그레이드',
     activeUntil: '{{date}}까지 이용 가능', success: '{{plan}}에 오신 것을 환영해요! ✨', cancelled: '구매가 취소되었어요',
     devNotice: '테스트 모드: 구매는 시뮬레이션이며 실제로 결제되지 않아요.',

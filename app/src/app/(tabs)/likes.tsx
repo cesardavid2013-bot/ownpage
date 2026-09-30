@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
+import { GridSkeleton } from '@/components/Skeleton';
 import { Button, Chip, Muted, Row, Title } from '@/components/ui';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
@@ -59,7 +60,7 @@ export default function Likes() {
         </Row>
       ) : null}
 
-      {!data ? <ActivityIndicator color={colors.primary} style={{ marginTop: space(10) }} /> : data.locked ? (
+      {!data ? <GridSkeleton /> : data.locked ? (
         <Locked count={data.count} />
       ) : (
         <FlatList

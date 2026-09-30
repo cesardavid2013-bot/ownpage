@@ -7,7 +7,7 @@ const ja = {
   },
   welcome: {
     title: '出会う価値のある人と出会おう',
-    subtitle: '認証済みのプロフィール、本物の会話、そして20言語対応のプレミアム体験。',
+    subtitle: "細部に気づく人のためのデーティングアプリ。プロフィールは写真の見た目だけでなく、その人の考え方を伝えます。",
     createAccount: 'アカウントを作成', haveAccount: 'アカウントをお持ちの方',
     terms: '続行すると、利用規約とプライバシーポリシーに同意したことになります。18歳以上である必要があります。',
   },
@@ -81,7 +81,7 @@ const ja = {
     premiumOnly: 'プレミアム',
   },
   premium: {
-    title: 'Lumi Premium', subtitle: 'もっと多くのマッチを。もっと良いマッチを。待ち時間は少なく。',
+    title: 'Lumi Premium', subtitle: "Lumi は無料で使えます。メンバーシップで露出、コントロール、プライバシーが広がります。いつでも解約できます。",
     perMonth: '/月', current: '現在のプラン', choose: '{{plan}}を選ぶ', upgrade: 'アップグレード',
     activeUntil: '{{date}}まで有効', success: '{{plan}}へようこそ！✨', cancelled: '購入がキャンセルされました',
     devNotice: 'テストモード：購入はシミュレーションで、実際の請求はありません。',

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,6 +7,7 @@ import * as Haptics from 'expo-haptics';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
+import { CardSkeleton } from '@/components/Skeleton';
 import { Sheet } from '@/components/Sheet';
 import { SwipeCard, type SwipeAction, type SwipeCardHandle } from '@/components/SwipeCard';
 import { Button, ErrorText, Input, Logo, Muted, Title } from '@/components/ui';
@@ -162,7 +163,7 @@ export default function Discover() {
       ) : null}
 
       <View style={styles.deck}>
-        {loading ? <ActivityIndicator color={colors.primary} size="large" /> : deck.length === 0 ? (
+        {loading ? <CardSkeleton /> : deck.length === 0 ? (
           <Empty photo={user.photos[0]?.url} error={error} onRetry={() => { setLoading(true); load(true); }} />
         ) : (
           deck.slice(0, 3).reverse().map((p, i, arr) => {
