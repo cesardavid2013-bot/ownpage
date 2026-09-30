@@ -269,3 +269,33 @@ footer a:hover { color: var(--text); }
 @media (prefers-reduced-motion: reduce) { .typing i { animation: none; } }
 .legal ol li { color: var(--muted); margin-bottom: 8px; }
 .legal strong { color: var(--text); font-weight: 600; }
+
+/* ---- Hero: a dark room of portraits, revealed by the visitor's light ---- */
+.lumen { min-height: min(96vh, 1000px); display: flex; align-items: flex-end; background: var(--ink); cursor: none; }
+.lumen .mosaic { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 1fr); gap: 3px; }
+.lumen .tile { position: relative; overflow: hidden; background: var(--ink-3); }
+.lumen .tile img, .lumen .tile canvas { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.85) contrast(1.05); user-select: none; -webkit-user-drag: none; }
+.lumen canvas.dark { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.lumen::after { z-index: 1; background: linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.55) 26%, transparent 55%); }
+.lumen .hero-copy { display: block; position: relative; z-index: 2; padding-block: 120px 72px; pointer-events: none; }
+.lumen .hero-copy a { pointer-events: auto; }
+.lumen h1 { font-size: clamp(56px, 9vw, 150px); line-height: 0.92; letter-spacing: -0.03em; margin: 20px 0 26px; max-width: 11em; text-shadow: 0 2px 40px rgba(0,0,0,0.6); }
+.lumen .lead { text-shadow: 0 1px 20px rgba(0,0,0,0.8); color: #cfc8bb; }
+.light-hint { position: absolute; z-index: 2; right: clamp(16px, 4vw, 40px); bottom: 34px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--champagne); opacity: 0.8; }
+.light-hint .spark { display: inline-block; animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.5); opacity: 0.6; } }
+
+/* ---- Try it ---- */
+.try-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.try-copy h2 { font-size: clamp(38px, 5vw, 70px); line-height: 1.02; letter-spacing: -0.015em; margin: 16px 0 20px; text-wrap: balance; }
+.try-copy p { color: var(--muted); font-size: 17px; max-width: 30em; }
+.try .phone-wrap { justify-self: center; }
+
+@media (max-width: 1020px) {
+  .lumen .mosaic { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+  .lumen .tile:nth-child(n+13) { display: none; }
+  .try-grid { grid-template-columns: 1fr; }
+  .lumen { cursor: auto; }
+}
+@media (max-width: 560px) { .light-hint { display: none; } .lumen .hero-copy { padding-block: 90px 48px; } }
+@media (prefers-reduced-motion: reduce) { .light-hint .spark { animation: none; } }

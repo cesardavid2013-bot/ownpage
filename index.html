@@ -36,17 +36,52 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <canvas data-bokeh="hero" aria-hidden="true"></canvas>
+    <section class="hero lumen">
+      <div class="mosaic" aria-hidden="true">
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+          <span class="tile"><img data-fallback="portrait" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=600&h=800&q=75" alt="" draggable="false" /></span>
+      </div>
+      <canvas class="dark" aria-hidden="true"></canvas>
+      <div class="wrap hero-copy">
+        <span class="label" data-i18n="hero.eyebrow"></span>
+        <h1><span data-i18n="hero.title1"></span> <em data-i18n="hero.title2"></em></h1>
+        <p class="lead" data-i18n="hero.lead"></p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" data-app-link data-i18n="hero.start"></a>
+          <a class="btn-text" href="#try" data-i18n="hero.try"></a>
+        </div>
+      </div>
+      <p class="light-hint" aria-hidden="true"><span class="spark">✦</span> <span data-i18n="hero.light"></span></p>
+    </section>
+
+    <section class="manifesto">
       <div class="wrap">
-        <div>
-          <span class="label" data-i18n="hero.eyebrow"></span>
-          <h1><span data-i18n="hero.title1"></span> <em data-i18n="hero.title2"></em></h1>
-          <p class="lead" data-i18n="hero.lead"></p>
-          <div class="hero-cta">
-            <a class="btn btn-solid" data-app-link data-i18n="hero.start"></a>
-            <a class="btn-text" href="#membership" data-i18n="hero.premium"></a>
-          </div>
+        <blockquote class="reveal" data-i18n-html="manifesto"></blockquote>
+        <div class="facts">
+          <span><b>20</b><span data-i18n="stats.langs"></span></span>
+          <span><b>iOS · Android · Web</b><span data-i18n="stats.platforms"></span></span>
+          <span><b>Live</b><span data-i18n="stats.realtime"></span></span>
+          <span><b>18+</b><span data-i18n="stats.adults"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block try" id="try">
+      <div class="wrap try-grid">
+        <div class="try-copy">
+          <span class="label" data-i18n="try.eyebrow"></span>
+          <h2 class="serif" data-i18n="try.title"></h2>
+          <p data-i18n="try.text"></p>
           <div class="stores" data-stores></div>
         </div>
         <div class="phone-wrap">
@@ -103,18 +138,6 @@
             </div>
           </div>
           <p class="demo-hint" data-i18n="demo.hint"></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="manifesto">
-      <div class="wrap">
-        <blockquote class="reveal" data-i18n-html="manifesto"></blockquote>
-        <div class="facts">
-          <span><b>20</b><span data-i18n="stats.langs"></span></span>
-          <span><b>iOS · Android · Web</b><span data-i18n="stats.platforms"></span></span>
-          <span><b>Live</b><span data-i18n="stats.realtime"></span></span>
-          <span><b>18+</b><span data-i18n="stats.adults"></span></span>
         </div>
       </div>
     </section>
