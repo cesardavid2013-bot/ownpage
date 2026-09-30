@@ -1,6 +1,6 @@
-// Edit these once the app is live. Leave a store URL empty to show "Coming soon".
+// Edit these once each piece is live. An empty URL shows "Coming soon" instead of a broken link.
 window.LUMI_CONFIG = {
-  appUrl: 'https://app.lumi.app',
+  appUrl: '', // web app, e.g. 'https://app.lumi.app' once the API is deployed
   appStoreUrl: '',
   playStoreUrl: '',
 };
