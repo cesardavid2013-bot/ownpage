@@ -76,6 +76,96 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ---- Interactive demo: swipe real-looking profiles right on the page ----
+  (function demo() {
+    var root = document.getElementById('demo');
+    if (!root) return;
+    var cards = Array.prototype.slice.call(root.querySelectorAll('.dcard'));
+    var match = root.querySelector('.dmatch');
+    var empty = root.querySelector('.dempty');
+    var current = function () { return cards.find(function (c) { return !c.classList.contains('gone'); }); };
+
+    function stamps(card, dx) {
+      card.querySelector('.dstamp.like').style.opacity = Math.max(0, Math.min(1, dx / 90));
+      card.querySelector('.dstamp.nope').style.opacity = Math.max(0, Math.min(1, -dx / 90));
+    }
+
+    function fly(card, dir) {
+      if (!card) return;
+      var x = dir === 'nope' ? -520 : dir === 'like' ? 520 : 0;
+      var y = dir === 'super' ? -760 : 40;
+      stamps(card, dir === 'like' ? 120 : dir === 'nope' ? -120 : 0);
+      card.classList.remove('back');
+      card.classList.add('gone');
+      card.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + (x / 22) + 'deg)';
+      if (dir !== 'nope') {
+        setTimeout(function () {
+          var sub = t(document.documentElement.lang, 'demo.matchSub').replace('{name}', card.dataset.name);
+          match.querySelector('.dmatch-sub').textContent = sub;
+          match.hidden = false;
+        }, 380);
+      } else if (!current()) {
+        setTimeout(function () { empty.hidden = false; }, 380);
+      }
+    }
+
+    root.querySelectorAll('.dbtn').forEach(function (b) {
+      b.addEventListener('click', function () { if (match.hidden) fly(current(), b.dataset.act); });
+    });
+    root.querySelector('.dkeep').addEventListener('click', function () {
+      match.hidden = true;
+      if (!current()) empty.hidden = false;
+    });
+    root.querySelector('.dreset').addEventListener('click', function () {
+      empty.hidden = true;
+      cards.forEach(function (c) { c.classList.remove('gone'); c.style.transform = ''; stamps(c, 0); });
+    });
+
+    var drag = null;
+    cards.forEach(function (card) {
+      card.addEventListener('pointerdown', function (e) {
+        if (card !== current() || !match.hidden) return;
+        drag = { card: card, x: e.clientX, y: e.clientY, dx: 0, dy: 0 };
+        card.classList.remove('back');
+        card.setPointerCapture(e.pointerId);
+      });
+      card.addEventListener('pointermove', function (e) {
+        if (!drag || drag.card !== card) return;
+        drag.dx = e.clientX - drag.x; drag.dy = e.clientY - drag.y;
+        card.style.transform = 'translate(' + drag.dx + 'px,' + drag.dy + 'px) rotate(' + (drag.dx / 18) + 'deg)';
+        stamps(card, drag.dx);
+      });
+      function end() {
+        if (!drag || drag.card !== card) return;
+        var d = drag; drag = null;
+        if (d.dx > 90) fly(card, 'like');
+        else if (d.dx < -90) fly(card, 'nope');
+        else if (d.dy < -110) fly(card, 'super');
+        else { card.classList.add('back'); card.style.transform = ''; stamps(card, 0); }
+      }
+      card.addEventListener('pointerup', end);
+      card.addEventListener('pointercancel', end);
+    });
+  })();
+
+  // ---- Metal membership cards follow the pointer ----
+  if (!reduceMotion()) {
+    document.querySelectorAll('.card[data-tilt]').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.setProperty('--ry', (px * 14).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', (-py * 12).toFixed(2) + 'deg');
+        card.style.setProperty('--sx', (px * 60 - 20).toFixed(1) + '%');
+        card.style.setProperty('--sy', (py * 60 - 30).toFixed(1) + '%');
+      });
+      card.addEventListener('pointerleave', function () {
+        ['--rx', '--ry', '--sx', '--sy'].forEach(function (v) { card.style.removeProperty(v); });
+      });
+    });
+  }
+  function reduceMotion() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
   // ---- City-lights bokeh (the brand's signature texture) ----
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PALETTE = [[233, 190, 130], [227, 139, 106], [245, 214, 160], [200, 150, 110], [255, 236, 200], [170, 120, 150]];
