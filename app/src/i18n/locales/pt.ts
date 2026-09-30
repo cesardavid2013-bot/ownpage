@@ -57,6 +57,7 @@ const pt = {
     unmatchConfirm: 'Desfazer match com {{name}}? Isso não pode ser revertido.', read: 'Lida', matchedOn: 'Vocês deram match em {{date}}',
   },
   profile: {
+    prompts: "Perguntas", addPrompt: "Adicionar pergunta", promptsHint: "Responda até 3. Elas começam as melhores conversas.", choosePrompt: "Escolha uma pergunta", answerPlaceholder: "Sua resposta…",
     title: 'Perfil', edit: 'Editar perfil', preview: 'Pré-visualizar', settings: 'Configurações', premium: 'Lumi Premium',
     completeness: 'Perfil {{percent}}% completo', verified: 'Verificado', about: 'Sobre mim',
     interests: 'Interesses', languages: 'Idiomas', job: 'Cargo', company: 'Empresa', school: 'Formação',
@@ -101,6 +102,18 @@ const pt = {
   safety: {
     title: 'Encontros seguros',
     tips: 'Marque encontros em lugares públicos. Conte a alguém de confiança aonde você vai. Nunca envie dinheiro para alguém que conheceu on-line. Denuncie quem fizer você se sentir desconfortável.',
+  },
+  prompts: {
+    ideal_sunday: "Meu domingo ideal",
+    green_flag: "Um sinal verde que procuro",
+    two_truths: "Duas verdades e uma mentira",
+    best_trip: "A melhor viagem da minha vida",
+    simple_pleasures: "Meus prazeres simples",
+    first_date: "O primeiro encontro perfeito",
+    dating_me: "Namorar comigo é como",
+    this_year: "Este ano eu quero muito",
+    looking_for_someone: "Procuro alguém que",
+    secretly_good_at: "Sou secretamente bom(boa) em",
   },
   errors: {
     network_error: 'Não foi possível conectar ao Lumi. Verifique sua conexão e tente novamente.',

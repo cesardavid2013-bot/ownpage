@@ -6,13 +6,14 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
+import { MembershipCard } from '@/components/MembershipCard';
 import { Button, Muted, Row, webMaxWidth } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { notify } from '@/lib/notify';
 import { purchase, storePrices } from '@/lib/purchases';
-import { colors, gradients, radius, space } from '@/lib/theme';
+import { colors, font, gradients, radius, space } from '@/lib/theme';
 import type { Entitlements, Plan, Product } from '@/lib/types';
 
 type Tier = Exclude<Plan, 'free'>;
@@ -90,8 +91,6 @@ export default function Premium() {
     }
   }
 
-  const g = tier === 'platinum' ? gradients.platinum : tier === 'gold' ? gradients.gold : gradients.plus;
-  const dark = tier !== 'plus';
   const isCurrent = user.plan === tier;
   const isLower = RANK[tier] < RANK[user.plan];
 
@@ -105,7 +104,7 @@ export default function Premium() {
         </Row>
 
         <View style={{ alignItems: 'center', gap: space(2) }}>
-          <LinearGradient colors={gradients.gold} style={styles.crown}><Ionicons name="diamond" size={34} color="#2A1D05" /></LinearGradient>
+          <Text style={styles.crownStar}>✦</Text>
           <Text style={styles.title}>{t('premium.title')}</Text>
           <Muted style={{ textAlign: 'center' }}>{t('premium.subtitle')}</Muted>
         </View>
@@ -120,21 +119,21 @@ export default function Premium() {
           ))}
         </Row>
 
-        <LinearGradient colors={g} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.plan}>
-          <Text style={[styles.planName, { color: dark ? '#1B1406' : '#fff' }]}>{t(`premium.plans.${tier}`)}</Text>
-          <Row style={{ alignItems: 'baseline', gap: 4 }}>
-            <Text style={[styles.price, { color: dark ? '#1B1406' : '#fff' }]}>{money(tier)}</Text>
-            <Text style={{ color: dark ? '#3D2E10' : 'rgba(255,255,255,0.85)', fontSize: 16 }}>{t('premium.perMonth')}</Text>
+        <MembershipCard tier={tier} holder={user.name} />
+        <View style={{ gap: space(1) }}>
+          <Row style={{ alignItems: 'baseline', gap: 6 }}>
+            <Text style={styles.price}>{money(tier)}</Text>
+            <Text style={{ color: colors.textMuted, fontSize: 15 }}>{t('premium.perMonth')}</Text>
           </Row>
-          <View style={{ gap: space(2.5), marginTop: space(3) }}>
+          <View style={{ gap: space(3), marginTop: space(3) }}>
             {catalog && features(catalog.entitlements[tier], t).map((f) => (
-              <Row key={f} style={{ gap: space(2.5) }}>
-                <Ionicons name="checkmark-circle" size={20} color={dark ? '#1B1406' : '#fff'} />
-                <Text style={{ color: dark ? '#1B1406' : '#fff', fontSize: 15, fontWeight: '600', flex: 1 }}>{f}</Text>
+              <Row key={f} style={{ gap: space(3), alignItems: 'flex-start' }}>
+                <View style={styles.dash} />
+                <Text style={{ color: colors.text, fontSize: 15.5, flex: 1, lineHeight: 22 }}>{f}</Text>
               </Row>
             ))}
           </View>
-        </LinearGradient>
+        </View>
 
         {isCurrent ? (
           <View style={styles.current}>
@@ -146,7 +145,7 @@ export default function Premium() {
         ) : (
           <Button
             title={t('premium.choose', { plan: t(`premium.plans.${tier}`) })}
-            variant={tier === 'plus' ? 'primary' : 'gold'}
+            variant="primary"
             onPress={() => buy(tier)}
             loading={busy === tier}
             disabled={isLower || !catalog}
@@ -190,16 +189,15 @@ function Pack({ icon, color, title, desc, owned, price, busy, onBuy, buyLabel }:
 }
 
 const styles = StyleSheet.create({
-  crown: { width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' },
-  title: { color: colors.text, fontSize: 32, fontWeight: '900', letterSpacing: -0.5 },
+  crownStar: { color: colors.gold, fontSize: 26 },
+  title: { color: colors.text, fontSize: 38, fontFamily: font.display },
   tabs: { backgroundColor: colors.card, borderRadius: radius.pill, padding: 4, borderWidth: 1, borderColor: colors.border },
   tab: { flex: 1, alignItems: 'center', paddingVertical: space(2.5), borderRadius: radius.pill },
   tabActive: { backgroundColor: colors.cardHigh },
   tabText: { color: colors.textMuted, fontWeight: '800', fontSize: 15 },
   popular: { color: colors.gold, fontSize: 9, fontWeight: '800', textTransform: 'uppercase', marginTop: 2 },
-  plan: { borderRadius: radius.xl, padding: space(6), gap: space(1) },
-  planName: { fontSize: 22, fontWeight: '900' },
-  price: { fontSize: 40, fontWeight: '900', letterSpacing: -1 },
+  price: { fontSize: 46, fontFamily: font.display, color: colors.text },
+  dash: { width: 12, height: 1, backgroundColor: colors.gold, marginTop: 11 },
   current: { flexDirection: 'row', gap: space(2), alignItems: 'center', justifyContent: 'center', padding: space(4), backgroundColor: colors.card, borderRadius: radius.pill },
   section: { color: colors.text, fontSize: 20, fontWeight: '800', marginTop: space(4) },
   pack: { flexDirection: 'row', gap: space(3), alignItems: 'center', backgroundColor: colors.card, borderRadius: radius.lg, padding: space(4), borderWidth: 1, borderColor: colors.border },

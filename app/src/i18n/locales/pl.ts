@@ -58,6 +58,7 @@ const pl = {
     unmatchConfirm: 'Usunąć parę z {{name}}? Tego nie można cofnąć.', read: 'Przeczytano', matchedOn: 'Para od {{date}}',
   },
   profile: {
+    prompts: "Pytania", addPrompt: "Dodaj pytanie", promptsHint: "Odpowiedz maksymalnie na 3. To one zaczynają najlepsze rozmowy.", choosePrompt: "Wybierz pytanie", answerPlaceholder: "Twoja odpowiedź…",
     title: 'Profil', edit: 'Edytuj profil', preview: 'Podgląd', settings: 'Ustawienia', premium: 'Lumi Premium',
     completeness: 'Profil ukończony w {{percent}}%', verified: 'Zweryfikowany', about: 'O mnie',
     interests: 'Zainteresowania', languages: 'Języki', job: 'Stanowisko', company: 'Firma', school: 'Wykształcenie',
@@ -101,6 +102,18 @@ const pl = {
   safety: {
     title: 'Bezpieczne randki',
     tips: 'Spotykaj się w miejscach publicznych. Powiedz zaufanej osobie, dokąd idziesz. Nigdy nie wysyłaj pieniędzy komuś poznanemu w sieci. Zgłaszaj każdego, przy kim czujesz się niekomfortowo.',
+  },
+  prompts: {
+    ideal_sunday: "Moja idealna niedziela",
+    green_flag: "Dobry znak, którego szukam",
+    two_truths: "Dwie prawdy i jedno kłamstwo",
+    best_trip: "Najlepsza podróż mojego życia",
+    simple_pleasures: "Moje małe przyjemności",
+    first_date: "Idealna pierwsza randka",
+    dating_me: "Randka ze mną jest jak",
+    this_year: "W tym roku naprawdę chcę",
+    looking_for_someone: "Szukam kogoś, kto",
+    secretly_good_at: "Po cichu jestem dobry(a) w",
   },
   errors: {
     network_error: 'Nie można połączyć się z Lumi. Sprawdź połączenie i spróbuj ponownie.',

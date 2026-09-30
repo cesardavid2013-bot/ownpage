@@ -24,6 +24,19 @@ const bios = [
 const interests = ['travel', 'music', 'coffee', 'hiking', 'cooking', 'art', 'yoga', 'movies', 'photography', 'dancing', 'gaming', 'wine', 'fitness', 'books', 'surf'];
 const jobs = ['Designer', 'Engineer', 'Doctor', 'Photographer', 'Chef', 'Architect', 'Lawyer', 'Musician', 'Teacher', 'Founder'];
 
+const PROMPTS: [string, string][] = [
+  ['ideal_sunday', 'Farmers market, a long lunch that turns into dinner, and a film I have seen ten times.'],
+  ['green_flag', 'You are kind to waiters and you remember the small things.'],
+  ['best_trip', 'Two weeks in Japan with no plan. Best decision I ever made.'],
+  ['simple_pleasures', 'Fresh bread, handwritten notes, the first coffee of the day.'],
+  ['first_date', 'A tiny wine bar, good music, and no phones on the table.'],
+  ['dating_me', 'A spontaneous weekend away — you will need comfortable shoes.'],
+  ['this_year', 'Learn to sail and finally finish the book I started.'],
+  ['looking_for_someone', 'Is curious, laughs easily and texts back.'],
+  ['secretly_good_at', 'Parallel parking and making perfect risotto.'],
+  ['two_truths', 'I have met a Pope. I speak four languages. I can juggle.'],
+];
+
 const pick = <T>(arr: T[], i: number) => arr[i % arr.length];
 
 async function main() {
@@ -50,15 +63,16 @@ async function main() {
     const age = 21 + (idx * 7) % 18;
     const res = await query(
       `INSERT INTO users (email, password_hash, name, birthdate, gender, interested_in, bio, job_title, interests,
-         lat, lng, city, height_cm, looking_for, is_verified, languages, last_active_at)
+         lat, lng, city, height_cm, looking_for, is_verified, languages, last_active_at, prompts)
        VALUES ($1, $2, $3, make_date($4, 1 + $5 % 12, 1 + $5 % 27), $6, '{woman,man,nonbinary}', $7, $8, $9, $10, $11, 'Demo City',
-         $12, $13, $14, $15, now() - ($5 || ' hours')::interval)
+         $12, $13, $14, $15, now() - ($5 || ' hours')::interval, $16)
        RETURNING id`,
       [
         `seed${idx}@seed.lumi.app`, hash, p.name, new Date().getFullYear() - age, idx, p.gender, pick(bios, idx),
         pick(jobs, idx), [pick(interests, idx), pick(interests, idx + 3), pick(interests, idx + 7)],
         lat + ((idx % 10) - 5) * 0.02, lng + ((idx % 7) - 3) * 0.02, 155 + (idx * 3) % 35,
         pick(['long_term', 'short_term', 'friendship', 'unsure'], idx), idx % 3 === 0, ['English', 'Español'],
+        JSON.stringify([pick(PROMPTS, idx), pick(PROMPTS, idx + 4)].map(([id, answer]) => ({ id, answer }))),
       ],
     );
     const id = res.rows[0].id;

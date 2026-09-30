@@ -57,6 +57,7 @@ const fr = {
     unmatchConfirm: 'Annuler le match avec {{name}} ? Cette action est irréversible.', read: 'Lu', matchedOn: 'Vous avez matché le {{date}}',
   },
   profile: {
+    prompts: "Questions", addPrompt: "Ajouter une question", promptsHint: "Répondez à 3 questions maximum. Elles lancent les meilleures conversations.", choosePrompt: "Choisissez une question", answerPlaceholder: "Votre réponse…",
     title: 'Profil', edit: 'Modifier le profil', preview: 'Aperçu', settings: 'Réglages', premium: 'Lumi Premium',
     completeness: 'Profil complété à {{percent}} %', verified: 'Vérifié', about: 'À propos de moi',
     interests: "Centres d'intérêt", languages: 'Langues', job: 'Poste', company: 'Entreprise', school: 'Études',
@@ -101,6 +102,18 @@ const fr = {
   safety: {
     title: 'Faire des rencontres en toute sécurité',
     tips: "Retrouvez-vous dans des lieux publics. Dites à un proche où vous allez. N'envoyez jamais d'argent à une personne rencontrée en ligne. Signalez toute personne qui vous met mal à l'aise.",
+  },
+  prompts: {
+    ideal_sunday: "Mon dimanche idéal",
+    green_flag: "Un signe positif que je recherche",
+    two_truths: "Deux vérités et un mensonge",
+    best_trip: "Le plus beau voyage de ma vie",
+    simple_pleasures: "Mes petits plaisirs",
+    first_date: "Le premier rendez-vous parfait",
+    dating_me: "Sortir avec moi, c’est comme",
+    this_year: "Cette année, je veux vraiment",
+    looking_for_someone: "Je cherche quelqu’un qui",
+    secretly_good_at: "J’ai un talent caché pour",
   },
   errors: {
     network_error: 'Impossible de joindre Lumi. Vérifiez votre connexion et réessayez.',

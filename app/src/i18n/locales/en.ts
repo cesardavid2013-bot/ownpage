@@ -56,6 +56,7 @@ const en = {
     unmatchConfirm: 'Unmatch {{name}}? This cannot be undone.', read: 'Read', matchedOn: 'You matched on {{date}}',
   },
   profile: {
+    prompts: "Prompts", addPrompt: "Add a prompt", promptsHint: "Answer up to 3. They start the best conversations.", choosePrompt: "Choose a prompt", answerPlaceholder: "Your answer…",
     title: 'Profile', edit: 'Edit profile', preview: 'Preview', settings: 'Settings', premium: 'Lumi Premium',
     completeness: 'Profile {{percent}}% complete', verified: 'Verified', about: 'About me',
     interests: 'Interests', languages: 'Languages', job: 'Job title', company: 'Company', school: 'School',
@@ -98,6 +99,18 @@ const en = {
   safety: {
     title: 'Dating safely',
     tips: 'Meet in public places. Tell a friend where you are going. Never send money to someone you met online. Report anyone who makes you uncomfortable.',
+  },
+  prompts: {
+    ideal_sunday: "My ideal Sunday",
+    green_flag: "A green flag I look for",
+    two_truths: "Two truths and a lie",
+    best_trip: "The best trip I ever took",
+    simple_pleasures: "My simple pleasures",
+    first_date: "The perfect first date",
+    dating_me: "Dating me is like",
+    this_year: "This year, I really want to",
+    looking_for_someone: "I'm looking for someone who",
+    secretly_good_at: "I'm secretly good at",
   },
   errors: {
     network_error: "Can't reach Lumi. Check your connection and try again.",

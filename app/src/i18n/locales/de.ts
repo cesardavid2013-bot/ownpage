@@ -57,6 +57,7 @@ const de = {
     unmatchConfirm: 'Match mit {{name}} auflösen? Das kann nicht rückgängig gemacht werden.', read: 'Gelesen', matchedOn: 'Ihr habt am {{date}} gematcht',
   },
   profile: {
+    prompts: "Fragen", addPrompt: "Frage hinzufügen", promptsHint: "Beantworte bis zu 3. Sie starten die besten Gespräche.", choosePrompt: "Wähle eine Frage", answerPlaceholder: "Deine Antwort…",
     title: 'Profil', edit: 'Profil bearbeiten', preview: 'Vorschau', settings: 'Einstellungen', premium: 'Lumi Premium',
     completeness: 'Profil zu {{percent}} % vollständig', verified: 'Verifiziert', about: 'Über mich',
     interests: 'Interessen', languages: 'Sprachen', job: 'Beruf', company: 'Unternehmen', school: 'Ausbildung',
@@ -101,6 +102,18 @@ const de = {
   safety: {
     title: 'Sicher daten',
     tips: 'Triff dich an öffentlichen Orten. Sag einer Vertrauensperson, wohin du gehst. Schicke niemals Geld an jemanden, den du online kennengelernt hast. Melde alle, bei denen du dich unwohl fühlst.',
+  },
+  prompts: {
+    ideal_sunday: "Mein perfekter Sonntag",
+    green_flag: "Ein gutes Zeichen, auf das ich achte",
+    two_truths: "Zwei Wahrheiten und eine Lüge",
+    best_trip: "Meine beste Reise",
+    simple_pleasures: "Meine kleinen Freuden",
+    first_date: "Das perfekte erste Date",
+    dating_me: "Mit mir auszugehen ist wie",
+    this_year: "Dieses Jahr will ich unbedingt",
+    looking_for_someone: "Ich suche jemanden, der",
+    secretly_good_at: "Ich bin heimlich gut in",
   },
   errors: {
     network_error: 'Lumi ist nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.',

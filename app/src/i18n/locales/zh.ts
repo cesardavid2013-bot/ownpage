@@ -57,6 +57,7 @@ const zh = {
     unmatchConfirm: '确定取消与 {{name}} 的配对吗？此操作无法撤销。', read: '已读', matchedOn: '你们于 {{date}} 配对',
   },
   profile: {
+    prompts: "问答", addPrompt: "添加问答", promptsHint: "最多回答 3 个。最好的对话往往从这里开始。", choosePrompt: "选择一个问题", answerPlaceholder: "你的回答…",
     title: '我的', edit: '编辑资料', preview: '预览', settings: '设置', premium: 'Lumi Premium',
     completeness: '资料完成度 {{percent}}%', verified: '已认证', about: '关于我',
     interests: '兴趣', languages: '语言', job: '职位', company: '公司', school: '学校',
@@ -100,6 +101,18 @@ const zh = {
   safety: {
     title: '安全约会',
     tips: '在公共场所见面。告诉你信任的人你要去哪里。永远不要给网上认识的人汇款。如果有人让你感到不适，请举报。',
+  },
+  prompts: {
+    ideal_sunday: "我理想中的周日",
+    green_flag: "我看重的加分项",
+    two_truths: "两真一假",
+    best_trip: "我最难忘的一次旅行",
+    simple_pleasures: "我的小确幸",
+    first_date: "完美的第一次约会",
+    dating_me: "和我约会就像",
+    this_year: "今年我真的很想",
+    looking_for_someone: "我在寻找这样一个人",
+    secretly_good_at: "我暗暗擅长的事",
   },
   errors: {
     network_error: '无法连接到 Lumi。请检查网络后重试。',

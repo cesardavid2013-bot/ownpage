@@ -3,6 +3,16 @@ export type LookingFor = 'long_term' | 'short_term' | 'friendship' | 'casual' | 
 export type Plan = 'free' | 'plus' | 'gold' | 'platinum';
 export type Product = 'plus' | 'gold' | 'platinum' | 'boost_pack' | 'superlike_pack';
 
+export const PROMPT_IDS = [
+  'ideal_sunday', 'green_flag', 'two_truths', 'best_trip', 'simple_pleasures',
+  'first_date', 'dating_me', 'this_year', 'looking_for_someone', 'secretly_good_at',
+] as const;
+export type PromptId = (typeof PROMPT_IDS)[number];
+export interface PromptAnswer {
+  id: PromptId;
+  answer: string;
+}
+
 export interface Photo {
   id: string;
   url: string;
@@ -22,6 +32,7 @@ export interface Profile {
   lookingFor: LookingFor;
   interests: string[];
   languages: string[];
+  prompts: PromptAnswer[];
   isVerified: boolean;
   distanceKm: number | null;
   photos: Photo[];

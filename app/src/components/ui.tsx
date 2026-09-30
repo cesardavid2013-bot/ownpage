@@ -3,10 +3,9 @@ import {
   ActivityIndicator, Platform, Pressable, StyleSheet, Text, TextInput, View,
   type StyleProp, type TextInputProps, type TextStyle, type ViewStyle,
 } from 'react-native';
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, gradients, radius, space } from '@/lib/theme';
+import { colors, font, gradients, radius, space } from '@/lib/theme';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'gold' | 'danger';
 
@@ -23,7 +22,7 @@ export function Button({
   testID?: string;
 }) {
   const inactive = disabled || loading;
-  const fg = variant === 'gold' ? '#2A1D05' : variant === 'secondary' || variant === 'ghost' ? colors.text : '#fff';
+  const fg = variant === 'gold' || variant === 'primary' ? colors.onPrimary : colors.text;
   const content = (
     <View style={styles.btnInner}>
       {loading ? <ActivityIndicator color={fg} /> : (
@@ -82,8 +81,8 @@ export function Chip({ label, selected, onPress, icon }: {
       accessibilityState={{ selected }}
       style={[styles.chip, selected && styles.chipSelected]}
     >
-      {icon ? <Ionicons name={icon} size={14} color={selected ? '#fff' : colors.textMuted} /> : null}
-      <Text style={[styles.chipText, selected && { color: '#fff' }]}>{label}</Text>
+      {icon ? <Ionicons name={icon} size={14} color={selected ? colors.onPrimary : colors.textMuted} /> : null}
+      <Text style={[styles.chipText, selected && { color: colors.onPrimary }]}>{label}</Text>
     </Pressable>
   );
 }
@@ -117,8 +116,8 @@ export function Row({ children, style }: { children: ReactNode; style?: StylePro
 export function Logo({ size = 40 }: { size?: number }) {
   return (
     <Row style={{ gap: size * 0.2 }}>
-      <Image source={require('@/assets/images/favicon.png')} style={{ width: size, height: size, borderRadius: size * 0.26 }} />
-      <Text style={{ color: colors.text, fontSize: size * 0.8, fontWeight: '800', letterSpacing: -0.5 }}>Lumi</Text>
+      <Text style={{ color: colors.text, fontFamily: font.display, fontSize: size * 0.82, letterSpacing: size * 0.1 }}>LUMI</Text>
+      <Text style={{ color: colors.gold, fontSize: size * 0.34, marginTop: -size * 0.4 }}>✦</Text>
     </Row>
   );
 }
@@ -128,7 +127,7 @@ export function PlanBadge({ plan }: { plan: string }) {
   const g = plan === 'platinum' ? gradients.platinum : plan === 'gold' ? gradients.gold : gradients.plus;
   return (
     <LinearGradient colors={g} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.badge}>
-      <Text style={[styles.badgeText, { color: plan === 'plus' ? '#fff' : '#1B1406' }]}>{plan.toUpperCase()}</Text>
+      <Text style={[styles.badgeText, { color: plan === 'plus' ? colors.text : '#1B1406' }]}>{plan.toUpperCase()}</Text>
     </LinearGradient>
   );
 }
@@ -138,13 +137,14 @@ export const webMaxWidth: ViewStyle = Platform.OS === 'web' ? { width: '100%', m
 const styles = StyleSheet.create({
   btn: { borderRadius: radius.pill, overflow: 'hidden' },
   btnFill: { minHeight: 54, paddingHorizontal: space(6), justifyContent: 'center', borderRadius: radius.pill },
-  btnSecondary: { backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border },
+  btnSecondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(233,217,190,0.3)' },
   btnInner: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space(2) },
-  btnText: { fontSize: 16, fontWeight: '700', letterSpacing: 0.2 },
-  label: { color: colors.textMuted, fontSize: 13, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.8 },
+  btnText: { fontSize: 15, fontWeight: '600', letterSpacing: 0.4 },
+  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2 },
   input: {
     backgroundColor: colors.card, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border,
     color: colors.text, fontSize: 16, paddingHorizontal: space(4), paddingVertical: space(3.5), minHeight: 52,
+    ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null),
   },
   error: { color: colors.danger, fontSize: 13 },
   chip: {
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   chipSelected: { backgroundColor: colors.primary, borderColor: colors.primary },
   chipText: { color: colors.textMuted, fontSize: 14, fontWeight: '600' },
-  title: { color: colors.text, fontSize: 30, fontWeight: '800', letterSpacing: -0.6 },
+  title: { color: colors.text, fontSize: 34, fontFamily: font.display, letterSpacing: -0.3, lineHeight: 40 },
   muted: { color: colors.textMuted, fontSize: 15, lineHeight: 22 },
   errorBox: {
     flexDirection: 'row', gap: space(2), alignItems: 'center', backgroundColor: 'rgba(255,90,95,0.12)',

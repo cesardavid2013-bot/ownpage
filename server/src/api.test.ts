@@ -65,6 +65,17 @@ describe('profile', () => {
     expect(patch.body.interests).toEqual(['travel', 'music']);
     expect(patch.body.lookingFor).toBe('long_term');
 
+    const prompts = await request(app).patch('/me').set(u.auth).send({
+      prompts: [{ id: 'ideal_sunday', answer: ' Coffee, a long walk and a good book ' }, { id: 'green_flag', answer: 'Kind to waiters' }],
+    });
+    expect(prompts.body.prompts).toEqual([
+      { id: 'ideal_sunday', answer: 'Coffee, a long walk and a good book' }, { id: 'green_flag', answer: 'Kind to waiters' },
+    ]);
+    await request(app).patch('/me').set(u.auth).send({ prompts: [{ id: 'nope', answer: 'x' }] }).expect(400);
+    await request(app).patch('/me').set(u.auth).send({ prompts: [{ id: 'green_flag', answer: 'a' }, { id: 'green_flag', answer: 'b' }] }).expect(400);
+    const four = ['ideal_sunday', 'green_flag', 'two_truths', 'best_trip'].map((id) => ({ id, answer: 'x' }));
+    await request(app).patch('/me').set(u.auth).send({ prompts: four }).expect(400);
+
     const settings = await request(app).patch('/me/settings').set(u.auth).send({ ageMin: 25, ageMax: 35, maxDistanceKm: 20 });
     expect(settings.body.settings).toMatchObject({ ageMin: 25, ageMax: 35, maxDistanceKm: 20 });
     await request(app).patch('/me/settings').set(u.auth).send({ ageMin: 40, ageMax: 30 }).expect(400);

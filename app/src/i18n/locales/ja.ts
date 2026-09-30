@@ -57,6 +57,7 @@ const ja = {
     unmatchConfirm: '{{name}}さんとのマッチを解除しますか？元に戻せません。', read: '既読', matchedOn: '{{date}}にマッチしました',
   },
   profile: {
+    prompts: "質問", addPrompt: "質問を追加", promptsHint: "最大3つまで回答できます。いちばん良い会話はここから始まります。", choosePrompt: "質問を選ぶ", answerPlaceholder: "あなたの答え…",
     title: 'プロフィール', edit: 'プロフィールを編集', preview: 'プレビュー', settings: '設定', premium: 'Lumi Premium',
     completeness: 'プロフィール完成度 {{percent}}%', verified: '認証済み', about: '自己紹介',
     interests: '興味', languages: '言語', job: '職種', company: '会社', school: '学校',
@@ -100,6 +101,18 @@ const ja = {
   safety: {
     title: '安全な出会いのために',
     tips: '人の多い公共の場所で会いましょう。行き先を信頼できる人に伝えましょう。オンラインで知り合った人に絶対にお金を送らないでください。不快に感じた相手は通報してください。',
+  },
+  prompts: {
+    ideal_sunday: "理想の日曜日",
+    green_flag: "好きになる相手のポイント",
+    two_truths: "2つの本当と1つの嘘",
+    best_trip: "人生最高の旅",
+    simple_pleasures: "ささやかな幸せ",
+    first_date: "理想の初デート",
+    dating_me: "私とのデートはまるで",
+    this_year: "今年ぜったいにやりたいこと",
+    looking_for_someone: "こんな人を探しています",
+    secretly_good_at: "実はこれが得意",
   },
   errors: {
     network_error: 'Lumi に接続できません。接続を確認して再度お試しください。',

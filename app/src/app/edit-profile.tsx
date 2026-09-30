@@ -3,13 +3,14 @@ import { StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { PhotoGrid } from '@/components/PhotoGrid';
+import { PromptsEditor } from '@/components/PromptsEditor';
 import { Header, Screen } from '@/components/Screen';
 import { Button, Chip, ErrorText, Input, Muted, Row } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { colors, space } from '@/lib/theme';
-import type { Gender, LookingFor, Me, Photo } from '@/lib/types';
+import type { Gender, LookingFor, Me, Photo, PromptAnswer } from '@/lib/types';
 
 const LOOKING: LookingFor[] = ['long_term', 'short_term', 'friendship', 'casual', 'unsure'];
 const GENDERS: Gender[] = ['woman', 'man', 'nonbinary'];
@@ -24,6 +25,7 @@ export default function EditProfile() {
     heightCm: user.heightCm ? String(user.heightCm) : '', interests: user.interests.join(', '), languages: user.languages.join(', '),
   });
   const [lookingFor, setLookingFor] = useState(user.lookingFor);
+  const [prompts, setPrompts] = useState<PromptAnswer[]>(user.prompts ?? []);
   const [gender, setGender] = useState(user.gender);
   const [interestedIn, setInterestedIn] = useState<Gender[]>(user.interestedIn);
   const [error, setError] = useState<string | null>(null);
@@ -47,6 +49,7 @@ export default function EditProfile() {
           name: form.name.trim(), bio: form.bio, jobTitle: form.jobTitle, company: form.company, school: form.school,
           city: form.city, heightCm: height && height >= 100 && height <= 250 ? Math.round(height) : null,
           interests: list(form.interests), languages: list(form.languages), lookingFor, gender, interestedIn,
+          prompts: prompts.map((p) => ({ id: p.id, answer: p.answer.trim() })).filter((p) => p.answer),
         },
       });
       useAuth.getState().setUser(me);
@@ -66,6 +69,8 @@ export default function EditProfile() {
         <Input label={t('auth.name')} value={form.name} onChangeText={set('name')} maxLength={40} />
         <Input label={t('profile.about')} value={form.bio} onChangeText={set('bio')} multiline maxLength={500}
           placeholder={t('onboarding.bioPlaceholder')} style={{ minHeight: 110, textAlignVertical: 'top' }} />
+        <Muted style={styles.label}>{t('profile.prompts')}</Muted>
+        <PromptsEditor value={prompts} onChange={setPrompts} />
         <Muted style={styles.label}>{t('lookingFor.title')}</Muted>
         <Row style={styles.wrap}>
           {LOOKING.map((l) => <Chip key={l} label={t(`lookingFor.${l}`)} selected={lookingFor === l} onPress={() => setLookingFor(l)} />)}
@@ -96,6 +101,6 @@ export default function EditProfile() {
 }
 
 const styles = StyleSheet.create({
-  label: { color: colors.textMuted, fontSize: 13, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.8 },
+  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2) },
   wrap: { flexWrap: 'wrap', gap: space(2) },
 });

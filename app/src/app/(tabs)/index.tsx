@@ -146,7 +146,7 @@ export default function Discover() {
         <View style={{ flexDirection: 'row', gap: space(2) }}>
           <Pressable onPress={boost} style={[styles.headerBtn, user.boost.activeUntil ? { backgroundColor: colors.violet } : null]}
             accessibilityRole="button" accessibilityLabel={t('discover.boost')}>
-            <Ionicons name="flash" size={20} color={user.boost.activeUntil ? '#fff' : colors.violet} />
+            <Ionicons name="flash" size={20} color={user.boost.activeUntil ? colors.onPrimary : colors.violet} />
           </Pressable>
           <Pressable onPress={() => router.push('/settings')} style={styles.headerBtn} accessibilityRole="button" accessibilityLabel={t('settings.title')}>
             <Ionicons name="options-outline" size={22} color={colors.text} />
@@ -182,11 +182,11 @@ export default function Discover() {
       </View>
 
       <View style={styles.actions}>
-        <ActionButton icon="refresh" color={colors.gold} size={48} onPress={rewind} label={t('discover.rewind')} />
-        <ActionButton icon="close" color={colors.danger} size={64} onPress={() => press('pass')} label={t('discover.nope')} testID="btn-pass" />
-        <ActionButton icon="star" color={colors.info} size={52} onPress={() => press('superlike')} label={t('discover.superLike')} testID="btn-superlike" />
-        <ActionButton icon="heart" color={colors.success} size={64} onPress={() => press('like')} label={t('discover.like')} testID="btn-like" />
-        <ActionButton icon="flash" color={colors.violet} size={48} onPress={boost} label={t('discover.boost')} />
+        <ActionButton icon="arrow-undo" color={colors.textMuted} size={46} onPress={rewind} label={t('discover.rewind')} />
+        <ActionButton icon="close" color={colors.text} size={62} onPress={() => press('pass')} label={t('discover.nope')} testID="btn-pass" />
+        <ActionButton icon="star" color={colors.gold} size={50} onPress={() => press('superlike')} label={t('discover.superLike')} testID="btn-superlike" />
+        <ActionButton icon="heart" color={colors.onPrimary} size={62} filled onPress={() => press('like')} label={t('discover.like')} testID="btn-like" />
+        <ActionButton icon="flash" color={colors.textMuted} size={46} onPress={boost} label={t('discover.boost')} />
       </View>
 
       <Sheet visible={!!upsell} onClose={() => setUpsell(null)}>
@@ -211,12 +211,12 @@ export default function Discover() {
   );
 }
 
-function ActionButton({ icon, color, size, onPress, label, testID }: {
-  icon: keyof typeof Ionicons.glyphMap; color: string; size: number; onPress: () => void; label: string; testID?: string;
+function ActionButton({ icon, color, size, onPress, label, testID, filled }: {
+  icon: keyof typeof Ionicons.glyphMap; color: string; size: number; onPress: () => void; label: string; testID?: string; filled?: boolean;
 }) {
   return (
     <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} testID={testID}
-      style={({ pressed }) => [styles.action, { width: size, height: size, borderRadius: size / 2, transform: [{ scale: pressed ? 0.92 : 1 }] }]}>
+      style={({ pressed }) => [styles.action, filled && styles.actionFilled, { width: size, height: size, borderRadius: size / 2, transform: [{ scale: pressed ? 0.92 : 1 }] }]}>
       <Ionicons name={icon} size={size * 0.46} color={color} />
     </Pressable>
   );
@@ -257,10 +257,11 @@ const styles = StyleSheet.create({
   bannerText: { color: colors.text, flex: 1, fontWeight: '600' },
   deck: { flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: space(2), marginHorizontal: space(3) },
   actions: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: space(3.5), paddingBottom: space(3), paddingTop: space(1) },
-  action: { backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: colors.border },
+  action: { backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(233,217,190,0.25)' },
+  actionFilled: { backgroundColor: colors.primary, borderColor: colors.primary },
   empty: { alignItems: 'stretch', gap: space(3), paddingHorizontal: space(6), maxWidth: 420 },
   radar: { width: 120, height: 120, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginBottom: space(6) },
   ring: { position: 'absolute', width: 120, height: 120, borderRadius: 60, backgroundColor: colors.primary },
-  radarPhoto: { width: 110, height: 110, borderRadius: 55, borderWidth: 3, borderColor: '#fff' },
+  radarPhoto: { width: 110, height: 110, borderRadius: 55, borderWidth: 2, borderColor: colors.primary },
   upsellIcon: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
 });

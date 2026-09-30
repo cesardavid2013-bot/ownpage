@@ -10,6 +10,7 @@ import { ah, badRequest, forbidden, notFound } from '../lib/errors.js';
 import { entitlementsFor } from '../plans.js';
 import { getUser, privateProfile } from '../services/users.js';
 import { SUPPORTED_LOCALES } from '../locales.js';
+import { MAX_PROMPTS, PROMPT_IDS } from '../prompts.js';
 
 export const meRouter = Router();
 export const MAX_PHOTOS = 9;
@@ -59,12 +60,15 @@ const profileSchema = z.object({
   gender: z.enum(['man', 'woman', 'nonbinary']),
   interestedIn: z.array(z.enum(['man', 'woman', 'nonbinary'])).min(1).max(3),
   locale: z.enum(SUPPORTED_LOCALES),
+  prompts: z.array(z.object({ id: z.enum(PROMPT_IDS), answer: z.string().trim().min(1).max(160) }))
+    .max(MAX_PROMPTS)
+    .refine((list) => new Set(list.map((p) => p.id)).size === list.length, { message: 'duplicate prompt' }),
 }).partial();
 
 const columns: Record<string, string> = {
   name: 'name', bio: 'bio', jobTitle: 'job_title', company: 'company', school: 'school', city: 'city',
   heightCm: 'height_cm', lookingFor: 'looking_for', interests: 'interests', languages: 'languages',
-  gender: 'gender', interestedIn: 'interested_in', locale: 'locale',
+  gender: 'gender', interestedIn: 'interested_in', locale: 'locale', prompts: 'prompts',
   maxDistanceKm: 'max_distance_km', ageMin: 'age_min', ageMax: 'age_max', globalMode: 'global_mode',
   hideAge: 'hide_age', hideDistance: 'hide_distance', incognito: 'incognito',
 };
@@ -73,7 +77,8 @@ async function updateColumns(userId: string, values: Record<string, unknown>) {
   const entries = Object.entries(values).filter(([, v]) => v !== undefined);
   if (!entries.length) return;
   const sets = entries.map(([k], i) => `${columns[k]} = $${i + 2}`);
-  await query(`UPDATE users SET ${sets.join(', ')} WHERE id = $1`, [userId, ...entries.map(([, v]) => v)]);
+  const params = entries.map(([k, v]) => (k === 'prompts' ? JSON.stringify(v) : v));
+  await query(`UPDATE users SET ${sets.join(', ')} WHERE id = $1`, [userId, ...params]);
 }
 
 meRouter.patch('/', ah(async (req, res) => {
@@ -187,7 +192,7 @@ meRouter.delete('/', ah(async (req, res) => {
     await c.query('UPDATE refresh_tokens SET revoked_at = now() WHERE user_id = $1 AND revoked_at IS NULL', [req.userId]);
     await c.query(
       `UPDATE users SET deleted_at = now(), email = 'deleted+' || id || '@invalid', name = 'Deleted',
-         bio = '', job_title = '', company = '', school = '', city = '', interests = '{}', languages = '{}',
+         bio = '', job_title = '', company = '', school = '', city = '', interests = '{}', languages = '{}', prompts = '[]',
          lat = NULL, lng = NULL, passport_lat = NULL, passport_lng = NULL, password_hash = ''
        WHERE id = $1`,
       [req.userId],

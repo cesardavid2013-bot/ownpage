@@ -57,6 +57,7 @@ const sv = {
     unmatchConfirm: 'Ta bort matchningen med {{name}}? Det går inte att ångra.', read: 'Läst', matchedOn: 'Ni matchade {{date}}',
   },
   profile: {
+    prompts: "Frågor", addPrompt: "Lägg till fråga", promptsHint: "Svara på upp till 3. De startar de bästa samtalen.", choosePrompt: "Välj en fråga", answerPlaceholder: "Ditt svar…",
     title: 'Profil', edit: 'Redigera profil', preview: 'Förhandsvisa', settings: 'Inställningar', premium: 'Lumi Premium',
     completeness: 'Profilen är {{percent}} % klar', verified: 'Verifierad', about: 'Om mig',
     interests: 'Intressen', languages: 'Språk', job: 'Yrke', company: 'Företag', school: 'Utbildning',
@@ -101,6 +102,18 @@ const sv = {
   safety: {
     title: 'Dejta säkert',
     tips: 'Träffas på offentliga platser. Berätta för någon du litar på vart du ska. Skicka aldrig pengar till någon du träffat online. Anmäl alla som får dig att känna dig obekväm.',
+  },
+  prompts: {
+    ideal_sunday: "Min perfekta söndag",
+    green_flag: "Ett gott tecken jag letar efter",
+    two_truths: "Två sanningar och en lögn",
+    best_trip: "Den bästa resan jag gjort",
+    simple_pleasures: "Mina små glädjeämnen",
+    first_date: "Den perfekta första dejten",
+    dating_me: "Att dejta mig är som",
+    this_year: "I år vill jag verkligen",
+    looking_for_someone: "Jag söker någon som",
+    secretly_good_at: "Jag är i hemlighet bra på",
   },
   errors: {
     network_error: 'Kan inte nå Lumi. Kontrollera anslutningen och försök igen.',

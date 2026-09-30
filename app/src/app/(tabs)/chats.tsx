@@ -8,7 +8,7 @@ import { Button, Muted, Title } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { useAuth } from '@/lib/auth';
 import { useMatches } from '@/lib/matches';
-import { colors, gradients, space } from '@/lib/theme';
+import { colors, font, gradients, space } from '@/lib/theme';
 import type { Match } from '@/lib/types';
 
 const open = (m: Match) => router.push({ pathname: '/chat/[id]', params: { id: m.id } });
@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
   freshName: { color: colors.text, fontWeight: '600', fontSize: 13 },
   row: { flexDirection: 'row', alignItems: 'center', gap: space(3.5), paddingHorizontal: space(5), paddingVertical: space(3) },
   avatar: { width: 62, height: 62, borderRadius: 31, backgroundColor: colors.card },
-  name: { color: colors.text, fontWeight: '700', fontSize: 17 },
+  name: { color: colors.text, fontFamily: font.display, fontSize: 21 },
   preview: { color: colors.textMuted, fontSize: 15 },
   previewUnread: { color: colors.text, fontWeight: '600' },
   unread: { minWidth: 22, height: 22, borderRadius: 11, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 6 },
-  unreadText: { color: '#fff', fontWeight: '800', fontSize: 12 },
+  unreadText: { color: colors.onPrimary, fontWeight: '800', fontSize: 12 },
 });

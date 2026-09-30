@@ -57,6 +57,7 @@ const vi = {
     unmatchConfirm: 'Hủy tương hợp với {{name}}? Không thể hoàn tác.', read: 'Đã xem', matchedOn: 'Các bạn tương hợp vào {{date}}',
   },
   profile: {
+    prompts: "Câu hỏi", addPrompt: "Thêm câu hỏi", promptsHint: "Trả lời tối đa 3 câu. Chúng mở đầu những cuộc trò chuyện hay nhất.", choosePrompt: "Chọn một câu hỏi", answerPlaceholder: "Câu trả lời của bạn…",
     title: 'Hồ sơ', edit: 'Chỉnh sửa hồ sơ', preview: 'Xem trước', settings: 'Cài đặt', premium: 'Lumi Premium',
     completeness: 'Hồ sơ hoàn thành {{percent}}%', verified: 'Đã xác minh', about: 'Giới thiệu',
     interests: 'Sở thích', languages: 'Ngôn ngữ', job: 'Chức danh', company: 'Công ty', school: 'Trường học',
@@ -100,6 +101,18 @@ const vi = {
   safety: {
     title: 'Hẹn hò an toàn',
     tips: 'Hẹn gặp ở nơi công cộng. Cho người bạn tin tưởng biết bạn đi đâu. Không bao giờ gửi tiền cho người quen qua mạng. Báo cáo bất kỳ ai khiến bạn không thoải mái.',
+  },
+  prompts: {
+    ideal_sunday: "Ngày Chủ nhật lý tưởng của tôi",
+    green_flag: "Một dấu hiệu tốt tôi tìm kiếm",
+    two_truths: "Hai sự thật và một lời nói dối",
+    best_trip: "Chuyến đi tuyệt nhất của tôi",
+    simple_pleasures: "Những niềm vui giản dị của tôi",
+    first_date: "Buổi hẹn đầu tiên hoàn hảo",
+    dating_me: "Hẹn hò với tôi giống như",
+    this_year: "Năm nay tôi thật sự muốn",
+    looking_for_someone: "Tôi tìm một người",
+    secretly_good_at: "Tôi giỏi một cách bí mật ở",
   },
   errors: {
     network_error: 'Không thể kết nối với Lumi. Kiểm tra kết nối rồi thử lại.',

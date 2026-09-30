@@ -57,6 +57,7 @@ const id = {
     unmatchConfirm: 'Batalkan match dengan {{name}}? Ini tidak bisa dibatalkan.', read: 'Dibaca', matchedOn: 'Kalian match pada {{date}}',
   },
   profile: {
+    prompts: "Pertanyaan", addPrompt: "Tambah pertanyaan", promptsHint: "Jawab hingga 3. Dari sinilah percakapan terbaik dimulai.", choosePrompt: "Pilih pertanyaan", answerPlaceholder: "Jawabanmu…",
     title: 'Profil', edit: 'Ubah profil', preview: 'Pratinjau', settings: 'Pengaturan', premium: 'Lumi Premium',
     completeness: 'Profil {{percent}}% lengkap', verified: 'Terverifikasi', about: 'Tentang saya',
     interests: 'Minat', languages: 'Bahasa', job: 'Jabatan', company: 'Perusahaan', school: 'Pendidikan',
@@ -100,6 +101,18 @@ const id = {
   safety: {
     title: 'Kencan dengan aman',
     tips: 'Bertemulah di tempat umum. Beri tahu orang tepercaya ke mana kamu pergi. Jangan pernah mengirim uang kepada orang yang kamu kenal secara online. Laporkan siapa pun yang membuatmu tidak nyaman.',
+  },
+  prompts: {
+    ideal_sunday: "Minggu idealku",
+    green_flag: "Tanda baik yang kucari",
+    two_truths: "Dua kebenaran dan satu kebohongan",
+    best_trip: "Perjalanan terbaik yang pernah kulakukan",
+    simple_pleasures: "Kesenangan sederhanaku",
+    first_date: "Kencan pertama yang sempurna",
+    dating_me: "Berkencan denganku itu seperti",
+    this_year: "Tahun ini aku sangat ingin",
+    looking_for_someone: "Aku mencari seseorang yang",
+    secretly_good_at: "Diam-diam aku jago",
   },
   errors: {
     network_error: 'Tidak dapat terhubung ke Lumi. Periksa koneksimu lalu coba lagi.',

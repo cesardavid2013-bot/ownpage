@@ -1,5 +1,6 @@
 import '@/i18n';
 import { useEffect } from 'react';
+import { useFonts, BodoniModa_500Medium, BodoniModa_500Medium_Italic } from '@expo-google-fonts/bodoni-moda';
 import { View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -19,6 +20,8 @@ const theme = {
 
 export default function RootLayout() {
   const status = useAuth((s) => s.status);
+  const [fontsLoaded, fontError] = useFonts({ BodoniModa_500Medium, BodoniModa_500Medium_Italic });
+  const fontsReady = fontsLoaded || !!fontError;
   const needsOnboarding = useAuth((s) => !!s.user && s.user.photos.length === 0);
 
   useEffect(() => {
@@ -26,10 +29,10 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (status !== 'loading') SplashScreen.hideAsync().catch(() => {});
-  }, [status]);
+    if (status !== 'loading' && fontsReady) SplashScreen.hideAsync().catch(() => {});
+  }, [status, fontsReady]);
 
-  if (status === 'loading') return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
+  if (status === 'loading' || !fontsReady) return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
 
   const signedIn = status === 'signedIn';
   return (

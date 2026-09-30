@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-na
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
-import { colors, radius, space } from '@/lib/theme';
+import { colors, font, radius, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 import { Chip, Row } from './ui';
 
@@ -60,6 +60,12 @@ export function ProfileDetails({ profile }: { profile: Profile }) {
             <Text style={styles.bio}>{profile.bio}</Text>
           </View>
         ) : null}
+        {(profile.prompts ?? []).map((p) => (
+          <View key={p.id} style={styles.quote}>
+            <Text style={styles.heading}>{t(`prompts.${p.id}`)}</Text>
+            <Text style={styles.quoteText}>{p.answer}</Text>
+          </View>
+        ))}
         {profile.interests.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.heading}>{t('profile.interests')}</Text>
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
   bars: { position: 'absolute', top: 12, left: 12, right: 12, flexDirection: 'row', gap: 4 },
   bar: { flex: 1, height: 3.5, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.35)' },
   body: { padding: space(5), gap: space(3) },
-  name: { color: colors.text, fontSize: 32, fontWeight: '800' },
+  name: { color: colors.text, fontSize: 38, fontFamily: font.display },
   age: { color: colors.text, fontSize: 26 },
   fact: { color: colors.textMuted, fontSize: 16, flex: 1 },
   pill: {
@@ -92,4 +98,6 @@ const styles = StyleSheet.create({
   section: { gap: space(2), marginTop: space(2) },
   heading: { color: colors.textMuted, fontWeight: '700', textTransform: 'uppercase', fontSize: 12, letterSpacing: 1 },
   bio: { color: colors.text, fontSize: 16, lineHeight: 24 },
+  quote: { gap: space(2), marginTop: space(2), paddingVertical: space(5), borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: colors.border },
+  quoteText: { color: colors.text, fontFamily: font.display, fontSize: 26, lineHeight: 33 },
 });

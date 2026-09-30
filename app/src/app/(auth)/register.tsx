@@ -100,6 +100,6 @@ export default function Register() {
 }
 
 const styles = StyleSheet.create({
-  label: { color: colors.textMuted, fontSize: 13, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.8 },
+  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2) },
   wrap: { flexWrap: 'wrap', gap: space(2) },
 });

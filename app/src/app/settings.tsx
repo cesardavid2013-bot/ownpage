@@ -190,7 +190,7 @@ function Toggle({ label, hint, value, onChange, premium }: { label: string; hint
         {hint ? <Text style={styles.hint}>{hint}</Text> : null}
       </View>
       {premium ? <PremiumTag /> : null}
-      <Switch value={value} onValueChange={onChange} trackColor={{ true: colors.primary, false: colors.border }} thumbColor="#fff" />
+      <Switch value={value} onValueChange={onChange} trackColor={{ true: colors.primary, false: colors.border }} thumbColor={value ? colors.onPrimary : '#d8d4cc'} />
     </View>
   );
 }

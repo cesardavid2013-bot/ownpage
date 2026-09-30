@@ -14,7 +14,7 @@ import { useAuth } from '@/lib/auth';
 import { useMatches } from '@/lib/matches';
 import { confirm, notify } from '@/lib/notify';
 import { emitTyping, useRealtime, useSocketEvent } from '@/lib/realtime';
-import { colors, gradients, space } from '@/lib/theme';
+import { colors, font, gradients, space } from '@/lib/theme';
 import type { Message } from '@/lib/types';
 
 export default function Chat() {
@@ -160,8 +160,8 @@ export default function Chat() {
               const mine = item.senderId === me.id;
               const content = (
                 <>
-                  <Text style={styles.body}>{item.body}</Text>
-                  <Text style={styles.time}>{time(item.createdAt)}</Text>
+                  <Text style={[styles.body, mine && { color: colors.onPrimary }]}>{item.body}</Text>
+                  <Text style={[styles.time, mine && { color: 'rgba(22,19,14,0.55)' }]}>{time(item.createdAt)}</Text>
                 </>
               );
               return (
@@ -189,7 +189,7 @@ export default function Chat() {
           />
           <Pressable onPress={send} disabled={!text.trim() || sending} accessibilityLabel={t('common.send')} testID="chat-send">
             <LinearGradient colors={gradients.brand} style={[styles.send, { opacity: text.trim() ? 1 : 0.4 }]}>
-              <Ionicons name="arrow-up" size={22} color="#fff" />
+              <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />
             </LinearGradient>
           </Pressable>
         </View>
@@ -202,11 +202,11 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   intro: { alignItems: 'center', gap: space(2), paddingVertical: space(8) },
   introPhoto: { width: 110, height: 110, borderRadius: 55, backgroundColor: colors.card },
-  introName: { color: colors.text, fontSize: 22, fontWeight: '800' },
+  introName: { color: colors.text, fontSize: 30, fontFamily: font.display },
   bubble: { maxWidth: '80%', paddingHorizontal: space(4), paddingVertical: space(2.5), borderRadius: 22 },
   mine: { borderBottomRightRadius: 6 },
   theirs: { backgroundColor: colors.cardHigh, borderBottomLeftRadius: 6 },
-  body: { color: '#fff', fontSize: 16, lineHeight: 22 },
+  body: { color: colors.text, fontSize: 16, lineHeight: 22 },
   time: { color: 'rgba(255,255,255,0.6)', fontSize: 10, alignSelf: 'flex-end', marginTop: 2 },
   typing: { color: colors.textMuted, fontStyle: 'italic', marginTop: space(1) },
   read: { color: colors.textFaint, fontSize: 12, alignSelf: 'flex-end', marginTop: 2 },
@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1, color: colors.text, fontSize: 16, backgroundColor: colors.card, borderRadius: 22,
     paddingHorizontal: space(4), paddingTop: space(3), paddingBottom: space(3), maxHeight: 120, minHeight: 44,
+    ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null),
   },
   send: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
 });

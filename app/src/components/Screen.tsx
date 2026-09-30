@@ -7,11 +7,11 @@ import { colors, space } from '@/lib/theme';
 import { webMaxWidth } from './ui';
 
 export function Screen({
-  children, scroll, edges = ['top', 'bottom'], style, padded = true,
-}: { children: ReactNode; scroll?: boolean; edges?: Edge[]; style?: ViewStyle; padded?: boolean }) {
+  children, scroll, edges = ['top', 'bottom'], style, padded = true, transparent,
+}: { children: ReactNode; scroll?: boolean; edges?: Edge[]; style?: ViewStyle; padded?: boolean; transparent?: boolean }) {
   const inner = padded ? { paddingHorizontal: space(5) } : null;
   return (
-    <SafeAreaView edges={edges} style={styles.root}>
+    <SafeAreaView edges={edges} style={[styles.root, transparent && { backgroundColor: 'transparent' }]}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         {scroll ? (
           <ScrollView

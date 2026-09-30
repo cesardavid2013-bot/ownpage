@@ -28,7 +28,7 @@ export default function TabsLayout() {
           height: Platform.OS === 'web' ? 64 : undefined,
         },
         tabBarLabelStyle: { fontWeight: '600', fontSize: 11 },
-        tabBarBadgeStyle: { backgroundColor: colors.primary, color: '#fff', fontSize: 10 },
+        tabBarBadgeStyle: { backgroundColor: colors.primary, color: colors.onPrimary, fontSize: 10 },
         sceneStyle: { backgroundColor: colors.bg },
       }}
     >

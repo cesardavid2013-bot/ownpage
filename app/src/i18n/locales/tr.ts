@@ -57,6 +57,7 @@ const tr = {
     unmatchConfirm: '{{name}} ile eşleşme kaldırılsın mı? Bu işlem geri alınamaz.', read: 'Okundu', matchedOn: '{{date}} tarihinde eşleştiniz',
   },
   profile: {
+    prompts: "Sorular", addPrompt: "Soru ekle", promptsHint: "En fazla 3 tanesini yanıtla. En güzel sohbetleri onlar başlatır.", choosePrompt: "Bir soru seç", answerPlaceholder: "Yanıtın…",
     title: 'Profil', edit: 'Profili düzenle', preview: 'Önizleme', settings: 'Ayarlar', premium: 'Lumi Premium',
     completeness: 'Profil %{{percent}} tamamlandı', verified: 'Doğrulandı', about: 'Hakkımda',
     interests: 'İlgi alanları', languages: 'Diller', job: 'Unvan', company: 'Şirket', school: 'Okul',
@@ -100,6 +101,18 @@ const tr = {
   safety: {
     title: 'Güvenli buluşmalar',
     tips: 'Halka açık yerlerde buluş. Nereye gittiğini güvendiğin birine söyle. İnternette tanıştığın birine asla para gönderme. Seni rahatsız eden herkesi şikâyet et.',
+  },
+  prompts: {
+    ideal_sunday: "İdeal pazar günüm",
+    green_flag: "Aradığım yeşil bayrak",
+    two_truths: "İki doğru bir yalan",
+    best_trip: "Yaptığım en güzel seyahat",
+    simple_pleasures: "Basit keyiflerim",
+    first_date: "Mükemmel ilk buluşma",
+    dating_me: "Benimle çıkmak şuna benzer",
+    this_year: "Bu yıl gerçekten istediğim",
+    looking_for_someone: "Şöyle birini arıyorum",
+    secretly_good_at: "Gizlice iyi olduğum şey",
   },
   errors: {
     network_error: 'Lumi’ye ulaşılamıyor. Bağlantını kontrol edip tekrar dene.',

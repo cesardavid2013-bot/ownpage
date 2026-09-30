@@ -57,6 +57,7 @@ const ar = {
     unmatchConfirm: 'إلغاء التطابق مع {{name}}؟ لا يمكن التراجع عن ذلك.', read: 'تمت القراءة', matchedOn: 'تطابقتما في {{date}}',
   },
   profile: {
+    prompts: "الأسئلة", addPrompt: "إضافة سؤال", promptsHint: "أجب عن 3 أسئلة كحد أقصى. هي ما يبدأ أجمل المحادثات.", choosePrompt: "اختر سؤالًا", answerPlaceholder: "إجابتك…",
     title: 'الملف الشخصي', edit: 'تعديل الملف', preview: 'معاينة', settings: 'الإعدادات', premium: 'Lumi Premium',
     completeness: 'اكتمل الملف بنسبة {{percent}}%', verified: 'موثّق', about: 'نبذة عني',
     interests: 'الاهتمامات', languages: 'اللغات', job: 'المسمى الوظيفي', company: 'الشركة', school: 'التعليم',
@@ -100,6 +101,18 @@ const ar = {
   safety: {
     title: 'مواعدة آمنة',
     tips: 'التقِ في أماكن عامة. أخبر شخصًا تثق به بوجهتك. لا ترسل المال أبدًا لشخص تعرفت إليه عبر الإنترنت. أبلغ عن أي شخص يجعلك تشعر بعدم الارتياح.',
+  },
+  prompts: {
+    ideal_sunday: "يوم الأحد المثالي بالنسبة لي",
+    green_flag: "علامة إيجابية أبحث عنها",
+    two_truths: "حقيقتان وكذبة",
+    best_trip: "أفضل رحلة قمت بها",
+    simple_pleasures: "متعي البسيطة",
+    first_date: "الموعد الأول المثالي",
+    dating_me: "مواعدتي تشبه",
+    this_year: "هذا العام أريد حقًا أن",
+    looking_for_someone: "أبحث عن شخص",
+    secretly_good_at: "أنا بارع سرًّا في",
   },
   errors: {
     network_error: 'تعذّر الاتصال بـLumi. تحقق من اتصالك وحاول مرة أخرى.',

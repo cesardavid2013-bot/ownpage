@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
-import { colors, gradients, radius, shadow, space } from '@/lib/theme';
+import { colors, font, gradients, radius, shadow, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 
 export type SwipeAction = 'like' | 'pass' | 'superlike';
@@ -64,6 +64,8 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
   const superOpacity = pos.y.interpolate({ inputRange: [-160, -40], outputRange: [1, 0], extrapolate: 'clamp' });
 
   const details = [profile.jobTitle, profile.school].filter(Boolean)[0];
+  // Photo by photo, the card cycles through the person's prompts too.
+  const prompt = profile.prompts?.length ? profile.prompts[photo % profile.prompts.length] : null;
 
   return (
     <Animated.View
@@ -86,19 +88,19 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
 
       {profile.superLikedYou && (
         <View style={styles.superTag} pointerEvents="none">
-          <Ionicons name="star" size={14} color="#fff" />
+          <Ionicons name="star" size={13} color={colors.onPrimary} />
           <Text style={styles.superTagText}>{t('discover.superLikedYou')}</Text>
         </View>
       )}
 
       <Animated.View style={[styles.stamp, styles.likeStamp, { opacity: likeOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.success }]}>LIKE</Text>
+        <Text style={[styles.stampText, { color: colors.primary }]}>LIKE</Text>
       </Animated.View>
       <Animated.View style={[styles.stamp, styles.nopeStamp, { opacity: nopeOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.danger }]}>NOPE</Text>
+        <Text style={[styles.stampText, { color: colors.textMuted }]}>NOPE</Text>
       </Animated.View>
       <Animated.View style={[styles.stamp, styles.superStamp, { opacity: superOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.info }]}>SUPER</Text>
+        <Text style={[styles.stampText, { color: colors.gold }]}>SUPER</Text>
       </Animated.View>
 
       <View style={styles.info}>
@@ -117,7 +119,12 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
           {profile.distanceKm != null ? (
             <View style={styles.meta}><Ionicons name="location-outline" size={15} color="#fff" /><Text style={styles.metaText}>{t('common.km', { count: profile.distanceKm })}</Text></View>
           ) : null}
-          {profile.note ? <Text style={styles.note} numberOfLines={2}>“{profile.note}”</Text> : null}
+          {profile.note ? <Text style={styles.note} numberOfLines={2}>“{profile.note}”</Text> : prompt ? (
+            <View style={styles.prompt}>
+              <Text style={styles.promptQ}>{t(`prompts.${prompt.id}`)}</Text>
+              <Text style={styles.promptA} numberOfLines={3}>{prompt.answer}</Text>
+            </View>
+          ) : null}
         </View>
         <Pressable onPress={onInfo} style={styles.infoBtn} hitSlop={10} accessibilityRole="button" accessibilityLabel="Info">
           <Ionicons name="arrow-up" size={20} color="#fff" />
@@ -137,22 +144,25 @@ const styles = StyleSheet.create({
   barActive: { backgroundColor: '#fff' },
   superTag: {
     position: 'absolute', top: 26, alignSelf: 'center', flexDirection: 'row', gap: 6, alignItems: 'center',
-    backgroundColor: colors.info, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999,
+    backgroundColor: colors.primary, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999,
   },
-  superTagText: { color: '#fff', fontWeight: '800', fontSize: 13 },
-  stamp: { position: 'absolute', top: 60, borderWidth: 4, borderRadius: 12, paddingHorizontal: 12, paddingVertical: 4 },
-  likeStamp: { left: 28, borderColor: colors.success, transform: [{ rotate: '-18deg' }] },
-  nopeStamp: { right: 28, borderColor: colors.danger, transform: [{ rotate: '18deg' }] },
-  superStamp: { alignSelf: 'center', top: undefined, bottom: 170, borderColor: colors.info, transform: [{ rotate: '-8deg' }] },
-  stampText: { fontSize: 38, fontWeight: '900', letterSpacing: 2 },
+  superTagText: { color: colors.onPrimary, fontWeight: '700', fontSize: 12, letterSpacing: 1, textTransform: 'uppercase' },
+  stamp: { position: 'absolute', top: 60, borderWidth: 2, borderRadius: 6, paddingHorizontal: 14, paddingVertical: 2 },
+  likeStamp: { left: 28, borderColor: colors.primary, transform: [{ rotate: '-14deg' }] },
+  nopeStamp: { right: 28, borderColor: colors.textMuted, transform: [{ rotate: '14deg' }] },
+  superStamp: { alignSelf: 'center', top: undefined, bottom: 170, borderColor: colors.gold, transform: [{ rotate: '-8deg' }] },
+  stampText: { fontSize: 34, fontFamily: font.display, letterSpacing: 6 },
   info: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: space(5), flexDirection: 'row', alignItems: 'flex-end' },
   nameRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8 },
-  name: { color: '#fff', fontSize: 32, fontWeight: '800', flexShrink: 1 },
+  name: { color: '#fff', fontSize: 36, fontFamily: font.display, flexShrink: 1 },
   age: { color: '#fff', fontSize: 26, fontWeight: '400' },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   metaText: { color: 'rgba(255,255,255,0.92)', fontSize: 15 },
   online: { width: 9, height: 9, borderRadius: 5, backgroundColor: colors.success },
-  note: { color: '#fff', fontStyle: 'italic', marginTop: 4, fontSize: 15 },
+  prompt: { marginTop: space(3), paddingTop: space(3), borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: 'rgba(233,217,190,0.35)', gap: 4 },
+  promptQ: { color: colors.gold, fontSize: 10.5, fontWeight: '700', letterSpacing: 1.6, textTransform: 'uppercase' },
+  promptA: { color: '#fff', fontFamily: font.display, fontSize: 21, lineHeight: 26 },
+  note: { color: colors.primary, fontFamily: font.displayItalic, marginTop: 6, fontSize: 17 },
   infoBtn: {
     width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.22)',
     alignItems: 'center', justifyContent: 'center', marginLeft: space(3),

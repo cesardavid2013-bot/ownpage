@@ -57,6 +57,7 @@ const it = {
     unmatchConfirm: 'Annullare il match con {{name}}? Non si può tornare indietro.', read: 'Letto', matchedOn: 'Avete fatto match il {{date}}',
   },
   profile: {
+    prompts: "Domande", addPrompt: "Aggiungi domanda", promptsHint: "Rispondi fino a 3. Sono loro ad avviare le conversazioni migliori.", choosePrompt: "Scegli una domanda", answerPlaceholder: "La tua risposta…",
     title: 'Profilo', edit: 'Modifica profilo', preview: 'Anteprima', settings: 'Impostazioni', premium: 'Lumi Premium',
     completeness: 'Profilo completo al {{percent}}%', verified: 'Verificato', about: 'Su di me',
     interests: 'Interessi', languages: 'Lingue', job: 'Professione', company: 'Azienda', school: 'Studi',
@@ -101,6 +102,18 @@ const it = {
   safety: {
     title: 'Incontri in sicurezza',
     tips: 'Incontratevi in luoghi pubblici. Di’ a qualcuno di fidato dove vai. Non inviare mai denaro a chi hai conosciuto online. Segnala chiunque ti metta a disagio.',
+  },
+  prompts: {
+    ideal_sunday: "La mia domenica ideale",
+    green_flag: "Un segnale positivo che cerco",
+    two_truths: "Due verità e una bugia",
+    best_trip: "Il viaggio più bello della mia vita",
+    simple_pleasures: "I miei piccoli piaceri",
+    first_date: "Il primo appuntamento perfetto",
+    dating_me: "Uscire con me è come",
+    this_year: "Quest’anno voglio davvero",
+    looking_for_someone: "Cerco qualcuno che",
+    secretly_good_at: "Ho un talento segreto per",
   },
   errors: {
     network_error: 'Impossibile raggiungere Lumi. Controlla la connessione e riprova.',

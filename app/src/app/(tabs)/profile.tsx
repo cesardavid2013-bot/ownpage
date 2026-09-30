@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
 import { Muted, PlanBadge, Row } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { colors, gradients, radius, space } from '@/lib/theme';
+import { colors, font, gradients, radius, space } from '@/lib/theme';
 import type { Me } from '@/lib/types';
 
 export function completeness(u: Me) {
@@ -71,7 +71,7 @@ function RoundAction({ icon, label, onPress, primary }: { icon: keyof typeof Ion
     <Pressable onPress={onPress} style={{ alignItems: 'center', gap: space(2), flex: 1 }} accessibilityRole="button">
       {primary ? (
         <LinearGradient colors={gradients.brand} style={[styles.round, { width: 68, height: 68, borderRadius: 34 }]}>
-          <Ionicons name={icon} size={28} color="#fff" />
+          <Ionicons name={icon} size={28} color={colors.onPrimary} />
         </LinearGradient>
       ) : (
         <View style={styles.round}><Ionicons name={icon} size={24} color={colors.textMuted} /></View>
@@ -99,13 +99,13 @@ const styles = StyleSheet.create({
     position: 'absolute', bottom: -4, alignSelf: 'center', backgroundColor: colors.primary, paddingHorizontal: 10,
     paddingVertical: 3, borderRadius: 999, borderWidth: 3, borderColor: colors.bg,
   },
-  pctText: { color: '#fff', fontWeight: '800', fontSize: 12 },
-  name: { color: colors.text, fontSize: 28, fontWeight: '800' },
+  pctText: { color: colors.onPrimary, fontWeight: '800', fontSize: 12 },
+  name: { color: colors.text, fontSize: 34, fontFamily: font.display },
   actions: { justifyContent: 'space-around', marginVertical: space(7) },
   round: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: colors.border },
   roundLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
   premium: { borderRadius: radius.lg, padding: space(5) },
-  premiumTitle: { color: '#2A1D05', fontWeight: '900', fontSize: 20 },
+  premiumTitle: { color: '#2A1D05', fontFamily: font.display, fontSize: 24 },
   premiumSub: { color: '#4A3510', fontSize: 14, marginTop: 2 },
   stat: { flex: 1, backgroundColor: colors.card, borderRadius: radius.md, padding: space(4), alignItems: 'center', gap: 4, borderWidth: 1, borderColor: colors.border },
   statValue: { color: colors.text, fontSize: 22, fontWeight: '800' },

@@ -57,6 +57,7 @@ const ko = {
     unmatchConfirm: '{{name}}님과의 매치를 취소할까요? 되돌릴 수 없어요.', read: '읽음', matchedOn: '{{date}}에 매치됨',
   },
   profile: {
+    prompts: "질문", addPrompt: "질문 추가", promptsHint: "최대 3개까지 답해 보세요. 최고의 대화는 여기서 시작돼요.", choosePrompt: "질문 선택", answerPlaceholder: "나의 답변…",
     title: '프로필', edit: '프로필 편집', preview: '미리보기', settings: '설정', premium: 'Lumi Premium',
     completeness: '프로필 {{percent}}% 완성', verified: '인증됨', about: '자기소개',
     interests: '관심사', languages: '언어', job: '직업', company: '회사', school: '학교',
@@ -100,6 +101,18 @@ const ko = {
   safety: {
     title: '안전한 만남',
     tips: '공공장소에서 만나세요. 믿을 수 있는 사람에게 어디에 가는지 알리세요. 온라인에서 만난 사람에게 절대 돈을 보내지 마세요. 불편하게 만드는 사람은 신고하세요.',
+  },
+  prompts: {
+    ideal_sunday: "나의 이상적인 일요일",
+    green_flag: "내가 찾는 좋은 신호",
+    two_truths: "두 개의 진실과 하나의 거짓말",
+    best_trip: "내 인생 최고의 여행",
+    simple_pleasures: "나의 소소한 행복",
+    first_date: "완벽한 첫 데이트",
+    dating_me: "나와의 데이트는 마치",
+    this_year: "올해 꼭 하고 싶은 것",
+    looking_for_someone: "이런 사람을 찾고 있어요",
+    secretly_good_at: "사실 나는 이걸 잘해요",
   },
   errors: {
     network_error: 'Lumi에 연결할 수 없어요. 연결 상태를 확인하고 다시 시도하세요.',

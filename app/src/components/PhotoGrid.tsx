@@ -67,7 +67,7 @@ export function PhotoGrid({ photos, onChange }: { photos: Photo[]; onChange: (ph
           return (
             <Pressable key={photo.id} style={styles.slot} onPress={() => i > 0 && makeMain(photo.id)} accessibilityLabel={t('profile.photosHint')}>
               <Image source={{ uri: photo.url }} style={StyleSheet.absoluteFill} contentFit="cover" />
-              {i === 0 ? <View style={styles.mainTag}><Ionicons name="star" size={10} color="#fff" /></View> : null}
+              {i === 0 ? <View style={styles.mainTag}><Ionicons name="star" size={10} color={colors.onPrimary} /></View> : null}
               <Pressable onPress={() => remove(photo.id)} style={styles.remove} hitSlop={8} accessibilityLabel={t('profile.removePhoto')}>
                 <Ionicons name="close" size={14} color="#fff" />
               </Pressable>
@@ -80,7 +80,7 @@ export function PhotoGrid({ photos, onChange }: { photos: Photo[]; onChange: (ph
             accessibilityRole="button" accessibilityLabel={t('onboarding.addPhoto')} testID={isNext ? 'add-photo' : undefined}>
             {isNext && uploading ? <ActivityIndicator color={colors.primary} /> : (
               <LinearGradient colors={isNext ? gradients.brand : [colors.cardHigh, colors.cardHigh]} style={styles.plus}>
-                <Ionicons name="add" size={20} color="#fff" />
+                <Ionicons name="add" size={20} color={isNext ? colors.onPrimary : colors.textMuted} />
               </LinearGradient>
             )}
           </Pressable>

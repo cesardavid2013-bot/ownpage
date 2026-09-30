@@ -7,7 +7,8 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/lib/auth';
 import { useRealtime } from '@/lib/realtime';
-import { colors, gradients, space } from '@/lib/theme';
+import { colors, font, gradients, space } from '@/lib/theme';
+import { Bokeh } from './Bokeh';
 import { Button } from './ui';
 
 export function MatchCelebration() {
@@ -29,15 +30,17 @@ export function MatchCelebration() {
   return (
     <Modal visible transparent animationType="fade" onRequestClose={close}>
       <View style={styles.root}>
-        <LinearGradient colors={['rgba(255,79,123,0.55)', 'rgba(139,92,246,0.45)', 'rgba(11,10,18,0.97)']} style={StyleSheet.absoluteFill} />
+        <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.bg }]} />
+        <Bokeh count={26} seed={31} intensity={1.1} />
+        <LinearGradient colors={['rgba(10,10,12,0.2)', 'rgba(10,10,12,0.55)', 'rgba(10,10,12,0.95)']} style={StyleSheet.absoluteFill} />
         <Animated.View style={[styles.content, { transform: [{ scale }] }]}>
-          <Ionicons name="sparkles" size={34} color={colors.gold} />
+          <Text style={{ color: colors.gold, fontSize: 22 }}>✦</Text>
           <Text style={styles.title}>{t('match.title')}</Text>
           <Text style={styles.subtitle}>{t('match.subtitle', { name: match.user.name })}</Text>
           <View style={styles.photos}>
             <Image source={{ uri: me.photos[0]?.url }} style={[styles.photo, { transform: [{ rotate: '-8deg' }] }]} />
             <Image source={{ uri: match.user.photos[0]?.url }} style={[styles.photo, { marginLeft: -24, transform: [{ rotate: '8deg' }] }]} />
-            <LinearGradient colors={gradients.brand} style={styles.heart}><Ionicons name="heart" size={26} color="#fff" /></LinearGradient>
+            <LinearGradient colors={gradients.brand} style={styles.heart}><Ionicons name="heart" size={24} color={colors.onPrimary} /></LinearGradient>
           </View>
           <View style={{ alignSelf: 'stretch', gap: space(3) }}>
             <Button title={t('match.sendMessage')} icon="chatbubble-ellipses" onPress={() => {
@@ -55,12 +58,12 @@ export function MatchCelebration() {
 const styles = StyleSheet.create({
   root: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: space(6) },
   content: { alignItems: 'center', gap: space(4), width: '100%', maxWidth: 420 },
-  title: { color: '#fff', fontSize: 46, fontWeight: '900', fontStyle: 'italic', letterSpacing: -1, textAlign: 'center' },
+  title: { color: colors.primary, fontSize: 52, fontFamily: font.displayItalic, textAlign: 'center', lineHeight: 60 },
   subtitle: { color: 'rgba(255,255,255,0.85)', fontSize: 17, textAlign: 'center' },
   photos: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: space(6) },
-  photo: { width: 140, height: 190, borderRadius: 20, borderWidth: 3, borderColor: '#fff', backgroundColor: colors.card },
+  photo: { width: 140, height: 190, borderRadius: 14, borderWidth: 1.5, borderColor: colors.primary, backgroundColor: colors.card },
   heart: {
     position: 'absolute', bottom: -22, alignSelf: 'center', left: '50%', marginLeft: -26,
-    width: 52, height: 52, borderRadius: 26, alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: '#fff',
+    width: 52, height: 52, borderRadius: 26, alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: colors.bg,
   },
 });

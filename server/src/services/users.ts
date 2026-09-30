@@ -17,6 +17,7 @@ export interface UserRow {
   looking_for: string;
   interests: string[];
   languages: string[];
+  prompts: { id: string; answer: string }[];
   locale: string;
   lat: number | null;
   lng: number | null;
@@ -118,6 +119,7 @@ export function publicProfile(u: UserRow, photos: Photo[], viewer?: UserRow | nu
     lookingFor: u.looking_for,
     interests: u.interests,
     languages: u.languages,
+    prompts: u.prompts ?? [],
     isVerified: u.is_verified,
     distanceKm: distance,
     photos: photos.map((p) => ({ id: p.id, url: p.url })),

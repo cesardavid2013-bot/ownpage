@@ -57,6 +57,7 @@ const nl = {
     unmatchConfirm: 'Match met {{name}} opheffen? Dit kan niet ongedaan worden gemaakt.', read: 'Gelezen', matchedOn: 'Jullie matchten op {{date}}',
   },
   profile: {
+    prompts: "Vragen", addPrompt: "Vraag toevoegen", promptsHint: "Beantwoord er maximaal 3. Ze starten de beste gesprekken.", choosePrompt: "Kies een vraag", answerPlaceholder: "Jouw antwoord…",
     title: 'Profiel', edit: 'Profiel bewerken', preview: 'Voorbeeld', settings: 'Instellingen', premium: 'Lumi Premium',
     completeness: 'Profiel {{percent}}% compleet', verified: 'Geverifieerd', about: 'Over mij',
     interests: 'Interesses', languages: 'Talen', job: 'Functie', company: 'Bedrijf', school: 'Opleiding',
@@ -101,6 +102,18 @@ const nl = {
   safety: {
     title: 'Veilig daten',
     tips: 'Spreek af op openbare plekken. Vertel iemand die je vertrouwt waar je heen gaat. Stuur nooit geld naar iemand die je online hebt ontmoet. Meld iedereen bij wie je je niet prettig voelt.',
+  },
+  prompts: {
+    ideal_sunday: "Mijn ideale zondag",
+    green_flag: "Een goed teken waar ik op let",
+    two_truths: "Twee waarheden en een leugen",
+    best_trip: "De mooiste reis die ik maakte",
+    simple_pleasures: "Mijn kleine geneugten",
+    first_date: "De perfecte eerste date",
+    dating_me: "Daten met mij is als",
+    this_year: "Dit jaar wil ik echt",
+    looking_for_someone: "Ik zoek iemand die",
+    secretly_good_at: "Ik ben stiekem goed in",
   },
   errors: {
     network_error: 'Lumi is niet bereikbaar. Controleer je verbinding en probeer het opnieuw.',
