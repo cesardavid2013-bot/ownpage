@@ -1,0 +1,76 @@
+{
+  "expo": {
+    "name": "Lumi",
+    "slug": "lumi",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "lumi",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0B0A12",
+    "ios": {
+      "bundleIdentifier": "app.lumi.dating",
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "config": { "usesNonExemptEncryption": false },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Lumi uses your location to show you people nearby. Your exact location is never shared.",
+        "NSPhotoLibraryUsageDescription": "Lumi needs access to your photos so you can add them to your profile.",
+        "NSCameraUsageDescription": "Lumi needs camera access so you can take profile photos."
+      }
+    },
+    "android": {
+      "package": "app.lumi.dating",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#FF4F7B",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "com.android.vending.BILLING"],
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Lumi — Dating, premium",
+      "shortName": "Lumi",
+      "themeColor": "#0B0A12",
+      "backgroundColor": "#0B0A12",
+      "description": "Lumi — where sparks find their light. Premium dating in 20 languages."
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-localization",
+      [
+        "expo-location",
+        { "locationWhenInUsePermission": "Lumi uses your location to show you people nearby. Your exact location is never shared." }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Lumi needs access to your photos so you can add them to your profile.",
+          "cameraPermission": "Lumi needs camera access so you can take profile photos."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0B0A12",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 160
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {}
+    }
+  }
+}

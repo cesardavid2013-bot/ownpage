@@ -1,0 +1,22 @@
+import en from './locales/en';
+import es from './locales/es';
+import pt from './locales/pt';
+import fr from './locales/fr';
+import de from './locales/de';
+import it from './locales/it';
+import nl from './locales/nl';
+import pl from './locales/pl';
+import ru from './locales/ru';
+import uk from './locales/uk';
+import tr from './locales/tr';
+import ar from './locales/ar';
+import hi from './locales/hi';
+import zh from './locales/zh';
+import ja from './locales/ja';
+import ko from './locales/ko';
+import id from './locales/id';
+import vi from './locales/vi';
+import th from './locales/th';
+import sv from './locales/sv';
+
+export const resources = { en, es, pt, fr, de, it, nl, pl, ru, uk, tr, ar, hi, zh, ja, ko, id, vi, th, sv };
