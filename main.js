@@ -1,5 +1,18 @@
 (function () {
   document.documentElement.classList.add('js');
+  // Failsafe: never leave content half-revealed (fast anchor jumps, crawlers, screenshots).
+  setTimeout(function () { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }, 2000);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
   var cfg = window.LUMI_CONFIG || {};
   var dict = window.LUMI_I18N;
   var LANGS = window.LUMI_LANGS;
@@ -267,27 +280,25 @@
     function swap() {
       var cv = document.createElement('canvas');
       img.replaceWith(cv);
-      scenes.push({ cv: cv, lights: makeLights(22, seeded(97 + i * 13)), base: ['#2a1c17', '#0d0a0a'] });
-      draw(performance.now());
+      var sc = { cv: cv, lights: makeLights(22, seeded(97 + i * 13)), base: ['#2a1c17', '#0d0a0a'] };
+      scenes.push(sc); if (seen) track(sc);
+      paint(cv, sc.lights, performance.now(), sc.base);
     }
     if (img.complete && img.naturalWidth === 0) swap(); else img.addEventListener('error', swap);
   });
 
-  function draw(t) { scenes.forEach(function (s) { paint(s.cv, s.lights, t, s.base); }); }
-  draw(0);
-  window.addEventListener('resize', function () { draw(performance.now()); });
+  var seen = new WeakSet();
+  var watch = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+  }) : null;
+  function track(sc) { if (watch) watch.observe(sc.cv); else seen.add(sc.cv); }
+  scenes.forEach(track);
+  function draw(t, all) { scenes.forEach(function (s) { if (all || seen.has(s.cv)) paint(s.cv, s.lights, t, s.base); }); }
+  draw(0, true);
+  window.addEventListener('resize', function () { draw(performance.now(), true); });
   if (!reduce) {
-    (function loop(t) { draw(t); requestAnimationFrame(loop); })(0);
+    var last = 0;
+    (function loop(t) { if (t - last > 33) { last = t; draw(t); } requestAnimationFrame(loop); })(0);
   }
 
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-  } else {
-    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-  }
 })();

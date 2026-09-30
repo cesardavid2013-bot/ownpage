@@ -299,3 +299,40 @@ footer a:hover { color: var(--text); }
 }
 @media (max-width: 560px) { .light-hint { display: none; } .lumen .hero-copy { padding-block: 90px 48px; } }
 @media (prefers-reduced-motion: reduce) { .light-hint .spark { animation: none; } }
+
+/* ---- Polish pass: fewer boxes, more life ---- */
+.ic svg, .arch-ic svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+section.block { padding-block: clamp(64px, 8vw, 112px); }
+.manifesto { padding-block: clamp(64px, 8vw, 110px); border-bottom: 0; }
+.manifesto-grid { display: grid; grid-template-columns: 1.5fr 0.7fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
+.arch { position: relative; overflow: hidden; border-radius: 999px 999px 18px 18px; background: var(--ink-3); aspect-ratio: 3 / 4; max-width: 100%; }
+.arch img, .arch canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.arch-portrait { box-shadow: 0 40px 80px rgba(0,0,0,0.55); outline: 1px solid var(--line-strong); outline-offset: 10px; }
+.marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: 22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee .track { display: flex; gap: 56px; width: max-content; animation: marquee 60s linear infinite; }
+.marquee span { font-family: var(--font-display); font-style: italic; font-size: clamp(26px, 3vw, 40px); color: var(--champagne); white-space: nowrap; opacity: 0.85; }
+.marquee span:nth-child(3n) { color: var(--gold); font-style: normal; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+[dir='rtl'] .marquee .track { animation-direction: reverse; }
+.arches { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: 90px; }
+.arch-item .arch { aspect-ratio: 4 / 5; }
+.arch-ic { position: absolute; inset: 0; display: grid; place-items: center; color: var(--champagne); }
+.arch-ic svg { width: 44px; height: 44px; stroke-width: 1.1; filter: drop-shadow(0 4px 18px rgba(0,0,0,0.6)); }
+.arch-item h3 { font-family: var(--font-display); font-weight: 500; font-size: 26px; margin: 22px 0 6px; }
+.arch-item p { color: var(--muted); max-width: 26em; }
+.pledges { border-top: 0; gap: 34px 60px; }
+.pledge { border-bottom: 0; padding: 0; grid-template-columns: 52px 1fr; }
+.pledge:nth-child(even) { padding-left: 0; border-left: 0; }
+.pledge .ic { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; }
+.pledge .ic svg { width: 22px; height: 22px; }
+.sc .mini { transition: transform 0.6s cubic-bezier(.2,.7,.2,1), box-shadow 0.6s; }
+.sc:hover .mini { transform: translateY(-8px) rotate(-0.6deg); box-shadow: 0 40px 70px rgba(0,0,0,0.5); }
+.sc:nth-child(2) { margin-top: 50px; }
+.js .reveal { opacity: 0.35; transform: translateY(28px); transition: opacity 0.9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (max-width: 1020px) {
+  .manifesto-grid { grid-template-columns: 1fr; } .arch-portrait { max-width: 320px; }
+  .arches { grid-template-columns: 1fr; max-width: 420px; }
+  .sc:nth-child(2) { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .marquee .track { animation: none; } .js .reveal { opacity: 1; transform: none; } }
