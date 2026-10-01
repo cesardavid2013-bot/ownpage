@@ -64,7 +64,8 @@
   }
 
   // ---- Membership billing period (yearly is the default, like most premium brands) ----
-  var period = 'yearly';
+  // Monthly first: the headline price is what a member is actually charged each period.
+  var period = 'monthly';
   function renderPeriod(lang) {
     lang = lang || document.documentElement.lang;
     document.querySelectorAll('.period button').forEach(function (b) { b.classList.toggle('on', b.dataset.period === period); b.setAttribute('aria-pressed', b.dataset.period === period); });
