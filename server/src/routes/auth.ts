@@ -11,9 +11,19 @@ import { SUPPORTED_LOCALES } from '../locales.js';
 
 export const authRouter = Router();
 
+// Credential endpoints are strict (brute-force protection). Session refresh happens on every app
+// launch and is shared by everyone behind the same IP (offices, campuses, mobile carriers), so it
+// gets its own, much wider budget.
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: config.isTest ? 10_000 : 30,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'too_many_requests' },
+});
+const refreshLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: config.isTest ? 10_000 : 600,
   standardHeaders: 'draft-7',
   legacyHeaders: false,
   message: { error: 'too_many_requests' },
@@ -66,7 +76,7 @@ authRouter.post('/login', limiter, ah(async (req, res) => {
   res.json(await session(user.id));
 }));
 
-authRouter.post('/refresh', limiter, ah(async (req, res) => {
+authRouter.post('/refresh', refreshLimiter, ah(async (req, res) => {
   const { refreshToken } = z.object({ refreshToken: z.string().min(10) }).parse(req.body);
   const rotated = await rotateRefreshToken(refreshToken);
   if (!rotated) throw unauthorized('refresh_invalid');

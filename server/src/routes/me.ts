@@ -71,6 +71,7 @@ const columns: Record<string, string> = {
   gender: 'gender', interestedIn: 'interested_in', locale: 'locale', prompts: 'prompts',
   maxDistanceKm: 'max_distance_km', ageMin: 'age_min', ageMax: 'age_max', globalMode: 'global_mode',
   hideAge: 'hide_age', hideDistance: 'hide_distance', incognito: 'incognito',
+  filterVerified: 'filter_verified', filterHasPrompts: 'filter_has_prompts', filterLookingFor: 'filter_looking_for',
 };
 
 async function updateColumns(userId: string, values: Record<string, unknown>) {
@@ -97,6 +98,9 @@ const settingsSchema = z.object({
   hideAge: z.boolean(),
   hideDistance: z.boolean(),
   incognito: z.boolean(),
+  filterVerified: z.boolean(),
+  filterHasPrompts: z.boolean(),
+  filterLookingFor: z.array(z.enum(['long_term', 'short_term', 'friendship', 'casual', 'unsure'])).max(5),
 }).partial();
 
 meRouter.patch('/settings', ah(async (req, res) => {
@@ -105,6 +109,10 @@ meRouter.patch('/settings', ah(async (req, res) => {
   const ent = entitlementsFor(user);
   if ((body.hideAge || body.hideDistance) && !ent.hideAgeDistance) throw forbidden('premium_required');
   if (body.incognito && !ent.incognito) throw forbidden('premium_required');
+  if ((body.filterVerified || body.filterHasPrompts || body.filterLookingFor?.length) && !ent.advancedFilters) {
+    throw forbidden('premium_required');
+  }
+  if (body.filterLookingFor) body.filterLookingFor = [...new Set(body.filterLookingFor)];
   const ageMin = body.ageMin ?? user.age_min;
   const ageMax = body.ageMax ?? user.age_max;
   if (ageMin > ageMax) throw badRequest('invalid_age_range');

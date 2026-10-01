@@ -249,7 +249,7 @@ describe('premium', () => {
 
   it('lists plans and falls back to dev checkout without Stripe', async () => {
     const plans = await request(app).get('/billing/plans');
-    expect(plans.body.products.map((p: any) => p.id)).toEqual(['plus', 'gold', 'platinum', 'boost_pack', 'superlike_pack']);
+    expect(plans.body.products.map((p: any) => p.id)).toEqual(['plus', 'gold', 'platinum', 'plus_yearly', 'gold_yearly', 'platinum_yearly', 'boost_pack', 'superlike_pack']);
     const me = await makeUser();
     const checkout = await request(app).post('/billing/checkout').set(me.auth).send({ product: 'plus' });
     expect(checkout.body).toEqual({ url: null, devMode: true });
@@ -257,6 +257,57 @@ describe('premium', () => {
 
   it('rejects unauthenticated RevenueCat webhooks', async () => {
     await request(app).post('/billing/webhook/revenuecat').send({ event: {} }).expect(401);
+  });
+});
+
+describe('membership benefits', () => {
+  it('advanced filters, top picks, read receipts, message hearts and yearly plans', async () => {
+    const me = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+    const verified = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+    const plain = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+    await query('UPDATE users SET is_verified = true, interests = $2 WHERE id = $1', [verified.id, ['wine', 'surf']]);
+    await query('UPDATE users SET interests = $2 WHERE id = $1', [me.id, ['wine', 'surf']]);
+
+    // Free: filters and top picks are gated
+    expect((await request(app).patch('/me/settings').set(me.auth).send({ filterVerified: true })).body.error).toBe('premium_required');
+    await request(app).get('/top-picks').set(me.auth).expect(403);
+
+    // Yearly Plus unlocks filters for 12 months
+    const plus = await request(app).post('/billing/dev-activate').set(me.auth).send({ product: 'plus_yearly' });
+    expect(plus.body.plan).toBe('plus');
+    expect(new Date(plus.body.planExpiresAt).getTime()).toBeGreaterThan(Date.now() + 300 * 24 * 3600 * 1000);
+    const f = await request(app).patch('/me/settings').set(me.auth).send({ filterVerified: true, filterLookingFor: ['long_term', 'long_term'] });
+    expect(f.body.settings).toMatchObject({ filterVerified: true, filterLookingFor: ['long_term'] });
+    await request(app).patch('/me/settings').set(me.auth).send({ filterLookingFor: [] });
+    const deck = (await request(app).get('/discover').set(me.auth)).body.profiles.map((p: any) => p.id);
+    expect(deck).toEqual([verified.id]);
+    await request(app).get('/top-picks').set(me.auth).expect(403);
+
+    // Gold: top picks ranked by compatibility
+    await request(app).patch('/me/settings').set(me.auth).send({ filterVerified: false });
+    await request(app).post('/billing/dev-activate').set(me.auth).send({ product: 'gold' });
+    const picks = await request(app).get('/top-picks').set(me.auth);
+    expect(picks.body.profiles.map((p: any) => p.id)).toEqual([verified.id, plain.id]);
+
+    // Read receipts: visible to Gold sender, hidden from free sender
+    await request(app).post('/swipes').set(me.auth).send({ targetId: plain.id, action: 'like' });
+    const m = await request(app).post('/swipes').set(plain.auth).send({ targetId: me.id, action: 'like' });
+    const matchId = m.body.match.id;
+    const mine = await request(app).post(`/matches/${matchId}/messages`).set(me.auth).send({ body: 'hi' });
+    const theirs = await request(app).post(`/matches/${matchId}/messages`).set(plain.auth).send({ body: 'hey' });
+    await request(app).post(`/matches/${matchId}/read`).set(plain.auth).expect(204);
+    await request(app).post(`/matches/${matchId}/read`).set(me.auth).expect(204);
+    const forMe = await request(app).get(`/matches/${matchId}/messages`).set(me.auth);
+    expect(forMe.body.messages.find((x: any) => x.id === mine.body.id).readAt).not.toBeNull();
+    const forPlain = await request(app).get(`/matches/${matchId}/messages`).set(plain.auth);
+    expect(forPlain.body.messages.find((x: any) => x.id === theirs.body.id).readAt).toBeNull();
+
+    // Hearts: only on messages you received, toggles
+    const liked = await request(app).post(`/matches/${matchId}/messages/${theirs.body.id}/like`).set(me.auth);
+    expect(liked.body.likedAt).not.toBeNull();
+    await request(app).post(`/matches/${matchId}/messages/${mine.body.id}/like`).set(me.auth).expect(404);
+    const unliked = await request(app).post(`/matches/${matchId}/messages/${theirs.body.id}/like`).set(me.auth);
+    expect(unliked.body.likedAt).toBeNull();
   });
 });
 

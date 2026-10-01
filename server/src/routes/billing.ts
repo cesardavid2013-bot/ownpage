@@ -120,9 +120,10 @@ export const stripeWebhook = [
 
 function productFromStoreId(storeId: string): Product | null {
   const id = storeId.toLowerCase();
-  if (id.includes('platinum')) return 'platinum';
-  if (id.includes('gold')) return 'gold';
-  if (id.includes('plus')) return 'plus';
+  const yearly = id.includes('year') || id.includes('annual');
+  if (id.includes('platinum')) return yearly ? 'platinum_yearly' : 'platinum';
+  if (id.includes('gold')) return yearly ? 'gold_yearly' : 'gold';
+  if (id.includes('plus')) return yearly ? 'plus_yearly' : 'plus';
   if (id.includes('boost')) return 'boost_pack';
   if (id.includes('superlike') || id.includes('super_like')) return 'superlike_pack';
   return null;

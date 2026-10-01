@@ -30,6 +30,9 @@ export interface UserRow {
   hide_age: boolean;
   hide_distance: boolean;
   incognito: boolean;
+  filter_verified: boolean;
+  filter_has_prompts: boolean;
+  filter_looking_for: string[];
   is_verified: boolean;
   is_banned: boolean;
   plan: string;
@@ -157,6 +160,9 @@ export async function privateProfile(u: UserRow) {
       hideAge: u.hide_age,
       hideDistance: u.hide_distance,
       incognito: u.incognito,
+      filterVerified: u.filter_verified,
+      filterHasPrompts: u.filter_has_prompts,
+      filterLookingFor: u.filter_looking_for,
     },
     plan,
     planExpiresAt: plan === 'free' ? null : u.plan_expires_at,

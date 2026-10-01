@@ -16,14 +16,12 @@ const DISTANCE_SQL = `(6371 * 2 * asin(sqrt(
   power(sin(radians(u.lat - $2) / 2), 2) +
   cos(radians($2)) * cos(radians(u.lat)) * power(sin(radians(u.lng - $3) / 2), 2))))`;
 
-discoverRouter.get('/discover', ah(async (req, res) => {
-  const me = (await getUser(req.userId!))!;
-  const exclude = z.array(z.string().uuid()).max(100).parse(
-    typeof req.query.exclude === 'string' && req.query.exclude ? req.query.exclude.split(',') : [],
-  );
-  const loc = viewerLocation(me);
-  const rows = await query<UserRow & { superliked_me: boolean; note: string | null }>(
-    `SELECT u.*,
+/**
+ * Profiles `me` may see: mutual gender/age preferences, not swiped, not blocked, with a photo, within distance,
+ * respecting incognito, plus the viewer's advanced filters when their plan includes them.
+ */
+function candidatesSql(orderBy: string, limit: number) {
+  return `SELECT u.*,
        EXISTS (SELECT 1 FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action = 'superlike') AS superliked_me,
        (SELECT s.note FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action = 'superlike') AS note
      FROM users u, users me
@@ -40,21 +38,52 @@ discoverRouter.get('/discover', ah(async (req, res) => {
        AND (NOT (u.incognito AND ${ACTIVE_PREMIUM('u', `'platinum'`)})
             OR EXISTS (SELECT 1 FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = me.id AND s.action <> 'pass'))
        AND ($2::float8 IS NULL OR me.global_mode OR (u.lat IS NOT NULL AND ${DISTANCE_SQL} <= me.max_distance_km))
-     ORDER BY (u.boost_until IS NOT NULL AND u.boost_until > now()) DESC,
+       AND (NOT $5::bool OR (
+             (NOT me.filter_verified OR u.is_verified)
+         AND (NOT me.filter_has_prompts OR jsonb_array_length(u.prompts) > 0)
+         AND (cardinality(me.filter_looking_for) = 0 OR u.looking_for = ANY(me.filter_looking_for))))
+     ORDER BY ${orderBy}
+     LIMIT ${limit}`;
+}
+
+async function candidates(me: UserRow, orderBy: string, limit: number, exclude: string[] = []) {
+  const loc = viewerLocation(me);
+  const rows = await query<UserRow & { superliked_me: boolean; note: string | null }>(candidatesSql(orderBy, limit), [
+    me.id, loc?.lat ?? null, loc?.lng ?? null, exclude, entitlementsFor(me).advancedFilters,
+  ]);
+  const photos = await photosFor(rows.rows.map((r) => r.id));
+  return rows.rows.map((u) => ({
+    ...publicProfile(u, photos.get(u.id) ?? [], me),
+    superLikedYou: u.superliked_me,
+    note: u.note,
+  }));
+}
+
+discoverRouter.get('/discover', ah(async (req, res) => {
+  const me = (await getUser(req.userId!))!;
+  const exclude = z.array(z.string().uuid()).max(100).parse(
+    typeof req.query.exclude === 'string' && req.query.exclude ? req.query.exclude.split(',') : [],
+  );
+  const profiles = await candidates(me, `(u.boost_until IS NOT NULL AND u.boost_until > now()) DESC,
        (EXISTS (SELECT 1 FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action <> 'pass')
          AND ${ACTIVE_PREMIUM('u', `'platinum'`)}) DESC,
-       u.last_active_at DESC
-     LIMIT 20`,
-    [me.id, loc?.lat ?? null, loc?.lng ?? null, exclude],
-  );
-  const photos = await photosFor(rows.rows.map((r) => r.id));
-  res.json({
-    profiles: rows.rows.map((u) => ({
-      ...publicProfile(u, photos.get(u.id) ?? [], me),
-      superLikedYou: u.superliked_me,
-      note: u.note,
-    })),
-  });
+       u.last_active_at DESC`, 20, exclude);
+  res.json({ profiles });
+}));
+
+/** Gold+: today's most compatible people. Stable for the whole day, refreshed at midnight UTC. */
+discoverRouter.get('/top-picks', ah(async (req, res) => {
+  const me = (await getUser(req.userId!))!;
+  if (!entitlementsFor(me).topPicks) throw forbidden('premium_required');
+  const profiles = await candidates(me, `(
+       2 * cardinality(ARRAY(SELECT unnest(u.interests) INTERSECT SELECT unnest(me.interests)))
+     + 2 * cardinality(ARRAY(SELECT unnest(u.languages) INTERSECT SELECT unnest(me.languages)))
+     + CASE WHEN u.looking_for = me.looking_for AND u.looking_for <> 'unsure' THEN 3 ELSE 0 END
+     + CASE WHEN u.is_verified THEN 2 ELSE 0 END
+     + CASE WHEN jsonb_array_length(u.prompts) > 0 THEN 1 ELSE 0 END
+     + CASE WHEN u.last_active_at > now() - interval '3 days' THEN 1 ELSE 0 END
+     ) DESC, md5(u.id::text || me.id::text || current_date::text)`, 6);
+  res.json({ profiles, refreshesAt: new Date(new Date().setUTCHours(24, 0, 0, 0)).toISOString() });
 }));
 
 const swipeSchema = z.object({

@@ -1,5 +1,5 @@
 import { tx } from '../db/pool.js';
-import { CATALOG, ENTITLEMENTS, type Plan, type Product } from '../plans.js';
+import { CATALOG, ENTITLEMENTS, type Product } from '../plans.js';
 
 export type Provider = 'stripe' | 'revenuecat' | 'dev';
 
@@ -25,11 +25,10 @@ export async function grantProduct(opts: {
     if (!ins.rowCount) return false;
     const item = CATALOG[opts.product];
     if (item.kind === 'subscription') {
-      const plan = opts.product as Plan;
-      const end = opts.periodEnd ?? new Date(Date.now() + 30 * 24 * 3600 * 1000);
+      const end = opts.periodEnd ?? new Date(Date.now() + item.months * 30 * 24 * 3600 * 1000);
       await c.query(
         `UPDATE users SET plan = $2, plan_expires_at = $3, plan_source = $4, boost_credits = boost_credits + $5 WHERE id = $1`,
-        [opts.userId, plan, end, opts.provider, ENTITLEMENTS[plan].boostsPerPeriod],
+        [opts.userId, item.plan, end, opts.provider, ENTITLEMENTS[item.plan].boostsPerPeriod * item.months],
       );
     } else if (opts.product === 'boost_pack') {
       await c.query('UPDATE users SET boost_credits = boost_credits + $2 WHERE id = $1', [opts.userId, item.quantity]);

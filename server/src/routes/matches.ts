@@ -4,6 +4,8 @@ import { one, query } from '../db/pool.js';
 import { ah, badRequest, notFound } from '../lib/errors.js';
 import { emitToUser } from '../realtime.js';
 import { activeMatchFor, listMatches, otherUserId } from '../services/matches.js';
+import { entitlementsFor } from '../plans.js';
+import { getUser } from '../services/users.js';
 
 export const matchesRouter = Router();
 
@@ -23,6 +25,7 @@ matchesRouter.delete('/:id', ah(async (req, res) => {
 
 const toMessage = (m: any) => ({
   id: m.id, matchId: m.match_id, senderId: m.sender_id, body: m.body, createdAt: m.created_at, readAt: m.read_at,
+  likedAt: m.liked_at ?? null,
 });
 
 matchesRouter.get('/:id/messages', ah(async (req, res) => {
@@ -35,7 +38,11 @@ matchesRouter.get('/:id/messages', ah(async (req, res) => {
      ORDER BY created_at DESC LIMIT 50`,
     [match.id, before],
   );
-  res.json({ messages: rows.rows.map(toMessage).reverse(), hasMore: rows.rowCount === 50 });
+  // Read receipts are a Gold+ benefit: other plans never learn when their own messages were read.
+  const receipts = entitlementsFor((await getUser(req.userId!))!).readReceipts;
+  const messages = rows.rows.map(toMessage).reverse()
+    .map((m) => (!receipts && m.senderId === req.userId ? { ...m, readAt: null } : m));
+  res.json({ messages, hasMore: rows.rowCount === 50, readReceipts: receipts });
 }));
 
 matchesRouter.post('/:id/messages', ah(async (req, res) => {
@@ -58,6 +65,21 @@ matchesRouter.post('/:id/messages', ah(async (req, res) => {
   res.status(201).json(payload);
 }));
 
+/** Toggle a heart on a message you received. */
+matchesRouter.post('/:id/messages/:messageId/like', ah(async (req, res) => {
+  const match = await activeMatchFor(uuid.parse(req.params.id), req.userId!);
+  if (!match) throw notFound('match_not_found');
+  const msg = await one(
+    `UPDATE messages SET liked_at = CASE WHEN liked_at IS NULL THEN now() ELSE NULL END
+     WHERE id = $1 AND match_id = $2 AND sender_id <> $3 RETURNING *`,
+    [uuid.parse(req.params.messageId), match.id, req.userId],
+  );
+  if (!msg) throw notFound('message_not_found');
+  const payload = toMessage(msg);
+  emitToUser(otherUserId(match, req.userId!), 'message:liked', payload);
+  res.json(payload);
+}));
+
 matchesRouter.post('/:id/read', ah(async (req, res) => {
   const match = await activeMatchFor(uuid.parse(req.params.id), req.userId!);
   if (!match) throw notFound('match_not_found');
@@ -65,6 +87,7 @@ matchesRouter.post('/:id/read', ah(async (req, res) => {
     'UPDATE messages SET read_at = now() WHERE match_id = $1 AND sender_id <> $2 AND read_at IS NULL',
     [match.id, req.userId],
   );
-  if (updated.rowCount) emitToUser(otherUserId(match, req.userId!), 'message:read', { matchId: match.id });
+  const other = await getUser(otherUserId(match, req.userId!));
+  if (updated.rowCount && other && entitlementsFor(other).readReceipts) emitToUser(other.id, 'message:read', { matchId: match.id });
   res.status(204).end();
 }));
