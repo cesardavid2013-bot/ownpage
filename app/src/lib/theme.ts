@@ -45,6 +45,12 @@ export const font = {
 };
 
 export const shadow = Platform.select({
-  web: { boxShadow: '0 18px 40px rgba(0,0,0,0.5)' } as object,
+  web: { boxShadow: '0 10px 28px rgba(0,0,0,0.35)' } as object,
   default: { shadowColor: '#000', shadowOpacity: 0.5, shadowRadius: 24, shadowOffset: { width: 0, height: 14 }, elevation: 14 },
 });
+
+/**
+ * KeyboardAvoidingView behaviour. Android runs edge-to-edge (SDK 57), where the window is no longer
+ * resized for the keyboard, so both native platforms pad; the browser handles it itself.
+ */
+export const keyboardBehavior = Platform.OS === 'web' ? undefined : ('padding' as const);

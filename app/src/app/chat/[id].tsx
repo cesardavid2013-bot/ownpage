@@ -16,7 +16,7 @@ import { useAuth } from '@/lib/auth';
 import { useMatches } from '@/lib/matches';
 import { notify } from '@/lib/notify';
 import { emitTyping, useRealtime, useSocketEvent } from '@/lib/realtime';
-import { colors, font, space } from '@/lib/theme';
+import { colors, font, space, keyboardBehavior } from '@/lib/theme';
 import type { Message } from '@/lib/types';
 
 type Row = { kind: 'msg'; m: Message; first: boolean; last: boolean } | { kind: 'day'; key: string; label: string };
@@ -243,7 +243,7 @@ export default function Chat() {
         </Pressable>
       </View>
 
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={keyboardBehavior}>
         {!messages ? <ActivityIndicator color={colors.primary} style={{ flex: 1 }} /> : (
           <FlatList
             inverted

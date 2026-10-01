@@ -22,6 +22,8 @@ interface Props {
 export function TabBar({ state, descriptors, navigation, insets }: Props) {
   return (
     <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, space(3)) }]}>
+      {/* On wide screens the four destinations stay together instead of spreading across the window. */}
+      <View style={styles.items}>
       {state.routes.map((route, i) => {
         const focused = state.index === i;
         const { options } = descriptors[route.key];
@@ -51,15 +53,17 @@ export function TabBar({ state, descriptors, navigation, insets }: Props) {
           </Pressable>
         );
       })}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   bar: {
-    flexDirection: 'row', backgroundColor: colors.bg, paddingTop: space(3),
+    flexDirection: 'row', justifyContent: 'center', backgroundColor: colors.bg, paddingTop: space(3),
     borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: 'rgba(233,217,190,0.14)',
   },
+  items: { flexDirection: 'row', width: '100%', maxWidth: 520, alignSelf: 'center' },
   item: { flex: 1, alignItems: 'center', gap: 6, paddingVertical: 2 },
   dot: { width: 4, height: 4, borderRadius: 2, backgroundColor: colors.primary },
   badge: {

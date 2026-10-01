@@ -71,7 +71,7 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
   return (
     <Animated.View
       {...responder.panHandlers}
-      style={[styles.card, shadow, { width: cardWidth, transform: [...pos.getTranslateTransform(), { rotate }] },
+      style={[styles.card, Platform.OS === 'web' ? null : shadow, { width: cardWidth, transform: [...pos.getTranslateTransform(), { rotate }] },
         Platform.OS === 'web' ? ({ userSelect: 'none', cursor: 'grab', touchAction: 'none' } as object) : null]}
     >
       <View style={StyleSheet.absoluteFill} pointerEvents="none">

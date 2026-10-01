@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { AppState, Platform } from 'react-native';
 import { io, type Socket } from 'socket.io-client';
 import { create } from 'zustand';
 import { refreshSession, tokens } from './api';
@@ -55,6 +56,15 @@ function connect(token: string) {
     import('./auth').then(({ useAuth }) => useAuth.getState().reload());
   });
   socket.on('like:new', () => useRealtime.setState((s) => ({ newLikes: s.newLikes + 1 })));
+}
+
+// On phones, coming back from the background refreshes lists and reconnects if the OS dropped the socket.
+if (Platform.OS !== 'web') {
+  AppState.addEventListener('change', (state) => {
+    if (state !== 'active' || !socket) return;
+    if (!socket.connected) socket.connect();
+    useRealtime.getState().bump();
+  });
 }
 
 // On the web the browser knows about lost connectivity long before a socket ping times out.

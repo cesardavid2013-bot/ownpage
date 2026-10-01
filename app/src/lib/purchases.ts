@@ -61,7 +61,9 @@ export async function purchase(product: Product, userId: string): Promise<Result
       await new Promise((r) => setTimeout(r, 2500));
       return { status: 'success', user: await api<Me>('/me') };
     }
-    return devActivate(product);
+    // Without store keys only a development build can simulate a purchase; a release build says so plainly.
+    if (__DEV__) return devActivate(product);
+    throw new Error('payments_unavailable');
   }
 
   const { url, devMode } = await api<{ url: string | null; devMode: boolean }>('/billing/checkout', { body: { product } });

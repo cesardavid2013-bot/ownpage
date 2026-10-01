@@ -1,13 +1,15 @@
 import type { ReactNode } from 'react';
-import { Modal, Pressable, StyleSheet, View } from 'react-native';
-import { colors, radius, space } from '@/lib/theme';
+import { KeyboardAvoidingView, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { colors, keyboardBehavior, radius, space } from '@/lib/theme';
 
 export function Sheet({ visible, onClose, children }: { visible: boolean; onClose: () => void; children: ReactNode }) {
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel="Close">
-        <Pressable style={styles.sheet} onPress={() => {}}>{children}</Pressable>
-      </Pressable>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={keyboardBehavior}>
+        <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel="Close">
+          <Pressable style={styles.sheet} onPress={() => {}}>{children}</Pressable>
+        </Pressable>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }

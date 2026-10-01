@@ -36,6 +36,11 @@ jobs:
       - run: npm run check:i18n
       - run: npx expo export --platform web
         env: { EXPO_PUBLIC_API_URL: same-origin, EXPO_NO_TELEMETRY: 1 }
+      # The phone apps share this code; make sure both native bundles still compile.
+      - run: npx expo export --platform ios --output-dir dist-ios
+        env: { EXPO_NO_TELEMETRY: 1 }
+      - run: npx expo export --platform android --output-dir dist-android
+        env: { EXPO_NO_TELEMETRY: 1 }
 
   website:
     runs-on: ubuntu-latest

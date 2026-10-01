@@ -11,7 +11,7 @@ import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { notify } from '@/lib/notify';
 import { useRealtime } from '@/lib/realtime';
-import { colors, font, space } from '@/lib/theme';
+import { colors, font, space, keyboardBehavior } from '@/lib/theme';
 import { Bokeh } from './Bokeh';
 import { Glyph } from './Glyphs';
 
@@ -70,7 +70,7 @@ export function MatchCelebration() {
 
   return (
     <Modal visible transparent animationType="fade" onRequestClose={close}>
-      <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView style={styles.root} behavior={keyboardBehavior}>
         <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.bg }]} />
         <Bokeh count={14} seed={31} intensity={0.7} />
         <LinearGradient colors={['rgba(10,10,12,0.55)', 'rgba(10,10,12,0.75)', 'rgba(10,10,12,0.97)']} style={StyleSheet.absoluteFill} />

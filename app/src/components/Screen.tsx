@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { colors, font, space } from '@/lib/theme';
+import { colors, font, space, keyboardBehavior } from '@/lib/theme';
 import { webMaxWidth } from './ui';
 
 export function Screen({
@@ -12,7 +12,7 @@ export function Screen({
   const inner = padded ? { paddingHorizontal: space(5) } : null;
   return (
     <SafeAreaView edges={edges} style={[styles.root, transparent && { backgroundColor: 'transparent' }]}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={keyboardBehavior}>
         {scroll ? (
           <ScrollView
             contentContainerStyle={[inner, { paddingBottom: space(10) }, webMaxWidth, style]}
