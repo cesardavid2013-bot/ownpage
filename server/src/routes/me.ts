@@ -6,16 +6,20 @@ import multer from 'multer';
 import { z } from 'zod';
 import { config } from '../config.js';
 import { one, query, tx } from '../db/pool.js';
-import { ah, badRequest, forbidden, notFound } from '../lib/errors.js';
+import { ah, badRequest, conflict, forbidden, notFound } from '../lib/errors.js';
 import { entitlementsFor } from '../plans.js';
 import { getUser, privateProfile } from '../services/users.js';
 import { SUPPORTED_LOCALES } from '../locales.js';
 import { MAX_PROMPTS, PROMPT_IDS } from '../prompts.js';
+import { poseFor } from '../verification.js';
 
 export const meRouter = Router();
 export const MAX_PHOTOS = 9;
 
 fs.mkdirSync(config.uploadDir, { recursive: true });
+/** Verification selfies are never served publicly; only moderators can open them. */
+export const PRIVATE_DIR = path.join(config.uploadDir, '..', 'private-uploads');
+fs.mkdirSync(PRIVATE_DIR, { recursive: true });
 
 const IMAGE_TYPES: Record<string, string> = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
 
@@ -189,6 +193,51 @@ meRouter.delete('/photos/:id', ah(async (req, res) => {
     [req.userId],
   );
   res.json(await privateProfile((await getUser(req.userId!))!));
+}));
+
+const selfieUpload = multer({
+  storage: multer.diskStorage({
+    destination: PRIVATE_DIR,
+    filename: (_req, file, cb) => cb(null, crypto.randomUUID() + IMAGE_TYPES[file.mimetype]),
+  }),
+  limits: { fileSize: 8 * 1024 * 1024, files: 1 },
+  fileFilter: (_req, file, cb) => cb(null, file.mimetype in IMAGE_TYPES),
+});
+
+meRouter.get('/verification', ah(async (req, res) => {
+  const user = (await getUser(req.userId!))!;
+  const last = await one<{ status: string; reason: string | null; created_at: Date }>(
+    'SELECT status, reason, created_at FROM verification_requests WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1',
+    [req.userId],
+  );
+  res.json({
+    verified: user.is_verified,
+    status: user.is_verified ? 'approved' : last?.status ?? 'none',
+    reason: last?.status === 'rejected' ? last.reason : null,
+    pose: poseFor(user.id),
+  });
+}));
+
+meRouter.post('/verification', selfieUpload.single('photo'), ah(async (req, res) => {
+  const file = req.file;
+  if (!file) throw badRequest('invalid_image');
+  try {
+    if (!looksLikeImage(file.path)) throw badRequest('invalid_image');
+    const user = (await getUser(req.userId!))!;
+    if (user.is_verified) throw conflict('already_verified');
+    const photos = (await query('SELECT 1 FROM photos WHERE user_id = $1', [user.id])).rowCount;
+    if (!photos) throw badRequest('photo_required');
+    const created = await one(
+      `INSERT INTO verification_requests (user_id, pose, photo_file) VALUES ($1, $2, $3)
+       ON CONFLICT (user_id) WHERE status = 'pending' DO NOTHING RETURNING id`,
+      [user.id, poseFor(user.id), path.basename(file.path)],
+    );
+    if (!created) throw conflict('verification_pending');
+    res.status(201).json({ status: 'pending' });
+  } catch (err) {
+    fs.rmSync(file.path, { force: true });
+    throw err;
+  }
 }));
 
 /** Account deletion (required by Apple & Google): anonymises the user and removes their content. */

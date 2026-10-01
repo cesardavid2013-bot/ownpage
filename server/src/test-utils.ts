@@ -7,7 +7,7 @@ export const app = createApp();
 
 export async function resetDb() {
   await migrate();
-  await query('TRUNCATE users, refresh_tokens, photos, swipes, matches, messages, blocks, reports, payments CASCADE');
+  await query('TRUNCATE users, refresh_tokens, photos, swipes, matches, messages, blocks, reports, payments, verification_requests CASCADE');
 }
 
 export const closeDb = () => pool.end();

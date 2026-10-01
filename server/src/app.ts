@@ -11,11 +11,17 @@ import { discoverRouter } from './routes/discover.js';
 import { matchesRouter } from './routes/matches.js';
 import { usersRouter } from './routes/users.js';
 import { billingRouter, revenueCatWebhook, stripeWebhook } from './routes/billing.js';
+import { adminRouter } from './routes/admin.js';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export function createApp() {
   const app = express();
   app.set('trust proxy', 1);
-  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+  app.use(helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: { directives: { 'img-src': ["'self'", 'data:', 'https:'] } },
+  }));
   app.use(cors({ origin: config.corsOrigins.includes('*') ? true : config.corsOrigins }));
 
   // Webhooks need their own body parsers and must come before express.json().
@@ -34,6 +40,8 @@ export function createApp() {
   app.get('/health', (_req, res) => res.json({ ok: true }));
   app.use('/uploads', express.static(config.uploadDir, { maxAge: '30d', immutable: true, index: false }));
 
+  app.use('/admin/api', adminRouter);
+  app.use('/admin', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'admin'), { index: 'index.html' }));
   app.use('/auth', authRouter);
   app.use('/billing', billingRouter);
   app.use('/me', requireAuth, meRouter);

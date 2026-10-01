@@ -37,6 +37,8 @@ export const config = {
     },
   },
   revenueCatWebhookAuth: process.env.REVENUECAT_WEBHOOK_AUTH ?? '',
+  /** Moderators sign in to /admin with this token. Empty disables the admin API. */
+  adminToken: process.env.ADMIN_TOKEN ?? '',
 };
 
 if (isProd && config.jwtSecret.length < 32) {

@@ -1,4 +1,7 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import request from 'supertest';
+import { config } from './config.js';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { query } from './db/pool.js';
 import { app, closeDb, makeUser, PNG, resetDb } from './test-utils.js';
@@ -308,6 +311,53 @@ describe('membership benefits', () => {
     await request(app).post(`/matches/${matchId}/messages/${mine.body.id}/like`).set(me.auth).expect(404);
     const unliked = await request(app).post(`/matches/${matchId}/messages/${theirs.body.id}/like`).set(me.auth);
     expect(unliked.body.likedAt).toBeNull();
+  });
+});
+
+describe('verification and moderation', () => {
+  const ADMIN = { Authorization: 'Bearer test-admin-token-0123456789abcdef' };
+
+  it('selfie verification goes through moderator review', async () => {
+    const u = await makeUser();
+    const v = await request(app).get('/me/verification').set(u.auth);
+    expect(v.body).toMatchObject({ verified: false, status: 'none' });
+    expect(['peace_sign', 'thumbs_up', 'touch_nose', 'hand_on_cheek', 'wave']).toContain(v.body.pose);
+
+    await request(app).get('/admin/api/verifications').expect(401);
+    await request(app).get('/admin/api/verifications').set({ Authorization: 'Bearer wrong-token-wrong-token-wrong!!' }).expect(401);
+
+    const sent = await request(app).post('/me/verification').set(u.auth).attach('photo', PNG, { filename: 's.png', contentType: 'image/png' });
+    expect(sent.status).toBe(201);
+    const again = await request(app).post('/me/verification').set(u.auth).attach('photo', PNG, { filename: 's.png', contentType: 'image/png' });
+    expect(again.body.error).toBe('verification_pending');
+    expect((await request(app).get('/me/verification').set(u.auth)).body.status).toBe('pending');
+
+    const queue = await request(app).get('/admin/api/verifications').set(ADMIN);
+    expect(queue.body.items).toHaveLength(1);
+    const item = queue.body.items[0];
+    const selfie = await request(app).get(`/admin/api/verifications/${item.id}/selfie`).set(ADMIN);
+    expect(selfie.status).toBe(200);
+    // never reachable through the public uploads path
+    expect(fs.readdirSync(config.uploadDir)).not.toContain(path.basename(item.photo_file ?? ''));
+
+    await request(app).post(`/admin/api/verifications/${item.id}`).set(ADMIN).send({ decision: 'approve' }).expect(200);
+    const me = await request(app).get('/me').set(u.auth);
+    expect(me.body.isVerified).toBe(true);
+    expect((await request(app).get('/me/verification').set(u.auth)).body.status).toBe('approved');
+  });
+
+  it('reports can be dismissed or end in a ban', async () => {
+    const a = await makeUser();
+    const b = await makeUser();
+    await request(app).post(`/users/${b.id}/report`).set(a.auth).send({ reason: 'harassment', details: 'rude' }).expect(201);
+    const stats = await request(app).get('/admin/api/stats').set(ADMIN);
+    expect(stats.body.open_reports).toBe(1);
+    const reports = await request(app).get('/admin/api/reports').set(ADMIN);
+    expect(reports.body.items[0]).toMatchObject({ reported_id: b.id, reason: 'harassment' });
+    await request(app).post(`/admin/api/reports/${reports.body.items[0].id}`).set(ADMIN).send({ action: 'ban' }).expect(200);
+    const blocked = await request(app).get('/me').set(b.auth);
+    expect(blocked.body.error).toBe('account_banned');
+    await request(app).post('/auth/refresh').send({ refreshToken: b.refreshToken }).expect(401);
   });
 });
 

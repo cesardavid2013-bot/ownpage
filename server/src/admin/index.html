@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Lumi Moderation</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header>
+    <span class="mark">LUMI <sup>✦</sup></span>
+    <span class="sub">Moderation</span>
+    <button id="logout" hidden>Sign out</button>
+  </header>
+
+  <main>
+    <section id="login" class="login">
+      <h1>Moderator sign-in</h1>
+      <p>Enter the <code>ADMIN_TOKEN</code> configured on the server.</p>
+      <form id="login-form">
+        <input id="token" type="password" autocomplete="current-password" placeholder="Admin token" required />
+        <button type="submit">Sign in</button>
+      </form>
+      <p id="login-error" class="error" hidden>That token isn't valid.</p>
+    </section>
+
+    <section id="dash" hidden>
+      <div class="stats" id="stats"></div>
+      <nav class="tabs">
+        <button data-tab="verifications" class="on">Verifications</button>
+        <button data-tab="reports">Reports</button>
+      </nav>
+      <div id="list" class="list"></div>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
