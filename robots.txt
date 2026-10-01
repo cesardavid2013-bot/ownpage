@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: https://cesardavid2013-bot.github.io/ownpage/sitemap.xml
