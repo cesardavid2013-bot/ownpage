@@ -6,7 +6,7 @@ export async function shareLocation(): Promise<boolean> {
   try {
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') return false;
-    const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+    const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Low });
     const round = (n: number) => Math.round(n * 1000) / 1000;
     await api('/me/location', { method: 'PUT', body: { lat: round(pos.coords.latitude), lng: round(pos.coords.longitude) } });
     return true;

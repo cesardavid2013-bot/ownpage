@@ -134,7 +134,10 @@ const coords = z.object({ lat: z.number().min(-90).max(90), lng: z.number().min(
 
 meRouter.put('/location', ah(async (req, res) => {
   const { lat, lng } = coords.parse(req.body);
-  await query('UPDATE users SET lat = $2, lng = $3 WHERE id = $1', [req.userId, lat, lng]);
+  // Stored on a ~1 km grid. Distances shown to others are whole kilometres from this point, so
+  // nobody can triangulate a member's home from repeated distance readings.
+  const grid = (v: number) => Math.round(v * 100) / 100;
+  await query('UPDATE users SET lat = $2, lng = $3 WHERE id = $1', [req.userId, grid(lat), grid(lng)]);
   res.status(204).end();
 }));
 

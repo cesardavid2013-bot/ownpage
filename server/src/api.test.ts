@@ -466,6 +466,18 @@ describe('integrity, privacy and safety', () => {
     expect(deck.body.profiles.map((p: { id: string }) => p.id)).not.toContain(paused.id);
   });
 
+  it('stores location coarsely and never exposes coordinates', async () => {
+    const a = await makeUser();
+    const b = await makeUser();
+    await request(app).put('/me/location').set(a.auth).send({ lat: 40.416789, lng: -3.703812 }).expect(204);
+    const row = (await query('SELECT lat, lng FROM users WHERE id = $1', [a.id])).rows[0];
+    expect(row).toEqual({ lat: 40.42, lng: -3.7 });
+    const seen = await request(app).get(`/users/${a.id}`).set(b.auth);
+    const text = JSON.stringify(seen.body);
+    expect(text).not.toMatch(/"lat"|"lng"|birthdate|email/);
+    expect(seen.body.age).toBeGreaterThanOrEqual(18);
+  });
+
   it('hides activity status when the member turns it off', async () => {
     const a = await makeUser();
     const b = await makeUser();

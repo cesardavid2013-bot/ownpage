@@ -24,8 +24,6 @@ services:
         generateValue: true
       - key: ADMIN_TOKEN
         generateValue: true
-      - key: CORS_ORIGINS
-        value: "*"
       # Payments: fill these in the Render dashboard once Stripe / RevenueCat are set up.
       - { key: STRIPE_SECRET_KEY, sync: false }
       - { key: STRIPE_WEBHOOK_SECRET, sync: false }

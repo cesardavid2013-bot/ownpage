@@ -1947,3 +1947,70 @@ Object.assign(window.LUMI_I18N, {
 };
   Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
 })(window.LUMI_I18N);
+
+// Footer: community guidelines.
+(function (d) {
+  var add = {
+ "en": {
+  "footer.guidelines": "Community guidelines"
+ },
+ "es": {
+  "footer.guidelines": "Normas de la comunidad"
+ },
+ "pt": {
+  "footer.guidelines": "Diretrizes da comunidade"
+ },
+ "fr": {
+  "footer.guidelines": "Règles de la communauté"
+ },
+ "de": {
+  "footer.guidelines": "Community-Richtlinien"
+ },
+ "it": {
+  "footer.guidelines": "Linee guida della community"
+ },
+ "nl": {
+  "footer.guidelines": "Communityrichtlijnen"
+ },
+ "pl": {
+  "footer.guidelines": "Zasady społeczności"
+ },
+ "ru": {
+  "footer.guidelines": "Правила сообщества"
+ },
+ "uk": {
+  "footer.guidelines": "Правила спільноти"
+ },
+ "tr": {
+  "footer.guidelines": "Topluluk kuralları"
+ },
+ "ar": {
+  "footer.guidelines": "إرشادات المجتمع"
+ },
+ "hi": {
+  "footer.guidelines": "समुदाय दिशानिर्देश"
+ },
+ "zh": {
+  "footer.guidelines": "社区准则"
+ },
+ "ja": {
+  "footer.guidelines": "コミュニティガイドライン"
+ },
+ "ko": {
+  "footer.guidelines": "커뮤니티 가이드라인"
+ },
+ "id": {
+  "footer.guidelines": "Pedoman komunitas"
+ },
+ "vi": {
+  "footer.guidelines": "Nguyên tắc cộng đồng"
+ },
+ "th": {
+  "footer.guidelines": "แนวทางของชุมชน"
+ },
+ "sv": {
+  "footer.guidelines": "Communityriktlinjer"
+ }
+};
+  Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
+})(window.LUMI_I18N);

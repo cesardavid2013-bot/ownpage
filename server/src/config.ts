@@ -18,7 +18,9 @@ export const config = {
   jwtSecret: required('JWT_SECRET', isProd ? undefined : 'dev-secret-change-me-dev-secret-change-me'),
   accessTokenTtl: '15m',
   refreshTokenDays: 30,
-  corsOrigins: (process.env.CORS_ORIGINS ?? '*').split(',').map((s) => s.trim()).filter(Boolean),
+  // Production default is no cross-origin access: the web app is served from the API's own origin and
+  // native apps send no Origin header. List extra origins explicitly if another site must call the API.
+  corsOrigins: (process.env.CORS_ORIGINS ?? (isProd ? '' : '*')).split(',').map((s) => s.trim()).filter(Boolean),
   // Render exposes the service URL as RENDER_EXTERNAL_URL, so a Blueprint deploy needs no extra setup.
   publicUrl: (process.env.PUBLIC_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT ?? 4000}`).replace(/\/$/, ''),
   /** Optional: a built Expo web app (app/dist) served from this same origin. */

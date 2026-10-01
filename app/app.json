@@ -12,7 +12,9 @@
       "bundleIdentifier": "app.lumi.dating",
       "buildNumber": "1",
       "supportsTablet": false,
-      "config": { "usesNonExemptEncryption": false },
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Lumi uses your location to show you people nearby. Your exact location is never shared.",
         "NSPhotoLibraryUsageDescription": "Lumi needs access to your photos so you can add them to your profile.",
@@ -23,13 +25,19 @@
       "package": "app.lumi.dating",
       "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#FF4F7B",
+        "backgroundColor": "#0A0A0C",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "com.android.vending.BILLING"],
-      "blockedPermissions": ["android.permission.RECORD_AUDIO"],
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "com.android.vending.BILLING"
+      ],
+      "blockedPermissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ],
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -47,7 +55,9 @@
       "expo-localization",
       [
         "expo-location",
-        { "locationWhenInUsePermission": "Lumi uses your location to show you people nearby. Your exact location is never shared." }
+        {
+          "locationWhenInUsePermission": "Lumi uses your location to show you people nearby. Your exact location is never shared."
+        }
       ],
       [
         "expo-image-picker",
