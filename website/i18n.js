@@ -1860,3 +1860,90 @@ Object.assign(window.LUMI_I18N, {
 };
   Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
 })(window.LUMI_I18N);
+
+// Selfie verification pledge.
+(function (d) {
+  var add = {
+ "en": {
+  "sa5.t": "Verified by a person",
+  "sa5.d": "A live selfie in today's pose, checked by our team against your photos. The selfie is never shown on your profile."
+ },
+ "es": {
+  "sa5.t": "Verificado por una persona",
+  "sa5.d": "Una selfie en la pose del día que nuestro equipo compara con tus fotos. La selfie nunca aparece en tu perfil."
+ },
+ "pt": {
+  "sa5.t": "Verificado por uma pessoa",
+  "sa5.d": "Uma selfie na pose do dia, conferida pela nossa equipe com as suas fotos. A selfie nunca aparece no seu perfil."
+ },
+ "fr": {
+  "sa5.t": "Vérifié par une personne",
+  "sa5.d": "Un selfie dans la pose du jour, comparé à vos photos par notre équipe. Le selfie n’apparaît jamais sur votre profil."
+ },
+ "de": {
+  "sa5.t": "Von einem Menschen verifiziert",
+  "sa5.d": "Ein Selfie in der Pose des Tages, von unserem Team mit deinen Fotos abgeglichen. Das Selfie erscheint nie in deinem Profil."
+ },
+ "it": {
+  "sa5.t": "Verificato da una persona",
+  "sa5.d": "Un selfie nella posa del giorno, confrontato dal nostro team con le tue foto. Il selfie non appare mai sul tuo profilo."
+ },
+ "nl": {
+  "sa5.t": "Geverifieerd door een mens",
+  "sa5.d": "Een selfie in de pose van vandaag, door ons team vergeleken met je foto’s. De selfie staat nooit op je profiel."
+ },
+ "pl": {
+  "sa5.t": "Weryfikowane przez człowieka",
+  "sa5.d": "Selfie w dzisiejszej pozie, które nasz zespół porównuje z Twoimi zdjęciami. Selfie nigdy nie pojawia się w profilu."
+ },
+ "ru": {
+  "sa5.t": "Проверено человеком",
+  "sa5.d": "Селфи в позе дня, которое наша команда сверяет с вашими фото. Селфи никогда не показывается в профиле."
+ },
+ "uk": {
+  "sa5.t": "Перевірено людиною",
+  "sa5.d": "Селфі в позі дня, яке наша команда звіряє з вашими фото. Селфі ніколи не з’являється в профілі."
+ },
+ "tr": {
+  "sa5.t": "Bir insan tarafından doğrulanır",
+  "sa5.d": "Günün pozunda bir selfie; ekibimiz fotoğraflarınla karşılaştırır. Selfie profilinde asla görünmez."
+ },
+ "ar": {
+  "sa5.t": "تحقق يجريه إنسان",
+  "sa5.d": "صورة سيلفي بوضعية اليوم يطابقها فريقنا مع صورك. لا تظهر صورة السيلفي في ملفك أبدًا."
+ },
+ "hi": {
+  "sa5.t": "इंसान द्वारा सत्यापित",
+  "sa5.d": "आज की पोज़ में एक सेल्फ़ी, जिसे हमारी टीम आपकी फ़ोटो से मिलाती है। सेल्फ़ी कभी आपकी प्रोफ़ाइल पर नहीं दिखती।"
+ },
+ "zh": {
+  "sa5.t": "由真人审核认证",
+  "sa5.d": "按今日指定姿势拍一张自拍，由我们的团队与你的照片比对。自拍绝不会显示在你的资料中。"
+ },
+ "ja": {
+  "sa5.t": "人の目で本人確認",
+  "sa5.d": "今日のポーズで撮ったセルフィーを、チームがあなたの写真と照合します。セルフィーがプロフィールに表示されることはありません。"
+ },
+ "ko": {
+  "sa5.t": "사람이 직접 인증",
+  "sa5.d": "오늘의 포즈로 찍은 셀카를 저희 팀이 사진과 대조합니다. 셀카는 프로필에 절대 표시되지 않아요."
+ },
+ "id": {
+  "sa5.t": "Diverifikasi oleh manusia",
+  "sa5.d": "Selfie dengan pose hari ini, dicocokkan tim kami dengan fotomu. Selfie itu tidak pernah tampil di profilmu."
+ },
+ "vi": {
+  "sa5.t": "Được xác minh bởi con người",
+  "sa5.d": "Một ảnh selfie theo tư thế của hôm nay, được đội ngũ chúng tôi đối chiếu với ảnh của bạn. Ảnh selfie không bao giờ hiện trên hồ sơ."
+ },
+ "th": {
+  "sa5.t": "ยืนยันตัวตนโดยคนจริง",
+  "sa5.d": "เซลฟีตามท่าประจำวัน ซึ่งทีมงานของเราตรวจเทียบกับรูปของคุณ เซลฟีนี้จะไม่แสดงบนโปรไฟล์ของคุณ"
+ },
+ "sv": {
+  "sa5.t": "Verifierad av en människa",
+  "sa5.d": "En selfie i dagens pose som vårt team jämför med dina foton. Selfien visas aldrig på din profil."
+ }
+};
+  Object.keys(add).forEach(function (k) { Object.assign(d[k], add[k]); });
+})(window.LUMI_I18N);

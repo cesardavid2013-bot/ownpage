@@ -1,3 +1,17 @@
+/* Brand typefaces, self-hosted (SIL Open Font License, see assets/fonts). No third-party font requests. */
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-500-italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('assets/fonts/jost-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('assets/fonts/jost-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('assets/fonts/jost-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('assets/fonts/jost-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('assets/fonts/jost-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-500-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-500-italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Bodoni Moda'; src: url('assets/fonts/bodoni-500-italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+
 /* Lumi — "city lights after dark": ink, champagne and warm bokeh; editorial serif + quiet sans. */
 :root {
   color-scheme: dark;
@@ -36,7 +50,9 @@ img { max-width: 100%; display: block; }
 .nav-links { display: flex; gap: 34px; font-size: 13.5px; letter-spacing: 0.06em; color: var(--muted); }
 .nav-links a:hover { color: var(--text); }
 .nav-right { display: flex; align-items: center; gap: 14px; }
-select.lang { appearance: none; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 13px; cursor: pointer; max-width: 150px; }
+select.lang { appearance: none; -webkit-appearance: none; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 8px 32px 8px 14px; font: inherit; font-size: 13px; cursor: pointer; max-width: 160px; transition: border-color .2s, color .2s;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23C9A46A' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 13px center; }
+select.lang:hover, select.lang:focus-visible { border-color: var(--line-strong); color: var(--text); }
 select.lang option { background: var(--ink-2); color: var(--text); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 600; font-size: 14.5px; letter-spacing: 0.02em; padding: 14px 26px; border: 1px solid transparent; cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s; }
@@ -131,6 +147,11 @@ details p { color: var(--muted); margin-top: 14px; max-width: 46em; }
 .closing h2 { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: clamp(44px, 7vw, 96px); line-height: 1; letter-spacing: -0.02em; }
 .closing p { color: var(--muted); font-size: 18px; margin: 22px 0 36px; }
 .closing .stores { justify-content: center; }
+@media (max-width: 560px) {
+  .stores { display: grid; grid-template-columns: 1fr 1fr; }
+  .store { min-width: 0; }
+  .store:last-child:nth-child(odd) { grid-column: 1 / -1; justify-content: center; }
+}
 
 footer { padding-block: 56px 48px; color: var(--muted); font-size: 13.5px; border-top: 1px solid var(--line); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 26px; align-items: flex-end; }
@@ -260,6 +281,18 @@ footer a:hover { color: var(--text); }
 .compare td:nth-child(4) { background: rgba(201,164,106,0.06); }
 .compare .yes { color: var(--champagne); }
 .compare .no-mark { color: var(--faint); }
+/* Phones: all four plans side by side, no sideways scrolling. */
+@media (max-width: 640px) {
+  .compare table { min-width: 0; table-layout: fixed; font-size: 14px; }
+  .compare thead th:first-child { width: 33%; }
+  .compare th, .compare td { padding: 13px 2px; }
+  .compare th[scope='row'] { padding-inline-end: 8px; line-height: 1.35; font-size: 13.5px; }
+  .compare thead th { font-size: 9px; letter-spacing: 0.02em; hyphens: auto; vertical-align: bottom; }
+}
+@media (max-width: 380px) {
+  .compare thead th { font-size: 8px; letter-spacing: 0; }
+  .compare thead th:first-child { width: 31%; }
+}
 
 @media (max-width: 1020px) {
   .screens { grid-template-columns: 1fr; max-width: 420px; }
@@ -378,3 +411,6 @@ section.block { padding-block: clamp(64px, 8vw, 112px); }
 .vig-item > p { color: var(--muted); }
 .vig .vig-hint + .faces, .vig .polyglot + .vig-hint { margin-top: auto; }
 @media (max-width: 1020px) { .vignettes { grid-template-columns: 1fr; max-width: 420px; } .period { margin-bottom: 36px; } }
+/* The verification pledge leads the safety list across both columns. */
+.pledges > .pledge:first-child { grid-column: 1 / -1; max-width: 720px; }
+.pledges > .pledge:first-child b { font-family: var(--font-display); font-weight: 500; font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 8px; }
