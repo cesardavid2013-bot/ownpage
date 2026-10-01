@@ -70,6 +70,9 @@ describe('profile', () => {
     });
     expect(patch.status).toBe(200);
     expect(patch.body.interests).toEqual(['travel', 'music']);
+    // Only catalog interests (translatable, nothing to moderate), at most six.
+    await request(app).patch('/me').set(u.auth).send({ interests: ['buy my crypto'] }).expect(400);
+    await request(app).patch('/me').set(u.auth).send({ interests: ['travel', 'music', 'wine', 'surf', 'books', 'art', 'yoga'] }).expect(400);
     expect(patch.body.lookingFor).toBe('long_term');
 
     const prompts = await request(app).patch('/me').set(u.auth).send({

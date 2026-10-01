@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Seal } from './Glyphs';
+import { interestLabel } from './InterestPicker';
 import { colors, font, gradients, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 import { Chip, Row } from './ui';
@@ -82,7 +83,7 @@ export function ProfileDetails({ profile }: { profile: Profile }) {
           {profile.interests.length > 0 ? (
             <View style={{ gap: space(3) }}>
               <Text style={styles.label}>{t('profile.interests')}</Text>
-              <Row style={{ flexWrap: 'wrap', gap: space(2) }}>{profile.interests.map((i) => <Chip key={i} label={i} />)}</Row>
+              <Row style={{ flexWrap: 'wrap', gap: space(2) }}>{profile.interests.map((i) => <Chip key={i} label={interestLabel(t, i)} />)}</Row>
             </View>
           ) : null}
           {profile.languages.length > 0 ? (

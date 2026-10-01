@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { InterestPicker } from '@/components/InterestPicker';
 import { PhotoGrid } from '@/components/PhotoGrid';
 import { PromptsEditor } from '@/components/PromptsEditor';
 import { Header, Screen } from '@/components/Screen';
@@ -22,9 +23,10 @@ export default function EditProfile() {
   const [photos, setPhotos] = useState<Photo[]>(user.photos);
   const [form, setForm] = useState({
     name: user.name, bio: user.bio, jobTitle: user.jobTitle, company: user.company, school: user.school, city: user.city,
-    heightCm: user.heightCm ? String(user.heightCm) : '', interests: user.interests.join(', '), languages: user.languages.join(', '),
+    heightCm: user.heightCm ? String(user.heightCm) : '', languages: user.languages.join(', '),
   });
   const [lookingFor, setLookingFor] = useState(user.lookingFor);
+  const [interests, setInterests] = useState<string[]>(user.interests);
   const [prompts, setPrompts] = useState<PromptAnswer[]>(user.prompts ?? []);
   const [gender, setGender] = useState(user.gender);
   const [interestedIn, setInterestedIn] = useState<Gender[]>(user.interestedIn);
@@ -48,7 +50,7 @@ export default function EditProfile() {
         body: {
           name: form.name.trim(), bio: form.bio, jobTitle: form.jobTitle, company: form.company, school: form.school,
           city: form.city, heightCm: height && height >= 100 && height <= 250 ? Math.round(height) : null,
-          interests: list(form.interests), languages: list(form.languages), lookingFor, gender, interestedIn,
+          interests, languages: list(form.languages), lookingFor, gender, interestedIn,
           prompts: prompts.map((p) => ({ id: p.id, answer: p.answer.trim() })).filter((p) => p.answer),
         },
       });
@@ -75,7 +77,8 @@ export default function EditProfile() {
         <Row style={styles.wrap}>
           {LOOKING.map((l) => <Chip key={l} label={t(`lookingFor.${l}`)} selected={lookingFor === l} onPress={() => setLookingFor(l)} />)}
         </Row>
-        <Input label={t('profile.interests')} value={form.interests} onChangeText={set('interests')} placeholder={t('profile.interestsHint')} />
+        <Muted style={styles.label}>{t('profile.interests')}</Muted>
+        <InterestPicker value={interests} onChange={setInterests} />
         <Input label={t('profile.languages')} value={form.languages} onChangeText={set('languages')} placeholder="English, Español" />
         <Input label={t('profile.job')} value={form.jobTitle} onChangeText={set('jobTitle')} maxLength={60} />
         <Input label={t('profile.company')} value={form.company} onChangeText={set('company')} maxLength={60} />

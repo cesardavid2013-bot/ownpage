@@ -3,6 +3,7 @@ import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { Choice } from '@/components/Choice';
 import { Screen } from '@/components/Screen';
 import { Button, Chip, ErrorText, Input, Row } from '@/components/ui';
 import { currentLanguage, errorMessage } from '@/i18n';
@@ -87,7 +88,7 @@ export default function Register() {
 
   const ready = [
     name.trim().length > 0,
-    day.length > 0 && month.length > 0 && year.length === 4,
+    dateOk && (age ?? 0) >= 18,
     !!gender,
     !!showMe,
     email.trim().length > 3 && password.length > 0,
@@ -124,6 +125,7 @@ export default function Register() {
               <View style={{ flex: 1.6 }}><Input placeholder="YYYY" value={year} onChangeText={setYear} keyboardType="number-pad" maxLength={4} style={styles.big} testID="year" /></View>
             </Row>
             {age != null && age >= 18 ? <Text style={styles.age}>{t('register.youAre', { age })}</Text> : null}
+            {age != null && age < 18 ? <Text style={styles.minor} testID="underage">{t('errors.underage')}</Text> : null}
             <Text style={styles.hint}>{t('register.stepBirthdayHint')}</Text>
           </View>
         )}
@@ -156,14 +158,6 @@ export default function Register() {
   );
 }
 
-function Choice({ label, selected, onPress }: { label: string; selected: boolean; onPress: () => void }) {
-  return (
-    <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ selected }} style={[styles.choice, selected && styles.choiceOn]}>
-      <Text style={[styles.choiceText, selected && { color: colors.text }]}>{label}</Text>
-      <View style={[styles.radio, selected && styles.radioOn]}>{selected ? <View style={styles.dot} /> : null}</View>
-    </Pressable>
-  );
-}
 
 const styles = StyleSheet.create({
   top: { flexDirection: 'row', alignItems: 'center', gap: space(4), paddingTop: space(3) },
@@ -173,14 +167,6 @@ const styles = StyleSheet.create({
   question: { color: colors.text, fontFamily: font.display, fontSize: 40, lineHeight: 46, letterSpacing: -0.3 },
   big: { fontSize: 24, fontFamily: font.body, minHeight: 60 },
   age: { color: colors.primary, fontFamily: font.displayItalic, fontSize: 24 },
+  minor: { color: colors.text, fontFamily: font.medium, fontSize: 15, lineHeight: 22 },
   hint: { color: colors.textMuted, fontFamily: font.body, fontSize: 14, lineHeight: 20 },
-  choice: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: space(4.5),
-    borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.border,
-  },
-  choiceOn: { borderBottomColor: colors.primary },
-  choiceText: { color: colors.textMuted, fontFamily: font.display, fontSize: 26 },
-  radio: { width: 24, height: 24, borderRadius: 12, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center' },
-  radioOn: { borderColor: colors.primary },
-  dot: { width: 12, height: 12, borderRadius: 6, backgroundColor: colors.primary },
 });

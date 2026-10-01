@@ -11,6 +11,7 @@ import { entitlementsFor } from '../plans.js';
 import { getUser, privateProfile } from '../services/users.js';
 import { SUPPORTED_LOCALES } from '../locales.js';
 import { MAX_PROMPTS, PROMPT_IDS } from '../prompts.js';
+import { INTEREST_IDS, MAX_INTERESTS } from '../interests.js';
 import { poseFor } from '../verification.js';
 import { processPhoto, removeStored } from '../lib/media.js';
 import { emitToUser } from '../realtime.js';
@@ -62,7 +63,7 @@ const profileSchema = z.object({
   city: z.string().trim().max(60),
   heightCm: z.number().int().min(100).max(250).nullable(),
   lookingFor: z.enum(['long_term', 'short_term', 'friendship', 'casual', 'unsure']),
-  interests: tags,
+  interests: z.array(z.enum(INTEREST_IDS)).max(MAX_INTERESTS),
   languages: tags,
   gender: z.enum(['man', 'woman', 'nonbinary']),
   interestedIn: z.array(z.enum(['man', 'woman', 'nonbinary'])).min(1).max(3),

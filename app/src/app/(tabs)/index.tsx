@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -30,6 +30,9 @@ export default function Discover() {
   const [upsell, setUpsell] = useState<string | null>(null);
   const [noteFor, setNoteFor] = useState<Profile | null>(null);
   const [note, setNote] = useState('');
+  // After a pass, offer to undo it for a few seconds instead of a permanent rewind button.
+  const [undoable, setUndoable] = useState(false);
+  const undoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const topRef = useRef<SwipeCardHandle>(null);
   const fetching = useRef(false);
   const deckRef = useRef(deck);
@@ -76,6 +79,9 @@ export default function Discover() {
 
   async function handleSwiped(profile: Profile, action: SwipeAction, withNote?: string) {
     setDeck((d) => d.filter((p) => p.id !== profile.id));
+    if (undoTimer.current) clearTimeout(undoTimer.current);
+    setUndoable(action === 'pass');
+    if (action === 'pass') undoTimer.current = setTimeout(() => setUndoable(false), 6000);
     try {
       const res = await api<{ matched: boolean; match: Match | null }>('/swipes', {
         body: { targetId: profile.id, action, ...(withNote ? { note: withNote } : {}) },
@@ -113,6 +119,7 @@ export default function Discover() {
   }
 
   async function rewind() {
+    setUndoable(false);
     if (!user.entitlements.rewind) return setUpsell(t('errors.premium_required'));
     try {
       const res = await api<{ profile: Profile | null }>('/swipes/rewind', { body: {} });
@@ -192,12 +199,26 @@ export default function Discover() {
         )}
       </View>
 
+      <View style={styles.undoRow} pointerEvents="box-none">
+        {undoable ? (
+          <Pressable onPress={rewind} style={styles.undo} accessibilityRole="button" accessibilityLabel={t('discover.rewind')} testID="btn-undo">
+            <Ionicons name="arrow-undo-outline" size={14} color={colors.primary} />
+            <Text style={styles.undoText}>{t('discover.rewind')}</Text>
+          </Pressable>
+        ) : null}
+      </View>
       <View style={styles.actions}>
-        <ActionButton icon="arrow-undo" color={colors.textMuted} size={46} onPress={rewind} label={t('discover.rewind')} />
-        <ActionButton icon="close" color={colors.text} size={62} onPress={() => press('pass')} label={t('discover.nope')} testID="btn-pass" />
-        <ActionButton icon="star" color={colors.gold} size={50} onPress={() => press('superlike')} label={t('discover.superLike')} testID="btn-superlike" />
-        <ActionButton icon="heart" color={colors.onPrimary} size={62} filled onPress={() => press('like')} label={t('discover.like')} testID="btn-like" />
-        <ActionButton icon="flash" color={colors.textMuted} size={46} onPress={boost} label={t('discover.boost')} />
+        <RoundAction onPress={() => press('pass')} label={t('discover.nope')} testID="btn-pass">
+          <Ionicons name="close" size={26} color={colors.text} />
+        </RoundAction>
+        <Pressable onPress={() => press('like')} accessibilityRole="button" accessibilityLabel={t('discover.like')} testID="btn-like"
+          style={({ pressed }) => [styles.like, pressed && { transform: [{ scale: 0.97 }] }]}>
+          <Ionicons name="heart" size={20} color={colors.onPrimary} />
+          <Text style={styles.likeText}>{t('discover.like')}</Text>
+        </Pressable>
+        <RoundAction onPress={() => press('superlike')} label={t('discover.superLike')} testID="btn-superlike">
+          <Glyph name="spark" size={24} color={colors.gold} filled />
+        </RoundAction>
       </View>
 
       <Sheet visible={!!upsell} onClose={() => setUpsell(null)}>
@@ -222,37 +243,39 @@ export default function Discover() {
   );
 }
 
-function ActionButton({ icon, color, size, onPress, label, testID, filled }: {
-  icon: keyof typeof Ionicons.glyphMap; color: string; size: number; onPress: () => void; label: string; testID?: string; filled?: boolean;
-}) {
+function RoundAction({ children, onPress, label, testID }: { children: ReactNode; onPress: () => void; label: string; testID?: string }) {
   return (
-    <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} testID={testID}
-      style={({ pressed }) => [styles.action, filled && styles.actionFilled, { width: size, height: size, borderRadius: size / 2, transform: [{ scale: pressed ? 0.92 : 1 }] }]}>
-      <Ionicons name={icon} size={size * 0.46} color={color} />
+    <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} testID={testID} hitSlop={6}
+      style={({ pressed }) => [styles.action, pressed && { transform: [{ scale: 0.93 }] }]}>
+      {children}
     </Pressable>
   );
 }
 
 function Empty({ photo, error, onRetry }: { photo?: string; error: string | null; onRetry: () => void }) {
   const { t } = useTranslation();
-  const pulse = useRef(new Animated.Value(0)).current;
+  // A slow breath on the light, nothing more: the screen is resting, not searching.
+  const glow = useRef(new Animated.Value(0)).current;
   useEffect(() => {
-    const loop = Animated.loop(Animated.timing(pulse, { toValue: 1, duration: 2200, easing: Easing.out(Easing.ease), useNativeDriver: false }));
+    const loop = Animated.loop(Animated.sequence([
+      Animated.timing(glow, { toValue: 1, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: false }),
+      Animated.timing(glow, { toValue: 0, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: false }),
+    ]));
     loop.start();
     return () => loop.stop();
-  }, [pulse]);
-  const scale = pulse.interpolate({ inputRange: [0, 1], outputRange: [1, 2.4] });
-  const opacity = pulse.interpolate({ inputRange: [0, 1], outputRange: [0.5, 0] });
+  }, [glow]);
   return (
     <View style={styles.empty}>
-      <View style={styles.radar}>
-        <Animated.View style={[styles.ring, { transform: [{ scale }], opacity }]} />
-        {photo ? <Image source={{ uri: photo }} style={styles.radarPhoto} /> : null}
+      <View style={styles.emptyArch}>
+        {photo ? <Image source={{ uri: photo }} style={[StyleSheet.absoluteFill, { opacity: 0.55 }]} contentFit="cover" /> : null}
+        <Animated.View style={{ opacity: glow.interpolate({ inputRange: [0, 1], outputRange: [0.45, 1] }) }}>
+          <Glyph name="spark" size={26} color={colors.gold} filled />
+        </Animated.View>
       </View>
-      <Title style={{ fontSize: 22, textAlign: 'center', fontFamily: font.body }}>{t('discover.emptyTitle')}</Title>
+      <Title style={{ fontSize: 26, textAlign: 'center' }}>{t('discover.emptyTitle')}</Title>
       <Muted style={{ textAlign: 'center' }}>{t('discover.emptySubtitle')}</Muted>
       <ErrorText message={error} />
-      <Button title={t('discover.adjust')} variant="secondary" icon="options-outline" onPress={() => router.push('/settings')} />
+      <Button title={t('discover.adjust')} variant="secondary" onPress={() => router.push('/settings')} />
       <Button title={t('common.retry')} variant="ghost" onPress={onRetry} />
     </View>
   );
@@ -263,16 +286,29 @@ const styles = StyleSheet.create({
   headerBtn: { width: 42, height: 42, borderRadius: 21, backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center' },
   banner: {
     flexDirection: 'row', alignItems: 'center', gap: space(2), marginHorizontal: space(4), padding: space(3),
-    backgroundColor: 'rgba(255,79,123,0.12)', borderRadius: 14,
+    backgroundColor: 'rgba(233,217,190,0.07)', borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(233,217,190,0.22)',
   },
   bannerText: { color: colors.text, flex: 1, fontFamily: font.semibold },
   deck: { flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: space(2), marginHorizontal: space(3) },
-  actions: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: space(3.5), paddingBottom: space(3), paddingTop: space(1) },
-  action: { backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(233,217,190,0.25)' },
-  actionFilled: { backgroundColor: colors.primary, borderColor: colors.primary },
+  actions: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: space(4), paddingBottom: space(3), paddingTop: space(1) },
+  action: {
+    width: 56, height: 56, borderRadius: 28, alignItems: 'center', justifyContent: 'center',
+    borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(233,217,190,0.35)',
+  },
+  like: {
+    height: 56, minWidth: 148, paddingHorizontal: space(7), borderRadius: 28, backgroundColor: colors.primary,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space(2),
+  },
+  likeText: { color: colors.onPrimary, fontFamily: font.semibold, fontSize: 15, letterSpacing: 0.4 },
+  undoRow: { height: 30, alignItems: 'center', justifyContent: 'center' },
+  undo: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: space(3), paddingVertical: 4 },
+  undoText: { color: colors.primary, fontFamily: font.medium, fontSize: 13 },
   empty: { alignItems: 'stretch', gap: space(3), paddingHorizontal: space(6), maxWidth: 420 },
-  radar: { width: 120, height: 120, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginBottom: space(6) },
-  ring: { position: 'absolute', width: 120, height: 120, borderRadius: 60, backgroundColor: colors.primary },
-  radarPhoto: { width: 110, height: 110, borderRadius: 55, borderWidth: 2, borderColor: colors.primary },
+  emptyArch: {
+    width: 112, height: 148, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: space(4),
+    borderTopLeftRadius: 56, borderTopRightRadius: 56, borderBottomLeftRadius: 6, borderBottomRightRadius: 6,
+    borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(201,164,106,0.5)', backgroundColor: colors.card,
+  },
   upsellIcon: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(201,164,106,0.5)' },
 });

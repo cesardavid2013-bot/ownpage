@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
-import { Seal } from './Glyphs';
+import { Glyph, Seal } from './Glyphs';
 import { colors, font, gradients, radius, shadow, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 
@@ -94,14 +94,18 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
         </View>
       )}
 
-      <Animated.View style={[styles.stamp, styles.likeStamp, { opacity: likeOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.primary }]}>LIKE</Text>
+      {/* Drag feedback: warm light from the side you're moving toward (like), the card dims (pass),
+          or a single spark rises (super like). No stamps. */}
+      <Animated.View style={[StyleSheet.absoluteFill, { opacity: likeOpacity }]} pointerEvents="none">
+        <LinearGradient colors={['rgba(233,217,190,0)', 'rgba(233,217,190,0.32)']} start={{ x: 0.35, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={StyleSheet.absoluteFill} />
+        <View style={[styles.cue, styles.cueLike]}><Ionicons name="heart" size={26} color={colors.onPrimary} /></View>
       </Animated.View>
-      <Animated.View style={[styles.stamp, styles.nopeStamp, { opacity: nopeOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.textMuted }]}>NOPE</Text>
+      <Animated.View style={[StyleSheet.absoluteFill, { opacity: nopeOpacity, backgroundColor: 'rgba(6,6,8,0.55)' }]} pointerEvents="none">
+        <View style={[styles.cue, styles.cuePass]}><Ionicons name="close" size={26} color={colors.text} /></View>
       </Animated.View>
-      <Animated.View style={[styles.stamp, styles.superStamp, { opacity: superOpacity }]} pointerEvents="none">
-        <Text style={[styles.stampText, { color: colors.gold }]}>SUPER</Text>
+      <Animated.View style={[StyleSheet.absoluteFill, { opacity: superOpacity }]} pointerEvents="none">
+        <LinearGradient colors={['rgba(201,164,106,0)', 'rgba(201,164,106,0.35)']} start={{ x: 0.5, y: 0.7 }} end={{ x: 0.5, y: 0 }} style={StyleSheet.absoluteFill} />
+        <View style={[styles.cue, styles.cueSuper]}><Glyph name="spark" size={28} color={colors.onPrimary} filled /></View>
       </Animated.View>
 
       <View style={styles.info}>
@@ -120,6 +124,9 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
           {profile.distanceKm != null ? (
             <View style={styles.meta}><Ionicons name="location-outline" size={15} color="#fff" /><Text style={styles.metaText}>{t('common.km', { count: profile.distanceKm })}</Text></View>
           ) : null}
+          {profile.lookingFor && profile.lookingFor !== 'unsure' ? (
+            <Text style={styles.intent} numberOfLines={1}>{t(`lookingFor.${profile.lookingFor}`)}</Text>
+          ) : null}
           {profile.note ? <Text style={styles.note} numberOfLines={2}>“{profile.note}”</Text> : prompt ? (
             <View style={styles.prompt}>
               <Text style={styles.promptQ}>{t(`prompts.${prompt.id}`)}</Text>
@@ -137,7 +144,7 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
 
 const styles = StyleSheet.create({
   card: {
-    position: 'absolute', aspectRatio: 0.68, maxHeight: '100%', borderRadius: radius.xl,
+    position: 'absolute', aspectRatio: 0.68, maxHeight: '100%', borderRadius: radius.lg,
     overflow: 'hidden', backgroundColor: colors.card, alignSelf: 'center',
   },
   bars: { position: 'absolute', top: 10, left: 12, right: 12, flexDirection: 'row', gap: 4 },
@@ -148,11 +155,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999,
   },
   superTagText: { color: colors.onPrimary, fontSize: 12, letterSpacing: 1, textTransform: 'uppercase', fontFamily: font.bold },
-  stamp: { position: 'absolute', top: 60, borderWidth: 2, borderRadius: 6, paddingHorizontal: 14, paddingVertical: 2 },
-  likeStamp: { left: 28, borderColor: colors.primary, transform: [{ rotate: '-14deg' }] },
-  nopeStamp: { right: 28, borderColor: colors.textMuted, transform: [{ rotate: '14deg' }] },
-  superStamp: { alignSelf: 'center', top: undefined, bottom: 170, borderColor: colors.gold, transform: [{ rotate: '-8deg' }] },
-  stampText: { fontSize: 34, fontFamily: font.display, letterSpacing: 6 },
+  cue: { position: 'absolute', top: 44, width: 56, height: 56, borderRadius: 28, alignItems: 'center', justifyContent: 'center' },
+  cueLike: { right: 22, backgroundColor: colors.primary },
+  cuePass: { left: 22, borderWidth: 1, borderColor: 'rgba(243,239,232,0.6)', backgroundColor: 'rgba(10,10,12,0.4)' },
+  cueSuper: { alignSelf: 'center', backgroundColor: colors.gold },
   info: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: space(5), flexDirection: 'row', alignItems: 'flex-end' },
   nameRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8 },
   name: { color: '#fff', fontSize: 36, fontFamily: font.display, flexShrink: 1 },
@@ -163,6 +169,7 @@ const styles = StyleSheet.create({
   prompt: { marginTop: space(3), paddingTop: space(3), borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: 'rgba(233,217,190,0.35)', gap: 4 },
   promptQ: { color: colors.gold, fontSize: 10.5, letterSpacing: 1.6, textTransform: 'uppercase', fontFamily: font.bold },
   promptA: { color: '#fff', fontFamily: font.display, fontSize: 21, lineHeight: 26 },
+  intent: { color: colors.primary, fontFamily: font.semibold, fontSize: 11, letterSpacing: 1.8, textTransform: 'uppercase', marginTop: 4 },
   note: { color: colors.primary, fontFamily: font.displayItalic, marginTop: 6, fontSize: 17 },
   infoBtn: {
     width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.22)',
