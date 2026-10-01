@@ -80,7 +80,7 @@ export default function Likes() {
           ListEmptyComponent={<Muted style={{ textAlign: 'center', marginTop: space(10) }}>{t('likes.empty')}</Muted>}
           renderItem={({ item }) => (
             <Pressable style={styles.tile} onPress={() => router.push({ pathname: '/user/[id]', params: { id: item.id, fromLikes: '1' } })}>
-              <Image source={{ uri: item.photos[0]?.url }} style={StyleSheet.absoluteFill} contentFit="cover" />
+              <Image source={{ uri: item.photos[0]?.thumb }} style={StyleSheet.absoluteFill} contentFit="cover" />
               <LinearGradient colors={gradients.cardShade} style={StyleSheet.absoluteFill} />
               {item.superLikedYou ? <View style={styles.super}><Ionicons name="star" size={11} color={colors.onPrimary} /></View> : null}
               <View style={styles.tileInfo}>

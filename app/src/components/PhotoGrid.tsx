@@ -32,7 +32,7 @@ export function PhotoGrid({ photos, onChange }: { photos: Photo[]; onChange: (ph
     try {
       const mime = asset.mimeType && ['image/jpeg', 'image/png', 'image/webp'].includes(asset.mimeType) ? asset.mimeType : 'image/jpeg';
       const photo = await api<Photo>('/me/photos', { form: await imageFormData(asset.uri, mime) });
-      onChange([...photos, { id: photo.id, url: photo.url }]);
+      onChange([...photos, { id: photo.id, url: photo.url, thumb: photo.thumb ?? photo.url }]);
     } catch (e) {
       notify(errorMessage(e));
     } finally {
@@ -66,7 +66,7 @@ export function PhotoGrid({ photos, onChange }: { photos: Photo[]; onChange: (ph
         if (photo) {
           return (
             <Pressable key={photo.id} style={styles.slot} onPress={() => i > 0 && makeMain(photo.id)} accessibilityLabel={t('profile.photosHint')}>
-              <Image source={{ uri: photo.url }} style={StyleSheet.absoluteFill} contentFit="cover" />
+              <Image source={{ uri: photo.thumb }} style={StyleSheet.absoluteFill} contentFit="cover" />
               {i === 0 ? <View style={styles.mainTag}><Ionicons name="star" size={10} color={colors.onPrimary} /></View> : null}
               <Pressable onPress={() => remove(photo.id)} style={styles.remove} hitSlop={8} accessibilityLabel={t('profile.removePhoto')}>
                 <Ionicons name="close" size={14} color="#fff" />

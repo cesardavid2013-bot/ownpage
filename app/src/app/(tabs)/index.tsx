@@ -156,6 +156,15 @@ export default function Discover() {
         </View>
       </View>
 
+      {!user.settings.discoverable ? (
+        <Pressable onPress={() => api<Me>('/me/settings', { method: 'PATCH', body: { discoverable: true } }).then((me) => useAuth.getState().setUser(me)).catch((e) => notify(errorMessage(e)))}
+          style={styles.banner} testID="paused-banner">
+          <Ionicons name="pause-circle-outline" size={16} color={colors.primary} />
+          <Text style={styles.bannerText}>{t('privacy.paused')}</Text>
+          <Text style={[styles.bannerText, { flex: 0, color: colors.primary }]}>{t('privacy.resume')}</Text>
+        </Pressable>
+      ) : null}
+
       {noLocation ? (
         <Pressable onPress={enableLocation} style={styles.banner}>
           <Ionicons name="location" size={16} color={colors.primary} />
@@ -165,7 +174,7 @@ export default function Discover() {
 
       <View style={styles.deck}>
         {loading ? <CardSkeleton /> : deck.length === 0 ? (
-          <Empty photo={user.photos[0]?.url} error={error} onRetry={() => { setLoading(true); load(true); }} />
+          <Empty photo={user.photos[0]?.thumb} error={error} onRetry={() => { setLoading(true); load(true); }} />
         ) : (
           deck.slice(0, 3).reverse().map((p, i, arr) => {
             const isTop = i === arr.length - 1;

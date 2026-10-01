@@ -38,8 +38,8 @@ export function MatchCelebration() {
           <Text style={styles.title}>{t('match.title')}</Text>
           <Text style={styles.subtitle}>{t('match.subtitle', { name: match.user.name })}</Text>
           <View style={styles.photos}>
-            <Image source={{ uri: me.photos[0]?.url }} style={[styles.photo, { transform: [{ rotate: '-8deg' }] }]} />
-            <Image source={{ uri: match.user.photos[0]?.url }} style={[styles.photo, { marginLeft: -24, transform: [{ rotate: '8deg' }] }]} />
+            <Image source={{ uri: me.photos[0]?.thumb }} style={[styles.photo, { transform: [{ rotate: '-8deg' }] }]} />
+            <Image source={{ uri: match.user.photos[0]?.thumb }} style={[styles.photo, { marginLeft: -24, transform: [{ rotate: '8deg' }] }]} />
             <LinearGradient colors={gradients.brand} style={styles.heart}><Ionicons name="heart" size={24} color={colors.onPrimary} /></LinearGradient>
           </View>
           <View style={{ alignSelf: 'stretch', gap: space(3) }}>

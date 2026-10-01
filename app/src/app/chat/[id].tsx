@@ -8,12 +8,13 @@ import * as Haptics from 'expo-haptics';
 import { router, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
+import { SafetySheet } from '@/components/SafetySheet';
 import { webMaxWidth } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { useMatches } from '@/lib/matches';
-import { confirm, notify } from '@/lib/notify';
+import { notify } from '@/lib/notify';
 import { emitTyping, useRealtime, useSocketEvent } from '@/lib/realtime';
 import { colors, font, space } from '@/lib/theme';
 import type { Message } from '@/lib/types';
@@ -32,8 +33,10 @@ export default function Chat() {
   const [receipts, setReceipts] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const [text, setText] = useState('');
-  const [sending, setSending] = useState(false);
   const [typing, setTyping] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const connected = useRealtime((s) => s.connected);
+  const [offline, setOffline] = useState(false);
   const typingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastTypingSent = useRef(0);
   const lastTap = useRef<{ id: string; at: number } | null>(null);
@@ -43,30 +46,51 @@ export default function Chat() {
     api(`/matches/${id}/read`, { body: {} }).then(() => useRealtime.getState().bump()).catch(() => {});
   }, [id]);
 
-  useEffect(() => {
-    api<{ messages: Message[]; hasMore: boolean; readReceipts?: boolean }>(`/matches/${id}/messages`)
-      .then((res) => {
-        setMessages(res.messages);
-        setHasMore(res.hasMore);
-        setReceipts(!!res.readReceipts);
-        markRead();
-      })
-      .catch((e) => {
-        notify(errorMessage(e));
-        router.back();
-      });
-  }, [id, markRead]);
-
+  /** Inserts or updates by server id, or replaces the optimistic copy with the same client id. */
   const upsert = useCallback((m: Message) => {
     setMessages((list) => {
       if (!list) return list;
-      const i = list.findIndex((x) => x.id === m.id);
-      if (i === -1) return [...list, m];
+      let i = list.findIndex((x) => x.id === m.id);
+      if (i === -1 && m.clientId) i = list.findIndex((x) => x.clientId === m.clientId);
+      if (i === -1) return [...list, m].sort((a, b) => (a.status ? 1 : 0) - (b.status ? 1 : 0) || a.createdAt.localeCompare(b.createdAt));
       const next = list.slice();
-      next[i] = { ...next[i], ...m };
+      next[i] = { ...next[i], ...m, status: m.status };
       return next;
     });
   }, []);
+
+  const loadLatest = useCallback(async (initial: boolean) => {
+    try {
+      const res = await api<{ messages: Message[]; hasMore: boolean; readReceipts?: boolean }>(`/matches/${id}/messages`);
+      setReceipts(!!res.readReceipts);
+      if (initial) {
+        setMessages(res.messages);
+        setHasMore(res.hasMore);
+      } else {
+        res.messages.forEach(upsert);
+      }
+      markRead();
+    } catch (e) {
+      if (initial) {
+        notify(errorMessage(e));
+        router.back();
+      }
+    }
+  }, [id, markRead, upsert]);
+
+  useEffect(() => { loadLatest(true); }, [loadLatest]);
+
+  // After a dropped connection, fetch what arrived meanwhile; upsert keeps it free of duplicates.
+  const wasConnected = useRef(connected);
+  useEffect(() => {
+    if (connected && !wasConnected.current && messages) loadLatest(false);
+    wasConnected.current = connected;
+    // Only claim "reconnecting" if the connection stays down for a moment.
+    if (connected) { setOffline(false); return; }
+    const timer = setTimeout(() => setOffline(true), 2500);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected]);
 
   useSocketEvent<Message>('message:new', useCallback((m) => {
     if (m.matchId !== id) return;
@@ -109,23 +133,31 @@ export default function Chat() {
     }
   }
 
-  async function send(body = text.trim()) {
-    if (!body || sending) return;
-    setSending(true);
+  async function deliver(draft: Message) {
+    upsert({ ...draft, status: 'sending' });
     try {
-      const msg = await api<Message>(`/matches/${id}/messages`, { body: { body } });
-      setText('');
-      upsert(msg);
+      const msg = await api<Message>(`/matches/${id}/messages`, { body: { body: draft.body, clientId: draft.clientId } });
+      upsert({ ...msg, status: undefined });
       useRealtime.getState().bump();
     } catch (e) {
-      notify(errorMessage(e));
-    } finally {
-      setSending(false);
+      upsert({ ...draft, status: 'failed' });
+      const code = (e as { code?: string }).code;
+      if (code && code !== 'network_error') notify(errorMessage(e));
     }
   }
 
+  function send(body = text.trim()) {
+    if (!body) return;
+    setText('');
+    const clientId = `c${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+    deliver({
+      id: `local-${clientId}`, clientId, matchId: id, senderId: me.id, body,
+      createdAt: new Date().toISOString(), readAt: null, status: 'sending',
+    });
+  }
+
   async function toggleHeart(m: Message) {
-    if (m.senderId === me.id) return;
+    if (m.senderId === me.id || m.status) return;
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     upsert({ ...m, likedAt: m.likedAt ? null : new Date().toISOString() });
     try {
@@ -136,6 +168,7 @@ export default function Chat() {
   }
 
   function onBubblePress(m: Message) {
+    if (m.status === 'failed') { deliver(m); return; }
     const now = Date.now();
     if (lastTap.current && lastTap.current.id === m.id && now - lastTap.current.at < 320) {
       lastTap.current = null;
@@ -153,17 +186,7 @@ export default function Chat() {
     }
   }
 
-  async function unmatch() {
-    if (!match) return;
-    if (!(await confirm(t('chats.unmatchConfirm', { name: match.user.name }), t('chats.unmatch'), t('common.cancel')))) return;
-    try {
-      await api(`/matches/${id}`, { method: 'DELETE' });
-      useRealtime.getState().bump();
-      router.back();
-    } catch (e) {
-      notify(errorMessage(e));
-    }
-  }
+  const leave = () => (router.canGoBack() ? router.back() : router.replace('/chats'));
 
   const time = (iso: string) => new Date(iso).toLocaleTimeString(i18n.language, { hour: '2-digit', minute: '2-digit' });
   const dayLabel = useCallback((iso: string) => {
@@ -207,13 +230,15 @@ export default function Chat() {
           <Ionicons name="chevron-back" size={26} color={colors.text} />
         </Pressable>
         <Pressable style={styles.who} onPress={() => match && router.push({ pathname: '/user/[id]', params: { id: match.user.id, fromChat: '1' } })}>
-          <View style={styles.avatar}>{match?.user.photos[0] ? <Image source={{ uri: match.user.photos[0].url }} style={StyleSheet.absoluteFill} /> : null}</View>
+          <View style={styles.avatar}>{match?.user.photos[0] ? <Image source={{ uri: match.user.photos[0].thumb }} style={StyleSheet.absoluteFill} /> : null}</View>
           <View style={{ flex: 1 }}>
             <Text style={styles.name} numberOfLines={1}>{match?.user.name ?? ''}</Text>
-            <Text style={styles.status} numberOfLines={1}>{typing ? t('chats.typing') : match?.user.recentlyActive ? t('discover.recentlyActive') : ' '}</Text>
+            <Text style={[styles.status, offline && { color: colors.textMuted }]} numberOfLines={1}>
+              {offline ? t('chatState.reconnecting') : typing ? t('chats.typing') : match?.user.recentlyActive ? t('discover.recentlyActive') : ' '}
+            </Text>
           </View>
         </Pressable>
-        <Pressable onPress={unmatch} hitSlop={10} accessibilityLabel={t('chats.unmatch')}>
+        <Pressable onPress={() => setMenu(true)} hitSlop={10} accessibilityLabel={t('safetyMenu.unmatch')} testID="chat-menu">
           <Ionicons name="ellipsis-horizontal" size={22} color={colors.textMuted} />
         </Pressable>
       </View>
@@ -233,7 +258,7 @@ export default function Chat() {
             }
             ListFooterComponent={match ? (
               <View style={styles.intro}>
-                <View style={styles.introArch}>{match.user.photos[0] ? <Image source={{ uri: match.user.photos[0].url }} style={StyleSheet.absoluteFill} /> : null}</View>
+                <View style={styles.introArch}>{match.user.photos[0] ? <Image source={{ uri: match.user.photos[0].url }} style={StyleSheet.absoluteFill} contentFit="cover" /> : null}</View>
                 <Text style={styles.introName}>{match.user.name}</Text>
                 <Text style={styles.introSub}>{t('chats.matchedOn', { date: new Date(match.createdAt).toLocaleDateString(i18n.language) })}</Text>
               </View>
@@ -247,18 +272,22 @@ export default function Chat() {
                   <Pressable
                     onPress={() => onBubblePress(m)}
                     onLongPress={() => toggleHeart(m)}
-                    style={[styles.bubble, mine ? styles.mine : styles.theirs,
+                    accessibilityHint={m.status === 'failed' ? t('chatState.failed') : undefined}
+                    style={[styles.bubble, mine ? styles.mine : styles.theirs, m.status === 'sending' && { opacity: 0.6 },
+                      m.status === 'failed' && styles.failed,
                       mine ? { borderBottomRightRadius: last ? 6 : 22, borderTopRightRadius: first ? 22 : 6 }
                         : { borderBottomLeftRadius: last ? 6 : 22, borderTopLeftRadius: first ? 22 : 6 }]}
                   >
-                    <Text style={[styles.body, mine && { color: colors.onPrimary }]}>{m.body}</Text>
+                    <Text style={[styles.body, mine && m.status !== 'failed' && { color: colors.onPrimary }]}>{m.body}</Text>
                     {m.likedAt ? (
                       <View style={[styles.heart, mine ? { left: -8 } : { right: -8 }]}>
                         <Ionicons name="heart" size={11} color={colors.onPrimary} />
                       </View>
                     ) : null}
                   </Pressable>
-                  {last ? <Text style={styles.time}>{time(m.createdAt)}</Text> : null}
+                  {m.status === 'failed' ? <Text style={[styles.time, { color: colors.danger }]} testID="msg-failed">{t('chatState.failed')}</Text>
+                    : m.status === 'sending' ? (last ? <Text style={styles.time}>{t('chatState.sending')}</Text> : null)
+                    : last ? <Text style={styles.time}>{time(m.createdAt)}</Text> : null}
                 </View>
               );
             }}
@@ -292,12 +321,22 @@ export default function Chat() {
             blurOnSubmit={false}
             testID="chat-input"
           />
-          <Pressable onPress={() => send()} disabled={!text.trim() || sending} accessibilityLabel={t('common.send')} testID="chat-send"
+          <Pressable onPress={() => send()} disabled={!text.trim()} accessibilityLabel={t('common.send')} testID="chat-send"
             style={[styles.send, { opacity: text.trim() ? 1 : 0.35 }]}>
             <Ionicons name="arrow-up" size={20} color={colors.onPrimary} />
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      {match ? (
+        <SafetySheet
+          visible={menu}
+          onClose={() => setMenu(false)}
+          person={{ id: match.user.id, name: match.user.name }}
+          matchId={match.id}
+          onViewProfile={() => router.push({ pathname: '/user/[id]', params: { id: match.user.id, fromChat: '1' } })}
+          onDone={leave}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }
@@ -319,6 +358,7 @@ const styles = StyleSheet.create({
   day: { alignSelf: 'center', color: colors.gold, fontFamily: font.semibold, fontSize: 10.5, letterSpacing: 2, textTransform: 'uppercase', marginTop: space(6), marginBottom: space(2) },
   bubble: { maxWidth: '80%', paddingHorizontal: space(4), paddingVertical: space(2.5), borderRadius: 22 },
   mine: { backgroundColor: colors.primary },
+  failed: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.danger },
   theirs: { backgroundColor: colors.cardHigh },
   body: { color: colors.text, fontFamily: font.body, fontSize: 16, lineHeight: 22, ...(Platform.OS === 'web' ? ({ userSelect: 'none' } as object) : null) },
   heart: {

@@ -18,5 +18,18 @@ import id from './locales/id';
 import vi from './locales/vi';
 import th from './locales/th';
 import sv from './locales/sv';
+import { additions } from './additions';
 
-export const resources = { en, es, pt, fr, de, it, nl, pl, ru, uk, tr, ar, hi, zh, ja, ko, id, vi, th, sv };
+type Tree = { [k: string]: string | Tree };
+function merge<T extends object>(base: T, extra: object): T {
+  const out: Tree = { ...(base as Tree) };
+  for (const [k, v] of Object.entries(extra)) {
+    out[k] = typeof v === 'object' && typeof out[k] === 'object' ? merge(out[k] as Tree, v) : v;
+  }
+  return out as T;
+}
+
+const base = { en, es, pt, fr, de, it, nl, pl, ru, uk, tr, ar, hi, zh, ja, ko, id, vi, th, sv };
+export const resources = Object.fromEntries(
+  Object.entries(base).map(([lng, tree]) => [lng, merge(tree, additions[lng as keyof typeof additions])]),
+) as typeof base;

@@ -49,7 +49,7 @@ export function TopPicks() {
           ? [0, 1, 2].map((i) => <Skeleton key={i} width={130} height={176} radius={65} />)
           : picks.map((p) => (
             <Pressable key={p.id} onPress={() => router.push({ pathname: '/user/[id]', params: { id: p.id, fromLikes: '1' } })} style={styles.pick}>
-              {p.photos[0] ? <Image source={{ uri: p.photos[0].url }} style={StyleSheet.absoluteFill} contentFit="cover" /> : null}
+              {p.photos[0] ? <Image source={{ uri: p.photos[0].thumb }} style={StyleSheet.absoluteFill} contentFit="cover" /> : null}
               <LinearGradient colors={gradients.cardShade} style={StyleSheet.absoluteFill} />
               <Text style={styles.name} numberOfLines={1}>{p.name}{p.age != null ? `, ${p.age}` : ''}</Text>
             </Pressable>

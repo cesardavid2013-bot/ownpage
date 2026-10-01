@@ -12,16 +12,21 @@ import { useAuth } from '@/lib/auth';
 import { colors, font, gradients, space } from '@/lib/theme';
 import type { Me } from '@/lib/types';
 
-export function completeness(u: Me) {
-  const checks = [u.photos.length >= 1, u.photos.length >= 3, !!u.bio, !!u.jobTitle, !!u.school, u.interests.length >= 3,
-    u.languages.length > 0, !!u.city, (u.prompts?.length ?? 0) >= 1, u.lookingFor !== 'unsure'];
-  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+/** Concrete things that would make this profile better, most useful first. No arbitrary percentages. */
+export function nextSteps(u: Me): { key: string; icon: keyof typeof Ionicons.glyphMap }[] {
+  const steps: { key: string; icon: keyof typeof Ionicons.glyphMap; missing: boolean }[] = [
+    { key: 'todo.addPhoto', icon: 'images-outline', missing: u.photos.length < 3 },
+    { key: 'todo.addPrompt', icon: 'chatbubble-ellipses-outline', missing: (u.prompts?.length ?? 0) === 0 },
+    { key: 'todo.addBio', icon: 'create-outline', missing: !u.bio.trim() },
+    { key: 'todo.addInterests', icon: 'sparkles-outline', missing: u.interests.length < 3 },
+  ];
+  return steps.filter((s) => s.missing).slice(0, 3);
 }
 
 export default function ProfileTab() {
   const { t, i18n } = useTranslation();
   const user = useAuth((s) => s.user)!;
-  const pct = completeness(user);
+  const steps = nextSteps(user);
   const member = user.plan !== 'free';
 
   return (
@@ -40,11 +45,15 @@ export default function ProfileTab() {
         </View>
 
         <View style={{ paddingHorizontal: space(5), gap: space(8) }}>
-          {pct < 100 ? (
-            <Pressable onPress={() => router.push('/edit-profile')} style={{ gap: space(2) }}>
-              <View style={styles.progressTrack}><View style={[styles.progressFill, { width: `${pct}%` }]} /></View>
-              <Text style={styles.progressText}>{t('profile.completeness', { percent: pct })}</Text>
-            </Pressable>
+          {steps.length ? (
+            <View style={{ gap: space(2) }}>
+              <Text style={styles.section}>{t('todo.title')}</Text>
+              <View style={styles.list}>
+                {steps.map((st, i) => (
+                  <Row key={st.key} icon={st.icon} label={t(st.key)} onPress={() => router.push('/edit-profile')} last={i === steps.length - 1} />
+                ))}
+              </View>
+            </View>
           ) : null}
 
           <View style={styles.list}>

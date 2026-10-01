@@ -19,6 +19,8 @@ export interface PromptAnswer {
 export interface Photo {
   id: string;
   url: string;
+  /** Small cover-cropped version for lists and avatars. */
+  thumb: string;
 }
 
 export interface Profile {
@@ -80,6 +82,8 @@ export interface Me extends Profile {
     filterVerified: boolean;
     filterHasPrompts: boolean;
     filterLookingFor: LookingFor[];
+    discoverable: boolean;
+    showActivity: boolean;
   };
   plan: Plan;
   planExpiresAt: string | null;
@@ -97,6 +101,10 @@ export interface Message {
   createdAt: string;
   readAt: string | null;
   likedAt?: string | null;
+  /** Set by the app for its own sends; lets retries and socket echoes reconcile with the optimistic copy. */
+  clientId?: string | null;
+  /** Local only: an optimistic message still on its way, or one that could not be delivered. */
+  status?: 'sending' | 'failed';
 }
 
 export interface Match {

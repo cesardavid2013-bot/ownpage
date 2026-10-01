@@ -60,7 +60,7 @@ export default function Chats() {
                   {fresh.map((m) => (
                     <Pressable key={m.id} onPress={() => open(m)} style={styles.fresh}>
                       <LinearGradient colors={gradients.brand} style={styles.freshRing}>
-                        <Image source={{ uri: m.user.photos[0]?.url }} style={styles.freshPhoto} />
+                        <Image source={{ uri: m.user.photos[0]?.thumb }} style={styles.freshPhoto} />
                       </LinearGradient>
                       <Text style={styles.freshName} numberOfLines={1}>{m.user.name}</Text>
                     </Pressable>
@@ -82,7 +82,7 @@ export default function Chats() {
           const mine = item.lastMessage?.senderId === me.id;
           return (
             <Pressable onPress={() => open(item)} style={({ pressed }) => [styles.row, pressed && { backgroundColor: colors.bgElevated }]}>
-              <Image source={{ uri: item.user.photos[0]?.url }} style={styles.avatar} />
+              <Image source={{ uri: item.user.photos[0]?.thumb }} style={styles.avatar} />
               <View style={{ flex: 1, gap: 3 }}>
                 <Text style={styles.name} numberOfLines={1}>{item.user.name}</Text>
                 <Text style={[styles.preview, item.unread > 0 && styles.previewUnread]} numberOfLines={1}>

@@ -122,6 +122,11 @@ export default function SettingsScreen() {
         </View>
       </Section>
 
+      <Section title={t('privacy.title')}>
+        <Toggle label={t('privacy.pause')} hint={t('privacy.pauseHint')} value={!s.discoverable} onChange={(v) => update({ discoverable: !v })} />
+        <Toggle label={t('privacy.showActivity')} hint={t('privacy.showActivityHint')} value={s.showActivity} onChange={(v) => update({ showActivity: v })} />
+      </Section>
+
       <Section title={t('settings.privacy')}>
         <Toggle label={t('settings.hideAge')} value={s.hideAge} premium={!ent.hideAgeDistance}
           onChange={(v) => gated(ent.hideAgeDistance, () => update({ hideAge: v }))} />
@@ -211,7 +216,7 @@ function Toggle({ label, hint, value, onChange, premium }: { label: string; hint
         {hint ? <Text style={styles.hint}>{hint}</Text> : null}
       </View>
       {premium ? <PremiumTag /> : null}
-      <Switch value={value} onValueChange={onChange} trackColor={{ true: colors.primary, false: colors.border }} thumbColor={value ? colors.onPrimary : '#d8d4cc'} />
+      <Switch accessibilityLabel={label} value={value} onValueChange={onChange} trackColor={{ true: colors.primary, false: colors.border }} thumbColor={value ? colors.onPrimary : '#d8d4cc'} />
     </View>
   );
 }
