@@ -58,7 +58,7 @@ const ko = {
   chats: {
     icebreakers: "무슨 말을 할지 고민되나요?", iceAbout: "“{{prompt}}”에 대한 답이 정말 좋았어요. 더 얘기해 줄래요?", ice1: "두 개의 진실과 하나의 거짓말. 시작!", ice2: "이번 주에 있었던 가장 좋은 일은 뭐예요?", ice3: "커피 아니면 한잔: 우리 첫 데이트는 어떨까요?", today: "오늘", yesterday: "어제", liked: "좋아함",
     title: '채팅', newMatches: '새로운 매치', messages: '메시지',
-    empty: '아직 매치가 없어요. 계속 스와이프하세요 — 인연은 어딘가에 있어요.', startConversation: '{{name}}님에게 인사해 보세요 👋',
+    empty: '아직 매치가 없어요. 계속 스와이프하세요 — 인연은 어딘가에 있어요.', startConversation: '{{name}}님에게 인사해 보세요',
     you: '나: ', typing: '입력 중…', placeholder: '메시지 입력', unmatch: '매치 취소',
     unmatchConfirm: '{{name}}님과의 매치를 취소할까요? 되돌릴 수 없어요.', read: '읽음', matchedOn: '{{date}}에 매치됨',
   },
@@ -91,7 +91,7 @@ const ko = {
     monthly: "월간", yearly: "연간", save: "{{percent}}% 절약", billedYearly: "연 {{price}} 결제",
     title: 'Lumi Premium', subtitle: "Lumi는 무료예요. 멤버십은 더 넓은 노출, 통제, 프라이버시를 더해요. 언제든 해지할 수 있어요.",
     perMonth: '/월', current: '현재 플랜', choose: '{{plan}} 선택', upgrade: '업그레이드',
-    activeUntil: '{{date}}까지 이용 가능', success: '{{plan}}에 오신 것을 환영해요! ✨', cancelled: '구매가 취소되었어요',
+    activeUntil: '{{date}}까지 이용 가능', success: '{{plan}}에 오신 것을 환영해요!', cancelled: '구매가 취소되었어요',
     devNotice: '테스트 모드: 구매는 시뮬레이션이며 실제로 결제되지 않아요.',
     legal: '구독은 기간 종료 최소 24시간 전에 취소하지 않으면 자동으로 갱신돼요. 계정 설정에서 언제든지 관리하거나 취소할 수 있어요.',
     boosts: '부스트', boostPack: '부스트 5개', boostPackDesc: '30분 동안 지역 최상위 프로필 중 하나가 되어 보세요.',

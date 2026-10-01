@@ -4,6 +4,7 @@ import request from 'supertest';
 import { config } from './config.js';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { query } from './db/pool.js';
+import { createApp } from './app.js';
 import { app, closeDb, makeUser, PNG, resetDb } from './test-utils.js';
 
 beforeEach(resetDb);
@@ -374,5 +375,23 @@ describe('account deletion', () => {
       email, password: 'password123', name: 'New', birthdate: '1990-01-01', gender: 'man', interestedIn: ['woman'],
     });
     expect(again.status).toBe(201);
+  });
+});
+
+describe('web app served from the API origin', () => {
+  const dir = fs.mkdtempSync(path.join(config.uploadDir, '..', 'web-test-'));
+  fs.writeFileSync(path.join(dir, 'index.html'), '<div id="root"></div>');
+  const web = createApp({ webDir: dir });
+  afterAll(() => fs.rmSync(dir, { recursive: true, force: true }));
+
+  it('gives browser navigations the app shell and keeps the JSON API intact', async () => {
+    const page = await request(web).get('/likes').set('Accept', 'text/html,application/xhtml+xml').expect(200);
+    expect(page.text).toContain('id="root"');
+    expect(page.headers['cache-control']).toBe('no-cache');
+    await request(web).get('/likes/received').set('Accept', '*/*').expect(401);
+    await request(web).get('/likes').set('Accept', 'application/json').expect(401);
+    const csp = page.headers['content-security-policy'];
+    expect(csp).toContain("img-src 'self' data: blob: https:");
+    expect(csp).toContain("connect-src 'self' blob: ws: wss:");
   });
 });

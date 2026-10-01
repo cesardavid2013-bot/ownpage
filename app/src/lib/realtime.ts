@@ -31,7 +31,9 @@ export const useRealtime = create<RealtimeState>((set) => ({
 
 function connect(token: string) {
   socket?.disconnect();
-  socket = io(API_URL, { auth: { token }, transports: ['websocket'] });
+  const options = { auth: { token }, transports: ['websocket'] };
+  // An empty API_URL means same origin (web build served by the API).
+  socket = API_URL ? io(API_URL, options) : io(options);
   socket.on('connect', () => useRealtime.setState({ connected: true }));
   socket.on('disconnect', () => useRealtime.setState({ connected: false }));
   socket.on('connect_error', async (err) => {

@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { Glyph } from '@/components/Glyphs';
 import { Screen } from '@/components/Screen';
 import { CardSkeleton } from '@/components/Skeleton';
 import { Sheet } from '@/components/Sheet';
@@ -145,9 +146,9 @@ export default function Discover() {
       <View style={styles.header}>
         <Logo size={30} />
         <View style={{ flexDirection: 'row', gap: space(2) }}>
-          <Pressable onPress={boost} style={[styles.headerBtn, user.boost.activeUntil ? { backgroundColor: colors.violet } : null]}
+          <Pressable onPress={boost} style={[styles.headerBtn, user.boost.activeUntil ? { backgroundColor: colors.primary } : null]}
             accessibilityRole="button" accessibilityLabel={t('discover.boost')}>
-            <Ionicons name="flash" size={20} color={user.boost.activeUntil ? colors.onPrimary : colors.violet} />
+            <Ionicons name={user.boost.activeUntil ? 'flash' : 'flash-outline'} size={19} color={user.boost.activeUntil ? colors.onPrimary : colors.primary} />
           </Pressable>
           <Pressable onPress={() => router.push('/settings')} style={styles.headerBtn} accessibilityRole="button" accessibilityLabel={t('settings.title')}>
             <Ionicons name="options-outline" size={22} color={colors.text} />
@@ -191,15 +192,15 @@ export default function Discover() {
       </View>
 
       <Sheet visible={!!upsell} onClose={() => setUpsell(null)}>
-        <LinearGradient colors={gradients.gold} style={styles.upsellIcon}><Ionicons name="diamond" size={30} color="#2A1D05" /></LinearGradient>
-        <Title style={{ fontSize: 24, textAlign: 'center', fontFamily: font.body }}>{upsell}</Title>
+        <View style={styles.upsellIcon}><Glyph name="spark" size={30} color={colors.gold} filled /></View>
+        <Title style={{ fontSize: 26, textAlign: 'center' }}>{upsell}</Title>
         <Muted style={{ textAlign: 'center' }}>{t('discover.outOfLikesBody')}</Muted>
         <Button title={t('premium.upgrade')} variant="gold" onPress={() => { setUpsell(null); router.push('/premium'); }} />
         <Button title={t('common.close')} variant="ghost" onPress={() => setUpsell(null)} />
       </Sheet>
 
       <Sheet visible={!!noteFor} onClose={() => setNoteFor(null)}>
-        <Title style={{ fontSize: 22, fontFamily: font.body }}>{t('discover.noteTitle')}</Title>
+        <Title style={{ fontSize: 24 }}>{t('discover.noteTitle')}</Title>
         <Input value={note} onChangeText={setNote} placeholder={t('discover.notePlaceholder')} maxLength={140} multiline />
         <Button title={t('discover.superLike')} icon="star" onPress={() => {
           const target = noteFor!;
@@ -264,5 +265,5 @@ const styles = StyleSheet.create({
   radar: { width: 120, height: 120, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginBottom: space(6) },
   ring: { position: 'absolute', width: 120, height: 120, borderRadius: 60, backgroundColor: colors.primary },
   radarPhoto: { width: 110, height: 110, borderRadius: 55, borderWidth: 2, borderColor: colors.primary },
-  upsellIcon: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
+  upsellIcon: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(201,164,106,0.5)' },
 });

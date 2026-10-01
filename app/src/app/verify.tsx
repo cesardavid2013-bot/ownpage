@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Bokeh } from '@/components/Bokeh';
+import Svg, { Defs, RadialGradient, Rect, Stop } from 'react-native-svg';
 import { Header, Screen } from '@/components/Screen';
 import { Button, ErrorText } from '@/components/ui';
 import { errorMessage } from '@/i18n';
@@ -96,8 +96,16 @@ export default function Verify() {
               <View style={styles.arch}>
                 {shot ? <Image source={{ uri: shot.uri }} style={StyleSheet.absoluteFill} contentFit="cover" /> : (
                   <>
-                    <Bokeh count={10} seed={23} intensity={0.8} />
-                    <Ionicons name={POSE_ICON[info.pose] ?? 'hand-right-outline'} size={88} color={colors.primary} />
+                    <Svg style={StyleSheet.absoluteFill} viewBox="0 0 100 130" preserveAspectRatio="none">
+                      <Defs>
+                        <RadialGradient id="halo" cx="50%" cy="46%" r="55%">
+                          <Stop offset="0" stopColor={colors.gold} stopOpacity={0.28} />
+                          <Stop offset="1" stopColor={colors.gold} stopOpacity={0} />
+                        </RadialGradient>
+                      </Defs>
+                      <Rect width="100" height="130" fill="url(#halo)" />
+                    </Svg>
+                    <Ionicons name={POSE_ICON[info.pose] ?? 'hand-right-outline'} size={76} color={colors.primary} />
                   </>
                 )}
               </View>

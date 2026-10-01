@@ -58,7 +58,7 @@ const tr = {
   chats: {
     icebreakers: "Ne yazacağını bilmiyor musun?", iceAbout: "“{{prompt}}” yanıtına bayıldım. Biraz daha anlatır mısın?", ice1: "İki doğru bir yalan. Başla.", ice2: "Bu hafta başına gelen en güzel şey neydi?", ice3: "Kahve mi bir içki mi: ilk buluşmamız nasıl olurdu?", today: "Bugün", yesterday: "Dün", liked: "Beğenildi",
     title: 'Sohbetler', newMatches: 'Yeni eşleşmeler', messages: 'Mesajlar',
-    empty: 'Henüz eşleşme yok. Kaydırmaya devam et — o kişi bir yerlerde.', startConversation: '{{name}} ile merhabalaş 👋',
+    empty: 'Henüz eşleşme yok. Kaydırmaya devam et — o kişi bir yerlerde.', startConversation: '{{name}} ile merhabalaş',
     you: 'Sen: ', typing: 'yazıyor…', placeholder: 'Bir mesaj yaz', unmatch: 'Eşleşmeyi kaldır',
     unmatchConfirm: '{{name}} ile eşleşme kaldırılsın mı? Bu işlem geri alınamaz.', read: 'Okundu', matchedOn: '{{date}} tarihinde eşleştiniz',
   },
@@ -91,7 +91,7 @@ const tr = {
     monthly: "Aylık", yearly: "Yıllık", save: "%{{percent}} tasarruf", billedYearly: "Yıllık {{price}} faturalandırılır",
     title: 'Lumi Premium', subtitle: "Lumi ücretsiz. Üyelik daha fazla erişim, kontrol ve gizlilik sağlar. İstediğin zaman iptal et.",
     perMonth: '/ay', current: 'Mevcut plan', choose: '{{plan}} seç', upgrade: 'Yükselt',
-    activeUntil: '{{date}} tarihine kadar aktif', success: '{{plan}} planına hoş geldin! ✨', cancelled: 'Satın alma iptal edildi',
+    activeUntil: '{{date}} tarihine kadar aktif', success: '{{plan}} planına hoş geldin!', cancelled: 'Satın alma iptal edildi',
     devNotice: 'Test modu: satın alımlar simüle edilir, gerçek ücret alınmaz.',
     legal: 'Abonelikler, dönem bitiminden en az 24 saat önce iptal edilmedikçe otomatik olarak yenilenir. Hesap ayarlarından istediğin zaman yönetebilir veya iptal edebilirsin.',
     boosts: 'Boostlar', boostPack: '5 Boost', boostPackDesc: '30 dakika boyunca bölgendeki en öne çıkan profillerden biri ol.',

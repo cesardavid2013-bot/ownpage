@@ -17,9 +17,16 @@ if (config.isProd) {
 const women = ['Lucía', 'Sofía', 'Emma', 'Valentina', 'Chloé', 'Mia', 'Aiko', 'Isabella', 'Yuna', 'Amara', 'Nora', 'Leila', 'Olivia', 'Camila', 'Hana', 'Zoe', 'Elena', 'Ines', 'Maya', 'Sara'];
 const men = ['Mateo', 'Lucas', 'Hugo', 'Liam', 'Kenji', 'Noah', 'Diego', 'Omar', 'Leo', 'Marco', 'Ethan', 'Arjun', 'Pablo', 'Jonas', 'Adrián', 'Theo', 'Samuel', 'Daniel', 'Minho', 'Luca'];
 const bios = [
-  'Coffee first, adventures second ☕️', 'Looking for someone to explore new restaurants with 🍜',
-  'Dog lover. Sunset chaser. Terrible at karaoke 🎤', 'Weekend hikes and bookstore dates 📚',
-  'Architect by day, salsa dancer by night 💃', 'Let’s travel somewhere we can’t pronounce ✈️',
+  'Restoring a 1972 Vespa, slowly. Will cook you my grandmother’s tortilla if you are patient with the Vespa.',
+  'Paediatric nurse. Night shifts, early markets, and a running list of bars with good jukeboxes.',
+  'I translate Italian novels and still get lost in my own neighbourhood.',
+  'Ceramics on Thursdays, sea swims all year. Looking for someone who answers messages like letters.',
+  'Building a bakery one failed sourdough at a time. Opinionated about jazz, flexible about everything else.',
+  'Architect. I will notice the staircase before I notice the menu.',
+  'Learning Japanese for a trip I keep postponing. Come with me and make it real.',
+  'Film photographer. I own more cameras than plates, and I am working on that.',
+  'Lawyer by day, terrible but committed tango dancer by night.',
+  'Moved here for a job, stayed for the light at seven in the evening.',
 ];
 const interests = ['travel', 'music', 'coffee', 'hiking', 'cooking', 'art', 'yoga', 'movies', 'photography', 'dancing', 'gaming', 'wine', 'fitness', 'books', 'surf'];
 const jobs = ['Designer', 'Engineer', 'Doctor', 'Photographer', 'Chef', 'Architect', 'Lawyer', 'Musician', 'Teacher', 'Founder'];
@@ -48,7 +55,7 @@ async function main() {
 
   const demo = await query(
     `INSERT INTO users (email, password_hash, name, birthdate, gender, interested_in, bio, lat, lng, job_title, interests, city)
-     VALUES ('demo@lumi.app', $1, 'Alex', '1994-04-12', 'man', '{woman,man,nonbinary}', 'Demo account ✨', $2, $3, 'Product Manager', '{travel,music,coffee}', 'Demo City')
+     VALUES ('demo@lumi.app', $1, 'Alex', '1994-04-12', 'man', '{woman,man,nonbinary}', 'Architect of very long walks. Looking for someone to argue about films with, then agree over dinner.', $2, $3, 'Product Manager', '{travel,music,coffee}', 'Demo City')
      RETURNING id`,
     [hash, lat, lng],
   );

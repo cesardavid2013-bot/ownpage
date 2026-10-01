@@ -58,7 +58,7 @@ const zh = {
   chats: {
     icebreakers: "不知道说什么？", iceAbout: "很喜欢你对“{{prompt}}”的回答，能多说说吗？", ice1: "两真一假，来吧。", ice2: "这周发生在你身上最棒的事是什么？", ice3: "咖啡还是小酌：我们的第一次约会会是什么样？", today: "今天", yesterday: "昨天", liked: "已喜欢",
     title: '聊天', newMatches: '新配对', messages: '消息',
-    empty: '还没有配对。继续滑动——对的人就在某处。', startConversation: '向 {{name}} 打个招呼 👋',
+    empty: '还没有配对。继续滑动——对的人就在某处。', startConversation: '向 {{name}} 打个招呼',
     you: '你：', typing: '正在输入…', placeholder: '输入消息', unmatch: '取消配对',
     unmatchConfirm: '确定取消与 {{name}} 的配对吗？此操作无法撤销。', read: '已读', matchedOn: '你们于 {{date}} 配对',
   },
@@ -91,7 +91,7 @@ const zh = {
     monthly: "按月", yearly: "按年", save: "省 {{percent}}%", billedYearly: "按年付费 {{price}}",
     title: 'Lumi Premium', subtitle: "Lumi 免费使用。会员带来更多曝光、掌控和隐私，可随时取消。",
     perMonth: '/月', current: '当前方案', choose: '选择 {{plan}}', upgrade: '升级',
-    activeUntil: '有效期至 {{date}}', success: '欢迎加入 {{plan}}！✨', cancelled: '购买已取消',
+    activeUntil: '有效期至 {{date}}', success: '欢迎加入 {{plan}}！', cancelled: '购买已取消',
     devNotice: '测试模式：购买为模拟，不会产生实际扣费。',
     legal: '订阅将自动续订，除非在当前周期结束前至少 24 小时取消。你可以随时在账号设置中管理或取消订阅。',
     boosts: '加速', boostPack: '5 次加速', boostPackDesc: '在 30 分钟内成为你所在区域最受瞩目的资料之一。',

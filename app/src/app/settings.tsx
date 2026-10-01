@@ -81,7 +81,7 @@ export default function SettingsScreen() {
   }
 
   const passportCity = user.passport
-    ? CITIES.find((c) => Math.abs(c.lat - user.passport!.lat) < 0.05 && Math.abs(c.lng - user.passport!.lng) < 0.05)?.name ?? '📍'
+    ? CITIES.find((c) => Math.abs(c.lat - user.passport!.lat) < 0.05 && Math.abs(c.lng - user.passport!.lng) < 0.05)?.name ?? `${user.passport.lat.toFixed(2)}, ${user.passport.lng.toFixed(2)}`
     : t('settings.passportCurrent');
 
   return (

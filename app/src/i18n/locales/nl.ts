@@ -58,7 +58,7 @@ const nl = {
   chats: {
     icebreakers: "Weet je niet wat je moet zeggen?", iceAbout: "Ik vond je antwoord op “{{prompt}}” geweldig. Vertel je meer?", ice1: "Twee waarheden en een leugen. Kom maar op.", ice2: "Wat is het beste dat je deze week is overkomen?", ice3: "Koffie of een drankje: hoe zou onze eerste date eruitzien?", today: "Vandaag", yesterday: "Gisteren", liked: "Leuk gevonden",
     title: 'Chats', newMatches: 'Nieuwe matches', messages: 'Berichten',
-    empty: 'Nog geen matches. Blijf swipen – jouw persoon is er.', startConversation: 'Zeg hoi tegen {{name}} 👋',
+    empty: 'Nog geen matches. Blijf swipen – jouw persoon is er.', startConversation: 'Zeg hoi tegen {{name}}',
     you: 'Jij: ', typing: 'typt…', placeholder: 'Typ een bericht', unmatch: 'Match opheffen',
     unmatchConfirm: 'Match met {{name}} opheffen? Dit kan niet ongedaan worden gemaakt.', read: 'Gelezen', matchedOn: 'Jullie matchten op {{date}}',
   },
@@ -91,7 +91,7 @@ const nl = {
     monthly: "Maandelijks", yearly: "Jaarlijks", save: "Bespaar {{percent}}%", billedYearly: "{{price}} per jaar gefactureerd",
     title: 'Lumi Premium', subtitle: "Lumi is gratis. Een lidmaatschap geeft meer bereik, controle en privacy. Altijd opzegbaar.",
     perMonth: '/maand', current: 'Huidig abonnement', choose: 'Kies {{plan}}', upgrade: 'Upgraden',
-    activeUntil: 'Actief tot {{date}}', success: 'Welkom bij {{plan}}! ✨', cancelled: 'Aankoop geannuleerd',
+    activeUntil: 'Actief tot {{date}}', success: 'Welkom bij {{plan}}!', cancelled: 'Aankoop geannuleerd',
     devNotice: 'Testmodus: aankopen worden gesimuleerd, er wordt niets afgeschreven.',
     legal: 'Abonnementen worden automatisch verlengd tenzij ze minstens 24 uur voor het einde van de periode worden opgezegd. Beheer of annuleer ze op elk moment in je accountinstellingen.',
     boosts: 'Boosts', boostPack: '5 Boosts', boostPackDesc: 'Wees 30 minuten lang een van de topprofielen in je buurt.',

@@ -58,7 +58,7 @@ const it = {
   chats: {
     icebreakers: "Non sai cosa scrivere?", iceAbout: "Mi è piaciuta la tua risposta a «{{prompt}}». Mi racconti di più?", ice1: "Due verità e una bugia. Vai.", ice2: "Qual è la cosa più bella che ti è successa questa settimana?", ice3: "Caffè o un drink: come sarebbe il nostro primo appuntamento?", today: "Oggi", yesterday: "Ieri", liked: "Piaciuto",
     title: 'Chat', newMatches: 'Nuovi match', messages: 'Messaggi',
-    empty: 'Ancora nessun match. Continua a scorrere: la persona giusta è là fuori.', startConversation: 'Saluta {{name}} 👋',
+    empty: 'Ancora nessun match. Continua a scorrere: la persona giusta è là fuori.', startConversation: 'Saluta {{name}}',
     you: 'Tu: ', typing: 'sta scrivendo…', placeholder: 'Scrivi un messaggio', unmatch: 'Annulla match',
     unmatchConfirm: 'Annullare il match con {{name}}? Non si può tornare indietro.', read: 'Letto', matchedOn: 'Avete fatto match il {{date}}',
   },
@@ -91,7 +91,7 @@ const it = {
     monthly: "Mensile", yearly: "Annuale", save: "Risparmia il {{percent}}%", billedYearly: "{{price}} fatturato annualmente",
     title: 'Lumi Premium', subtitle: "Lumi è gratis. L’abbonamento aggiunge visibilità, controllo e privacy. Disdici quando vuoi.",
     perMonth: '/mese', current: 'Piano attuale', choose: 'Scegli {{plan}}', upgrade: 'Passa a Premium',
-    activeUntil: 'Attivo fino al {{date}}', success: 'Benvenuto in {{plan}}! ✨', cancelled: 'Acquisto annullato',
+    activeUntil: 'Attivo fino al {{date}}', success: 'Benvenuto in {{plan}}!', cancelled: 'Acquisto annullato',
     devNotice: 'Modalità test: gli acquisti sono simulati, nessun addebito reale.',
     legal: 'Gli abbonamenti si rinnovano automaticamente se non vengono annullati almeno 24 ore prima della fine del periodo. Gestiscili o annullali in qualsiasi momento dalle impostazioni dell’account.',
     boosts: 'Boost', boostPack: '5 Boost', boostPackDesc: 'Sii tra i profili più in vista della tua zona per 30 minuti.',

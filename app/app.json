@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "lumi",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#0B0A12",
+    "backgroundColor": "#0A0A0C",
     "ios": {
       "bundleIdentifier": "app.lumi.dating",
       "buildNumber": "1",
@@ -35,11 +35,11 @@
     "web": {
       "output": "single",
       "favicon": "./assets/images/favicon.png",
-      "name": "Lumi — Dating, premium",
+      "name": "Lumi",
       "shortName": "Lumi",
-      "themeColor": "#0B0A12",
-      "backgroundColor": "#0B0A12",
-      "description": "Lumi — where sparks find their light. Premium dating in 20 languages."
+      "themeColor": "#0A0A0C",
+      "backgroundColor": "#0A0A0C",
+      "description": "Lumi. A members' club for meeting someone, after dark. Verified people, twenty languages."
     },
     "plugins": [
       "expo-router",
@@ -59,7 +59,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#0B0A12",
+          "backgroundColor": "#0A0A0C",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 160
         }

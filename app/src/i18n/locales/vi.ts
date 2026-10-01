@@ -58,7 +58,7 @@ const vi = {
   chats: {
     icebreakers: "Chưa biết nói gì?", iceAbout: "Mình rất thích câu trả lời của bạn cho “{{prompt}}”. Kể thêm nhé?", ice1: "Hai sự thật và một lời nói dối. Bắt đầu nào.", ice2: "Điều tuyệt nhất xảy ra với bạn tuần này là gì?", ice3: "Cà phê hay một ly: buổi hẹn đầu của chúng ta sẽ thế nào?", today: "Hôm nay", yesterday: "Hôm qua", liked: "Đã thích",
     title: 'Trò chuyện', newMatches: 'Tương hợp mới', messages: 'Tin nhắn',
-    empty: 'Chưa có tương hợp nào. Tiếp tục vuốt — người ấy đang ở đâu đó.', startConversation: 'Chào {{name}} nào 👋',
+    empty: 'Chưa có tương hợp nào. Tiếp tục vuốt — người ấy đang ở đâu đó.', startConversation: 'Chào {{name}} nào',
     you: 'Bạn: ', typing: 'đang nhập…', placeholder: 'Nhập tin nhắn', unmatch: 'Hủy tương hợp',
     unmatchConfirm: 'Hủy tương hợp với {{name}}? Không thể hoàn tác.', read: 'Đã xem', matchedOn: 'Các bạn tương hợp vào {{date}}',
   },
@@ -91,7 +91,7 @@ const vi = {
     monthly: "Hàng tháng", yearly: "Hàng năm", save: "Tiết kiệm {{percent}}%", billedYearly: "{{price}} thanh toán theo năm",
     title: 'Lumi Premium', subtitle: "Lumi miễn phí. Gói thành viên thêm phạm vi, quyền kiểm soát và riêng tư. Hủy bất cứ lúc nào.",
     perMonth: '/tháng', current: 'Gói hiện tại', choose: 'Chọn {{plan}}', upgrade: 'Nâng cấp',
-    activeUntil: 'Có hiệu lực đến {{date}}', success: 'Chào mừng đến với {{plan}}! ✨', cancelled: 'Đã hủy giao dịch',
+    activeUntil: 'Có hiệu lực đến {{date}}', success: 'Chào mừng đến với {{plan}}!', cancelled: 'Đã hủy giao dịch',
     devNotice: 'Chế độ thử nghiệm: giao dịch là mô phỏng, không tính phí thật.',
     legal: 'Gói đăng ký tự động gia hạn trừ khi được hủy ít nhất 24 giờ trước khi kết thúc chu kỳ. Quản lý hoặc hủy bất cứ lúc nào trong cài đặt tài khoản.',
     boosts: 'Tăng tốc', boostPack: '5 lượt Tăng tốc', boostPackDesc: 'Trở thành một trong những hồ sơ nổi bật nhất khu vực trong 30 phút.',

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
 import { TopPicks } from '@/components/TopPicks';
 import { GridSkeleton } from '@/components/Skeleton';
+import { Veiled } from '@/components/Veiled';
 import { Button, Chip, Muted, Row, Title } from '@/components/ui';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
@@ -63,8 +64,9 @@ export default function Likes() {
 
       {!data ? <GridSkeleton /> : data.locked ? (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space(8) }}>
-          <TopPicks />
           <Locked count={data.count} />
+          <View style={styles.rule} />
+          <TopPicks />
         </ScrollView>
       ) : (
         <FlatList
@@ -80,7 +82,7 @@ export default function Likes() {
             <Pressable style={styles.tile} onPress={() => router.push({ pathname: '/user/[id]', params: { id: item.id, fromLikes: '1' } })}>
               <Image source={{ uri: item.photos[0]?.url }} style={StyleSheet.absoluteFill} contentFit="cover" />
               <LinearGradient colors={gradients.cardShade} style={StyleSheet.absoluteFill} />
-              {item.superLikedYou ? <View style={styles.super}><Ionicons name="star" size={12} color="#fff" /></View> : null}
+              {item.superLikedYou ? <View style={styles.super}><Ionicons name="star" size={11} color={colors.onPrimary} /></View> : null}
               <View style={styles.tileInfo}>
                 <Text style={styles.tileName} numberOfLines={1}>{item.name}{item.age != null ? `, ${item.age}` : ''}</Text>
                 {item.note ? <Text style={styles.tileNote} numberOfLines={2}>“{item.note}”</Text> : null}
@@ -95,20 +97,19 @@ export default function Likes() {
 
 function Locked({ count }: { count: number }) {
   const { t } = useTranslation();
+  const tiles = count > 0 ? Math.min(count, 6) : 3;
   return (
-    <View style={{ gap: space(5) }}>
-      <View style={styles.blurGrid}>
-        {Array.from({ length: Math.max(4, Math.min(count, 6)) }).map((_, i) => (
-          <LinearGradient key={i} colors={i % 2 ? ['#3B2B4F', '#1C1929'] : ['#4A2438', '#1C1929']} style={styles.blurTile}>
-            <Ionicons name="heart" size={28} color="rgba(255,255,255,0.25)" />
-          </LinearGradient>
+    <View style={{ gap: space(6), paddingTop: space(2) }}>
+      <View style={styles.veilGrid}>
+        {Array.from({ length: tiles }).map((_, i) => (
+          <Veiled key={i} seed={i + 3} style={[styles.veil, i % 3 === 1 && { marginTop: space(5) }]} />
         ))}
       </View>
-      <View style={{ gap: space(2) }}>
-        <Title style={{ fontSize: 24, textAlign: 'center', fontFamily: font.body }}>{t('likes.lockedTitle', { count })}</Title>
-        <Muted style={{ textAlign: 'center' }}>{t('likes.lockedSubtitle')}</Muted>
+      <View style={{ gap: space(2), alignItems: 'center' }}>
+        <Text style={styles.lockedTitle}>{count > 0 ? t('likes.lockedTitle', { count }) : t('likes.empty')}</Text>
+        {count > 0 ? <Muted style={{ textAlign: 'center', maxWidth: 300 }}>{t('likes.lockedSubtitle')}</Muted> : null}
       </View>
-      <Button title={t('likes.seeWho')} variant="gold" icon="diamond" onPress={() => router.push('/premium')} />
+      {count > 0 ? <Button title={t('likes.seeWho')} variant="gold" onPress={() => router.push('/premium')} testID="likes-upgrade" /> : null}
     </View>
   );
 }
@@ -116,12 +117,14 @@ function Locked({ count }: { count: number }) {
 const styles = StyleSheet.create({
   tile: { flex: 1, aspectRatio: 0.75, borderRadius: radius.lg, overflow: 'hidden', backgroundColor: colors.card, maxWidth: '50%' },
   tileInfo: { position: 'absolute', bottom: 0, left: 0, right: 0, padding: space(3) },
-  tileName: { color: '#fff', fontSize: 17, fontFamily: font.bold },
-  tileNote: { color: '#fff', fontStyle: 'italic', fontSize: 12, marginTop: 2, fontFamily: font.body },
+  tileName: { color: colors.text, fontSize: 20, fontFamily: font.display },
+  tileNote: { color: colors.primary, fontSize: 12, marginTop: 2, fontFamily: font.body },
   super: {
-    position: 'absolute', top: 8, right: 8, width: 24, height: 24, borderRadius: 12, backgroundColor: colors.info,
+    position: 'absolute', top: 8, right: 8, width: 24, height: 24, borderRadius: 12, backgroundColor: colors.primary,
     alignItems: 'center', justifyContent: 'center',
   },
-  blurGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: space(3), justifyContent: 'center' },
-  blurTile: { width: '30%', aspectRatio: 0.75, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
+  veilGrid: { flexDirection: 'row', flexWrap: 'wrap', columnGap: '3.5%', rowGap: space(3) },
+  veil: { width: '31%' },
+  lockedTitle: { color: colors.text, fontFamily: font.display, fontSize: 28, lineHeight: 34, textAlign: 'center' },
+  rule: { height: StyleSheet.hairlineWidth, backgroundColor: colors.border, marginVertical: space(8) },
 });

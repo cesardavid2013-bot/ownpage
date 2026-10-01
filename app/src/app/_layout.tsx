@@ -11,6 +11,7 @@ import { loadSavedLanguage } from '@/i18n';
 import { useAuth } from '@/lib/auth';
 import { colors } from '@/lib/theme';
 import { MatchCelebration } from '@/components/MatchCelebration';
+import { Notices } from '@/components/Notices';
 import { OfflineScreen } from '@/components/OfflineScreen';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -63,6 +64,7 @@ export default function RootLayout() {
           <Stack.Screen name="language" options={{ animation: 'slide_from_right' }} />
         </Stack>
         {signedIn ? <MatchCelebration /> : null}
+        <Notices />
       </ThemeProvider>
     </SafeAreaProvider>
   );

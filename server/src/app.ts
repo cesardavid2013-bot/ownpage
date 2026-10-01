@@ -15,12 +15,18 @@ import { adminRouter } from './routes/admin.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export function createApp() {
+export function createApp({ webDir = config.webDir }: { webDir?: string } = {}) {
   const app = express();
   app.set('trust proxy', 1);
   app.use(helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' },
-    contentSecurityPolicy: { directives: { 'img-src': ["'self'", 'data:', 'https:'] } },
+    contentSecurityPolicy: {
+      directives: {
+        // blob: is how the web app reads a picked photo before uploading it.
+        'img-src': ["'self'", 'data:', 'blob:', 'https:'],
+        'connect-src': ["'self'", 'blob:', 'ws:', 'wss:'],
+      },
+    },
   }));
   app.use(cors({ origin: config.corsOrigins.includes('*') ? true : config.corsOrigins }));
 
@@ -42,6 +48,7 @@ export function createApp() {
 
   app.use('/admin/api', adminRouter);
   app.use('/admin', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'admin'), { index: 'index.html' }));
+  if (webDir) serveWebApp(app, webDir);
   app.use('/auth', authRouter);
   app.use('/billing', billingRouter);
   app.use('/me', requireAuth, meRouter);
@@ -54,4 +61,21 @@ export function createApp() {
   app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
   app.use(errorHandler);
   return app;
+}
+
+/**
+ * Serves the exported Expo web app from the API origin. Browser navigations (Accept: text/html)
+ * get the single-page shell, so app routes like /likes never collide with the JSON API.
+ */
+function serveWebApp(app: express.Express, dir: string) {
+  const root = path.resolve(dir);
+  const shell = path.join(root, 'index.html');
+  app.use('/_expo', express.static(path.join(root, '_expo'), { maxAge: '1y', immutable: true, index: false }));
+  app.use('/assets', express.static(path.join(root, 'assets'), { maxAge: '30d', index: false }));
+  app.get('/favicon.ico', (_req, res) => res.sendFile(path.join(root, 'favicon.ico')));
+  app.get('*', (req, res, next) => {
+    if (req.accepts(['json', 'html']) !== 'html') return next();
+    res.setHeader('Cache-Control', 'no-cache');
+    res.sendFile(shell);
+  });
 }

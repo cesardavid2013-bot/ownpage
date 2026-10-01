@@ -10,6 +10,7 @@ import { colors, font, gradients, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 import { Button } from './ui';
 import { Skeleton } from './Skeleton';
+import { Veiled } from './Veiled';
 
 /** Gold+: today's most compatible people, framed as arches. Free members see what they're missing. */
 export function TopPicks() {
@@ -26,7 +27,7 @@ export function TopPicks() {
     return (
       <View style={styles.locked}>
         <View style={styles.ghosts}>
-          {[0, 1, 2].map((i) => <LinearGradient key={i} colors={['#3A2F25', '#17171B']} style={[styles.ghost, { transform: [{ translateY: i === 1 ? -10 : 0 }] }]} />)}
+          {[0, 1, 2].map((i) => <Veiled key={i} seed={i + 11} style={[styles.ghost, { transform: [{ translateY: i === 1 ? -10 : 0 }] }]} />)}
         </View>
         <Text style={styles.title}>{t('likes.topPicks')}</Text>
         <Text style={styles.sub}>{t('likes.topPicksLocked')}</Text>

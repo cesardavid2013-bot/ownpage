@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+**/.env
+**/.expo
+server/uploads
+server/private-uploads
+website
+.git

@@ -1,14 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { colors, space, font } from '@/lib/theme';
 
-type IconName = keyof typeof Ionicons.glyphMap;
-export const TAB_ICONS: Record<string, [IconName, IconName]> = {
-  index: ['flame-outline', 'flame'],
-  likes: ['heart-outline', 'heart'],
-  chats: ['chatbubble-outline', 'chatbubble'],
-  profile: ['person-outline', 'person'],
+import { Glyph, type GlyphName } from './Glyphs';
+
+export const TAB_ICONS: Record<string, GlyphName> = {
+  index: 'spark',
+  likes: 'heart',
+  chats: 'bubble',
+  profile: 'arch',
 };
 
 interface Props {
@@ -25,7 +25,7 @@ export function TabBar({ state, descriptors, navigation, insets }: Props) {
       {state.routes.map((route, i) => {
         const focused = state.index === i;
         const { options } = descriptors[route.key];
-        const [off, on] = TAB_ICONS[route.name] ?? ['ellipse-outline', 'ellipse'];
+        const glyph = TAB_ICONS[route.name] ?? 'spark';
         const badge = options.tabBarBadge;
         return (
           <Pressable
@@ -44,7 +44,7 @@ export function TabBar({ state, descriptors, navigation, insets }: Props) {
             style={styles.item}
           >
             <View>
-              <Ionicons name={focused ? on : off} size={24} color={focused ? colors.primary : colors.textFaint} />
+              <Glyph name={glyph} size={25} filled={focused} color={focused ? colors.primary : colors.textFaint} />
               {badge ? <View style={styles.badge}><Text style={styles.badgeText}>{badge}</Text></View> : null}
             </View>
             <View style={[styles.dot, { opacity: focused ? 1 : 0 }]} />

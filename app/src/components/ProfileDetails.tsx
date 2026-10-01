@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
+import { Seal } from './Glyphs';
 import { colors, font, gradients, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 import { Chip, Row } from './ui';
@@ -46,7 +47,7 @@ export function ProfileDetails({ profile }: { profile: Profile }) {
             <Row style={{ gap: space(2), alignItems: 'baseline' }}>
               <Text style={styles.name}>{profile.name}</Text>
               {profile.age != null ? <Text style={styles.age}>{profile.age}</Text> : null}
-              {profile.isVerified ? <View style={styles.seal}><Ionicons name="checkmark" size={13} color={colors.onPrimary} /></View> : null}
+              {profile.isVerified ? <View style={styles.seal}><Seal size={26} /></View> : null}
             </Row>
             <Text style={styles.looking}>{t(`lookingFor.${profile.lookingFor}`)}</Text>
           </View>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   nameBlockPlain: { paddingVertical: space(6) },
   name: { color: '#fff', fontFamily: font.display, fontSize: 44, lineHeight: 50 },
   age: { color: 'rgba(255,255,255,0.9)', fontFamily: font.body, fontSize: 24 },
-  seal: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
+  seal: { alignSelf: 'center' },
   looking: { color: colors.primary, fontFamily: font.medium, fontSize: 13, letterSpacing: 1.6, textTransform: 'uppercase' },
   facts: { gap: space(3), paddingVertical: space(4), paddingHorizontal: space(1) },
   fact: { color: colors.text, fontFamily: font.body, fontSize: 16, flex: 1 },

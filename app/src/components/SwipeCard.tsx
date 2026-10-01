@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
+import { Seal } from './Glyphs';
 import { colors, font, gradients, radius, shadow, space } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 
@@ -108,7 +109,7 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
           <View style={styles.nameRow}>
             <Text style={styles.name} numberOfLines={1}>{profile.name}</Text>
             {profile.age != null ? <Text style={styles.age}>{profile.age}</Text> : null}
-            {profile.isVerified ? <Ionicons name="checkmark-circle" size={22} color={colors.info} /> : null}
+            {profile.isVerified ? <Seal size={24} /> : null}
           </View>
           {profile.recentlyActive ? (
             <View style={styles.meta}><View style={styles.online} /><Text style={styles.metaText}>{t('discover.recentlyActive')}</Text></View>

@@ -58,7 +58,7 @@ const fr = {
   chats: {
     icebreakers: "Vous ne savez pas quoi dire ?", iceAbout: "J’ai adoré ta réponse à « {{prompt}} ». Tu m’en dis plus ?", ice1: "Deux vérités et un mensonge. À toi.", ice2: "Quelle est la meilleure chose qui t’est arrivée cette semaine ?", ice3: "Café ou un verre : ce serait quoi, notre premier rendez-vous ?", today: "Aujourd’hui", yesterday: "Hier", liked: "Aimé",
     title: 'Messages', newMatches: 'Nouveaux matchs', messages: 'Conversations',
-    empty: 'Pas encore de match. Continuez à swiper : la bonne personne est quelque part.', startConversation: 'Dites bonjour à {{name}} 👋',
+    empty: 'Pas encore de match. Continuez à swiper : la bonne personne est quelque part.', startConversation: 'Dites bonjour à {{name}}',
     you: 'Vous : ', typing: 'écrit…', placeholder: 'Écrire un message', unmatch: 'Annuler le match',
     unmatchConfirm: 'Annuler le match avec {{name}} ? Cette action est irréversible.', read: 'Lu', matchedOn: 'Vous avez matché le {{date}}',
   },
@@ -91,7 +91,7 @@ const fr = {
     monthly: "Mensuel", yearly: "Annuel", save: "Économisez {{percent}} %", billedYearly: "{{price}} facturé par an",
     title: 'Lumi Premium', subtitle: "Lumi est gratuit. L’abonnement ajoute visibilité, contrôle et discrétion. Résiliable à tout moment.",
     perMonth: '/mois', current: 'Offre actuelle', choose: 'Choisir {{plan}}', upgrade: 'Passer à Premium',
-    activeUntil: "Actif jusqu'au {{date}}", success: 'Bienvenue dans {{plan}} ! ✨', cancelled: 'Achat annulé',
+    activeUntil: "Actif jusqu'au {{date}}", success: 'Bienvenue dans {{plan}} !', cancelled: 'Achat annulé',
     devNotice: 'Mode test : les achats sont simulés, aucun paiement réel.',
     legal: "Les abonnements se renouvellent automatiquement sauf annulation au moins 24 heures avant la fin de la période. Gérez-les ou annulez-les à tout moment dans les réglages de votre compte.",
     boosts: 'Boosts', boostPack: '5 Boosts', boostPackDesc: 'Soyez parmi les profils mis en avant dans votre zone pendant 30 minutes.',

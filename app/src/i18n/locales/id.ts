@@ -58,7 +58,7 @@ const id = {
   chats: {
     icebreakers: "Bingung mau bilang apa?", iceAbout: "Aku suka jawabanmu untuk “{{prompt}}”. Ceritakan lagi?", ice1: "Dua kebenaran dan satu kebohongan. Mulai.", ice2: "Apa hal terbaik yang terjadi padamu minggu ini?", ice3: "Kopi atau minum: seperti apa kencan pertama kita?", today: "Hari ini", yesterday: "Kemarin", liked: "Disukai",
     title: 'Obrolan', newMatches: 'Match baru', messages: 'Pesan',
-    empty: 'Belum ada match. Terus geser — orang yang tepat ada di luar sana.', startConversation: 'Sapa {{name}} 👋',
+    empty: 'Belum ada match. Terus geser — orang yang tepat ada di luar sana.', startConversation: 'Sapa {{name}}',
     you: 'Kamu: ', typing: 'mengetik…', placeholder: 'Tulis pesan', unmatch: 'Batalkan match',
     unmatchConfirm: 'Batalkan match dengan {{name}}? Ini tidak bisa dibatalkan.', read: 'Dibaca', matchedOn: 'Kalian match pada {{date}}',
   },
@@ -91,7 +91,7 @@ const id = {
     monthly: "Bulanan", yearly: "Tahunan", save: "Hemat {{percent}}%", billedYearly: "{{price}} ditagih per tahun",
     title: 'Lumi Premium', subtitle: "Lumi gratis. Keanggotaan menambah jangkauan, kendali, dan privasi. Batalkan kapan saja.",
     perMonth: '/bulan', current: 'Paket saat ini', choose: 'Pilih {{plan}}', upgrade: 'Upgrade',
-    activeUntil: 'Aktif hingga {{date}}', success: 'Selamat datang di {{plan}}! ✨', cancelled: 'Pembelian dibatalkan',
+    activeUntil: 'Aktif hingga {{date}}', success: 'Selamat datang di {{plan}}!', cancelled: 'Pembelian dibatalkan',
     devNotice: 'Mode uji: pembelian disimulasikan, tanpa biaya sungguhan.',
     legal: 'Langganan diperpanjang otomatis kecuali dibatalkan minimal 24 jam sebelum periode berakhir. Kelola atau batalkan kapan saja di pengaturan akunmu.',
     boosts: 'Boost', boostPack: '5 Boost', boostPackDesc: 'Jadilah salah satu profil teratas di areamu selama 30 menit.',

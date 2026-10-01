@@ -173,10 +173,10 @@ export default function Premium() {
         )}
 
         <Text style={styles.section}>{t('premium.boosts')}</Text>
-        <Pack icon="flash" color={colors.violet} title={t('premium.boostPack')} desc={t('premium.boostPackDesc')}
+        <Pack icon="flash-outline" color={colors.primary} title={t('premium.boostPack')} desc={t('premium.boostPackDesc')}
           owned={t('premium.credits', { count: user.boost.credits })} price={money('boost_pack')}
           busy={busy === 'boost_pack'} onBuy={() => buy('boost_pack')} buyLabel={t('premium.buy')} />
-        <Pack icon="star" color={colors.info} title={t('premium.superLikePack')} desc={t('premium.superLikePackDesc')}
+        <Pack icon="star-outline" color={colors.gold} title={t('premium.superLikePack')} desc={t('premium.superLikePackDesc')}
           owned={t('premium.credits', { count: user.limits.superLikesRemaining })} price={money('superlike_pack')}
           busy={busy === 'superlike_pack'} onBuy={() => buy('superlike_pack')} buyLabel={t('premium.buy')} />
 

@@ -1,0 +1,40 @@
+# One-click deploy on Render: Dashboard → New → Blueprint → pick this repository.
+# Creates the Postgres database and the Lumi service (API + web app + /admin).
+databases:
+  - name: lumi-db
+    plan: basic-256mb
+    databaseName: lumi
+    user: lumi
+
+services:
+  - type: web
+    name: lumi
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    disk:
+      name: lumi-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase: { name: lumi-db, property: connectionString }
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "*"
+      # Payments: fill these in the Render dashboard once Stripe / RevenueCat are set up.
+      - { key: STRIPE_SECRET_KEY, sync: false }
+      - { key: STRIPE_WEBHOOK_SECRET, sync: false }
+      - { key: STRIPE_PRICE_PLUS_MONTHLY, sync: false }
+      - { key: STRIPE_PRICE_GOLD_MONTHLY, sync: false }
+      - { key: STRIPE_PRICE_PLATINUM_MONTHLY, sync: false }
+      - { key: STRIPE_PRICE_PLUS_YEARLY, sync: false }
+      - { key: STRIPE_PRICE_GOLD_YEARLY, sync: false }
+      - { key: STRIPE_PRICE_PLATINUM_YEARLY, sync: false }
+      - { key: STRIPE_PRICE_BOOST_PACK, sync: false }
+      - { key: STRIPE_PRICE_SUPERLIKE_PACK, sync: false }
+      - { key: REVENUECAT_WEBHOOK_AUTH, sync: false }

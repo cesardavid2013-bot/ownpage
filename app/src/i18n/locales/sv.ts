@@ -58,7 +58,7 @@ const sv = {
   chats: {
     icebreakers: "Vet du inte vad du ska skriva?", iceAbout: "Jag gillade ditt svar på ”{{prompt}}”. Berätta mer?", ice1: "Två sanningar och en lögn. Kör.", ice2: "Vad är det bästa som hänt dig den här veckan?", ice3: "Kaffe eller en drink: hur skulle vår första dejt se ut?", today: "I dag", yesterday: "I går", liked: "Gillad",
     title: 'Chattar', newMatches: 'Nya matchningar', messages: 'Meddelanden',
-    empty: 'Inga matchningar än. Fortsätt swipea – din person finns där ute.', startConversation: 'Säg hej till {{name}} 👋',
+    empty: 'Inga matchningar än. Fortsätt swipea – din person finns där ute.', startConversation: 'Säg hej till {{name}}',
     you: 'Du: ', typing: 'skriver…', placeholder: 'Skriv ett meddelande', unmatch: 'Ta bort matchning',
     unmatchConfirm: 'Ta bort matchningen med {{name}}? Det går inte att ångra.', read: 'Läst', matchedOn: 'Ni matchade {{date}}',
   },
@@ -91,7 +91,7 @@ const sv = {
     monthly: "Månadsvis", yearly: "Årsvis", save: "Spara {{percent}} %", billedYearly: "{{price}} faktureras årsvis",
     title: 'Lumi Premium', subtitle: "Lumi är gratis. Medlemskap ger mer räckvidd, kontroll och integritet. Säg upp när du vill.",
     perMonth: '/mån', current: 'Nuvarande plan', choose: 'Välj {{plan}}', upgrade: 'Uppgradera',
-    activeUntil: 'Aktiv till {{date}}', success: 'Välkommen till {{plan}}! ✨', cancelled: 'Köpet avbröts',
+    activeUntil: 'Aktiv till {{date}}', success: 'Välkommen till {{plan}}!', cancelled: 'Köpet avbröts',
     devNotice: 'Testläge: köp simuleras, inga riktiga debiteringar.',
     legal: 'Prenumerationer förnyas automatiskt om de inte sägs upp minst 24 timmar före periodens slut. Hantera eller säg upp när som helst i dina kontoinställningar.',
     boosts: 'Boosts', boostPack: '5 Boosts', boostPackDesc: 'Bli en av de mest synliga profilerna i ditt område i 30 minuter.',

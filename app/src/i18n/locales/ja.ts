@@ -58,7 +58,7 @@ const ja = {
   chats: {
     icebreakers: "何を書けばいいか迷っていますか？", iceAbout: "「{{prompt}}」への答え、すごく素敵でした。もっと聞かせて？", ice1: "2つの本当と1つの嘘。どうぞ。", ice2: "今週いちばん良かった出来事は？", ice3: "カフェかお酒、私たちの初デートならどっち？", today: "今日", yesterday: "昨日", liked: "いいね済み",
     title: 'チャット', newMatches: '新しいマッチ', messages: 'メッセージ',
-    empty: 'まだマッチはありません。スワイプを続けましょう — 運命の人はきっといます。', startConversation: '{{name}}さんに挨拶しよう 👋',
+    empty: 'まだマッチはありません。スワイプを続けましょう — 運命の人はきっといます。', startConversation: '{{name}}さんに挨拶しよう',
     you: 'あなた：', typing: '入力中…', placeholder: 'メッセージを入力', unmatch: 'マッチを解除',
     unmatchConfirm: '{{name}}さんとのマッチを解除しますか？元に戻せません。', read: '既読', matchedOn: '{{date}}にマッチしました',
   },
@@ -91,7 +91,7 @@ const ja = {
     monthly: "月額", yearly: "年額", save: "{{percent}}%お得", billedYearly: "年額 {{price}}",
     title: 'Lumi Premium', subtitle: "Lumi は無料で使えます。メンバーシップで露出、コントロール、プライバシーが広がります。いつでも解約できます。",
     perMonth: '/月', current: '現在のプラン', choose: '{{plan}}を選ぶ', upgrade: 'アップグレード',
-    activeUntil: '{{date}}まで有効', success: '{{plan}}へようこそ！✨', cancelled: '購入がキャンセルされました',
+    activeUntil: '{{date}}まで有効', success: '{{plan}}へようこそ！', cancelled: '購入がキャンセルされました',
     devNotice: 'テストモード：購入はシミュレーションで、実際の請求はありません。',
     legal: 'サブスクリプションは、期間終了の24時間前までにキャンセルしない限り自動更新されます。アカウント設定からいつでも管理・キャンセルできます。',
     boosts: 'ブースト', boostPack: 'ブースト5回', boostPackDesc: '30分間、エリアのトッププロフィールとして表示されます。',

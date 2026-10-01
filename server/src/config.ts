@@ -19,8 +19,11 @@ export const config = {
   accessTokenTtl: '15m',
   refreshTokenDays: 30,
   corsOrigins: (process.env.CORS_ORIGINS ?? '*').split(',').map((s) => s.trim()).filter(Boolean),
-  publicUrl: process.env.PUBLIC_URL ?? `http://localhost:${process.env.PORT ?? 4000}`,
-  webAppUrl: process.env.WEB_APP_URL ?? 'http://localhost:8081',
+  // Render exposes the service URL as RENDER_EXTERNAL_URL, so a Blueprint deploy needs no extra setup.
+  publicUrl: (process.env.PUBLIC_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT ?? 4000}`).replace(/\/$/, ''),
+  /** Optional: a built Expo web app (app/dist) served from this same origin. */
+  webDir: process.env.WEB_DIR ?? '',
+  webAppUrl: '',
   uploadDir: process.env.UPLOAD_DIR ?? 'uploads',
   stripe: {
     secretKey: process.env.STRIPE_SECRET_KEY ?? '',
@@ -40,6 +43,8 @@ export const config = {
   /** Moderators sign in to /admin with this token. Empty disables the admin API. */
   adminToken: process.env.ADMIN_TOKEN ?? '',
 };
+
+config.webAppUrl = (process.env.WEB_APP_URL || (config.webDir ? config.publicUrl : 'http://localhost:8081')).replace(/\/$/, '');
 
 if (isProd && config.jwtSecret.length < 32) {
   throw new Error('JWT_SECRET must be at least 32 characters in production');
