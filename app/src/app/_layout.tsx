@@ -1,6 +1,7 @@
 import '@/i18n';
 import { useEffect } from 'react';
 import { useFonts, BodoniModa_500Medium, BodoniModa_500Medium_Italic } from '@expo-google-fonts/bodoni-moda';
+import { Jost_400Regular, Jost_500Medium, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
 import { View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,6 +11,7 @@ import { loadSavedLanguage } from '@/i18n';
 import { useAuth } from '@/lib/auth';
 import { colors } from '@/lib/theme';
 import { MatchCelebration } from '@/components/MatchCelebration';
+import { OfflineScreen } from '@/components/OfflineScreen';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -20,7 +22,9 @@ const theme = {
 
 export default function RootLayout() {
   const status = useAuth((s) => s.status);
-  const [fontsLoaded, fontError] = useFonts({ BodoniModa_500Medium, BodoniModa_500Medium_Italic });
+  const [fontsLoaded, fontError] = useFonts({
+    BodoniModa_500Medium, BodoniModa_500Medium_Italic, Jost_400Regular, Jost_500Medium, Jost_600SemiBold, Jost_700Bold,
+  });
   const fontsReady = fontsLoaded || !!fontError;
   const needsOnboarding = useAuth((s) => !!s.user && s.user.photos.length === 0);
 
@@ -33,6 +37,7 @@ export default function RootLayout() {
   }, [status, fontsReady]);
 
   if (status === 'loading' || !fontsReady) return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
+  if (status === 'offline') return <SafeAreaProvider><OfflineScreen /></SafeAreaProvider>;
 
   const signedIn = status === 'signedIn';
   return (

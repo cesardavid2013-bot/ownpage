@@ -14,6 +14,16 @@ import type { Me, Product } from './types';
 
 type Result = { status: 'success' | 'cancelled' | 'redirected'; user?: Me };
 
+/** Store product ids look like "lumi_gold_monthly" / "lumi_gold_annual" / "lumi_boost_pack_5". */
+function storeIdMatches(storeId: string, product: Product) {
+  const id = storeId.toLowerCase();
+  const yearlyId = id.includes('year') || id.includes('annual');
+  const base = product.replace('_yearly', '').replace('_pack', '');
+  if (!id.includes(base)) return false;
+  if (product === 'boost_pack' || product === 'superlike_pack') return true;
+  return product.endsWith('_yearly') === yearlyId;
+}
+
 const storeKey = Platform.OS === 'ios' ? REVENUECAT_KEYS.ios : Platform.OS === 'android' ? REVENUECAT_KEYS.android : '';
 let rcConfiguredFor: string | null = null;
 
@@ -39,7 +49,7 @@ export async function purchase(product: Product, userId: string): Promise<Result
       const offerings = await Purchases.getOfferings();
       const pkg = Object.values(offerings.all)
         .flatMap((o) => o.availablePackages)
-        .find((p) => p.product.identifier.toLowerCase().includes(product.replace('_pack', '')));
+        .find((p) => storeIdMatches(p.product.identifier, product));
       if (!pkg) throw new Error('product_unavailable');
       try {
         await Purchases.purchasePackage(pkg);
@@ -91,10 +101,9 @@ export async function storePrices(userId: string): Promise<Partial<Record<Produc
     if (!Purchases) return {};
     const offerings = await Purchases.getOfferings();
     const out: Partial<Record<Product, string>> = {};
-    const all: Product[] = ['plus', 'gold', 'platinum', 'boost_pack', 'superlike_pack'];
+    const all: Product[] = ['plus_yearly', 'gold_yearly', 'platinum_yearly', 'plus', 'gold', 'platinum', 'boost_pack', 'superlike_pack'];
     for (const pkg of Object.values(offerings.all).flatMap((o) => o.availablePackages)) {
-      const id = pkg.product.identifier.toLowerCase();
-      const match = all.find((p) => id.includes(p.replace('_pack', '')));
+      const match = all.find((p) => storeIdMatches(pkg.product.identifier, p));
       if (match && !out[match]) out[match] = pkg.product.priceString;
     }
     return out;

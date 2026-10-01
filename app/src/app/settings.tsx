@@ -6,15 +6,17 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Header, Screen } from '@/components/Screen';
 import { Sheet } from '@/components/Sheet';
-import { Button, Muted, PlanBadge, Title } from '@/components/ui';
+import { Button, Chip, Muted, PlanBadge, Title } from '@/components/ui';
 import { LANGUAGES, currentLanguage, errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { SUPPORT_EMAIL } from '@/lib/config';
 import { confirm, notify } from '@/lib/notify';
 import { manageSubscription, restorePurchases } from '@/lib/purchases';
-import { colors, radius, space } from '@/lib/theme';
-import type { Me } from '@/lib/types';
+import { colors, font, radius, space } from '@/lib/theme';
+import type { LookingFor, Me } from '@/lib/types';
+
+const INTENTIONS: LookingFor[] = ['long_term', 'short_term', 'friendship', 'casual'];
 
 const CITIES = [
   { name: 'New York', lat: 40.71, lng: -74.01 }, { name: 'London', lat: 51.51, lng: -0.13 },
@@ -101,6 +103,25 @@ export default function SettingsScreen() {
         <Toggle label={t('settings.globalMode')} hint={t('settings.globalModeHint')} value={s.globalMode} onChange={(v) => update({ globalMode: v })} />
       </Section>
 
+      <Section title={t('settings.filters')}>
+        <Toggle label={t('settings.filterVerified')} value={s.filterVerified} premium={!ent.advancedFilters}
+          onChange={(v) => gated(ent.advancedFilters, () => update({ filterVerified: v }))} />
+        <Toggle label={t('settings.filterHasPrompts')} value={s.filterHasPrompts} premium={!ent.advancedFilters}
+          onChange={(v) => gated(ent.advancedFilters, () => update({ filterHasPrompts: v }))} />
+        <View style={[styles.item, { flexDirection: 'column', alignItems: 'stretch', gap: space(3) }]}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: space(3) }}>
+            <Text style={[styles.itemLabel, { flex: 1 }]}>{t('settings.filterIntentions')}</Text>
+            {!ent.advancedFilters ? <PremiumTag /> : null}
+          </View>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space(2) }}>
+            {INTENTIONS.map((l) => (
+              <Chip key={l} label={t(`lookingFor.${l}`)} selected={s.filterLookingFor.includes(l)} onPress={() => gated(ent.advancedFilters, () =>
+                update({ filterLookingFor: s.filterLookingFor.includes(l) ? s.filterLookingFor.filter((x) => x !== l) : [...s.filterLookingFor, l] }))} />
+            ))}
+          </View>
+        </View>
+      </Section>
+
       <Section title={t('settings.privacy')}>
         <Toggle label={t('settings.hideAge')} value={s.hideAge} premium={!ent.hideAgeDistance}
           onChange={(v) => gated(ent.hideAgeDistance, () => update({ hideAge: v }))} />
@@ -131,19 +152,19 @@ export default function SettingsScreen() {
       <View style={{ gap: space(3), marginTop: space(6) }}>
         <Button title={t('auth.logout')} variant="secondary" icon="log-out-outline" onPress={() => useAuth.getState().logout()} />
         <Button title={t('settings.deleteAccount')} variant="ghost" onPress={deleteAccount} />
-        <Muted style={{ textAlign: 'center', fontSize: 12 }}>
+        <Muted style={{ textAlign: 'center', fontSize: 12, fontFamily: font.body }}>
           Lumi · {t('settings.version', { version: Constants.expoConfig?.version ?? '1.0.0' })}
         </Muted>
       </View>
 
       <Sheet visible={passportOpen} onClose={() => setPassportOpen(false)}>
-        <Title style={{ fontSize: 22 }}>{t('settings.passport')}</Title>
+        <Title style={{ fontSize: 22, fontFamily: font.body }}>{t('settings.passport')}</Title>
         <Muted>{t('settings.passportHint')}</Muted>
         <Item label={t('settings.passportCurrent')} icon="navigate" onPress={() => setPassport(null)} />
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space(2) }}>
           {CITIES.map((c) => (
             <Pressable key={c.name} onPress={() => setPassport({ lat: c.lat, lng: c.lng })} style={styles.city}>
-              <Text style={{ color: colors.text, fontWeight: '600' }}>{c.name}</Text>
+              <Text style={{ color: colors.text, fontFamily: font.semibold }}>{c.name}</Text>
             </Pressable>
           ))}
         </View>
@@ -207,17 +228,17 @@ function Stepper({ label, value, onMinus, onPlus }: { label: string; value: stri
 }
 
 const styles = StyleSheet.create({
-  sectionTitle: { color: colors.primary, fontWeight: '800', fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, marginLeft: space(1) },
-  section: { backgroundColor: colors.card, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, overflow: 'hidden' },
+  sectionTitle: { color: colors.gold, fontSize: 11, textTransform: 'uppercase', letterSpacing: 2.2, marginLeft: space(1), marginBottom: space(1), fontFamily: font.semibold },
+  section: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border },
   item: {
-    flexDirection: 'row', alignItems: 'center', gap: space(3), paddingHorizontal: space(4), paddingVertical: space(3.5),
+    flexDirection: 'row', alignItems: 'center', gap: space(3), paddingHorizontal: space(1), paddingVertical: space(4),
     borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.border, minHeight: 56,
   },
-  itemLabel: { color: colors.text, fontSize: 16 },
-  hint: { color: colors.textMuted, fontSize: 13, marginTop: 2 },
+  itemLabel: { color: colors.text, fontSize: 16, fontFamily: font.body },
+  hint: { color: colors.textMuted, fontSize: 13, marginTop: 2, fontFamily: font.body },
   tag: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: colors.gold, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6 },
-  tagText: { color: '#2A1D05', fontSize: 9, fontWeight: '900' },
-  step: { width: 34, height: 34, borderRadius: 17, backgroundColor: colors.cardHigh, alignItems: 'center', justifyContent: 'center' },
-  stepValue: { color: colors.text, fontWeight: '700', minWidth: 58, textAlign: 'center' },
+  tagText: { color: '#2A1D05', fontSize: 9, fontFamily: font.bold },
+  step: { width: 34, height: 34, borderRadius: 17, borderWidth: 1, borderColor: 'rgba(233,217,190,0.25)', alignItems: 'center', justifyContent: 'center' },
+  stepValue: { color: colors.text, fontFamily: font.display, fontSize: 18, minWidth: 64, textAlign: 'center' },
   city: { paddingHorizontal: 14, paddingVertical: 10, borderRadius: 999, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border },
 });

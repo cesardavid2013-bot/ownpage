@@ -9,7 +9,7 @@ import { Button, Chip, ErrorText, Input, Muted, Row } from '@/components/ui';
 import { errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
-import { colors, space } from '@/lib/theme';
+import { colors, space, font } from '@/lib/theme';
 import type { Gender, LookingFor, Me, Photo, PromptAnswer } from '@/lib/types';
 
 const LOOKING: LookingFor[] = ['long_term', 'short_term', 'friendship', 'casual', 'unsure'];
@@ -101,6 +101,6 @@ export default function EditProfile() {
 }
 
 const styles = StyleSheet.create({
-  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2) },
+  label: { color: colors.gold, fontSize: 11, textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2), fontFamily: font.semibold },
   wrap: { flexWrap: 'wrap', gap: space(2) },
 });

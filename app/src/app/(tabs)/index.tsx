@@ -17,7 +17,7 @@ import { useAuth } from '@/lib/auth';
 import { refreshLocationIfAllowed, shareLocation } from '@/lib/location';
 import { notify } from '@/lib/notify';
 import { useRealtime } from '@/lib/realtime';
-import { colors, gradients, space } from '@/lib/theme';
+import { colors, gradients, space, font } from '@/lib/theme';
 import type { Match, Me, Profile } from '@/lib/types';
 
 export default function Discover() {
@@ -192,14 +192,14 @@ export default function Discover() {
 
       <Sheet visible={!!upsell} onClose={() => setUpsell(null)}>
         <LinearGradient colors={gradients.gold} style={styles.upsellIcon}><Ionicons name="diamond" size={30} color="#2A1D05" /></LinearGradient>
-        <Title style={{ fontSize: 24, textAlign: 'center' }}>{upsell}</Title>
+        <Title style={{ fontSize: 24, textAlign: 'center', fontFamily: font.body }}>{upsell}</Title>
         <Muted style={{ textAlign: 'center' }}>{t('discover.outOfLikesBody')}</Muted>
         <Button title={t('premium.upgrade')} variant="gold" onPress={() => { setUpsell(null); router.push('/premium'); }} />
         <Button title={t('common.close')} variant="ghost" onPress={() => setUpsell(null)} />
       </Sheet>
 
       <Sheet visible={!!noteFor} onClose={() => setNoteFor(null)}>
-        <Title style={{ fontSize: 22 }}>{t('discover.noteTitle')}</Title>
+        <Title style={{ fontSize: 22, fontFamily: font.body }}>{t('discover.noteTitle')}</Title>
         <Input value={note} onChangeText={setNote} placeholder={t('discover.notePlaceholder')} maxLength={140} multiline />
         <Button title={t('discover.superLike')} icon="star" onPress={() => {
           const target = noteFor!;
@@ -239,7 +239,7 @@ function Empty({ photo, error, onRetry }: { photo?: string; error: string | null
         <Animated.View style={[styles.ring, { transform: [{ scale }], opacity }]} />
         {photo ? <Image source={{ uri: photo }} style={styles.radarPhoto} /> : null}
       </View>
-      <Title style={{ fontSize: 22, textAlign: 'center' }}>{t('discover.emptyTitle')}</Title>
+      <Title style={{ fontSize: 22, textAlign: 'center', fontFamily: font.body }}>{t('discover.emptyTitle')}</Title>
       <Muted style={{ textAlign: 'center' }}>{t('discover.emptySubtitle')}</Muted>
       <ErrorText message={error} />
       <Button title={t('discover.adjust')} variant="secondary" icon="options-outline" onPress={() => router.push('/settings')} />
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', gap: space(2), marginHorizontal: space(4), padding: space(3),
     backgroundColor: 'rgba(255,79,123,0.12)', borderRadius: 14,
   },
-  bannerText: { color: colors.text, flex: 1, fontWeight: '600' },
+  bannerText: { color: colors.text, flex: 1, fontFamily: font.semibold },
   deck: { flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: space(2), marginHorizontal: space(3) },
   actions: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: space(3.5), paddingBottom: space(3), paddingTop: space(1) },
   action: { backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(233,217,190,0.25)' },

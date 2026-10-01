@@ -12,11 +12,15 @@ const en = {
     terms: 'By continuing you agree to our Terms and Privacy Policy. You must be 18 or older.',
   },
   auth: {
+    loginSubtitle: "Good to see you again.",
     loginTitle: 'Welcome back', registerTitle: 'Create your account',
     email: 'Email', password: 'Password', passwordHint: 'At least 8 characters',
     name: 'First name', birthdate: 'Birthday', birthdateHint: 'YYYY-MM-DD',
     iAm: 'I am', showMe: 'Show me', login: 'Log in', register: 'Sign up', logout: 'Log out',
     noAccount: "Don't have an account? Sign up", hasAccount: 'Already have an account? Log in',
+  },
+  register: {
+    stepName: "What’s your first name?", stepBirthday: "When’s your birthday?", stepBirthdayHint: "Your age is shown on your profile. Your birthday isn’t.", stepGender: "How do you identify?", stepShowMe: "Who would you like to meet?", stepAccount: "Last step: your account", youAre: "You’re {{age}}",
   },
   gender: { man: 'Man', woman: 'Woman', nonbinary: 'Non-binary', men: 'Men', women: 'Women', everyone: 'Everyone' },
   lookingFor: {
@@ -44,12 +48,14 @@ const en = {
     sendMessage: 'Send a message', keepSwiping: 'Keep swiping',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Chosen for you today. New picks at midnight.", topPicksLocked: "Get a daily selection of your most compatible people with Gold.",
     title: 'Likes', subtitle: 'People who already like you',
     lockedTitle_one: '{{count}} person likes you', lockedTitle_other: '{{count}} people like you', lockedSubtitle: 'Upgrade to Gold to see who likes you and match instantly.',
     seeWho: 'See who likes you', empty: 'No new likes yet. A great photo and bio help a lot!',
     sent: 'Likes sent',
   },
   chats: {
+    icebreakers: "Not sure what to say?", iceAbout: "I loved your answer to “{{prompt}}”. Tell me more?", ice1: "Two truths and a lie. Go.", ice2: "What’s the best thing that happened to you this week?", ice3: "Coffee or a drink: what would our first date be?", today: "Today", yesterday: "Yesterday", liked: "Liked",
     title: 'Chats', newMatches: 'New matches', messages: 'Messages',
     empty: 'No matches yet. Keep swiping — your person is out there.', startConversation: 'Say hi to {{name}} 👋',
     you: 'You: ', typing: 'typing…', placeholder: 'Type a message', unmatch: 'Unmatch',
@@ -68,6 +74,7 @@ const en = {
   },
   report: { fake: 'Fake profile', inappropriate: 'Inappropriate content', harassment: 'Harassment', spam: 'Spam or scam', underage: 'Appears under 18', other: 'Other' },
   settings: {
+    filters: "Advanced filters", filterVerified: "Verified profiles only", filterHasPrompts: "Only people who answered prompts", filterIntentions: "Their intentions",
     title: 'Settings', discovery: 'Discovery', maxDistance: 'Maximum distance', ageRange: 'Age range',
     globalMode: 'Global mode', globalModeHint: 'See people from all over the world',
     passport: 'Passport', passportHint: 'Swipe in any city in the world', passportCurrent: 'Using my current location',
@@ -80,6 +87,7 @@ const en = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Monthly", yearly: "Yearly", save: "Save {{percent}}%", billedYearly: "{{price}} billed yearly",
     title: 'Lumi Premium', subtitle: "Lumi is free to use. Membership adds reach, control and privacy. Cancel whenever you like.",
     perMonth: '/month', current: 'Current plan', choose: 'Choose {{plan}}', upgrade: 'Upgrade',
     activeUntil: 'Active until {{date}}', success: 'Welcome to {{plan}}! ✨', cancelled: 'Purchase cancelled',
@@ -90,6 +98,7 @@ const en = {
     buy: 'Buy', credits: 'You have {{count}}', mostPopular: 'Most popular', bestValue: 'Best value',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Advanced filters", topPicks: "Daily Top Picks", readReceipts: "Read receipts",
       unlimitedLikes: 'Unlimited likes', rewind: 'Unlimited rewinds', passport: 'Passport to any location',
       hideAds: 'Hide age & distance', seeLikes: 'See who likes you', superLikes_one: '{{count}} Super Like per day', superLikes_other: '{{count}} Super Likes per day',
       boosts_one: '{{count}} free Boost per month', boosts_other: '{{count}} free Boosts per month', priorityLikes: 'Priority likes — be seen first',

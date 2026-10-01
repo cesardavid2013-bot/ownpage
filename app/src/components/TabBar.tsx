@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { colors, space } from '@/lib/theme';
+import { colors, space, font } from '@/lib/theme';
 
 type IconName = keyof typeof Ionicons.glyphMap;
 export const TAB_ICONS: Record<string, [IconName, IconName]> = {
@@ -66,5 +66,5 @@ const styles = StyleSheet.create({
     position: 'absolute', top: -4, right: -10, minWidth: 16, height: 16, borderRadius: 8, paddingHorizontal: 4,
     backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
   },
-  badgeText: { color: colors.onPrimary, fontSize: 10, fontWeight: '800' },
+  badgeText: { color: colors.onPrimary, fontSize: 10, fontFamily: font.bold },
 });

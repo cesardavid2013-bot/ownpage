@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   brand: { fontFamily: font.display, fontSize: 26, letterSpacing: 4 },
   chip: { width: 42, height: 30, borderRadius: 6 },
-  no: { fontSize: 14, letterSpacing: 3, opacity: 0.7, marginBottom: 6, fontVariant: ['tabular-nums'] },
+  no: { fontSize: 14, letterSpacing: 3, opacity: 0.7, marginBottom: 6, fontVariant: ['tabular-nums'], fontFamily: font.body },
   bottom: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 },
-  tier: { fontSize: 12, letterSpacing: 4, fontWeight: '700' },
-  holder: { fontSize: 11, letterSpacing: 2, opacity: 0.75, flexShrink: 1 },
+  tier: { fontSize: 12, letterSpacing: 4, fontFamily: font.bold },
+  holder: { fontSize: 11, letterSpacing: 2, opacity: 0.75, flexShrink: 1, fontFamily: font.body },
 });

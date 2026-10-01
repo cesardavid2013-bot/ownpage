@@ -12,11 +12,15 @@ const de = {
     terms: 'Mit dem Fortfahren akzeptierst du unsere AGB und Datenschutzrichtlinie. Du musst mindestens 18 Jahre alt sein.',
   },
   auth: {
+    loginSubtitle: "Schön, dich wiederzusehen.",
     loginTitle: 'Willkommen zurück', registerTitle: 'Erstelle dein Konto',
     email: 'E-Mail', password: 'Passwort', passwordHint: 'Mindestens 8 Zeichen',
     name: 'Vorname', birthdate: 'Geburtstag', birthdateHint: 'JJJJ-MM-TT',
     iAm: 'Ich bin', showMe: 'Zeig mir', login: 'Anmelden', register: 'Registrieren', logout: 'Abmelden',
     noAccount: 'Noch kein Konto? Registrieren', hasAccount: 'Schon ein Konto? Anmelden',
+  },
+  register: {
+    stepName: "Wie ist dein Vorname?", stepBirthday: "Wann hast du Geburtstag?", stepBirthdayHint: "Dein Alter steht im Profil. Dein Geburtstag nicht.", stepGender: "Wie identifizierst du dich?", stepShowMe: "Wen möchtest du kennenlernen?", stepAccount: "Letzter Schritt: dein Konto", youAre: "Du bist {{age}}",
   },
   gender: { man: 'Mann', woman: 'Frau', nonbinary: 'Nicht-binär', men: 'Männer', women: 'Frauen', everyone: 'Alle' },
   lookingFor: {
@@ -44,6 +48,7 @@ const de = {
     sendMessage: 'Nachricht senden', keepSwiping: 'Weiter swipen',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Heute für dich ausgewählt. Neue Picks um Mitternacht.", topPicksLocked: "Mit Gold bekommst du täglich eine Auswahl der Menschen, die am besten zu dir passen.",
     title: 'Likes', subtitle: 'Menschen, die dich schon mögen',
     lockedTitle_one: '{{count}} Person mag dich', lockedTitle_other: '{{count}} Personen mögen dich',
     lockedSubtitle: 'Hol dir Gold, um zu sehen, wer dich mag, und sofort zu matchen.',
@@ -51,6 +56,7 @@ const de = {
     sent: 'Gesendete Likes',
   },
   chats: {
+    icebreakers: "Weißt du nicht, was du schreiben sollst?", iceAbout: "Deine Antwort auf „{{prompt}}“ hat mir gefallen. Erzähl mir mehr?", ice1: "Zwei Wahrheiten und eine Lüge. Los.", ice2: "Was war das Schönste, das dir diese Woche passiert ist?", ice3: "Kaffee oder ein Drink: Wie wäre unser erstes Date?", today: "Heute", yesterday: "Gestern", liked: "Gefällt dir",
     title: 'Chats', newMatches: 'Neue Matches', messages: 'Nachrichten',
     empty: 'Noch keine Matches. Swipe weiter – die richtige Person ist da draußen.', startConversation: 'Sag Hallo zu {{name}} 👋',
     you: 'Du: ', typing: 'schreibt…', placeholder: 'Nachricht schreiben', unmatch: 'Match auflösen',
@@ -69,6 +75,7 @@ const de = {
   },
   report: { fake: 'Fake-Profil', inappropriate: 'Unangemessene Inhalte', harassment: 'Belästigung', spam: 'Spam oder Betrug', underage: 'Wirkt jünger als 18', other: 'Sonstiges' },
   settings: {
+    filters: "Erweiterte Filter", filterVerified: "Nur verifizierte Profile", filterHasPrompts: "Nur Profile mit beantworteten Fragen", filterIntentions: "Was sie suchen",
     title: 'Einstellungen', discovery: 'Entdecken', maxDistance: 'Maximale Entfernung', ageRange: 'Altersbereich',
     globalMode: 'Globaler Modus', globalModeHint: 'Sieh Menschen aus der ganzen Welt',
     passport: 'Passport', passportHint: 'Swipe in jeder Stadt der Welt', passportCurrent: 'Mein aktueller Standort',
@@ -81,6 +88,7 @@ const de = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Monatlich", yearly: "Jährlich", save: "Spare {{percent}} %", billedYearly: "{{price}} jährlich abgerechnet",
     title: 'Lumi Premium', subtitle: "Lumi ist kostenlos. Eine Mitgliedschaft bringt mehr Reichweite, Kontrolle und Privatsphäre. Jederzeit kündbar.",
     perMonth: '/Monat', current: 'Aktueller Plan', choose: '{{plan}} wählen', upgrade: 'Upgrade',
     activeUntil: 'Aktiv bis {{date}}', success: 'Willkommen bei {{plan}}! ✨', cancelled: 'Kauf abgebrochen',
@@ -91,6 +99,7 @@ const de = {
     buy: 'Kaufen', credits: 'Du hast {{count}}', mostPopular: 'Am beliebtesten', bestValue: 'Bestes Angebot',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Erweiterte Filter", topPicks: "Tägliche Top Picks", readReceipts: "Lesebestätigungen",
       unlimitedLikes: 'Unbegrenzte Likes', rewind: 'Unbegrenztes Zurückholen', passport: 'Passport an jeden Ort',
       hideAds: 'Alter & Entfernung verbergen', seeLikes: 'Sieh, wer dich mag',
       superLikes_one: '{{count}} Super Like pro Tag', superLikes_other: '{{count}} Super Likes pro Tag',

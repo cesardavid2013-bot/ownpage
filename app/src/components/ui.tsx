@@ -22,7 +22,7 @@ export function Button({
   testID?: string;
 }) {
   const inactive = disabled || loading;
-  const fg = variant === 'gold' || variant === 'primary' ? colors.onPrimary : colors.text;
+  const fg = (variant === 'gold' || variant === 'primary') && !disabled ? colors.onPrimary : disabled ? colors.textFaint : colors.text;
   const content = (
     <View style={styles.btnInner}>
       {loading ? <ActivityIndicator color={fg} /> : (
@@ -38,9 +38,11 @@ export function Button({
       testID={testID}
       accessibilityRole="button"
       onPress={inactive ? undefined : onPress}
-      style={({ pressed }) => [styles.btn, { opacity: inactive ? 0.5 : pressed ? 0.85 : 1 }, style]}
+      style={({ pressed }) => [styles.btn, { opacity: loading ? 0.8 : pressed ? 0.85 : 1 }, style]}
     >
-      {variant === 'primary' || variant === 'gold' ? (
+      {(variant === 'primary' || variant === 'gold') && disabled ? (
+        <View style={[styles.btnFill, styles.btnDisabled]}>{content}</View>
+      ) : variant === 'primary' || variant === 'gold' ? (
         <LinearGradient
           colors={variant === 'gold' ? gradients.gold : gradients.brand}
           start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
@@ -117,7 +119,7 @@ export function Logo({ size = 40 }: { size?: number }) {
   return (
     <Row style={{ gap: size * 0.2 }}>
       <Text style={{ color: colors.text, fontFamily: font.display, fontSize: size * 0.82, letterSpacing: size * 0.1 }}>LUMI</Text>
-      <Text style={{ color: colors.gold, fontSize: size * 0.34, marginTop: -size * 0.4 }}>✦</Text>
+      <Text style={{ color: colors.gold, fontSize: size * 0.34, marginTop: -size * 0.4, fontFamily: font.body }}>✦</Text>
     </Row>
   );
 }
@@ -137,30 +139,31 @@ export const webMaxWidth: ViewStyle = Platform.OS === 'web' ? { width: '100%', m
 const styles = StyleSheet.create({
   btn: { borderRadius: radius.pill, overflow: 'hidden' },
   btnFill: { minHeight: 54, paddingHorizontal: space(6), justifyContent: 'center', borderRadius: radius.pill },
+  btnDisabled: { backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(233,217,190,0.18)' },
   btnSecondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: 'rgba(233,217,190,0.3)' },
   btnInner: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space(2) },
-  btnText: { fontSize: 15, fontWeight: '600', letterSpacing: 0.4 },
-  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2 },
+  btnText: { fontSize: 15, letterSpacing: 0.4, fontFamily: font.semibold },
+  label: { color: colors.gold, fontSize: 11, textTransform: 'uppercase', letterSpacing: 2.2, fontFamily: font.semibold },
   input: {
-    backgroundColor: colors.card, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border,
-    color: colors.text, fontSize: 16, paddingHorizontal: space(4), paddingVertical: space(3.5), minHeight: 52,
+    backgroundColor: 'transparent', borderBottomWidth: 1, borderColor: 'rgba(233,217,190,0.22)',
+    color: colors.text, fontSize: 17, fontFamily: font.body, paddingHorizontal: space(0.5), paddingVertical: space(3), minHeight: 50,
     ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null),
   },
-  error: { color: colors.danger, fontSize: 13 },
+  error: { color: colors.danger, fontSize: 13, fontFamily: font.body },
   chip: {
     flexDirection: 'row', alignItems: 'center', gap: space(1.5), paddingHorizontal: space(3.5), paddingVertical: space(2),
     borderRadius: radius.pill, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border,
   },
   chipSelected: { backgroundColor: colors.primary, borderColor: colors.primary },
-  chipText: { color: colors.textMuted, fontSize: 14, fontWeight: '600' },
+  chipText: { color: colors.textMuted, fontSize: 14, fontFamily: font.semibold },
   title: { color: colors.text, fontSize: 34, fontFamily: font.display, letterSpacing: -0.3, lineHeight: 40 },
-  muted: { color: colors.textMuted, fontSize: 15, lineHeight: 22 },
+  muted: { color: colors.textMuted, fontSize: 15, lineHeight: 22, fontFamily: font.body },
   errorBox: {
     flexDirection: 'row', gap: space(2), alignItems: 'center', backgroundColor: 'rgba(255,90,95,0.12)',
     padding: space(3), borderRadius: radius.sm,
   },
-  errorBoxText: { color: colors.danger, flex: 1, fontSize: 14 },
+  errorBoxText: { color: colors.danger, flex: 1, fontSize: 14, fontFamily: font.body },
   card: { backgroundColor: colors.card, borderRadius: radius.lg, padding: space(5), borderWidth: 1, borderColor: colors.border },
   badge: { paddingHorizontal: space(2.5), paddingVertical: 3, borderRadius: radius.pill },
-  badgeText: { fontSize: 11, fontWeight: '900', letterSpacing: 1 },
+  badgeText: { fontSize: 11, letterSpacing: 1, fontFamily: font.bold },
 });

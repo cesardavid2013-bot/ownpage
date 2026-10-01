@@ -12,11 +12,15 @@ const ko = {
     terms: '계속하면 이용약관 및 개인정보처리방침에 동의하게 됩니다. 만 18세 이상이어야 합니다.',
   },
   auth: {
+    loginSubtitle: "다시 만나서 반가워요.",
     loginTitle: '다시 오신 것을 환영해요', registerTitle: '계정 만들기',
     email: '이메일', password: '비밀번호', passwordHint: '8자 이상',
     name: '이름', birthdate: '생년월일', birthdateHint: 'YYYY-MM-DD',
     iAm: '나는', showMe: '보고 싶은 상대', login: '로그인', register: '가입하기', logout: '로그아웃',
     noAccount: '계정이 없나요? 가입하기', hasAccount: '이미 계정이 있나요? 로그인',
+  },
+  register: {
+    stepName: "이름이 뭐예요?", stepBirthday: "생일이 언제예요?", stepBirthdayHint: "나이는 프로필에 표시되지만 생일은 표시되지 않아요.", stepGender: "성별을 어떻게 정의하나요?", stepShowMe: "어떤 사람을 만나고 싶나요?", stepAccount: "마지막 단계: 계정 만들기", youAre: "{{age}}세예요",
   },
   gender: { man: '남성', woman: '여성', nonbinary: '논바이너리', men: '남성', women: '여성', everyone: '모두' },
   lookingFor: {
@@ -44,6 +48,7 @@ const ko = {
     sendMessage: '메시지 보내기', keepSwiping: '계속 스와이프',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "오늘 당신을 위해 골랐어요. 자정에 새로 바뀌어요.", topPicksLocked: "Gold로 매일 가장 잘 맞는 사람들을 추천받으세요.",
     title: '좋아요', subtitle: '이미 회원님을 좋아하는 사람들',
     lockedTitle: '{{count}}명이 회원님을 좋아해요',
     lockedSubtitle: 'Gold로 업그레이드하고 누가 좋아하는지 확인한 뒤 바로 매치하세요.',
@@ -51,6 +56,7 @@ const ko = {
     sent: '보낸 좋아요',
   },
   chats: {
+    icebreakers: "무슨 말을 할지 고민되나요?", iceAbout: "“{{prompt}}”에 대한 답이 정말 좋았어요. 더 얘기해 줄래요?", ice1: "두 개의 진실과 하나의 거짓말. 시작!", ice2: "이번 주에 있었던 가장 좋은 일은 뭐예요?", ice3: "커피 아니면 한잔: 우리 첫 데이트는 어떨까요?", today: "오늘", yesterday: "어제", liked: "좋아함",
     title: '채팅', newMatches: '새로운 매치', messages: '메시지',
     empty: '아직 매치가 없어요. 계속 스와이프하세요 — 인연은 어딘가에 있어요.', startConversation: '{{name}}님에게 인사해 보세요 👋',
     you: '나: ', typing: '입력 중…', placeholder: '메시지 입력', unmatch: '매치 취소',
@@ -69,6 +75,7 @@ const ko = {
   },
   report: { fake: '가짜 프로필', inappropriate: '부적절한 콘텐츠', harassment: '괴롭힘', spam: '스팸 또는 사기', underage: '18세 미만으로 보임', other: '기타' },
   settings: {
+    filters: "고급 필터", filterVerified: "인증된 프로필만", filterHasPrompts: "질문에 답한 사람만", filterIntentions: "원하는 관계",
     title: '설정', discovery: '탐색', maxDistance: '최대 거리', ageRange: '나이 범위',
     globalMode: '글로벌 모드', globalModeHint: '전 세계 사람들을 만나 보세요',
     passport: '패스포트', passportHint: '세계 어느 도시에서든 스와이프', passportCurrent: '현재 위치 사용',
@@ -81,6 +88,7 @@ const ko = {
     premiumOnly: '프리미엄',
   },
   premium: {
+    monthly: "월간", yearly: "연간", save: "{{percent}}% 절약", billedYearly: "연 {{price}} 결제",
     title: 'Lumi Premium', subtitle: "Lumi는 무료예요. 멤버십은 더 넓은 노출, 통제, 프라이버시를 더해요. 언제든 해지할 수 있어요.",
     perMonth: '/월', current: '현재 플랜', choose: '{{plan}} 선택', upgrade: '업그레이드',
     activeUntil: '{{date}}까지 이용 가능', success: '{{plan}}에 오신 것을 환영해요! ✨', cancelled: '구매가 취소되었어요',
@@ -91,6 +99,7 @@ const ko = {
     buy: '구매', credits: '{{count}}개 보유', mostPopular: '가장 인기', bestValue: '최고의 가치',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "고급 필터", topPicks: "매일 Top Picks", readReceipts: "읽음 확인",
       unlimitedLikes: '무제한 좋아요', rewind: '무제한 되돌리기', passport: '어디든 가는 패스포트',
       hideAds: '나이와 거리 숨기기', seeLikes: '나를 좋아하는 사람 보기',
       superLikes: '하루 {{count}}개의 슈퍼 좋아요', boosts: '매달 무료 부스트 {{count}}개',

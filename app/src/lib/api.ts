@@ -10,7 +10,6 @@ export class ApiError extends Error {
 
 const REFRESH_KEY = 'lumi.refreshToken';
 let accessToken: string | null = null;
-let refreshPromise: Promise<boolean> | null = null;
 let onSessionExpired: (() => void) | null = null;
 const tokenListeners = new Set<(token: string | null) => void>();
 
@@ -38,33 +37,44 @@ export const tokens = {
   },
 };
 
-/** Exchanges the stored refresh token for a new pair. Concurrent callers share one request. */
-export function refreshSession(): Promise<boolean> {
-  if (!refreshPromise) {
-    refreshPromise = (async () => {
+export type RefreshResult = 'ok' | 'none' | 'invalid' | 'unreachable';
+let refreshPromise2: Promise<RefreshResult> | null = null;
+
+/**
+ * Exchanges the stored refresh token for a new pair. Concurrent callers share one request.
+ * Only a 401 means the session is over; network errors, 429 and 5xx keep the stored token.
+ */
+export function refreshSessionDetailed(): Promise<RefreshResult> {
+  if (!refreshPromise2) {
+    refreshPromise2 = (async (): Promise<RefreshResult> => {
       const refresh = await storage.get(REFRESH_KEY);
-      if (!refresh) return false;
+      if (!refresh) return 'none';
       try {
         const res = await fetch(`${API_URL}/auth/refresh`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ refreshToken: refresh }),
         });
-        if (!res.ok) {
-          if (res.status === 401) await tokens.clear();
-          return false;
+        if (res.status === 401) {
+          await tokens.clear();
+          return 'invalid';
         }
+        if (!res.ok) return 'unreachable';
         const data = await res.json();
         await tokens.set(data.accessToken, data.refreshToken);
-        return true;
+        return 'ok';
       } catch {
-        return false;
+        return 'unreachable';
       }
     })().finally(() => {
-      refreshPromise = null;
+      refreshPromise2 = null;
     });
   }
-  return refreshPromise;
+  return refreshPromise2;
+}
+
+export async function refreshSession(): Promise<boolean> {
+  return (await refreshSessionDetailed()) === 'ok';
 }
 
 type Options = { method?: string; body?: unknown; form?: FormData; auth?: boolean };

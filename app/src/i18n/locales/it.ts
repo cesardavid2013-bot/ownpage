@@ -12,11 +12,15 @@ const it = {
     terms: 'Continuando accetti i nostri Termini e l’Informativa sulla privacy. Devi avere almeno 18 anni.',
   },
   auth: {
+    loginSubtitle: "Che bello rivederti.",
     loginTitle: 'Bentornato', registerTitle: 'Crea il tuo account',
     email: 'Email', password: 'Password', passwordHint: 'Almeno 8 caratteri',
     name: 'Nome', birthdate: 'Data di nascita', birthdateHint: 'AAAA-MM-GG',
     iAm: 'Sono', showMe: 'Mostrami', login: 'Accedi', register: 'Registrati', logout: 'Esci',
     noAccount: 'Non hai un account? Registrati', hasAccount: 'Hai già un account? Accedi',
+  },
+  register: {
+    stepName: "Come ti chiami?", stepBirthday: "Quando è il tuo compleanno?", stepBirthdayHint: "La tua età è visibile sul profilo. Il tuo compleanno no.", stepGender: "Come ti identifichi?", stepShowMe: "Chi ti piacerebbe conoscere?", stepAccount: "Ultimo passo: il tuo account", youAre: "Hai {{age}} anni",
   },
   gender: { man: 'Uomo', woman: 'Donna', nonbinary: 'Non binario', men: 'Uomini', women: 'Donne', everyone: 'Tutti' },
   lookingFor: {
@@ -44,6 +48,7 @@ const it = {
     sendMessage: 'Invia un messaggio', keepSwiping: 'Continua a scorrere',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Scelti per te oggi. Nuovi a mezzanotte.", topPicksLocked: "Ricevi ogni giorno una selezione delle persone più compatibili con Gold.",
     title: 'Like', subtitle: 'Persone a cui piaci già',
     lockedTitle_one: 'Piaci a {{count}} persona', lockedTitle_other: 'Piaci a {{count}} persone',
     lockedSubtitle: 'Passa a Gold per vedere a chi piaci e fare match all’istante.',
@@ -51,6 +56,7 @@ const it = {
     sent: 'Like inviati',
   },
   chats: {
+    icebreakers: "Non sai cosa scrivere?", iceAbout: "Mi è piaciuta la tua risposta a «{{prompt}}». Mi racconti di più?", ice1: "Due verità e una bugia. Vai.", ice2: "Qual è la cosa più bella che ti è successa questa settimana?", ice3: "Caffè o un drink: come sarebbe il nostro primo appuntamento?", today: "Oggi", yesterday: "Ieri", liked: "Piaciuto",
     title: 'Chat', newMatches: 'Nuovi match', messages: 'Messaggi',
     empty: 'Ancora nessun match. Continua a scorrere: la persona giusta è là fuori.', startConversation: 'Saluta {{name}} 👋',
     you: 'Tu: ', typing: 'sta scrivendo…', placeholder: 'Scrivi un messaggio', unmatch: 'Annulla match',
@@ -69,6 +75,7 @@ const it = {
   },
   report: { fake: 'Profilo falso', inappropriate: 'Contenuti inappropriati', harassment: 'Molestie', spam: 'Spam o truffa', underage: 'Sembra minorenne', other: 'Altro' },
   settings: {
+    filters: "Filtri avanzati", filterVerified: "Solo profili verificati", filterHasPrompts: "Solo chi ha risposto alle domande", filterIntentions: "Cosa cerca",
     title: 'Impostazioni', discovery: 'Scoperta', maxDistance: 'Distanza massima', ageRange: 'Fascia d’età',
     globalMode: 'Modalità globale', globalModeHint: 'Vedi persone da tutto il mondo',
     passport: 'Passaporto', passportHint: 'Scorri in qualsiasi città del mondo', passportCurrent: 'Uso la mia posizione attuale',
@@ -81,6 +88,7 @@ const it = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Mensile", yearly: "Annuale", save: "Risparmia il {{percent}}%", billedYearly: "{{price}} fatturato annualmente",
     title: 'Lumi Premium', subtitle: "Lumi è gratis. L’abbonamento aggiunge visibilità, controllo e privacy. Disdici quando vuoi.",
     perMonth: '/mese', current: 'Piano attuale', choose: 'Scegli {{plan}}', upgrade: 'Passa a Premium',
     activeUntil: 'Attivo fino al {{date}}', success: 'Benvenuto in {{plan}}! ✨', cancelled: 'Acquisto annullato',
@@ -91,6 +99,7 @@ const it = {
     buy: 'Acquista', credits: 'Ne hai {{count}}', mostPopular: 'Più popolare', bestValue: 'Miglior valore',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Filtri avanzati", topPicks: "Top Picks giornalieri", readReceipts: "Conferme di lettura",
       unlimitedLikes: 'Like illimitati', rewind: 'Annullamenti illimitati', passport: 'Passaporto per qualsiasi luogo',
       hideAds: 'Nascondi età e distanza', seeLikes: 'Scopri a chi piaci',
       superLikes_one: '{{count}} Super Like al giorno', superLikes_other: '{{count}} Super Like al giorno',

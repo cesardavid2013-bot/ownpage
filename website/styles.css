@@ -13,12 +13,12 @@
   --gold: #c9a46a;
   --ember: #e38b6a;
   --font-display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
-  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+  --font-body: 'Jost', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
   --max: 1240px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 17px; font-weight: 400; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
@@ -92,7 +92,7 @@ section.block { padding-block: clamp(80px, 10vw, 140px); border-bottom: 1px soli
 .card .brand { font-family: var(--font-display); font-size: 24px; letter-spacing: 0.14em; }
 .card .chip { width: 38px; height: 28px; border-radius: 6px; background: linear-gradient(135deg, #e8d3a4, #b58f4e); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2); }
 .card .tiername { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 700; }
-.card .no { font-family: 'Manrope', monospace; font-size: 13px; letter-spacing: 0.22em; opacity: 0.7; font-variant-numeric: tabular-nums; }
+.card .no { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.22em; opacity: 0.7; font-variant-numeric: tabular-nums; }
 .card.plus { background: linear-gradient(135deg, #3b3a3f, #1b1b1f 55%, #2c2b31); color: #ece8e1; }
 .card.gold { background: linear-gradient(135deg, #f1dcaa, #c9a46a 40%, #a47c3f 70%, #e2c68d); color: #2a1f0c; }
 .card.platinum { background: linear-gradient(135deg, #f7f7f5, #cfd2d6 40%, #a4a9b1 70%, #e9eaec); color: #1c1e22; }

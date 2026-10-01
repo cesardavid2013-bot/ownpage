@@ -12,11 +12,15 @@ const ja = {
     terms: '続行すると、利用規約とプライバシーポリシーに同意したことになります。18歳以上である必要があります。',
   },
   auth: {
+    loginSubtitle: "またお会いできてうれしいです。",
     loginTitle: 'おかえりなさい', registerTitle: 'アカウントを作成',
     email: 'メールアドレス', password: 'パスワード', passwordHint: '8文字以上',
     name: '名前', birthdate: '生年月日', birthdateHint: 'YYYY-MM-DD',
     iAm: '性別', showMe: '表示する相手', login: 'ログイン', register: '登録する', logout: 'ログアウト',
     noAccount: 'アカウントがない方は登録', hasAccount: 'アカウントをお持ちの方はログイン',
+  },
+  register: {
+    stepName: "お名前は？", stepBirthday: "誕生日はいつですか？", stepBirthdayHint: "年齢はプロフィールに表示されますが、誕生日は表示されません。", stepGender: "性別は？", stepShowMe: "どんな人に会いたいですか？", stepAccount: "最後のステップ：アカウント", youAre: "{{age}}歳です",
   },
   gender: { man: '男性', woman: '女性', nonbinary: 'ノンバイナリー', men: '男性', women: '女性', everyone: 'すべての人' },
   lookingFor: {
@@ -44,6 +48,7 @@ const ja = {
     sendMessage: 'メッセージを送る', keepSwiping: 'スワイプを続ける',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "今日あなたのために選びました。毎日0時に更新。", topPicksLocked: "Gold なら、相性のいい人を毎日セレクトしてお届けします。",
     title: 'いいね', subtitle: 'すでにあなたにいいねした人',
     lockedTitle: '{{count}}人があなたにいいねしています',
     lockedSubtitle: 'Gold にアップグレードして、誰がいいねしたかを見て今すぐマッチしよう。',
@@ -51,6 +56,7 @@ const ja = {
     sent: '送ったいいね',
   },
   chats: {
+    icebreakers: "何を書けばいいか迷っていますか？", iceAbout: "「{{prompt}}」への答え、すごく素敵でした。もっと聞かせて？", ice1: "2つの本当と1つの嘘。どうぞ。", ice2: "今週いちばん良かった出来事は？", ice3: "カフェかお酒、私たちの初デートならどっち？", today: "今日", yesterday: "昨日", liked: "いいね済み",
     title: 'チャット', newMatches: '新しいマッチ', messages: 'メッセージ',
     empty: 'まだマッチはありません。スワイプを続けましょう — 運命の人はきっといます。', startConversation: '{{name}}さんに挨拶しよう 👋',
     you: 'あなた：', typing: '入力中…', placeholder: 'メッセージを入力', unmatch: 'マッチを解除',
@@ -69,6 +75,7 @@ const ja = {
   },
   report: { fake: '偽のプロフィール', inappropriate: '不適切なコンテンツ', harassment: '嫌がらせ', spam: 'スパム・詐欺', underage: '18歳未満に見える', other: 'その他' },
   settings: {
+    filters: "詳細フィルター", filterVerified: "認証済みのプロフィールのみ", filterHasPrompts: "質問に答えた人のみ", filterIntentions: "相手が探しているもの",
     title: '設定', discovery: '探す設定', maxDistance: '最大距離', ageRange: '年齢の範囲',
     globalMode: 'グローバルモード', globalModeHint: '世界中の人を表示',
     passport: 'パスポート', passportHint: '世界中のどの都市でもスワイプ', passportCurrent: '現在地を使用',
@@ -81,6 +88,7 @@ const ja = {
     premiumOnly: 'プレミアム',
   },
   premium: {
+    monthly: "月額", yearly: "年額", save: "{{percent}}%お得", billedYearly: "年額 {{price}}",
     title: 'Lumi Premium', subtitle: "Lumi は無料で使えます。メンバーシップで露出、コントロール、プライバシーが広がります。いつでも解約できます。",
     perMonth: '/月', current: '現在のプラン', choose: '{{plan}}を選ぶ', upgrade: 'アップグレード',
     activeUntil: '{{date}}まで有効', success: '{{plan}}へようこそ！✨', cancelled: '購入がキャンセルされました',
@@ -91,6 +99,7 @@ const ja = {
     buy: '購入', credits: '残り {{count}}', mostPopular: '一番人気', bestValue: '最もお得',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "詳細フィルター", topPicks: "毎日の Top Picks", readReceipts: "既読表示",
       unlimitedLikes: 'いいね無制限', rewind: '戻す機能が無制限', passport: 'どこへでもパスポート',
       hideAds: '年齢と距離を非表示', seeLikes: '誰がいいねしたか見られる',
       superLikes: '1日{{count}}回のスーパーライク', boosts: '毎月{{count}}回の無料ブースト',

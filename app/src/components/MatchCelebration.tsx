@@ -34,7 +34,7 @@ export function MatchCelebration() {
         <Bokeh count={26} seed={31} intensity={1.1} />
         <LinearGradient colors={['rgba(10,10,12,0.2)', 'rgba(10,10,12,0.55)', 'rgba(10,10,12,0.95)']} style={StyleSheet.absoluteFill} />
         <Animated.View style={[styles.content, { transform: [{ scale }] }]}>
-          <Text style={{ color: colors.gold, fontSize: 22 }}>✦</Text>
+          <Text style={{ color: colors.gold, fontSize: 22, fontFamily: font.body }}>✦</Text>
           <Text style={styles.title}>{t('match.title')}</Text>
           <Text style={styles.subtitle}>{t('match.subtitle', { name: match.user.name })}</Text>
           <View style={styles.photos}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   root: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: space(6) },
   content: { alignItems: 'center', gap: space(4), width: '100%', maxWidth: 420 },
   title: { color: colors.primary, fontSize: 52, fontFamily: font.displayItalic, textAlign: 'center', lineHeight: 60 },
-  subtitle: { color: 'rgba(255,255,255,0.85)', fontSize: 17, textAlign: 'center' },
+  subtitle: { color: 'rgba(255,255,255,0.85)', fontSize: 17, textAlign: 'center', fontFamily: font.body },
   photos: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: space(6) },
   photo: { width: 140, height: 190, borderRadius: 14, borderWidth: 1.5, borderColor: colors.primary, backgroundColor: colors.card },
   heart: {

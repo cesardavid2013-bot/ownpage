@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { colors, space } from '@/lib/theme';
+import { colors, font, space } from '@/lib/theme';
 import { webMaxWidth } from './ui';
 
 export function Screen({
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   header: { flexDirection: 'row', alignItems: 'center', height: 56, gap: space(2) },
   back: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginLeft: -space(2) },
-  headerTitle: { flex: 1, color: colors.text, fontSize: 18, fontWeight: '700' },
+  headerTitle: { flex: 1, color: colors.text, fontSize: 24, fontFamily: font.display },
   right: { minWidth: 40, alignItems: 'flex-end' },
 });

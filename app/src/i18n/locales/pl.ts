@@ -12,11 +12,15 @@ const pl = {
     terms: 'Kontynuując, akceptujesz nasz Regulamin i Politykę prywatności. Musisz mieć ukończone 18 lat.',
   },
   auth: {
+    loginSubtitle: "Miło Cię znów widzieć.",
     loginTitle: 'Witaj ponownie', registerTitle: 'Utwórz konto',
     email: 'E-mail', password: 'Hasło', passwordHint: 'Co najmniej 8 znaków',
     name: 'Imię', birthdate: 'Data urodzenia', birthdateHint: 'RRRR-MM-DD',
     iAm: 'Jestem', showMe: 'Pokazuj mi', login: 'Zaloguj się', register: 'Zarejestruj się', logout: 'Wyloguj się',
     noAccount: 'Nie masz konta? Zarejestruj się', hasAccount: 'Masz już konto? Zaloguj się',
+  },
+  register: {
+    stepName: "Jak masz na imię?", stepBirthday: "Kiedy masz urodziny?", stepBirthdayHint: "Twój wiek jest widoczny w profilu. Data urodzin nie.", stepGender: "Jak się identyfikujesz?", stepShowMe: "Kogo chcesz poznać?", stepAccount: "Ostatni krok: Twoje konto", youAre: "Masz {{age}} lat",
   },
   gender: { man: 'Mężczyzna', woman: 'Kobieta', nonbinary: 'Osoba niebinarna', men: 'Mężczyzn', women: 'Kobiety', everyone: 'Wszystkich' },
   lookingFor: {
@@ -44,6 +48,7 @@ const pl = {
     sendMessage: 'Wyślij wiadomość', keepSwiping: 'Przesuwaj dalej',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Wybrane dla Ciebie dziś. Nowe o północy.", topPicksLocked: "Z Gold codziennie dostajesz wybór najlepiej dopasowanych osób.",
     title: 'Polubienia', subtitle: 'Osoby, które już Cię polubiły',
     lockedTitle_one: '{{count}} osoba Cię lubi', lockedTitle_few: '{{count}} osoby Cię lubią',
     lockedTitle_many: '{{count}} osób Cię lubi', lockedTitle_other: '{{count}} osoby Cię lubią',
@@ -52,6 +57,7 @@ const pl = {
     sent: 'Wysłane polubienia',
   },
   chats: {
+    icebreakers: "Nie wiesz, co napisać?", iceAbout: "Spodobała mi się Twoja odpowiedź na „{{prompt}}”. Opowiesz więcej?", ice1: "Dwie prawdy i jedno kłamstwo. Dawaj.", ice2: "Co najlepszego spotkało Cię w tym tygodniu?", ice3: "Kawa czy drink: jak wyglądałaby nasza pierwsza randka?", today: "Dziś", yesterday: "Wczoraj", liked: "Polubiono",
     title: 'Czaty', newMatches: 'Nowe pary', messages: 'Wiadomości',
     empty: 'Nie masz jeszcze par. Przesuwaj dalej – Twoja osoba gdzieś tam jest.', startConversation: 'Przywitaj się z {{name}} 👋',
     you: 'Ty: ', typing: 'pisze…', placeholder: 'Napisz wiadomość', unmatch: 'Usuń parę',
@@ -70,6 +76,7 @@ const pl = {
   },
   report: { fake: 'Fałszywy profil', inappropriate: 'Nieodpowiednie treści', harassment: 'Nękanie', spam: 'Spam lub oszustwo', underage: 'Wygląda na osobę poniżej 18 lat', other: 'Inne' },
   settings: {
+    filters: "Zaawansowane filtry", filterVerified: "Tylko zweryfikowane profile", filterHasPrompts: "Tylko osoby z odpowiedziami na pytania", filterIntentions: "Czego szuka",
     title: 'Ustawienia', discovery: 'Odkrywanie', maxDistance: 'Maksymalna odległość', ageRange: 'Przedział wieku',
     globalMode: 'Tryb globalny', globalModeHint: 'Poznawaj ludzi z całego świata',
     passport: 'Paszport', passportHint: 'Przesuwaj w dowolnym mieście świata', passportCurrent: 'Moja obecna lokalizacja',
@@ -82,6 +89,7 @@ const pl = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Miesięcznie", yearly: "Rocznie", save: "Oszczędź {{percent}}%", billedYearly: "{{price}} płatne rocznie",
     title: 'Lumi Premium', subtitle: "Lumi jest darmowe. Członkostwo daje większy zasięg, kontrolę i prywatność. Anuluj, kiedy chcesz.",
     perMonth: '/mies.', current: 'Obecny plan', choose: 'Wybierz {{plan}}', upgrade: 'Ulepsz',
     activeUntil: 'Aktywny do {{date}}', success: 'Witaj w {{plan}}! ✨', cancelled: 'Zakup anulowany',
@@ -92,6 +100,7 @@ const pl = {
     buy: 'Kup', credits: 'Masz: {{count}}', mostPopular: 'Najpopularniejszy', bestValue: 'Najlepsza wartość',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Zaawansowane filtry", topPicks: "Codzienne Top Picks", readReceipts: "Potwierdzenia odczytu",
       unlimitedLikes: 'Nielimitowane polubienia', rewind: 'Nielimitowane cofanie', passport: 'Paszport do dowolnego miejsca',
       hideAds: 'Ukryj wiek i odległość', seeLikes: 'Zobacz, kto Cię lubi',
       superLikes: 'Super Like dziennie: {{count}}', boosts: 'Darmowe Boosty miesięcznie: {{count}}',

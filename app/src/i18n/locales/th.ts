@@ -12,11 +12,15 @@ const th = {
     terms: 'การดำเนินการต่อถือว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัวของเรา คุณต้องมีอายุ 18 ปีขึ้นไป',
   },
   auth: {
+    loginSubtitle: "ยินดีที่ได้พบคุณอีกครั้ง",
     loginTitle: 'ยินดีต้อนรับกลับมา', registerTitle: 'สร้างบัญชีของคุณ',
     email: 'อีเมล', password: 'รหัสผ่าน', passwordHint: 'อย่างน้อย 8 ตัวอักษร',
     name: 'ชื่อ', birthdate: 'วันเกิด', birthdateHint: 'YYYY-MM-DD',
     iAm: 'ฉันเป็น', showMe: 'แสดงให้ฉันเห็น', login: 'เข้าสู่ระบบ', register: 'สมัครสมาชิก', logout: 'ออกจากระบบ',
     noAccount: 'ยังไม่มีบัญชี? สมัครสมาชิก', hasAccount: 'มีบัญชีแล้ว? เข้าสู่ระบบ',
+  },
+  register: {
+    stepName: "คุณชื่ออะไร?", stepBirthday: "วันเกิดของคุณคือวันไหน?", stepBirthdayHint: "อายุจะแสดงบนโปรไฟล์ แต่วันเกิดจะไม่แสดง", stepGender: "คุณระบุตัวตนว่าอย่างไร?", stepShowMe: "คุณอยากพบใคร?", stepAccount: "ขั้นตอนสุดท้าย: บัญชีของคุณ", youAre: "คุณอายุ {{age}} ปี",
   },
   gender: { man: 'ผู้ชาย', woman: 'ผู้หญิง', nonbinary: 'นอนไบนารี', men: 'ผู้ชาย', women: 'ผู้หญิง', everyone: 'ทุกคน' },
   lookingFor: {
@@ -44,6 +48,7 @@ const th = {
     sendMessage: 'ส่งข้อความ', keepSwiping: 'ปัดต่อ',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "คัดมาให้คุณวันนี้ อัปเดตตอนเที่ยงคืน", topPicksLocked: "รับคนที่เข้ากับคุณที่สุดทุกวันด้วย Gold",
     title: 'ถูกใจ', subtitle: 'คนที่ถูกใจคุณแล้ว',
     lockedTitle: 'มี {{count}} คนถูกใจคุณ',
     lockedSubtitle: 'อัปเกรดเป็น Gold เพื่อดูว่าใครถูกใจคุณและแมตช์ได้ทันที',
@@ -51,6 +56,7 @@ const th = {
     sent: 'ไลก์ที่ส่งไป',
   },
   chats: {
+    icebreakers: "ไม่รู้จะพูดอะไรดี?", iceAbout: "ชอบคำตอบของคุณเรื่อง “{{prompt}}” มาก เล่าเพิ่มอีกหน่อยได้ไหม?", ice1: "ความจริงสองข้อกับเรื่องโกหกหนึ่งข้อ เริ่มเลย", ice2: "เรื่องดีที่สุดที่เกิดขึ้นกับคุณสัปดาห์นี้คืออะไร?", ice3: "กาแฟหรือดริงก์: เดทแรกของเราจะเป็นแบบไหน?", today: "วันนี้", yesterday: "เมื่อวาน", liked: "ถูกใจแล้ว",
     title: 'แชท', newMatches: 'แมตช์ใหม่', messages: 'ข้อความ',
     empty: 'ยังไม่มีแมตช์ ปัดต่อไปนะ — คนที่ใช่อยู่ที่ไหนสักแห่ง', startConversation: 'ทักทาย {{name}} 👋',
     you: 'คุณ: ', typing: 'กำลังพิมพ์…', placeholder: 'พิมพ์ข้อความ', unmatch: 'ยกเลิกแมตช์',
@@ -69,6 +75,7 @@ const th = {
   },
   report: { fake: 'โปรไฟล์ปลอม', inappropriate: 'เนื้อหาไม่เหมาะสม', harassment: 'การคุกคาม', spam: 'สแปมหรือหลอกลวง', underage: 'ดูเหมือนอายุต่ำกว่า 18', other: 'อื่นๆ' },
   settings: {
+    filters: "ตัวกรองขั้นสูง", filterVerified: "เฉพาะโปรไฟล์ที่ยืนยันแล้ว", filterHasPrompts: "เฉพาะคนที่ตอบคำถาม", filterIntentions: "สิ่งที่เขามองหา",
     title: 'การตั้งค่า', discovery: 'การค้นหา', maxDistance: 'ระยะทางสูงสุด', ageRange: 'ช่วงอายุ',
     globalMode: 'โหมดทั่วโลก', globalModeHint: 'ดูคนจากทั่วโลก',
     passport: 'พาสปอร์ต', passportHint: 'ปัดได้ในทุกเมืองทั่วโลก', passportCurrent: 'ใช้ตำแหน่งปัจจุบันของฉัน',
@@ -81,6 +88,7 @@ const th = {
     premiumOnly: 'พรีเมียม',
   },
   premium: {
+    monthly: "รายเดือน", yearly: "รายปี", save: "ประหยัด {{percent}}%", billedYearly: "เรียกเก็บ {{price}} ต่อปี",
     title: 'Lumi Premium', subtitle: "Lumi ใช้ฟรี สมาชิกภาพช่วยเพิ่มการมองเห็น การควบคุม และความเป็นส่วนตัว ยกเลิกได้ทุกเมื่อ",
     perMonth: '/เดือน', current: 'แพ็กเกจปัจจุบัน', choose: 'เลือก {{plan}}', upgrade: 'อัปเกรด',
     activeUntil: 'ใช้งานได้ถึง {{date}}', success: 'ยินดีต้อนรับสู่ {{plan}}! ✨', cancelled: 'ยกเลิกการซื้อแล้ว',
@@ -91,6 +99,7 @@ const th = {
     buy: 'ซื้อ', credits: 'คุณมี {{count}}', mostPopular: 'ยอดนิยม', bestValue: 'คุ้มค่าที่สุด',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "ตัวกรองขั้นสูง", topPicks: "Top Picks รายวัน", readReceipts: "การแจ้งอ่านแล้ว",
       unlimitedLikes: 'ไลก์ได้ไม่จำกัด', rewind: 'ย้อนกลับได้ไม่จำกัด', passport: 'พาสปอร์ตไปได้ทุกที่',
       hideAds: 'ซ่อนอายุและระยะทาง', seeLikes: 'ดูว่าใครถูกใจคุณ',
       superLikes: 'ซูเปอร์ไลก์วันละ {{count}} ครั้ง', boosts: 'บูสต์ฟรีเดือนละ {{count}} ครั้ง',

@@ -12,11 +12,15 @@ const nl = {
     terms: 'Door verder te gaan ga je akkoord met onze Voorwaarden en ons Privacybeleid. Je moet 18 jaar of ouder zijn.',
   },
   auth: {
+    loginSubtitle: "Fijn je weer te zien.",
     loginTitle: 'Welkom terug', registerTitle: 'Maak je account aan',
     email: 'E-mail', password: 'Wachtwoord', passwordHint: 'Minstens 8 tekens',
     name: 'Voornaam', birthdate: 'Geboortedatum', birthdateHint: 'JJJJ-MM-DD',
     iAm: 'Ik ben', showMe: 'Toon mij', login: 'Inloggen', register: 'Registreren', logout: 'Uitloggen',
     noAccount: 'Nog geen account? Registreer', hasAccount: 'Al een account? Log in',
+  },
+  register: {
+    stepName: "Wat is je voornaam?", stepBirthday: "Wanneer ben je jarig?", stepBirthdayHint: "Je leeftijd staat op je profiel. Je verjaardag niet.", stepGender: "Hoe identificeer je jezelf?", stepShowMe: "Wie zou je willen ontmoeten?", stepAccount: "Laatste stap: je account", youAre: "Je bent {{age}}",
   },
   gender: { man: 'Man', woman: 'Vrouw', nonbinary: 'Non-binair', men: 'Mannen', women: 'Vrouwen', everyone: 'Iedereen' },
   lookingFor: {
@@ -44,6 +48,7 @@ const nl = {
     sendMessage: 'Stuur een bericht', keepSwiping: 'Verder swipen',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Vandaag voor jou gekozen. Nieuwe om middernacht.", topPicksLocked: "Krijg met Gold elke dag een selectie van je meest compatibele mensen.",
     title: 'Likes', subtitle: 'Mensen die jou al leuk vinden',
     lockedTitle_one: '{{count}} persoon vindt je leuk', lockedTitle_other: '{{count}} mensen vinden je leuk',
     lockedSubtitle: 'Upgrade naar Gold om te zien wie je leuk vindt en direct te matchen.',
@@ -51,6 +56,7 @@ const nl = {
     sent: 'Verstuurde likes',
   },
   chats: {
+    icebreakers: "Weet je niet wat je moet zeggen?", iceAbout: "Ik vond je antwoord op “{{prompt}}” geweldig. Vertel je meer?", ice1: "Twee waarheden en een leugen. Kom maar op.", ice2: "Wat is het beste dat je deze week is overkomen?", ice3: "Koffie of een drankje: hoe zou onze eerste date eruitzien?", today: "Vandaag", yesterday: "Gisteren", liked: "Leuk gevonden",
     title: 'Chats', newMatches: 'Nieuwe matches', messages: 'Berichten',
     empty: 'Nog geen matches. Blijf swipen – jouw persoon is er.', startConversation: 'Zeg hoi tegen {{name}} 👋',
     you: 'Jij: ', typing: 'typt…', placeholder: 'Typ een bericht', unmatch: 'Match opheffen',
@@ -69,6 +75,7 @@ const nl = {
   },
   report: { fake: 'Nepprofiel', inappropriate: 'Ongepaste inhoud', harassment: 'Intimidatie', spam: 'Spam of oplichting', underage: 'Lijkt jonger dan 18', other: 'Anders' },
   settings: {
+    filters: "Geavanceerde filters", filterVerified: "Alleen geverifieerde profielen", filterHasPrompts: "Alleen mensen die vragen beantwoordden", filterIntentions: "Wat ze zoeken",
     title: 'Instellingen', discovery: 'Ontdekken', maxDistance: 'Maximale afstand', ageRange: 'Leeftijdsbereik',
     globalMode: 'Wereldwijde modus', globalModeHint: 'Zie mensen van over de hele wereld',
     passport: 'Paspoort', passportHint: 'Swipe in elke stad ter wereld', passportCurrent: 'Mijn huidige locatie',
@@ -81,6 +88,7 @@ const nl = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Maandelijks", yearly: "Jaarlijks", save: "Bespaar {{percent}}%", billedYearly: "{{price}} per jaar gefactureerd",
     title: 'Lumi Premium', subtitle: "Lumi is gratis. Een lidmaatschap geeft meer bereik, controle en privacy. Altijd opzegbaar.",
     perMonth: '/maand', current: 'Huidig abonnement', choose: 'Kies {{plan}}', upgrade: 'Upgraden',
     activeUntil: 'Actief tot {{date}}', success: 'Welkom bij {{plan}}! ✨', cancelled: 'Aankoop geannuleerd',
@@ -91,6 +99,7 @@ const nl = {
     buy: 'Kopen', credits: 'Je hebt er {{count}}', mostPopular: 'Populairst', bestValue: 'Beste deal',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Geavanceerde filters", topPicks: "Dagelijkse Top Picks", readReceipts: "Leesbevestigingen",
       unlimitedLikes: 'Onbeperkt liken', rewind: 'Onbeperkt terugdraaien', passport: 'Paspoort naar elke locatie',
       hideAds: 'Leeftijd en afstand verbergen', seeLikes: 'Zie wie je leuk vindt',
       superLikes_one: '{{count}} Super Like per dag', superLikes_other: '{{count}} Super Likes per dag',

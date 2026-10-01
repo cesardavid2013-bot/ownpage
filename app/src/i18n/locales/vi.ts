@@ -12,11 +12,15 @@ const vi = {
     terms: 'Khi tiếp tục, bạn đồng ý với Điều khoản và Chính sách quyền riêng tư của chúng tôi. Bạn phải từ 18 tuổi trở lên.',
   },
   auth: {
+    loginSubtitle: "Rất vui được gặp lại bạn.",
     loginTitle: 'Chào mừng trở lại', registerTitle: 'Tạo tài khoản của bạn',
     email: 'Email', password: 'Mật khẩu', passwordHint: 'Ít nhất 8 ký tự',
     name: 'Tên', birthdate: 'Ngày sinh', birthdateHint: 'YYYY-MM-DD',
     iAm: 'Tôi là', showMe: 'Hiển thị cho tôi', login: 'Đăng nhập', register: 'Đăng ký', logout: 'Đăng xuất',
     noAccount: 'Chưa có tài khoản? Đăng ký', hasAccount: 'Đã có tài khoản? Đăng nhập',
+  },
+  register: {
+    stepName: "Tên bạn là gì?", stepBirthday: "Sinh nhật bạn là khi nào?", stepBirthdayHint: "Tuổi của bạn hiển thị trên hồ sơ. Ngày sinh thì không.", stepGender: "Bạn xác định bản thân thế nào?", stepShowMe: "Bạn muốn gặp ai?", stepAccount: "Bước cuối: tài khoản của bạn", youAre: "Bạn {{age}} tuổi",
   },
   gender: { man: 'Nam', woman: 'Nữ', nonbinary: 'Phi nhị giới', men: 'Nam', women: 'Nữ', everyone: 'Mọi người' },
   lookingFor: {
@@ -44,6 +48,7 @@ const vi = {
     sendMessage: 'Gửi tin nhắn', keepSwiping: 'Tiếp tục vuốt',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Chọn riêng cho bạn hôm nay. Làm mới lúc nửa đêm.", topPicksLocked: "Nhận mỗi ngày tuyển chọn những người hợp bạn nhất với Gold.",
     title: 'Lượt thích', subtitle: 'Những người đã thích bạn',
     lockedTitle: '{{count}} người thích bạn',
     lockedSubtitle: 'Nâng cấp lên Gold để xem ai thích bạn và tương hợp ngay lập tức.',
@@ -51,6 +56,7 @@ const vi = {
     sent: 'Lượt thích đã gửi',
   },
   chats: {
+    icebreakers: "Chưa biết nói gì?", iceAbout: "Mình rất thích câu trả lời của bạn cho “{{prompt}}”. Kể thêm nhé?", ice1: "Hai sự thật và một lời nói dối. Bắt đầu nào.", ice2: "Điều tuyệt nhất xảy ra với bạn tuần này là gì?", ice3: "Cà phê hay một ly: buổi hẹn đầu của chúng ta sẽ thế nào?", today: "Hôm nay", yesterday: "Hôm qua", liked: "Đã thích",
     title: 'Trò chuyện', newMatches: 'Tương hợp mới', messages: 'Tin nhắn',
     empty: 'Chưa có tương hợp nào. Tiếp tục vuốt — người ấy đang ở đâu đó.', startConversation: 'Chào {{name}} nào 👋',
     you: 'Bạn: ', typing: 'đang nhập…', placeholder: 'Nhập tin nhắn', unmatch: 'Hủy tương hợp',
@@ -69,6 +75,7 @@ const vi = {
   },
   report: { fake: 'Hồ sơ giả', inappropriate: 'Nội dung không phù hợp', harassment: 'Quấy rối', spam: 'Spam hoặc lừa đảo', underage: 'Có vẻ dưới 18 tuổi', other: 'Khác' },
   settings: {
+    filters: "Bộ lọc nâng cao", filterVerified: "Chỉ hồ sơ đã xác minh", filterHasPrompts: "Chỉ người đã trả lời câu hỏi", filterIntentions: "Điều họ tìm kiếm",
     title: 'Cài đặt', discovery: 'Khám phá', maxDistance: 'Khoảng cách tối đa', ageRange: 'Độ tuổi',
     globalMode: 'Chế độ toàn cầu', globalModeHint: 'Xem mọi người trên khắp thế giới',
     passport: 'Hộ chiếu', passportHint: 'Vuốt ở bất kỳ thành phố nào trên thế giới', passportCurrent: 'Dùng vị trí hiện tại',
@@ -81,6 +88,7 @@ const vi = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Hàng tháng", yearly: "Hàng năm", save: "Tiết kiệm {{percent}}%", billedYearly: "{{price}} thanh toán theo năm",
     title: 'Lumi Premium', subtitle: "Lumi miễn phí. Gói thành viên thêm phạm vi, quyền kiểm soát và riêng tư. Hủy bất cứ lúc nào.",
     perMonth: '/tháng', current: 'Gói hiện tại', choose: 'Chọn {{plan}}', upgrade: 'Nâng cấp',
     activeUntil: 'Có hiệu lực đến {{date}}', success: 'Chào mừng đến với {{plan}}! ✨', cancelled: 'Đã hủy giao dịch',
@@ -91,6 +99,7 @@ const vi = {
     buy: 'Mua', credits: 'Bạn có {{count}}', mostPopular: 'Phổ biến nhất', bestValue: 'Đáng giá nhất',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Bộ lọc nâng cao", topPicks: "Top Picks mỗi ngày", readReceipts: "Thông báo đã đọc",
       unlimitedLikes: 'Thích không giới hạn', rewind: 'Hoàn tác không giới hạn', passport: 'Hộ chiếu đến mọi nơi',
       hideAds: 'Ẩn tuổi và khoảng cách', seeLikes: 'Xem ai thích bạn',
       superLikes: '{{count}} Siêu thích mỗi ngày', boosts: '{{count}} lượt Tăng tốc miễn phí mỗi tháng',

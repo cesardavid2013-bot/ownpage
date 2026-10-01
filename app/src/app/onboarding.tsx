@@ -9,7 +9,7 @@ import { errorMessage } from '@/i18n';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { shareLocation } from '@/lib/location';
-import { colors, space } from '@/lib/theme';
+import { colors, space, font } from '@/lib/theme';
 import type { LookingFor, Photo } from '@/lib/types';
 
 const LOOKING: LookingFor[] = ['long_term', 'short_term', 'friendship', 'casual', 'unsure'];
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   progress: { flexDirection: 'row', gap: space(2), marginTop: space(4), marginBottom: space(6) },
   dot: { flex: 1, height: 4, borderRadius: 2, backgroundColor: colors.border },
   step: { gap: space(5) },
-  label: { color: colors.gold, fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2) },
+  label: { color: colors.gold, fontSize: 11, textTransform: 'uppercase', letterSpacing: 2.2, lineHeight: 16, marginBottom: -space(2), fontFamily: font.semibold },
   pin: {
     width: 110, height: 110, borderRadius: 55, backgroundColor: 'rgba(255,79,123,0.12)',
     alignItems: 'center', justifyContent: 'center', marginTop: space(6),

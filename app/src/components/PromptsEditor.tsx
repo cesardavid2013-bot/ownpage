@@ -48,7 +48,7 @@ export function PromptsEditor({ value, onChange }: { value: PromptAnswer[]; onCh
       ) : null}
 
       <Sheet visible={picking} onClose={() => setPicking(false)}>
-        <Title style={{ fontSize: 26 }}>{t('profile.choosePrompt')}</Title>
+        <Title style={{ fontSize: 26, fontFamily: font.body }}>{t('profile.choosePrompt')}</Title>
         <ScrollView style={{ maxHeight: 420 }} contentContainerStyle={{ gap: space(2) }}>
           {available.map((id) => (
             <Pressable key={id} style={styles.option} onPress={() => {
@@ -66,20 +66,20 @@ export function PromptsEditor({ value, onChange }: { value: PromptAnswer[]; onCh
 }
 
 const styles = StyleSheet.create({
-  hint: { color: colors.textMuted, fontSize: 14 },
+  hint: { color: colors.textMuted, fontSize: 14, fontFamily: font.body },
   card: { backgroundColor: colors.card, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, padding: space(4), gap: space(2) },
   cardHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: space(2) },
-  question: { color: colors.gold, fontSize: 11, fontWeight: '700', letterSpacing: 1.6, textTransform: 'uppercase', flex: 1 },
+  question: { color: colors.gold, fontSize: 11, letterSpacing: 1.6, textTransform: 'uppercase', flex: 1, fontFamily: font.bold },
   answer: { color: colors.text, fontFamily: font.display, fontSize: 21, lineHeight: 28, minHeight: 56, textAlignVertical: 'top', padding: 0, ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null) },
-  count: { color: colors.textFaint, fontSize: 11, alignSelf: 'flex-end' },
+  count: { color: colors.textFaint, fontSize: 11, alignSelf: 'flex-end', fontFamily: font.body },
   add: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space(2), paddingVertical: space(4),
     borderRadius: radius.md, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(233,217,190,0.35)',
   },
-  addText: { color: colors.primary, fontWeight: '600' },
+  addText: { color: colors.primary, fontFamily: font.semibold },
   option: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: space(3.5),
     paddingHorizontal: space(4), borderRadius: radius.sm, backgroundColor: colors.card,
   },
-  optionText: { color: colors.text, fontSize: 16, flex: 1 },
+  optionText: { color: colors.text, fontSize: 16, flex: 1, fontFamily: font.body },
 });

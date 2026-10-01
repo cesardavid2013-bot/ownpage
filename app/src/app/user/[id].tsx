@@ -12,7 +12,7 @@ import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { confirm, notify } from '@/lib/notify';
 import { useRealtime } from '@/lib/realtime';
-import { colors, space } from '@/lib/theme';
+import { colors, space, font } from '@/lib/theme';
 import type { Match, Profile } from '@/lib/types';
 
 const REASONS = ['fake', 'inappropriate', 'harassment', 'spam', 'underage', 'other'] as const;
@@ -93,7 +93,7 @@ export default function UserProfile() {
         </View>
       ) : null}
       <Sheet visible={reporting} onClose={() => setReporting(false)}>
-        <Title style={{ fontSize: 20 }}>{t('profile.reportTitle', { name: profile?.name ?? '' })}</Title>
+        <Title style={{ fontSize: 20, fontFamily: font.body }}>{t('profile.reportTitle', { name: profile?.name ?? '' })}</Title>
         {REASONS.map((r) => <Button key={r} title={t(`report.${r}`)} variant="secondary" onPress={() => report(r)} />)}
         <Button title={t('common.cancel')} variant="ghost" onPress={() => setReporting(false)} />
       </Sheet>

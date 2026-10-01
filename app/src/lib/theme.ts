@@ -34,9 +34,14 @@ export const gradients = {
 export const radius = { sm: 10, md: 16, lg: 22, xl: 30, pill: 999 };
 export const space = (n: number) => n * 4;
 
+/** Bodoni for display, Jost (a Futura-style geometric) for everything else. Custom fonts carry their own weight. */
 export const font = {
   display: 'BodoniModa_500Medium',
   displayItalic: 'BodoniModa_500Medium_Italic',
+  body: 'Jost_400Regular',
+  medium: 'Jost_500Medium',
+  semibold: 'Jost_600SemiBold',
+  bold: 'Jost_700Bold',
 };
 
 export const shadow = Platform.select({

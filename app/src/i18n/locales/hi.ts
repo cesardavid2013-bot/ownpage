@@ -12,11 +12,15 @@ const hi = {
     terms: 'जारी रखकर आप हमारी शर्तों और गोपनीयता नीति से सहमत होते हैं। आपकी उम्र 18 वर्ष या उससे अधिक होनी चाहिए।',
   },
   auth: {
+    loginSubtitle: "आपको फिर से देखकर अच्छा लगा।",
     loginTitle: 'फिर से स्वागत है', registerTitle: 'अपना खाता बनाएँ',
     email: 'ईमेल', password: 'पासवर्ड', passwordHint: 'कम से कम 8 अक्षर',
     name: 'पहला नाम', birthdate: 'जन्मतिथि', birthdateHint: 'YYYY-MM-DD',
     iAm: 'मैं हूँ', showMe: 'मुझे दिखाएँ', login: 'लॉग इन करें', register: 'साइन अप करें', logout: 'लॉग आउट करें',
     noAccount: 'खाता नहीं है? साइन अप करें', hasAccount: 'पहले से खाता है? लॉग इन करें',
+  },
+  register: {
+    stepName: "आपका पहला नाम क्या है?", stepBirthday: "आपका जन्मदिन कब है?", stepBirthdayHint: "आपकी उम्र प्रोफ़ाइल पर दिखती है। जन्मदिन नहीं।", stepGender: "आप अपनी पहचान कैसे बताते हैं?", stepShowMe: "आप किससे मिलना चाहेंगे?", stepAccount: "आख़िरी कदम: आपका खाता", youAre: "आप {{age}} के हैं",
   },
   gender: { man: 'पुरुष', woman: 'महिला', nonbinary: 'नॉन-बाइनरी', men: 'पुरुष', women: 'महिलाएँ', everyone: 'सभी' },
   lookingFor: {
@@ -44,6 +48,7 @@ const hi = {
     sendMessage: 'संदेश भेजें', keepSwiping: 'स्वाइप जारी रखें',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "आज आपके लिए चुने गए। नए आधी रात को।", topPicksLocked: "Gold के साथ हर दिन अपने सबसे अनुकूल लोगों का चयन पाएँ।",
     title: 'लाइक्स', subtitle: 'जो लोग आपको पहले से पसंद करते हैं',
     lockedTitle: '{{count}} लोग आपको पसंद करते हैं',
     lockedSubtitle: 'यह देखने के लिए कि कौन आपको पसंद करता है और तुरंत मैच करने के लिए Gold लें।',
@@ -51,6 +56,7 @@ const hi = {
     sent: 'भेजे गए लाइक्स',
   },
   chats: {
+    icebreakers: "समझ नहीं आ रहा क्या कहें?", iceAbout: "“{{prompt}}” पर तुम्हारा जवाब बहुत अच्छा लगा। और बताओ?", ice1: "दो सच और एक झूठ। शुरू करो।", ice2: "इस हफ़्ते तुम्हारे साथ सबसे अच्छा क्या हुआ?", ice3: "कॉफ़ी या ड्रिंक: हमारी पहली डेट कैसी होगी?", today: "आज", yesterday: "कल", liked: "पसंद किया",
     title: 'चैट', newMatches: 'नए मैच', messages: 'संदेश',
     empty: 'अभी कोई मैच नहीं। स्वाइप करते रहें — आपका खास इंसान कहीं है।', startConversation: '{{name}} को हाय कहें 👋',
     you: 'आप: ', typing: 'टाइप कर रहे हैं…', placeholder: 'संदेश लिखें', unmatch: 'मैच हटाएँ',
@@ -69,6 +75,7 @@ const hi = {
   },
   report: { fake: 'नकली प्रोफ़ाइल', inappropriate: 'अनुचित सामग्री', harassment: 'उत्पीड़न', spam: 'स्पैम या धोखाधड़ी', underage: '18 से कम उम्र का लगता है', other: 'अन्य' },
   settings: {
+    filters: "एडवांस्ड फ़िल्टर", filterVerified: "सिर्फ़ सत्यापित प्रोफ़ाइल", filterHasPrompts: "सिर्फ़ वे जिन्होंने सवालों के जवाब दिए", filterIntentions: "वे क्या ढूँढ रहे हैं",
     title: 'सेटिंग्स', discovery: 'खोज', maxDistance: 'अधिकतम दूरी', ageRange: 'उम्र सीमा',
     globalMode: 'ग्लोबल मोड', globalModeHint: 'दुनिया भर के लोगों को देखें',
     passport: 'पासपोर्ट', passportHint: 'दुनिया के किसी भी शहर में स्वाइप करें', passportCurrent: 'मेरी मौजूदा लोकेशन',
@@ -81,6 +88,7 @@ const hi = {
     premiumOnly: 'प्रीमियम',
   },
   premium: {
+    monthly: "मासिक", yearly: "वार्षिक", save: "{{percent}}% बचाएँ", billedYearly: "{{price}} सालाना बिल",
     title: 'Lumi Premium', subtitle: "Lumi मुफ़्त है। सदस्यता ज़्यादा पहुँच, नियंत्रण और निजता देती है। जब चाहें रद्द करें।",
     perMonth: '/माह', current: 'मौजूदा प्लान', choose: '{{plan}} चुनें', upgrade: 'अपग्रेड करें',
     activeUntil: '{{date}} तक सक्रिय', success: '{{plan}} में आपका स्वागत है! ✨', cancelled: 'खरीदारी रद्द हुई',
@@ -91,6 +99,7 @@ const hi = {
     buy: 'खरीदें', credits: 'आपके पास {{count}} हैं', mostPopular: 'सबसे लोकप्रिय', bestValue: 'सबसे किफ़ायती',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "एडवांस्ड फ़िल्टर", topPicks: "रोज़ाना Top Picks", readReceipts: "पढ़ने की रसीद",
       unlimitedLikes: 'असीमित लाइक्स', rewind: 'असीमित रिवाइंड', passport: 'किसी भी जगह का पासपोर्ट',
       hideAds: 'उम्र और दूरी छिपाएँ', seeLikes: 'देखें कौन आपको पसंद करता है',
       superLikes: 'रोज़ {{count}} सुपर लाइक', boosts: 'हर महीने {{count}} मुफ़्त बूस्ट',

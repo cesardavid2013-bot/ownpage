@@ -12,11 +12,15 @@ const tr = {
     terms: 'Devam ederek Koşullarımızı ve Gizlilik Politikamızı kabul etmiş olursun. 18 yaşında veya daha büyük olmalısın.',
   },
   auth: {
+    loginSubtitle: "Seni yeniden görmek güzel.",
     loginTitle: 'Tekrar hoş geldin', registerTitle: 'Hesabını oluştur',
     email: 'E-posta', password: 'Şifre', passwordHint: 'En az 8 karakter',
     name: 'Ad', birthdate: 'Doğum tarihi', birthdateHint: 'YYYY-AA-GG',
     iAm: 'Ben', showMe: 'Bana göster', login: 'Giriş yap', register: 'Kaydol', logout: 'Çıkış yap',
     noAccount: 'Hesabın yok mu? Kaydol', hasAccount: 'Hesabın var mı? Giriş yap',
+  },
+  register: {
+    stepName: "Adın ne?", stepBirthday: "Doğum günün ne zaman?", stepBirthdayHint: "Yaşın profilinde görünür. Doğum günün görünmez.", stepGender: "Kendini nasıl tanımlıyorsun?", stepShowMe: "Kiminle tanışmak istersin?", stepAccount: "Son adım: hesabın", youAre: "{{age}} yaşındasın",
   },
   gender: { man: 'Erkek', woman: 'Kadın', nonbinary: 'Non-binary', men: 'Erkekler', women: 'Kadınlar', everyone: 'Herkes' },
   lookingFor: {
@@ -44,6 +48,7 @@ const tr = {
     sendMessage: 'Mesaj gönder', keepSwiping: 'Kaydırmaya devam et',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Bugün senin için seçildi. Yenileri gece yarısı.", topPicksLocked: "Gold ile her gün sana en uygun kişilerden bir seçki al.",
     title: 'Beğeniler', subtitle: 'Seni zaten beğenen kişiler',
     lockedTitle: '{{count}} kişi seni beğendi',
     lockedSubtitle: 'Seni kimlerin beğendiğini görmek ve anında eşleşmek için Gold’a geç.',
@@ -51,6 +56,7 @@ const tr = {
     sent: 'Gönderilen beğeniler',
   },
   chats: {
+    icebreakers: "Ne yazacağını bilmiyor musun?", iceAbout: "“{{prompt}}” yanıtına bayıldım. Biraz daha anlatır mısın?", ice1: "İki doğru bir yalan. Başla.", ice2: "Bu hafta başına gelen en güzel şey neydi?", ice3: "Kahve mi bir içki mi: ilk buluşmamız nasıl olurdu?", today: "Bugün", yesterday: "Dün", liked: "Beğenildi",
     title: 'Sohbetler', newMatches: 'Yeni eşleşmeler', messages: 'Mesajlar',
     empty: 'Henüz eşleşme yok. Kaydırmaya devam et — o kişi bir yerlerde.', startConversation: '{{name}} ile merhabalaş 👋',
     you: 'Sen: ', typing: 'yazıyor…', placeholder: 'Bir mesaj yaz', unmatch: 'Eşleşmeyi kaldır',
@@ -69,6 +75,7 @@ const tr = {
   },
   report: { fake: 'Sahte profil', inappropriate: 'Uygunsuz içerik', harassment: 'Taciz', spam: 'Spam veya dolandırıcılık', underage: '18 yaşından küçük görünüyor', other: 'Diğer' },
   settings: {
+    filters: "Gelişmiş filtreler", filterVerified: "Yalnızca doğrulanmış profiller", filterHasPrompts: "Yalnızca soruları yanıtlayanlar", filterIntentions: "Ne arıyor",
     title: 'Ayarlar', discovery: 'Keşif', maxDistance: 'Maksimum mesafe', ageRange: 'Yaş aralığı',
     globalMode: 'Global mod', globalModeHint: 'Dünyanın her yerinden insanları gör',
     passport: 'Pasaport', passportHint: 'Dünyanın herhangi bir şehrinde kaydır', passportCurrent: 'Mevcut konumumu kullan',
@@ -81,6 +88,7 @@ const tr = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Aylık", yearly: "Yıllık", save: "%{{percent}} tasarruf", billedYearly: "Yıllık {{price}} faturalandırılır",
     title: 'Lumi Premium', subtitle: "Lumi ücretsiz. Üyelik daha fazla erişim, kontrol ve gizlilik sağlar. İstediğin zaman iptal et.",
     perMonth: '/ay', current: 'Mevcut plan', choose: '{{plan}} seç', upgrade: 'Yükselt',
     activeUntil: '{{date}} tarihine kadar aktif', success: '{{plan}} planına hoş geldin! ✨', cancelled: 'Satın alma iptal edildi',
@@ -91,6 +99,7 @@ const tr = {
     buy: 'Satın al', credits: '{{count}} adet var', mostPopular: 'En popüler', bestValue: 'En avantajlı',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Gelişmiş filtreler", topPicks: "Günlük Top Picks", readReceipts: "Okundu bilgisi",
       unlimitedLikes: 'Sınırsız beğeni', rewind: 'Sınırsız geri alma', passport: 'Her yere pasaport',
       hideAds: 'Yaşı ve mesafeyi gizle', seeLikes: 'Seni kimin beğendiğini gör',
       superLikes: 'Günde {{count}} Süper Beğeni', boosts: 'Ayda {{count}} ücretsiz Boost',

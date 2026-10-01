@@ -12,11 +12,15 @@ const zh = {
     terms: '继续即表示你同意我们的服务条款和隐私政策。你必须年满 18 周岁。',
   },
   auth: {
+    loginSubtitle: "很高兴再次见到你。",
     loginTitle: '欢迎回来', registerTitle: '创建你的账号',
     email: '邮箱', password: '密码', passwordHint: '至少 8 个字符',
     name: '名字', birthdate: '生日', birthdateHint: 'YYYY-MM-DD',
     iAm: '我是', showMe: '向我展示', login: '登录', register: '注册', logout: '退出登录',
     noAccount: '还没有账号？立即注册', hasAccount: '已有账号？去登录',
+  },
+  register: {
+    stepName: "你叫什么名字？", stepBirthday: "你的生日是哪天？", stepBirthdayHint: "你的年龄会显示在资料中，生日不会。", stepGender: "你如何认同自己的性别？", stepShowMe: "你想认识谁？", stepAccount: "最后一步：你的账号", youAre: "你 {{age}} 岁",
   },
   gender: { man: '男性', woman: '女性', nonbinary: '非二元', men: '男性', women: '女性', everyone: '所有人' },
   lookingFor: {
@@ -44,6 +48,7 @@ const zh = {
     sendMessage: '发消息', keepSwiping: '继续滑动',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "今天为你精选。午夜更新。", topPicksLocked: "开通 Gold，每天获得与你最合拍的人的精选。",
     title: '喜欢', subtitle: '已经喜欢你的人',
     lockedTitle: '有 {{count}} 人喜欢你',
     lockedSubtitle: '升级到 Gold，查看谁喜欢你并立即配对。',
@@ -51,6 +56,7 @@ const zh = {
     sent: '我发出的喜欢',
   },
   chats: {
+    icebreakers: "不知道说什么？", iceAbout: "很喜欢你对“{{prompt}}”的回答，能多说说吗？", ice1: "两真一假，来吧。", ice2: "这周发生在你身上最棒的事是什么？", ice3: "咖啡还是小酌：我们的第一次约会会是什么样？", today: "今天", yesterday: "昨天", liked: "已喜欢",
     title: '聊天', newMatches: '新配对', messages: '消息',
     empty: '还没有配对。继续滑动——对的人就在某处。', startConversation: '向 {{name}} 打个招呼 👋',
     you: '你：', typing: '正在输入…', placeholder: '输入消息', unmatch: '取消配对',
@@ -69,6 +75,7 @@ const zh = {
   },
   report: { fake: '虚假资料', inappropriate: '不当内容', harassment: '骚扰', spam: '垃圾信息或诈骗', underage: '疑似未满 18 岁', other: '其他' },
   settings: {
+    filters: "高级筛选", filterVerified: "只看已认证资料", filterHasPrompts: "只看回答了问答的人", filterIntentions: "对方在寻找",
     title: '设置', discovery: '发现设置', maxDistance: '最大距离', ageRange: '年龄范围',
     globalMode: '全球模式', globalModeHint: '查看来自世界各地的人',
     passport: '护照', passportHint: '在世界任何城市滑动', passportCurrent: '使用我当前的位置',
@@ -81,6 +88,7 @@ const zh = {
     premiumOnly: '会员',
   },
   premium: {
+    monthly: "按月", yearly: "按年", save: "省 {{percent}}%", billedYearly: "按年付费 {{price}}",
     title: 'Lumi Premium', subtitle: "Lumi 免费使用。会员带来更多曝光、掌控和隐私，可随时取消。",
     perMonth: '/月', current: '当前方案', choose: '选择 {{plan}}', upgrade: '升级',
     activeUntil: '有效期至 {{date}}', success: '欢迎加入 {{plan}}！✨', cancelled: '购买已取消',
@@ -91,6 +99,7 @@ const zh = {
     buy: '购买', credits: '你还有 {{count}} 个', mostPopular: '最受欢迎', bestValue: '最超值',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "高级筛选", topPicks: "每日 Top Picks", readReceipts: "已读回执",
       unlimitedLikes: '无限喜欢', rewind: '无限撤回', passport: '护照：前往任何地点',
       hideAds: '隐藏年龄和距离', seeLikes: '查看谁喜欢你',
       superLikes: '每天 {{count}} 个超级喜欢', boosts: '每月 {{count}} 次免费加速',

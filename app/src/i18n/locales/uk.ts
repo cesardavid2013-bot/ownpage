@@ -12,11 +12,15 @@ const uk = {
     terms: 'Продовжуючи, ви приймаєте наші Умови та Політику конфіденційності. Вам має бути 18 років або більше.',
   },
   auth: {
+    loginSubtitle: "Раді бачити вас знову.",
     loginTitle: 'З поверненням', registerTitle: 'Створіть акаунт',
     email: 'Ел. пошта', password: 'Пароль', passwordHint: 'Щонайменше 8 символів',
     name: "Ім'я", birthdate: 'Дата народження', birthdateHint: 'РРРР-ММ-ДД',
     iAm: 'Я', showMe: 'Показувати', login: 'Увійти', register: 'Зареєструватися', logout: 'Вийти',
     noAccount: 'Немає акаунта? Зареєструйтеся', hasAccount: 'Вже є акаунт? Увійдіть',
+  },
+  register: {
+    stepName: "Як вас звати?", stepBirthday: "Коли у вас день народження?", stepBirthdayHint: "Вік видно в профілі. Дату народження — ні.", stepGender: "Як ви себе ідентифікуєте?", stepShowMe: "З ким ви хочете познайомитися?", stepAccount: "Останній крок: ваш акаунт", youAre: "Вам {{age}}",
   },
   gender: { man: 'Чоловік', woman: 'Жінка', nonbinary: 'Небінарна особа', men: 'Чоловіків', women: 'Жінок', everyone: 'Усіх' },
   lookingFor: {
@@ -44,6 +48,7 @@ const uk = {
     sendMessage: 'Написати повідомлення', keepSwiping: 'Продовжити',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Підібрані для вас сьогодні. Нові — опівночі.", topPicksLocked: "З Gold щодня — добірка найбільш сумісних із вами людей.",
     title: 'Вподобання', subtitle: 'Люди, яким ви вже подобаєтеся',
     lockedTitle_one: 'Ви подобаєтеся {{count}} людині', lockedTitle_few: 'Ви подобаєтеся {{count}} людям',
     lockedTitle_many: 'Ви подобаєтеся {{count}} людям', lockedTitle_other: 'Ви подобаєтеся {{count}} людям',
@@ -52,6 +57,7 @@ const uk = {
     sent: 'Надіслані лайки',
   },
   chats: {
+    icebreakers: "Не знаєте, що написати?", iceAbout: "Мені сподобалася твоя відповідь на «{{prompt}}». Розкажеш більше?", ice1: "Дві правди й одна брехня. Починай.", ice2: "Що найкраще сталося з тобою цього тижня?", ice3: "Кава чи келих вина: яким було б наше перше побачення?", today: "Сьогодні", yesterday: "Учора", liked: "Подобається",
     title: 'Чати', newMatches: 'Нові пари', messages: 'Повідомлення',
     empty: 'Пар поки немає. Продовжуйте — ваша людина десь поруч.', startConversation: 'Привітайтеся з {{name}} 👋',
     you: 'Ви: ', typing: 'друкує…', placeholder: 'Напишіть повідомлення', unmatch: 'Видалити пару',
@@ -70,6 +76,7 @@ const uk = {
   },
   report: { fake: 'Фейковий профіль', inappropriate: 'Неприйнятний вміст', harassment: 'Переслідування', spam: 'Спам або шахрайство', underage: 'Схоже, молодше 18', other: 'Інше' },
   settings: {
+    filters: "Розширені фільтри", filterVerified: "Лише підтверджені профілі", filterHasPrompts: "Лише з відповідями на питання", filterIntentions: "Що шукає",
     title: 'Налаштування', discovery: 'Пошук', maxDistance: 'Максимальна відстань', ageRange: 'Вік',
     globalMode: 'Глобальний режим', globalModeHint: 'Люди з усього світу',
     passport: 'Паспорт', passportHint: 'Знайомтеся в будь-якому місті світу', passportCurrent: 'Моє поточне місцезнаходження',
@@ -82,6 +89,7 @@ const uk = {
     premiumOnly: 'Преміум',
   },
   premium: {
+    monthly: "Місяць", yearly: "Рік", save: "Заощадьте {{percent}}%", billedYearly: "{{price}} на рік",
     title: 'Lumi Premium', subtitle: "Lumi безкоштовний. Підписка додає охоплення, контроль і приватність. Скасувати можна будь-коли.",
     perMonth: '/міс.', current: 'Поточний план', choose: 'Обрати {{plan}}', upgrade: 'Покращити',
     activeUntil: 'Активний до {{date}}', success: 'Ласкаво просимо до {{plan}}! ✨', cancelled: 'Покупку скасовано',
@@ -92,6 +100,7 @@ const uk = {
     buy: 'Купити', credits: 'У вас: {{count}}', mostPopular: 'Найпопулярніший', bestValue: 'Найвигідніший',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Розширені фільтри", topPicks: "Щоденні Top Picks", readReceipts: "Позначки про прочитання",
       unlimitedLikes: 'Безлімітні лайки', rewind: 'Безлімітне повернення', passport: 'Паспорт у будь-яку точку світу',
       hideAds: 'Приховати вік і відстань', seeLikes: 'Кому ви подобаєтеся',
       superLikes: 'Суперлайків на день: {{count}}', boosts: 'Безкоштовних бустів на місяць: {{count}}',

@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { api, imageFormData } from '@/lib/api';
-import { colors, gradients, radius, space } from '@/lib/theme';
+import { colors, gradients, radius, space, font } from '@/lib/theme';
 import type { Me, Photo } from '@/lib/types';
 import { errorMessage } from '@/i18n';
 import { notify } from '@/lib/notify';
@@ -107,5 +107,5 @@ const styles = StyleSheet.create({
     position: 'absolute', top: 6, left: 6, width: 20, height: 20, borderRadius: 10,
     backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
   },
-  hint: { color: colors.textFaint, fontSize: 12, width: '100%' },
+  hint: { color: colors.textFaint, fontSize: 12, width: '100%', fontFamily: font.body },
 });

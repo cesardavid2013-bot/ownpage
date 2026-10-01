@@ -12,11 +12,15 @@ const id = {
     terms: 'Dengan melanjutkan, kamu menyetujui Ketentuan dan Kebijakan Privasi kami. Kamu harus berusia 18 tahun atau lebih.',
   },
   auth: {
+    loginSubtitle: "Senang bertemu lagi.",
     loginTitle: 'Selamat datang kembali', registerTitle: 'Buat akunmu',
     email: 'Email', password: 'Kata sandi', passwordHint: 'Minimal 8 karakter',
     name: 'Nama depan', birthdate: 'Tanggal lahir', birthdateHint: 'YYYY-MM-DD',
     iAm: 'Saya', showMe: 'Tampilkan', login: 'Masuk', register: 'Daftar', logout: 'Keluar',
     noAccount: 'Belum punya akun? Daftar', hasAccount: 'Sudah punya akun? Masuk',
+  },
+  register: {
+    stepName: "Siapa nama depanmu?", stepBirthday: "Kapan ulang tahunmu?", stepBirthdayHint: "Usiamu tampil di profil. Tanggal lahirmu tidak.", stepGender: "Bagaimana kamu mengidentifikasi diri?", stepShowMe: "Siapa yang ingin kamu temui?", stepAccount: "Langkah terakhir: akunmu", youAre: "Usiamu {{age}}",
   },
   gender: { man: 'Pria', woman: 'Wanita', nonbinary: 'Nonbiner', men: 'Pria', women: 'Wanita', everyone: 'Semua' },
   lookingFor: {
@@ -44,6 +48,7 @@ const id = {
     sendMessage: 'Kirim pesan', keepSwiping: 'Terus geser',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Dipilih untukmu hari ini. Yang baru tengah malam.", topPicksLocked: "Dapatkan pilihan harian orang paling cocok denganmu bersama Gold.",
     title: 'Suka', subtitle: 'Orang yang sudah menyukaimu',
     lockedTitle: '{{count}} orang menyukaimu',
     lockedSubtitle: 'Upgrade ke Gold untuk melihat siapa yang menyukaimu dan langsung match.',
@@ -51,6 +56,7 @@ const id = {
     sent: 'Suka terkirim',
   },
   chats: {
+    icebreakers: "Bingung mau bilang apa?", iceAbout: "Aku suka jawabanmu untuk “{{prompt}}”. Ceritakan lagi?", ice1: "Dua kebenaran dan satu kebohongan. Mulai.", ice2: "Apa hal terbaik yang terjadi padamu minggu ini?", ice3: "Kopi atau minum: seperti apa kencan pertama kita?", today: "Hari ini", yesterday: "Kemarin", liked: "Disukai",
     title: 'Obrolan', newMatches: 'Match baru', messages: 'Pesan',
     empty: 'Belum ada match. Terus geser — orang yang tepat ada di luar sana.', startConversation: 'Sapa {{name}} 👋',
     you: 'Kamu: ', typing: 'mengetik…', placeholder: 'Tulis pesan', unmatch: 'Batalkan match',
@@ -69,6 +75,7 @@ const id = {
   },
   report: { fake: 'Profil palsu', inappropriate: 'Konten tidak pantas', harassment: 'Pelecehan', spam: 'Spam atau penipuan', underage: 'Tampak di bawah 18 tahun', other: 'Lainnya' },
   settings: {
+    filters: "Filter lanjutan", filterVerified: "Hanya profil terverifikasi", filterHasPrompts: "Hanya yang menjawab pertanyaan", filterIntentions: "Yang dicari",
     title: 'Pengaturan', discovery: 'Penjelajahan', maxDistance: 'Jarak maksimum', ageRange: 'Rentang usia',
     globalMode: 'Mode global', globalModeHint: 'Lihat orang dari seluruh dunia',
     passport: 'Paspor', passportHint: 'Geser di kota mana pun di dunia', passportCurrent: 'Memakai lokasiku saat ini',
@@ -81,6 +88,7 @@ const id = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Bulanan", yearly: "Tahunan", save: "Hemat {{percent}}%", billedYearly: "{{price}} ditagih per tahun",
     title: 'Lumi Premium', subtitle: "Lumi gratis. Keanggotaan menambah jangkauan, kendali, dan privasi. Batalkan kapan saja.",
     perMonth: '/bulan', current: 'Paket saat ini', choose: 'Pilih {{plan}}', upgrade: 'Upgrade',
     activeUntil: 'Aktif hingga {{date}}', success: 'Selamat datang di {{plan}}! ✨', cancelled: 'Pembelian dibatalkan',
@@ -91,6 +99,7 @@ const id = {
     buy: 'Beli', credits: 'Kamu punya {{count}}', mostPopular: 'Paling populer', bestValue: 'Paling hemat',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Filter lanjutan", topPicks: "Top Picks harian", readReceipts: "Tanda dibaca",
       unlimitedLikes: 'Suka tanpa batas', rewind: 'Urungkan tanpa batas', passport: 'Paspor ke lokasi mana pun',
       hideAds: 'Sembunyikan usia & jarak', seeLikes: 'Lihat siapa yang menyukaimu',
       superLikes: '{{count}} Super Like per hari', boosts: '{{count}} Boost gratis per bulan',

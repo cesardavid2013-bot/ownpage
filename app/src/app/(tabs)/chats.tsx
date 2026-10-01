@@ -87,19 +87,18 @@ export default function Chats() {
 
 const styles = StyleSheet.create({
   section: {
-    color: colors.primary, fontWeight: '800', fontSize: 13, textTransform: 'uppercase', letterSpacing: 1,
-    paddingHorizontal: space(5), marginTop: space(3), marginBottom: space(3),
-  },
+    color: colors.gold, fontSize: 11, fontFamily: font.semibold, textTransform: 'uppercase', letterSpacing: 2.2,
+    paddingHorizontal: space(5), marginTop: space(3), marginBottom: space(3) },
   freshRow: { paddingHorizontal: space(5), gap: space(4) },
   fresh: { alignItems: 'center', width: 84, gap: 6 },
   freshRing: { width: 80, height: 80, borderRadius: 40, padding: 3, alignItems: 'center', justifyContent: 'center' },
   freshPhoto: { width: 74, height: 74, borderRadius: 37, borderWidth: 3, borderColor: colors.bg, backgroundColor: colors.card },
-  freshName: { color: colors.text, fontWeight: '600', fontSize: 13 },
+  freshName: { color: colors.text, fontSize: 13, fontFamily: font.semibold },
   row: { flexDirection: 'row', alignItems: 'center', gap: space(3.5), paddingHorizontal: space(5), paddingVertical: space(3) },
   avatar: { width: 62, height: 62, borderRadius: 31, backgroundColor: colors.card },
   name: { color: colors.text, fontFamily: font.display, fontSize: 21 },
-  preview: { color: colors.textMuted, fontSize: 15 },
-  previewUnread: { color: colors.text, fontWeight: '600' },
+  preview: { color: colors.textMuted, fontSize: 15, fontFamily: font.body },
+  previewUnread: { color: colors.text, fontFamily: font.semibold },
   unread: { minWidth: 22, height: 22, borderRadius: 11, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 6 },
-  unreadText: { color: colors.onPrimary, fontWeight: '800', fontSize: 12 },
+  unreadText: { color: colors.onPrimary, fontSize: 12, fontFamily: font.bold },
 });

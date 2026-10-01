@@ -12,11 +12,15 @@ const pt = {
     terms: 'Ao continuar, você concorda com nossos Termos e Política de Privacidade. Você precisa ter 18 anos ou mais.',
   },
   auth: {
+    loginSubtitle: "Que bom te ver de novo.",
     loginTitle: 'Bem-vindo de volta', registerTitle: 'Crie sua conta',
     email: 'E-mail', password: 'Senha', passwordHint: 'Pelo menos 8 caracteres',
     name: 'Nome', birthdate: 'Data de nascimento', birthdateHint: 'AAAA-MM-DD',
     iAm: 'Eu sou', showMe: 'Mostrar', login: 'Entrar', register: 'Cadastrar', logout: 'Sair',
     noAccount: 'Não tem conta? Cadastre-se', hasAccount: 'Já tem conta? Entre',
+  },
+  register: {
+    stepName: "Qual é o seu nome?", stepBirthday: "Quando é o seu aniversário?", stepBirthdayHint: "Sua idade aparece no perfil. Seu aniversário, não.", stepGender: "Como você se identifica?", stepShowMe: "Quem você gostaria de conhecer?", stepAccount: "Último passo: sua conta", youAre: "Você tem {{age}} anos",
   },
   gender: { man: 'Homem', woman: 'Mulher', nonbinary: 'Não binário', men: 'Homens', women: 'Mulheres', everyone: 'Todos' },
   lookingFor: {
@@ -44,6 +48,7 @@ const pt = {
     sendMessage: 'Enviar mensagem', keepSwiping: 'Continuar deslizando',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Escolhidos para você hoje. Novos à meia-noite.", topPicksLocked: "Receba todo dia uma seleção das pessoas mais compatíveis com o Gold.",
     title: 'Curtidas', subtitle: 'Pessoas que já curtiram você',
     lockedTitle_one: '{{count}} pessoa curtiu você', lockedTitle_other: '{{count}} pessoas curtiram você',
     lockedSubtitle: 'Assine o Gold para ver quem curtiu você e dar match na hora.',
@@ -51,6 +56,7 @@ const pt = {
     sent: 'Curtidas enviadas',
   },
   chats: {
+    icebreakers: "Sem saber o que dizer?", iceAbout: "Adorei sua resposta para “{{prompt}}”. Me conta mais?", ice1: "Duas verdades e uma mentira. Vai.", ice2: "Qual foi a melhor coisa que te aconteceu esta semana?", ice3: "Café ou um drink: como seria nosso primeiro encontro?", today: "Hoje", yesterday: "Ontem", liked: "Curtiu",
     title: 'Conversas', newMatches: 'Novos matches', messages: 'Mensagens',
     empty: 'Nenhum match ainda. Continue deslizando: sua pessoa está por aí.', startConversation: 'Diga oi para {{name}} 👋',
     you: 'Você: ', typing: 'digitando…', placeholder: 'Digite uma mensagem', unmatch: 'Desfazer match',
@@ -69,6 +75,7 @@ const pt = {
   },
   report: { fake: 'Perfil falso', inappropriate: 'Conteúdo impróprio', harassment: 'Assédio', spam: 'Spam ou golpe', underage: 'Parece ter menos de 18', other: 'Outro' },
   settings: {
+    filters: "Filtros avançados", filterVerified: "Só perfis verificados", filterHasPrompts: "Só quem respondeu perguntas", filterIntentions: "O que procura",
     title: 'Configurações', discovery: 'Descoberta', maxDistance: 'Distância máxima', ageRange: 'Faixa de idade',
     globalMode: 'Modo global', globalModeHint: 'Veja pessoas do mundo todo',
     passport: 'Passaporte', passportHint: 'Deslize em qualquer cidade do mundo', passportCurrent: 'Usando minha localização atual',
@@ -81,6 +88,7 @@ const pt = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Mensal", yearly: "Anual", save: "Economize {{percent}}%", billedYearly: "{{price}} cobrado por ano",
     title: 'Lumi Premium', subtitle: "O Lumi é gratuito. A assinatura traz mais alcance, controle e privacidade. Cancele quando quiser.",
     perMonth: '/mês', current: 'Plano atual', choose: 'Escolher {{plan}}', upgrade: 'Fazer upgrade',
     activeUntil: 'Ativo até {{date}}', success: 'Bem-vindo ao {{plan}}! ✨', cancelled: 'Compra cancelada',
@@ -91,6 +99,7 @@ const pt = {
     buy: 'Comprar', credits: 'Você tem {{count}}', mostPopular: 'Mais popular', bestValue: 'Melhor custo-benefício',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Filtros avançados", topPicks: "Top Picks diários", readReceipts: "Confirmação de leitura",
       unlimitedLikes: 'Curtidas ilimitadas', rewind: 'Voltar ilimitado', passport: 'Passaporte para qualquer lugar',
       hideAds: 'Oculte idade e distância', seeLikes: 'Veja quem curtiu você',
       superLikes_one: '{{count}} Super Like por dia', superLikes_other: '{{count}} Super Likes por dia',

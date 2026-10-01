@@ -12,11 +12,15 @@ const ru = {
     terms: 'Продолжая, вы принимаете наши Условия и Политику конфиденциальности. Вам должно быть 18 лет или больше.',
   },
   auth: {
+    loginSubtitle: "Рады видеть вас снова.",
     loginTitle: 'С возвращением', registerTitle: 'Создайте аккаунт',
     email: 'Эл. почта', password: 'Пароль', passwordHint: 'Не менее 8 символов',
     name: 'Имя', birthdate: 'Дата рождения', birthdateHint: 'ГГГГ-ММ-ДД',
     iAm: 'Я', showMe: 'Показывать', login: 'Войти', register: 'Зарегистрироваться', logout: 'Выйти',
     noAccount: 'Нет аккаунта? Зарегистрируйтесь', hasAccount: 'Уже есть аккаунт? Войдите',
+  },
+  register: {
+    stepName: "Как вас зовут?", stepBirthday: "Когда у вас день рождения?", stepBirthdayHint: "Возраст виден в профиле. Дата рождения — нет.", stepGender: "Как вы себя определяете?", stepShowMe: "С кем вы хотите познакомиться?", stepAccount: "Последний шаг: ваш аккаунт", youAre: "Вам {{age}}",
   },
   gender: { man: 'Мужчина', woman: 'Женщина', nonbinary: 'Небинарный человек', men: 'Мужчин', women: 'Женщин', everyone: 'Всех' },
   lookingFor: {
@@ -44,6 +48,7 @@ const ru = {
     sendMessage: 'Написать сообщение', keepSwiping: 'Продолжить',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Подобраны для вас сегодня. Новые — в полночь.", topPicksLocked: "С Gold каждый день — подборка самых подходящих вам людей.",
     title: 'Лайки', subtitle: 'Люди, которым вы уже нравитесь',
     lockedTitle_one: 'Вы нравитесь {{count}} человеку', lockedTitle_few: 'Вы нравитесь {{count}} людям',
     lockedTitle_many: 'Вы нравитесь {{count}} людям', lockedTitle_other: 'Вы нравитесь {{count}} людям',
@@ -52,6 +57,7 @@ const ru = {
     sent: 'Отправленные лайки',
   },
   chats: {
+    icebreakers: "Не знаете, что написать?", iceAbout: "Мне понравился твой ответ на «{{prompt}}». Расскажешь подробнее?", ice1: "Две правды и одна ложь. Начинай.", ice2: "Что самое лучшее случилось с тобой на этой неделе?", ice3: "Кофе или бокал вина: каким было бы наше первое свидание?", today: "Сегодня", yesterday: "Вчера", liked: "Нравится",
     title: 'Чаты', newMatches: 'Новые пары', messages: 'Сообщения',
     empty: 'Пар пока нет. Продолжайте — ваш человек где-то рядом.', startConversation: 'Поздоровайтесь с {{name}} 👋',
     you: 'Вы: ', typing: 'печатает…', placeholder: 'Напишите сообщение', unmatch: 'Удалить пару',
@@ -70,6 +76,7 @@ const ru = {
   },
   report: { fake: 'Фейковый профиль', inappropriate: 'Неприемлемый контент', harassment: 'Домогательства', spam: 'Спам или мошенничество', underage: 'Похоже, младше 18', other: 'Другое' },
   settings: {
+    filters: "Расширенные фильтры", filterVerified: "Только подтверждённые профили", filterHasPrompts: "Только с ответами на вопросы", filterIntentions: "Что ищет",
     title: 'Настройки', discovery: 'Поиск', maxDistance: 'Максимальное расстояние', ageRange: 'Возраст',
     globalMode: 'Глобальный режим', globalModeHint: 'Люди со всего мира',
     passport: 'Паспорт', passportHint: 'Знакомьтесь в любом городе мира', passportCurrent: 'Моё текущее местоположение',
@@ -82,6 +89,7 @@ const ru = {
     premiumOnly: 'Премиум',
   },
   premium: {
+    monthly: "Месяц", yearly: "Год", save: "Экономия {{percent}}%", billedYearly: "{{price}} в год",
     title: 'Lumi Premium', subtitle: "Lumi бесплатен. Подписка добавляет охват, контроль и приватность. Отменить можно когда угодно.",
     perMonth: '/мес.', current: 'Текущий план', choose: 'Выбрать {{plan}}', upgrade: 'Улучшить',
     activeUntil: 'Активен до {{date}}', success: 'Добро пожаловать в {{plan}}! ✨', cancelled: 'Покупка отменена',
@@ -92,6 +100,7 @@ const ru = {
     buy: 'Купить', credits: 'У вас: {{count}}', mostPopular: 'Самый популярный', bestValue: 'Выгоднее всего',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Расширенные фильтры", topPicks: "Ежедневные Top Picks", readReceipts: "Отметки о прочтении",
       unlimitedLikes: 'Безлимитные лайки', rewind: 'Безлимитный возврат', passport: 'Паспорт в любую точку мира',
       hideAds: 'Скрыть возраст и расстояние', seeLikes: 'Кому вы нравитесь',
       superLikes: 'Суперлайков в день: {{count}}', boosts: 'Бесплатных бустов в месяц: {{count}}',

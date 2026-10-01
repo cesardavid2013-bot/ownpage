@@ -12,11 +12,15 @@ const ar = {
     terms: 'بالمتابعة فإنك توافق على الشروط وسياسة الخصوصية. يجب أن يكون عمرك 18 عامًا أو أكثر.',
   },
   auth: {
+    loginSubtitle: "يسعدنا رؤيتك مجددًا.",
     loginTitle: 'مرحبًا بعودتك', registerTitle: 'أنشئ حسابك',
     email: 'البريد الإلكتروني', password: 'كلمة المرور', passwordHint: '8 أحرف على الأقل',
     name: 'الاسم الأول', birthdate: 'تاريخ الميلاد', birthdateHint: 'YYYY-MM-DD',
     iAm: 'أنا', showMe: 'أظهر لي', login: 'تسجيل الدخول', register: 'إنشاء حساب', logout: 'تسجيل الخروج',
     noAccount: 'ليس لديك حساب؟ أنشئ حسابًا', hasAccount: 'لديك حساب؟ سجّل الدخول',
+  },
+  register: {
+    stepName: "ما اسمك الأول؟", stepBirthday: "متى عيد ميلادك؟", stepBirthdayHint: "يظهر عمرك في ملفك. تاريخ ميلادك لا يظهر.", stepGender: "كيف تعرّف نفسك؟", stepShowMe: "من تودّ أن تتعرف إليه؟", stepAccount: "الخطوة الأخيرة: حسابك", youAre: "عمرك {{age}}",
   },
   gender: { man: 'رجل', woman: 'امرأة', nonbinary: 'غير ثنائي', men: 'الرجال', women: 'النساء', everyone: 'الجميع' },
   lookingFor: {
@@ -44,6 +48,7 @@ const ar = {
     sendMessage: 'إرسال رسالة', keepSwiping: 'متابعة التصفح',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "اخترناهم لك اليوم. جدد عند منتصف الليل.", topPicksLocked: "احصل يوميًا على مجموعة من أكثر الأشخاص توافقًا معك مع Gold.",
     title: 'الإعجابات', subtitle: 'أشخاص معجبون بك بالفعل',
     lockedTitle: 'عدد المعجبين بك: {{count}}',
     lockedSubtitle: 'اشترك في Gold لترى من أُعجب بك وتتطابق فورًا.',
@@ -51,6 +56,7 @@ const ar = {
     sent: 'الإعجابات المرسلة',
   },
   chats: {
+    icebreakers: "لا تعرف ماذا تقول؟", iceAbout: "أعجبتني إجابتك عن «{{prompt}}». أخبرني المزيد؟", ice1: "حقيقتان وكذبة. ابدأ.", ice2: "ما أجمل ما حدث لك هذا الأسبوع؟", ice3: "قهوة أم مشروب: كيف سيكون موعدنا الأول؟", today: "اليوم", yesterday: "أمس", liked: "أعجبك",
     title: 'المحادثات', newMatches: 'تطابقات جديدة', messages: 'الرسائل',
     empty: 'لا توجد تطابقات بعد. واصل التصفح — الشخص المناسب في مكان ما.', startConversation: 'قل مرحبًا لـ{{name}} 👋',
     you: 'أنت: ', typing: 'يكتب…', placeholder: 'اكتب رسالة', unmatch: 'إلغاء التطابق',
@@ -69,6 +75,7 @@ const ar = {
   },
   report: { fake: 'ملف مزيف', inappropriate: 'محتوى غير لائق', harassment: 'تحرش', spam: 'رسائل مزعجة أو احتيال', underage: 'يبدو أقل من 18 عامًا', other: 'أخرى' },
   settings: {
+    filters: "فلاتر متقدمة", filterVerified: "الملفات الموثّقة فقط", filterHasPrompts: "فقط من أجابوا عن الأسئلة", filterIntentions: "ما يبحث عنه",
     title: 'الإعدادات', discovery: 'الاستكشاف', maxDistance: 'أقصى مسافة', ageRange: 'الفئة العمرية',
     globalMode: 'الوضع العالمي', globalModeHint: 'تعرّف على أشخاص من كل أنحاء العالم',
     passport: 'جواز السفر', passportHint: 'تصفح في أي مدينة في العالم', passportCurrent: 'استخدام موقعي الحالي',
@@ -81,6 +88,7 @@ const ar = {
     premiumOnly: 'مميز',
   },
   premium: {
+    monthly: "شهريًا", yearly: "سنويًا", save: "وفّر {{percent}}٪", billedYearly: "{{price}} تُدفع سنويًا",
     title: 'Lumi Premium', subtitle: "Lumi مجاني. تضيف العضوية مدى أوسع وتحكمًا وخصوصية. ألغِها متى شئت.",
     perMonth: '/شهريًا', current: 'الخطة الحالية', choose: 'اختر {{plan}}', upgrade: 'ترقية',
     activeUntil: 'نشط حتى {{date}}', success: 'مرحبًا بك في {{plan}}! ✨', cancelled: 'تم إلغاء الشراء',
@@ -91,6 +99,7 @@ const ar = {
     buy: 'شراء', credits: 'لديك {{count}}', mostPopular: 'الأكثر شيوعًا', bestValue: 'أفضل قيمة',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "فلاتر متقدمة", topPicks: "Top Picks يوميًا", readReceipts: "إشعارات القراءة",
       unlimitedLikes: 'إعجابات غير محدودة', rewind: 'تراجع غير محدود', passport: 'جواز سفر إلى أي مكان',
       hideAds: 'إخفاء العمر والمسافة', seeLikes: 'اعرف من أُعجب بك',
       superLikes: 'إعجابات فائقة يوميًا: {{count}}', boosts: 'تعزيزات مجانية شهريًا: {{count}}',

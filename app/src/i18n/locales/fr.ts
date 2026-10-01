@@ -12,11 +12,15 @@ const fr = {
     terms: "En continuant, vous acceptez nos Conditions et notre Politique de confidentialité. Vous devez avoir 18 ans ou plus.",
   },
   auth: {
+    loginSubtitle: "Ravi de vous revoir.",
     loginTitle: 'Bon retour parmi nous', registerTitle: 'Créez votre compte',
     email: 'E-mail', password: 'Mot de passe', passwordHint: 'Au moins 8 caractères',
     name: 'Prénom', birthdate: 'Date de naissance', birthdateHint: 'AAAA-MM-JJ',
     iAm: 'Je suis', showMe: 'Me montrer', login: 'Se connecter', register: "S'inscrire", logout: 'Se déconnecter',
     noAccount: "Pas de compte ? Inscrivez-vous", hasAccount: 'Déjà un compte ? Connectez-vous',
+  },
+  register: {
+    stepName: "Quel est votre prénom ?", stepBirthday: "Quelle est votre date de naissance ?", stepBirthdayHint: "Votre âge est visible sur votre profil. Votre date de naissance, non.", stepGender: "Comment vous identifiez-vous ?", stepShowMe: "Qui aimeriez-vous rencontrer ?", stepAccount: "Dernière étape : votre compte", youAre: "Vous avez {{age}} ans",
   },
   gender: { man: 'Homme', woman: 'Femme', nonbinary: 'Non binaire', men: 'Hommes', women: 'Femmes', everyone: 'Tout le monde' },
   lookingFor: {
@@ -44,6 +48,7 @@ const fr = {
     sendMessage: 'Envoyer un message', keepSwiping: 'Continuer à swiper',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Choisis pour vous aujourd’hui. Nouveaux à minuit.", topPicksLocked: "Recevez chaque jour une sélection de vos profils les plus compatibles avec Gold.",
     title: 'Likes', subtitle: 'Les personnes qui vous apprécient déjà',
     lockedTitle_one: '{{count}} personne vous a liké', lockedTitle_other: '{{count}} personnes vous ont liké',
     lockedSubtitle: 'Passez à Gold pour voir qui vous a liké et matcher instantanément.',
@@ -51,6 +56,7 @@ const fr = {
     sent: 'Likes envoyés',
   },
   chats: {
+    icebreakers: "Vous ne savez pas quoi dire ?", iceAbout: "J’ai adoré ta réponse à « {{prompt}} ». Tu m’en dis plus ?", ice1: "Deux vérités et un mensonge. À toi.", ice2: "Quelle est la meilleure chose qui t’est arrivée cette semaine ?", ice3: "Café ou un verre : ce serait quoi, notre premier rendez-vous ?", today: "Aujourd’hui", yesterday: "Hier", liked: "Aimé",
     title: 'Messages', newMatches: 'Nouveaux matchs', messages: 'Conversations',
     empty: 'Pas encore de match. Continuez à swiper : la bonne personne est quelque part.', startConversation: 'Dites bonjour à {{name}} 👋',
     you: 'Vous : ', typing: 'écrit…', placeholder: 'Écrire un message', unmatch: 'Annuler le match',
@@ -69,6 +75,7 @@ const fr = {
   },
   report: { fake: 'Faux profil', inappropriate: 'Contenu inapproprié', harassment: 'Harcèlement', spam: 'Spam ou arnaque', underage: 'Semble avoir moins de 18 ans', other: 'Autre' },
   settings: {
+    filters: "Filtres avancés", filterVerified: "Profils vérifiés uniquement", filterHasPrompts: "Seulement ceux qui ont répondu aux questions", filterIntentions: "Ses intentions",
     title: 'Réglages', discovery: 'Découverte', maxDistance: 'Distance maximale', ageRange: "Tranche d'âge",
     globalMode: 'Mode global', globalModeHint: 'Voir des personnes du monde entier',
     passport: 'Passeport', passportHint: "Swipez dans n'importe quelle ville du monde", passportCurrent: 'Ma position actuelle',
@@ -81,6 +88,7 @@ const fr = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Mensuel", yearly: "Annuel", save: "Économisez {{percent}} %", billedYearly: "{{price}} facturé par an",
     title: 'Lumi Premium', subtitle: "Lumi est gratuit. L’abonnement ajoute visibilité, contrôle et discrétion. Résiliable à tout moment.",
     perMonth: '/mois', current: 'Offre actuelle', choose: 'Choisir {{plan}}', upgrade: 'Passer à Premium',
     activeUntil: "Actif jusqu'au {{date}}", success: 'Bienvenue dans {{plan}} ! ✨', cancelled: 'Achat annulé',
@@ -91,6 +99,7 @@ const fr = {
     buy: 'Acheter', credits: 'Vous en avez {{count}}', mostPopular: 'Le plus populaire', bestValue: 'Meilleure offre',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Filtres avancés", topPicks: "Top Picks du jour", readReceipts: "Accusés de lecture",
       unlimitedLikes: 'Likes illimités', rewind: 'Retours en arrière illimités', passport: 'Passeport vers n’importe quelle ville',
       hideAds: 'Masquer âge et distance', seeLikes: 'Voir qui vous a liké',
       superLikes_one: '{{count}} Super Like par jour', superLikes_other: '{{count}} Super Likes par jour',

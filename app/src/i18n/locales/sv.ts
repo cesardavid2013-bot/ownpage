@@ -12,11 +12,15 @@ const sv = {
     terms: 'Genom att fortsätta godkänner du våra Villkor och vår Integritetspolicy. Du måste vara minst 18 år.',
   },
   auth: {
+    loginSubtitle: "Kul att se dig igen.",
     loginTitle: 'Välkommen tillbaka', registerTitle: 'Skapa ditt konto',
     email: 'E-post', password: 'Lösenord', passwordHint: 'Minst 8 tecken',
     name: 'Förnamn', birthdate: 'Födelsedag', birthdateHint: 'ÅÅÅÅ-MM-DD',
     iAm: 'Jag är', showMe: 'Visa mig', login: 'Logga in', register: 'Registrera dig', logout: 'Logga ut',
     noAccount: 'Inget konto? Registrera dig', hasAccount: 'Har du redan ett konto? Logga in',
+  },
+  register: {
+    stepName: "Vad heter du?", stepBirthday: "När fyller du år?", stepBirthdayHint: "Din ålder visas på profilen. Din födelsedag gör det inte.", stepGender: "Hur identifierar du dig?", stepShowMe: "Vem vill du träffa?", stepAccount: "Sista steget: ditt konto", youAre: "Du är {{age}}",
   },
   gender: { man: 'Man', woman: 'Kvinna', nonbinary: 'Icke-binär', men: 'Män', women: 'Kvinnor', everyone: 'Alla' },
   lookingFor: {
@@ -44,6 +48,7 @@ const sv = {
     sendMessage: 'Skicka ett meddelande', keepSwiping: 'Fortsätt swipea',
   },
   likes: {
+    topPicks: "Top Picks", topPicksSubtitle: "Utvalda för dig i dag. Nya vid midnatt.", topPicksLocked: "Få dagligen ett urval av dina mest kompatibla personer med Gold.",
     title: 'Likes', subtitle: 'Personer som redan gillar dig',
     lockedTitle_one: '{{count}} person gillar dig', lockedTitle_other: '{{count}} personer gillar dig',
     lockedSubtitle: 'Uppgradera till Gold för att se vem som gillar dig och matcha direkt.',
@@ -51,6 +56,7 @@ const sv = {
     sent: 'Skickade likes',
   },
   chats: {
+    icebreakers: "Vet du inte vad du ska skriva?", iceAbout: "Jag gillade ditt svar på ”{{prompt}}”. Berätta mer?", ice1: "Två sanningar och en lögn. Kör.", ice2: "Vad är det bästa som hänt dig den här veckan?", ice3: "Kaffe eller en drink: hur skulle vår första dejt se ut?", today: "I dag", yesterday: "I går", liked: "Gillad",
     title: 'Chattar', newMatches: 'Nya matchningar', messages: 'Meddelanden',
     empty: 'Inga matchningar än. Fortsätt swipea – din person finns där ute.', startConversation: 'Säg hej till {{name}} 👋',
     you: 'Du: ', typing: 'skriver…', placeholder: 'Skriv ett meddelande', unmatch: 'Ta bort matchning',
@@ -69,6 +75,7 @@ const sv = {
   },
   report: { fake: 'Falsk profil', inappropriate: 'Olämpligt innehåll', harassment: 'Trakasserier', spam: 'Spam eller bedrägeri', underage: 'Verkar vara under 18', other: 'Annat' },
   settings: {
+    filters: "Avancerade filter", filterVerified: "Endast verifierade profiler", filterHasPrompts: "Endast de som svarat på frågor", filterIntentions: "Vad de söker",
     title: 'Inställningar', discovery: 'Upptäck', maxDistance: 'Maximalt avstånd', ageRange: 'Åldersspann',
     globalMode: 'Globalt läge', globalModeHint: 'Se personer från hela världen',
     passport: 'Pass', passportHint: 'Swipea i vilken stad som helst i världen', passportCurrent: 'Använder min nuvarande plats',
@@ -81,6 +88,7 @@ const sv = {
     premiumOnly: 'Premium',
   },
   premium: {
+    monthly: "Månadsvis", yearly: "Årsvis", save: "Spara {{percent}} %", billedYearly: "{{price}} faktureras årsvis",
     title: 'Lumi Premium', subtitle: "Lumi är gratis. Medlemskap ger mer räckvidd, kontroll och integritet. Säg upp när du vill.",
     perMonth: '/mån', current: 'Nuvarande plan', choose: 'Välj {{plan}}', upgrade: 'Uppgradera',
     activeUntil: 'Aktiv till {{date}}', success: 'Välkommen till {{plan}}! ✨', cancelled: 'Köpet avbröts',
@@ -91,6 +99,7 @@ const sv = {
     buy: 'Köp', credits: 'Du har {{count}}', mostPopular: 'Mest populär', bestValue: 'Bäst värde',
     plans: { plus: 'Lumi Plus', gold: 'Lumi Gold', platinum: 'Lumi Platinum' },
     features: {
+      advancedFilters: "Avancerade filter", topPicks: "Dagliga Top Picks", readReceipts: "Läskvitton",
       unlimitedLikes: 'Obegränsat med likes', rewind: 'Obegränsat antal ångringar', passport: 'Pass till vilken plats som helst',
       hideAds: 'Dölj ålder och avstånd', seeLikes: 'Se vem som gillar dig',
       superLikes_one: '{{count}} Super Like per dag', superLikes_other: '{{count}} Super Likes per dag',

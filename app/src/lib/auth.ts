@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import { api, refreshSession, tokens } from './api';
+import { api, refreshSessionDetailed, tokens } from './api';
 import type { Me } from './types';
 
-type Status = 'loading' | 'signedOut' | 'signedIn';
+type Status = 'loading' | 'signedOut' | 'signedIn' | 'offline';
 
 interface AuthState {
   status: Status;
@@ -32,15 +32,25 @@ export const useAuth = create<AuthState>((set, get) => ({
       tokens.clear();
       set({ status: 'signedOut', user: null });
     });
-    if (!(await refreshSession())) {
+    let result = await refreshSessionDetailed();
+    // A flaky network or a busy server shouldn't sign anyone out: retry with backoff first.
+    for (let attempt = 0; result === 'unreachable' && attempt < 3; attempt++) {
+      await new Promise((r) => setTimeout(r, 800 * 2 ** attempt));
+      result = await refreshSessionDetailed();
+    }
+    if (result === 'unreachable') {
+      set({ status: 'offline', user: null });
+      return;
+    }
+    if (result !== 'ok') {
       set({ status: 'signedOut', user: null });
       return;
     }
     try {
       const user = await api<Me>('/me');
       set({ status: 'signedIn', user });
-    } catch {
-      set({ status: 'signedOut', user: null });
+    } catch (e) {
+      set({ status: (e as { code?: string }).code === 'network_error' ? 'offline' : 'signedOut', user: null });
     }
   },
 

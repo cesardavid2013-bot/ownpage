@@ -1,17 +1,18 @@
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, ScrollView, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Screen } from '@/components/Screen';
+import { TopPicks } from '@/components/TopPicks';
 import { GridSkeleton } from '@/components/Skeleton';
 import { Button, Chip, Muted, Row, Title } from '@/components/ui';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { useRealtime } from '@/lib/realtime';
-import { colors, gradients, radius, space } from '@/lib/theme';
+import { colors, gradients, radius, space, font } from '@/lib/theme';
 import type { Profile } from '@/lib/types';
 
 type Tab = 'received' | 'sent';
@@ -61,9 +62,13 @@ export default function Likes() {
       ) : null}
 
       {!data ? <GridSkeleton /> : data.locked ? (
-        <Locked count={data.count} />
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space(8) }}>
+          <TopPicks />
+          <Locked count={data.count} />
+        </ScrollView>
       ) : (
         <FlatList
+          ListHeaderComponent={tab === 'received' ? <TopPicks /> : null}
           data={data.profiles}
           keyExtractor={(p) => p.id}
           numColumns={2}
@@ -100,7 +105,7 @@ function Locked({ count }: { count: number }) {
         ))}
       </View>
       <View style={{ gap: space(2) }}>
-        <Title style={{ fontSize: 24, textAlign: 'center' }}>{t('likes.lockedTitle', { count })}</Title>
+        <Title style={{ fontSize: 24, textAlign: 'center', fontFamily: font.body }}>{t('likes.lockedTitle', { count })}</Title>
         <Muted style={{ textAlign: 'center' }}>{t('likes.lockedSubtitle')}</Muted>
       </View>
       <Button title={t('likes.seeWho')} variant="gold" icon="diamond" onPress={() => router.push('/premium')} />
@@ -111,8 +116,8 @@ function Locked({ count }: { count: number }) {
 const styles = StyleSheet.create({
   tile: { flex: 1, aspectRatio: 0.75, borderRadius: radius.lg, overflow: 'hidden', backgroundColor: colors.card, maxWidth: '50%' },
   tileInfo: { position: 'absolute', bottom: 0, left: 0, right: 0, padding: space(3) },
-  tileName: { color: '#fff', fontWeight: '800', fontSize: 17 },
-  tileNote: { color: '#fff', fontStyle: 'italic', fontSize: 12, marginTop: 2 },
+  tileName: { color: '#fff', fontSize: 17, fontFamily: font.bold },
+  tileNote: { color: '#fff', fontStyle: 'italic', fontSize: 12, marginTop: 2, fontFamily: font.body },
   super: {
     position: 'absolute', top: 8, right: 8, width: 24, height: 24, borderRadius: 12, backgroundColor: colors.info,
     alignItems: 'center', justifyContent: 'center',
