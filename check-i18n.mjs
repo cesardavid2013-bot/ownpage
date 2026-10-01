@@ -11,7 +11,7 @@ const dict = ctx.window.LUMI_I18N;
 const langs = ctx.window.LUMI_LANGS.map((l) => l[0]);
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
 const used = new Set([...html.matchAll(/data-i18n(?:-html)?="([^"]+)"/g)].map((m) => m[1]));
-['store.apple', 'store.google', 'store.web', 'store.webBig', 'store.soon', 'demo.matchSub', 'footer.delete'].forEach((k) => used.add(k));
+['store.apple', 'store.google', 'store.web', 'store.webBig', 'store.soon', 'demo.matchSub', 'footer.delete', 'plan.save', 'plan.billed'].forEach((k) => used.add(k));
 
 let failed = false;
 for (const lang of langs) {

@@ -49,6 +49,7 @@
     });
     document.title = 'Lumi — ' + t(lang, 'hero.eyebrow');
     renderStores(lang);
+    renderPeriod(lang);
     try { localStorage.setItem(KEY, lang); } catch (e) {}
   }
 
@@ -61,6 +62,22 @@
     return '<a class="store' + (soon ? ' soon' : '') + '" ' + (soon ? 'aria-disabled="true"' : 'href="' + href + '" target="_blank" rel="noopener"') + '>' +
       icon + '<span><small>' + small + '</small><strong>' + big + '</strong></span></a>';
   }
+
+  // ---- Membership billing period (yearly is the default, like most premium brands) ----
+  var period = 'yearly';
+  function renderPeriod(lang) {
+    lang = lang || document.documentElement.lang;
+    document.querySelectorAll('.period button').forEach(function (b) { b.classList.toggle('on', b.dataset.period === period); b.setAttribute('aria-pressed', b.dataset.period === period); });
+    var save = document.querySelector('.period .save');
+    if (save) save.textContent = t(lang, 'plan.save').replace('{{percent}}', '50');
+    document.querySelectorAll('.tier .price strong').forEach(function (el) { el.textContent = el.dataset[period]; });
+    document.querySelectorAll('.tier .billed').forEach(function (el) {
+      el.textContent = period === 'yearly' ? t(lang, 'plan.billed').replace('{{price}}', el.dataset.billed) : '\u00a0';
+    });
+  }
+  document.querySelectorAll('.period button').forEach(function (b) {
+    b.addEventListener('click', function () { period = b.dataset.period; renderPeriod(); });
+  });
 
   function renderStores(lang) {
     var soon = t(lang, 'store.soon');
@@ -138,6 +155,16 @@
     size();
     if (reduceMotion()) frame(0); else requestAnimationFrame(frame);
   })();
+
+  // ---- Polyglot vignette: the same message in another language every few seconds ----
+  document.querySelectorAll('[data-rotate]').forEach(function (el) {
+    var lines = JSON.parse(el.getAttribute('data-rotate')), i = 0;
+    if (reduceMotion()) return;
+    setInterval(function () {
+      el.classList.add('swap');
+      setTimeout(function () { i = (i + 1) % lines.length; el.textContent = lines[i]; el.classList.remove('swap'); }, 280);
+    }, 2600);
+  });
 
   // ---- Interactive demo: swipe real-looking profiles right on the page ----
   (function demo() {
