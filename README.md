@@ -1,5 +1,7 @@
 # Lumi
 
+[![CI](https://github.com/cesardavid2013-bot/ownpage/actions/workflows/ci.yml/badge.svg)](https://github.com/cesardavid2013-bot/ownpage/actions/workflows/ci.yml)
+
 App de citas premium: web, iPhone y Android, 20 idiomas, 3 membresías de pago.
 
 | Carpeta    | Qué es |
@@ -16,8 +18,10 @@ Un único servidor sirve la API, la app web y el panel `/admin` en el mismo domi
 
 ### 1. Poner el servidor en línea (≈ 15 min, Render)
 
-1. Crea una cuenta en [render.com](https://render.com) y conecta tu GitHub.
-2. **New → Blueprint** → elige este repositorio. Render lee `render.yaml` y crea:
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/cesardavid2013-bot/ownpage)
+
+1. Pulsa el botón de arriba y entra con tu cuenta de GitHub (Render crea tu cuenta en ese momento).
+2. Pulsa **Deploy Blueprint**. Render lee `render.yaml` y crea:
    - la base de datos Postgres,
    - el servicio `lumi` (API + app web + `/admin`) con un disco de 5 GB para las fotos,
    - `JWT_SECRET` y `ADMIN_TOKEN` generados automáticamente.

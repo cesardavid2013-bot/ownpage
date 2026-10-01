@@ -1,0 +1,25 @@
+name: Website
+
+# Publishes website/ to GitHub Pages (gh-pages branch) whenever it changes.
+on:
+  push:
+    branches: ['claude/magical-edison-682w2w']
+    paths: ['website/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - run: node website/check-i18n.mjs
+      - name: Push website/ to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git subtree split --prefix website -b gh-pages-build
+          git push -f origin gh-pages-build:gh-pages
