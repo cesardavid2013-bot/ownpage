@@ -44,11 +44,15 @@ export interface UserRow {
   superlike_credits: number;
   last_active_at: Date;
   created_at: Date;
+  deleted_at: Date | null;
+  discoverable: boolean;
+  show_activity: boolean;
 }
 
 export interface Photo {
   id: string;
   url: string;
+  thumb: string | null;
   position: number;
 }
 
@@ -78,12 +82,12 @@ export async function photosFor(userIds: string[]): Promise<Map<string, Photo[]>
   const map = new Map<string, Photo[]>();
   if (!userIds.length) return map;
   const res = await query<Photo & { user_id: string }>(
-    'SELECT id, user_id, url, position FROM photos WHERE user_id = ANY($1::uuid[]) ORDER BY position, created_at',
+    'SELECT id, user_id, url, thumb_url AS thumb, position FROM photos WHERE user_id = ANY($1::uuid[]) ORDER BY position, created_at',
     [userIds],
   );
   for (const p of res.rows) {
     const list = map.get(p.user_id) ?? [];
-    list.push({ id: p.id, url: p.url, position: p.position });
+    list.push({ id: p.id, url: p.url, thumb: p.thumb, position: p.position });
     map.set(p.user_id, list);
   }
   return map;
@@ -125,8 +129,9 @@ export function publicProfile(u: UserRow, photos: Photo[], viewer?: UserRow | nu
     prompts: u.prompts ?? [],
     isVerified: u.is_verified,
     distanceKm: distance,
-    photos: photos.map((p) => ({ id: p.id, url: p.url })),
-    recentlyActive: Date.now() - new Date(u.last_active_at).getTime() < 24 * 3600 * 1000,
+    photos: photos.map((p) => ({ id: p.id, url: p.url, thumb: p.thumb ?? p.url })),
+    // Only shared when the member allows it; never a live "online now" claim.
+    recentlyActive: u.show_activity && Date.now() - new Date(u.last_active_at).getTime() < 24 * 3600 * 1000,
   };
 }
 
@@ -163,6 +168,8 @@ export async function privateProfile(u: UserRow) {
       filterVerified: u.filter_verified,
       filterHasPrompts: u.filter_has_prompts,
       filterLookingFor: u.filter_looking_for,
+      discoverable: u.discoverable,
+      showActivity: u.show_activity,
     },
     plan,
     planExpiresAt: plan === 'free' ? null : u.plan_expires_at,
@@ -177,6 +184,26 @@ export async function privateProfile(u: UserRow) {
       superLikesRemaining: Math.max(0, ent.dailySuperLikes - superUsed) + u.superlike_credits,
     },
   };
+}
+
+/**
+ * Whether `viewer` may open `target`'s profile directly. Hidden: blocked either way, banned, deleted,
+ * and incognito Platinum members who have not liked or matched the viewer.
+ */
+export async function canView(viewerId: string, target: UserRow): Promise<boolean> {
+  if (target.is_banned || target.deleted_at) return false;
+  if (viewerId === target.id) return true;
+  if (await isBlockedBetween(viewerId, target.id)) return false;
+  if (target.incognito && entitlementsFor(target).incognito) {
+    const [a, b] = [viewerId, target.id].sort();
+    const known = await one(
+      `SELECT 1 WHERE EXISTS (SELECT 1 FROM swipes WHERE swiper_id = $2 AND target_id = $1 AND action <> 'pass')
+          OR EXISTS (SELECT 1 FROM matches WHERE user_a = $3 AND user_b = $4)`,
+      [viewerId, target.id, a, b],
+    );
+    if (!known) return false;
+  }
+  return true;
 }
 
 /** True if either user has blocked the other. */

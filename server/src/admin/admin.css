@@ -27,6 +27,7 @@ input { font: inherit; padding: 12px 14px; border-radius: 10px; border: 1px soli
 .tabs button.on { background: var(--champagne); color: #16130e; }
 .list { display: grid; gap: 16px; }
 .item { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--ink-2); }
+.item.log { grid-template-columns: 1fr auto; padding: 14px 18px; }
 .pics { display: flex; gap: 8px; }
 .pics img { width: 96px; height: 128px; object-fit: cover; border-radius: 10px; background: #222; }
 .pics .selfie { outline: 2px solid var(--gold); outline-offset: 2px; }

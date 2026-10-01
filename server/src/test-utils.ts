@@ -1,4 +1,5 @@
 import request from 'supertest';
+import sharp from 'sharp';
 import { createApp } from './app.js';
 import { migrate } from './db/migrate.js';
 import { pool, query } from './db/pool.js';
@@ -7,16 +8,13 @@ export const app = createApp();
 
 export async function resetDb() {
   await migrate();
-  await query('TRUNCATE users, refresh_tokens, photos, swipes, matches, messages, blocks, reports, payments, verification_requests CASCADE');
+  await query('TRUNCATE users, refresh_tokens, photos, swipes, matches, messages, blocks, reports, payments, verification_requests, moderation_actions CASCADE');
 }
 
 export const closeDb = () => pool.end();
 
-// Smallest valid PNG (1x1 transparent pixel).
-export const PNG = Buffer.from(
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-  'base64',
-);
+// A portrait-sized PNG; uploads below 200px are rejected as too small.
+export const PNG = await sharp({ create: { width: 400, height: 500, channels: 3, background: '#c9a46a' } }).png().toBuffer();
 
 let n = 0;
 export async function makeUser(opts: { gender?: string; interestedIn?: string[]; lat?: number; lng?: number; photo?: boolean } = {}) {

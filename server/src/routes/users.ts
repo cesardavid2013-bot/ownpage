@@ -3,7 +3,9 @@ import { z } from 'zod';
 import { one, query } from '../db/pool.js';
 import { ah, badRequest, notFound } from '../lib/errors.js';
 import { emitToUser } from '../realtime.js';
-import { getUser, isBlockedBetween, photosFor, publicProfile } from '../services/users.js';
+import { canView, getUser, photosFor, publicProfile } from '../services/users.js';
+import { reportLimiter } from '../lib/limits.js';
+import { REPORT_REASONS } from '../moderation.js';
 
 export const usersRouter = Router();
 
@@ -12,7 +14,7 @@ const uuid = z.string().uuid();
 usersRouter.get('/:id', ah(async (req, res) => {
   const id = uuid.parse(req.params.id);
   const user = await getUser(id);
-  if (!user || user.is_banned || (await isBlockedBetween(req.userId!, id))) throw notFound('user_not_found');
+  if (!user || !(await canView(req.userId!, user))) throw notFound('user_not_found');
   const me = await getUser(req.userId!);
   const photos = await photosFor([id]);
   res.json(publicProfile(user, photos.get(id) ?? [], me));
@@ -32,10 +34,10 @@ usersRouter.post('/:id/block', ah(async (req, res) => {
   res.status(204).end();
 }));
 
-usersRouter.post('/:id/report', ah(async (req, res) => {
+usersRouter.post('/:id/report', reportLimiter, ah(async (req, res) => {
   const id = uuid.parse(req.params.id);
   const body = z.object({
-    reason: z.enum(['fake', 'inappropriate', 'harassment', 'spam', 'underage', 'other']),
+    reason: z.enum(REPORT_REASONS),
     details: z.string().max(1000).default(''),
   }).parse(req.body);
   if (id === req.userId) throw badRequest('cannot_report_self');

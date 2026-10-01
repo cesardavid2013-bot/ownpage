@@ -12,15 +12,25 @@ import { PRIVATE_DIR } from './me.js';
 /** Moderation API: verification reviews and report handling. Authenticated with ADMIN_TOKEN. */
 export const adminRouter = Router();
 
+// Header only: a token in a URL ends up in proxy logs and browser history.
 function requireAdmin(req: Request, _res: Response, next: NextFunction) {
   const expected = config.adminToken;
-  const got = (req.headers.authorization ?? '').replace(/^Bearer /, '') || String(req.query.token ?? '');
+  const got = (req.headers.authorization ?? '').replace(/^Bearer /, '');
   const ok = expected.length >= 16 && got.length === expected.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(expected));
   next(ok ? undefined : unauthorized());
 }
 adminRouter.use(requireAdmin);
 
 const uuid = z.string().uuid();
+
+type Db = { query: (text: string, params: unknown[]) => Promise<unknown> };
+/** Every moderator decision is written to an append-only log. */
+function logAction(db: Db, req: Request, action: string, refs: { user?: string; report?: string; verification?: string; note?: string }) {
+  return db.query(
+    `INSERT INTO moderation_actions (action, target_user_id, report_id, verification_id, note, ip) VALUES ($1, $2, $3, $4, $5, $6)`,
+    [action, refs.user ?? null, refs.report ?? null, refs.verification ?? null, refs.note ?? null, req.ip ?? null],
+  );
+}
 
 adminRouter.get('/stats', ah(async (_req, res) => {
   const row = await one(`SELECT
@@ -61,10 +71,28 @@ adminRouter.post('/verifications/:id', ah(async (req, res) => {
     )).rows[0];
     if (!row) throw notFound();
     if (body.decision === 'approve') await c.query('UPDATE users SET is_verified = true WHERE id = $1', [row.user_id]);
+    await logAction(c, req, `verification_${body.decision}`, { user: row.user_id, verification: String(req.params.id), note: body.reason });
     return row as { user_id: string };
   });
   emitToUser(v.user_id, 'verification:updated', { status: body.decision === 'approve' ? 'approved' : 'rejected' });
   res.json({ ok: true });
+}));
+
+adminRouter.post('/users/:id/unban', ah(async (req, res) => {
+  const id = uuid.parse(req.params.id);
+  const row = await one('UPDATE users SET is_banned = false WHERE id = $1 AND is_banned RETURNING id', [id]);
+  if (!row) throw notFound();
+  await logAction({ query }, req, 'unban', { user: id });
+  res.json({ ok: true });
+}));
+
+adminRouter.get('/actions', ah(async (_req, res) => {
+  const rows = await query(
+    `SELECT a.id, a.action, a.note, a.created_at, a.target_user_id, u.name AS target_name, u.is_banned
+     FROM moderation_actions a LEFT JOIN users u ON u.id = a.target_user_id
+     ORDER BY a.created_at DESC LIMIT 100`,
+  );
+  res.json({ items: rows.rows });
 }));
 
 adminRouter.get('/reports', ah(async (_req, res) => {
@@ -88,6 +116,7 @@ adminRouter.post('/reports/:id', ah(async (req, res) => {
       [uuid.parse(req.params.id), action === 'ban' ? 'actioned' : 'reviewed'],
     )).rows[0];
     if (!r) throw notFound();
+    await logAction(c, req, action === 'ban' ? 'ban' : 'report_dismissed', { user: r.reported_id, report: String(req.params.id) });
     if (action === 'ban') {
       await c.query('UPDATE users SET is_banned = true WHERE id = $1', [r.reported_id]);
       await c.query('UPDATE refresh_tokens SET revoked_at = now() WHERE user_id = $1 AND revoked_at IS NULL', [r.reported_id]);

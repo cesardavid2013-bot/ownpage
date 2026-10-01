@@ -12,6 +12,9 @@ import { getUser, privateProfile } from '../services/users.js';
 import { SUPPORTED_LOCALES } from '../locales.js';
 import { MAX_PROMPTS, PROMPT_IDS } from '../prompts.js';
 import { poseFor } from '../verification.js';
+import { processPhoto, removeStored } from '../lib/media.js';
+import { emitToUser } from '../realtime.js';
+import { userLimiter } from '../lib/limits.js';
 
 export const meRouter = Router();
 export const MAX_PHOTOS = 9;
@@ -76,6 +79,7 @@ const columns: Record<string, string> = {
   maxDistanceKm: 'max_distance_km', ageMin: 'age_min', ageMax: 'age_max', globalMode: 'global_mode',
   hideAge: 'hide_age', hideDistance: 'hide_distance', incognito: 'incognito',
   filterVerified: 'filter_verified', filterHasPrompts: 'filter_has_prompts', filterLookingFor: 'filter_looking_for',
+  discoverable: 'discoverable', showActivity: 'show_activity',
 };
 
 async function updateColumns(userId: string, values: Record<string, unknown>) {
@@ -105,6 +109,8 @@ const settingsSchema = z.object({
   filterVerified: z.boolean(),
   filterHasPrompts: z.boolean(),
   filterLookingFor: z.array(z.enum(['long_term', 'short_term', 'friendship', 'casual', 'unsure'])).max(5),
+  discoverable: z.boolean(),
+  showActivity: z.boolean(),
 }).partial();
 
 meRouter.patch('/settings', ah(async (req, res) => {
@@ -142,27 +148,31 @@ meRouter.put('/passport', ah(async (req, res) => {
   res.json(await privateProfile((await getUser(req.userId!))!));
 }));
 
-meRouter.post('/photos', upload.single('photo'), ah(async (req, res) => {
+const uploadLimiter = userLimiter('uploads', 60 * 60 * 1000, 60);
+
+meRouter.post('/photos', uploadLimiter, upload.single('photo'), ah(async (req, res) => {
   const file = req.file;
   if (!file) throw badRequest('invalid_image');
   if (!looksLikeImage(file.path)) {
     fs.rmSync(file.path, { force: true });
     throw badRequest('invalid_image');
   }
+  const stored = await processPhoto(file.path, config.uploadDir);
+  const url = `${config.publicUrl}/uploads/${stored.file}`;
+  const thumbUrl = `${config.publicUrl}/uploads/${stored.thumbFile}`;
   try {
     const photo = await tx(async (c) => {
       await c.query('SELECT id FROM users WHERE id = $1 FOR UPDATE', [req.userId]);
       const count = (await c.query('SELECT count(*)::int AS n FROM photos WHERE user_id = $1', [req.userId])).rows[0].n;
       if (count >= MAX_PHOTOS) throw badRequest('too_many_photos');
-      const url = `${config.publicUrl}/uploads/${path.basename(file.path)}`;
       return (await c.query(
-        'INSERT INTO photos (user_id, url, position) VALUES ($1, $2, $3) RETURNING id, url, position',
-        [req.userId, url, count],
+        'INSERT INTO photos (user_id, url, thumb_url, position) VALUES ($1, $2, $3, $4) RETURNING id, url, thumb_url AS thumb, position',
+        [req.userId, url, thumbUrl, count],
       )).rows[0];
     });
     res.status(201).json(photo);
   } catch (err) {
-    fs.rmSync(file.path, { force: true });
+    removeStored(config.uploadDir, url, thumbUrl);
     throw err;
   }
 }));
@@ -180,12 +190,12 @@ meRouter.put('/photos/order', ah(async (req, res) => {
 }));
 
 meRouter.delete('/photos/:id', ah(async (req, res) => {
-  const photo = await one<{ url: string }>('DELETE FROM photos WHERE id = $1 AND user_id = $2 RETURNING url', [
-    req.params.id, req.userId,
-  ]);
+  const photo = await one<{ url: string; thumb_url: string | null }>(
+    'DELETE FROM photos WHERE id = $1 AND user_id = $2 RETURNING url, thumb_url',
+    [z.string().uuid().parse(req.params.id), req.userId],
+  );
   if (!photo) throw notFound();
-  const local = photo.url.startsWith(`${config.publicUrl}/uploads/`);
-  if (local) fs.rmSync(path.join(config.uploadDir, path.basename(photo.url)), { force: true });
+  if (photo.url.startsWith(`${config.publicUrl}/uploads/`)) removeStored(config.uploadDir, photo.url, photo.thumb_url);
   await query(
     `UPDATE photos p SET position = o.rn - 1 FROM (
        SELECT id, row_number() OVER (ORDER BY position, created_at) AS rn FROM photos WHERE user_id = $1) o
@@ -218,11 +228,15 @@ meRouter.get('/verification', ah(async (req, res) => {
   });
 }));
 
-meRouter.post('/verification', selfieUpload.single('photo'), ah(async (req, res) => {
-  const file = req.file;
-  if (!file) throw badRequest('invalid_image');
+meRouter.post('/verification', uploadLimiter, selfieUpload.single('photo'), ah(async (req, res) => {
+  const upload = req.file;
+  if (!upload) throw badRequest('invalid_image');
+  if (!looksLikeImage(upload.path)) {
+    fs.rmSync(upload.path, { force: true });
+    throw badRequest('invalid_image');
+  }
+  const file = { path: path.join(PRIVATE_DIR, (await processPhoto(upload.path, PRIVATE_DIR, { thumb: false })).file) };
   try {
-    if (!looksLikeImage(file.path)) throw badRequest('invalid_image');
     const user = (await getUser(req.userId!))!;
     if (user.is_verified) throw conflict('already_verified');
     const photos = (await query('SELECT 1 FROM photos WHERE user_id = $1', [user.id])).rowCount;
@@ -242,24 +256,35 @@ meRouter.post('/verification', selfieUpload.single('photo'), ah(async (req, res)
 
 /** Account deletion (required by Apple & Google): anonymises the user and removes their content. */
 meRouter.delete('/', ah(async (req, res) => {
+  let ended: { id: string; other: string }[] = [];
+  let selfies: string[] = [];
   const photos = await tx(async (c) => {
-    const rows = (await c.query('DELETE FROM photos WHERE user_id = $1 RETURNING url', [req.userId])).rows;
-    await c.query('UPDATE matches SET unmatched_at = now() WHERE (user_a = $1 OR user_b = $1) AND unmatched_at IS NULL', [req.userId]);
+    const rows = (await c.query('DELETE FROM photos WHERE user_id = $1 RETURNING url, thumb_url', [req.userId])).rows;
+    ended = (await c.query(
+      `UPDATE matches SET unmatched_at = now() WHERE (user_a = $1 OR user_b = $1) AND unmatched_at IS NULL
+       RETURNING id, CASE WHEN user_a = $1 THEN user_b ELSE user_a END AS other`,
+      [req.userId],
+    )).rows;
+    // Their words leave with them. Reports they filed or received stay for safety records.
+    await c.query('DELETE FROM messages WHERE sender_id = $1', [req.userId]);
+    selfies = (await c.query('DELETE FROM verification_requests WHERE user_id = $1 RETURNING photo_file', [req.userId])).rows
+      .map((r) => r.photo_file as string);
     await c.query('DELETE FROM swipes WHERE swiper_id = $1 OR target_id = $1', [req.userId]);
     await c.query('UPDATE refresh_tokens SET revoked_at = now() WHERE user_id = $1 AND revoked_at IS NULL', [req.userId]);
     await c.query(
       `UPDATE users SET deleted_at = now(), email = 'deleted+' || id || '@invalid', name = 'Deleted',
          bio = '', job_title = '', company = '', school = '', city = '', interests = '{}', languages = '{}', prompts = '[]',
-         lat = NULL, lng = NULL, passport_lat = NULL, passport_lng = NULL, password_hash = ''
+         lat = NULL, lng = NULL, passport_lat = NULL, passport_lng = NULL, password_hash = '',
+         discoverable = false, is_verified = false, stripe_customer_id = NULL
        WHERE id = $1`,
       [req.userId],
     );
-    return rows as { url: string }[];
+    return rows as { url: string; thumb_url: string | null }[];
   });
   for (const p of photos) {
-    if (p.url.startsWith(`${config.publicUrl}/uploads/`)) {
-      fs.rmSync(path.join(config.uploadDir, path.basename(p.url)), { force: true });
-    }
+    if (p.url.startsWith(`${config.publicUrl}/uploads/`)) removeStored(config.uploadDir, p.url, p.thumb_url);
   }
+  removeStored(PRIVATE_DIR, ...selfies);
+  for (const m of ended) emitToUser(m.other, 'match:removed', { matchId: m.id });
   res.status(204).end();
 }));

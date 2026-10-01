@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import request from 'supertest';
+import sharp from 'sharp';
 import { config } from './config.js';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { query } from './db/pool.js';
@@ -393,5 +394,111 @@ describe('web app served from the API origin', () => {
     const csp = page.headers['content-security-policy'];
     expect(csp).toContain("img-src 'self' data: blob: https:");
     expect(csp).toContain("connect-src 'self' blob: ws: wss:");
+  });
+});
+
+describe('integrity, privacy and safety', () => {
+  beforeEach(resetDb);
+
+  it('creates exactly one match when two people like each other at the same instant', async () => {
+    for (let i = 0; i < 6; i++) {
+      const a = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+      const b = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+      const [ra, rb] = await Promise.all([
+        request(app).post('/swipes').set(a.auth).send({ targetId: b.id, action: 'like' }),
+        request(app).post('/swipes').set(b.auth).send({ targetId: a.id, action: 'like' }),
+      ]);
+      expect([ra.body.matched, rb.body.matched].filter(Boolean)).toHaveLength(1);
+      const rows = await query('SELECT count(*)::int AS n FROM matches WHERE user_a = ANY($1::uuid[]) AND user_b = ANY($1::uuid[])', [[a.id, b.id]]);
+      expect(rows.rows[0].n).toBe(1);
+    }
+  });
+
+  it('does not duplicate a message when the app retries with the same client id', async () => {
+    const a = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+    const b = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+    await request(app).post('/swipes').set(a.auth).send({ targetId: b.id, action: 'like' });
+    const m = await request(app).post('/swipes').set(b.auth).send({ targetId: a.id, action: 'like' });
+    const matchId = m.body.match.id;
+    const send = () => request(app).post(`/matches/${matchId}/messages`).set(a.auth).send({ body: 'Hola', clientId: 'c_0123456789abcdef' });
+    const [first, retry] = await Promise.all([send(), send()]);
+    expect([first.status, retry.status].sort()).toEqual([200, 201]);
+    expect(first.body.id).toBe(retry.body.id);
+    const list = await request(app).get(`/matches/${matchId}/messages`).set(b.auth);
+    expect(list.body.messages).toHaveLength(1);
+    // Someone else's conversation is never reachable by id.
+    const outsider = await makeUser();
+    await request(app).get(`/matches/${matchId}/messages`).set(outsider.auth).expect(404);
+    await request(app).post(`/matches/${matchId}/messages`).set(outsider.auth).send({ body: 'hi' }).expect(404);
+  });
+
+  it('re-encodes photos without metadata and adds a thumbnail', async () => {
+    const u = await makeUser({ photo: false });
+    const withGps = await sharp({ create: { width: 900, height: 1200, channels: 3, background: '#334455' } })
+      .jpeg().withExif({ IFD0: { Copyright: 'secret-location-marker' } }).toBuffer();
+    expect(withGps.includes('secret-location-marker')).toBe(true);
+    const up = await request(app).post('/me/photos').set(u.auth).attach('photo', withGps, { filename: 'p.jpg', contentType: 'image/jpeg' });
+    expect(up.status).toBe(201);
+    expect(up.body.thumb).toMatch(/-t\.jpg$/);
+    const stored = fs.readFileSync(path.join(config.uploadDir, path.basename(up.body.url)));
+    expect(stored.includes('secret-location-marker')).toBe(false);
+    const meta = await sharp(stored).metadata();
+    expect(meta.exif).toBeUndefined();
+    const tiny = await sharp({ create: { width: 50, height: 50, channels: 3, background: '#000' } }).png().toBuffer();
+    const small = await request(app).post('/me/photos').set(u.auth).attach('photo', tiny, { filename: 't.png', contentType: 'image/png' });
+    expect(small.body.error).toBe('image_too_small');
+  });
+
+  it('keeps incognito and paused members out of reach', async () => {
+    const hidden = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+    const stranger = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+    await request(app).get(`/users/${hidden.id}`).set(stranger.auth).expect(200);
+    await request(app).post('/billing/dev-activate').set(hidden.auth).send({ product: 'platinum' }).expect(200);
+    await request(app).patch('/me/settings').set(hidden.auth).send({ incognito: true }).expect(200);
+    await request(app).get(`/users/${hidden.id}`).set(stranger.auth).expect(404);
+    // Once she likes him, he may see her.
+    await request(app).post('/swipes').set(hidden.auth).send({ targetId: stranger.id, action: 'like' });
+    await request(app).get(`/users/${hidden.id}`).set(stranger.auth).expect(200);
+
+    const paused = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+    await request(app).patch('/me/settings').set(paused.auth).send({ discoverable: false }).expect(200);
+    const deck = await request(app).get('/discover').set(stranger.auth);
+    expect(deck.body.profiles.map((p: { id: string }) => p.id)).not.toContain(paused.id);
+  });
+
+  it('hides activity status when the member turns it off', async () => {
+    const a = await makeUser();
+    const b = await makeUser();
+    expect((await request(app).get(`/users/${a.id}`).set(b.auth)).body.recentlyActive).toBe(true);
+    await request(app).patch('/me/settings').set(a.auth).send({ showActivity: false }).expect(200);
+    expect((await request(app).get(`/users/${a.id}`).set(b.auth)).body.recentlyActive).toBe(false);
+  });
+
+  it('accepts the specific report reasons and records moderator decisions', async () => {
+    const a = await makeUser();
+    const b = await makeUser();
+    await request(app).post(`/users/${b.id}/report`).set(a.auth).send({ reason: 'scam', details: 'asked for money' }).expect(201);
+    await request(app).post(`/users/${b.id}/report`).set(a.auth).send({ reason: 'made_up' }).expect(400);
+    const ADMIN = { Authorization: 'Bearer test-admin-token-0123456789abcdef' };
+    // The admin token is never accepted from the query string.
+    await request(app).get('/admin/api/reports?token=test-admin-token-0123456789abcdef').expect(401);
+    const reports = await request(app).get('/admin/api/reports').set(ADMIN);
+    await request(app).post(`/admin/api/reports/${reports.body.items[0].id}`).set(ADMIN).send({ action: 'ban' }).expect(200);
+    const log = await request(app).get('/admin/api/actions').set(ADMIN);
+    expect(log.body.items[0]).toMatchObject({ action: 'ban', target_user_id: b.id });
+    await request(app).post(`/admin/api/users/${b.id}/unban`).set(ADMIN).expect(200);
+    expect((await request(app).get('/admin/api/actions').set(ADMIN)).body.items[0].action).toBe('unban');
+  });
+
+  it('removes sent messages and ends conversations when an account is deleted', async () => {
+    const a = await makeUser({ gender: 'woman', interestedIn: ['man'] });
+    const b = await makeUser({ gender: 'man', interestedIn: ['woman'] });
+    await request(app).post('/swipes').set(a.auth).send({ targetId: b.id, action: 'like' });
+    const m = await request(app).post('/swipes').set(b.auth).send({ targetId: a.id, action: 'like' });
+    await request(app).post(`/matches/${m.body.match.id}/messages`).set(a.auth).send({ body: 'private words' }).expect(201);
+    await request(app).delete('/me').set(a.auth).expect(204);
+    expect((await query('SELECT count(*)::int AS n FROM messages WHERE sender_id = $1', [a.id])).rows[0].n).toBe(0);
+    expect((await request(app).get('/matches').set(b.auth)).body.matches).toHaveLength(0);
+    await request(app).get(`/users/${a.id}`).set(b.auth).expect(404);
   });
 });

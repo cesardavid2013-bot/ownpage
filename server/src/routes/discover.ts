@@ -6,6 +6,7 @@ import { entitlementsFor } from '../plans.js';
 import { emitToUser } from '../realtime.js';
 import { getUser, photosFor, privateProfile, publicProfile, viewerLocation, type UserRow } from '../services/users.js';
 import { matchSummary } from '../services/matches.js';
+import { swipeLimiter } from '../lib/limits.js';
 
 export const discoverRouter = Router();
 
@@ -26,7 +27,7 @@ function candidatesSql(orderBy: string, limit: number) {
        (SELECT s.note FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action = 'superlike') AS note
      FROM users u, users me
      WHERE me.id = $1 AND u.id <> me.id
-       AND u.deleted_at IS NULL AND NOT u.is_banned
+       AND u.deleted_at IS NULL AND NOT u.is_banned AND u.discoverable
        AND u.gender = ANY(me.interested_in) AND me.gender = ANY(u.interested_in)
        AND date_part('year', age(u.birthdate)) BETWEEN me.age_min AND me.age_max
        AND date_part('year', age(me.birthdate)) BETWEEN u.age_min AND u.age_max
@@ -92,17 +93,23 @@ const swipeSchema = z.object({
   note: z.string().trim().min(1).max(140).optional(),
 });
 
-discoverRouter.post('/swipes', ah(async (req, res) => {
+discoverRouter.post('/swipes', swipeLimiter, ah(async (req, res) => {
   const body = swipeSchema.parse(req.body);
   const meId = req.userId!;
   if (body.targetId === meId) throw badRequest('cannot_swipe_self');
   if (body.note && body.action !== 'superlike') throw badRequest('note_requires_superlike');
 
   const result = await tx(async (c) => {
-    const me = (await c.query<UserRow>('SELECT * FROM users WHERE id = $1 FOR UPDATE', [meId])).rows[0];
+    // Lock both members in a fixed order. Two people liking each other at the same instant are then
+    // serialised, so the second transaction always sees the first like and exactly one match is made.
+    const locked = (await c.query<UserRow>(
+      'SELECT * FROM users WHERE id = ANY($1::uuid[]) ORDER BY id FOR UPDATE',
+      [[meId, body.targetId]],
+    )).rows;
+    const me = locked.find((u) => u.id === meId)!;
+    const target = locked.find((u) => u.id === body.targetId && !u.deleted_at && !u.is_banned);
     const ent = entitlementsFor(me);
     if (body.note && !ent.noteWithSuperLike) throw forbidden('premium_required');
-    const target = (await c.query('SELECT id FROM users WHERE id = $1 AND deleted_at IS NULL AND NOT is_banned', [body.targetId])).rows[0];
     if (!target) throw notFound('user_not_found');
     const blocked = (await c.query(
       `SELECT 1 FROM blocks WHERE (blocker_id = $1 AND blocked_id = $2) OR (blocker_id = $2 AND blocked_id = $1)`,
