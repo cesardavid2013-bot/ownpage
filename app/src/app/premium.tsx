@@ -52,7 +52,8 @@ export default function Premium() {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [prices, setPrices] = useState<Partial<Record<Product, string>>>({});
   const [tier, setTier] = useState<Tier>(user.plan === 'free' ? 'gold' : (user.plan as Tier));
-  const [yearly, setYearly] = useState(true);
+  // Monthly first, so the big number is the amount charged each period.
+  const [yearly, setYearly] = useState(false);
   const product = (yearly ? `${tier}_yearly` : tier) as Product;
   const [busy, setBusy] = useState<Product | null>(null);
 
@@ -122,8 +123,6 @@ export default function Premium() {
           {TIERS.map((k) => (
             <Pressable key={k} onPress={() => setTier(k)} style={[styles.tab, tier === k && styles.tabActive]} testID={`tier-${k}`}>
               <Text style={[styles.tabText, tier === k && { color: colors.text }]}>{t(`premium.plans.${k}`).replace('Lumi ', '')}</Text>
-              {k === 'gold' ? <Text style={styles.popular}>{t('premium.mostPopular')}</Text> : null}
-              {k === 'platinum' ? <Text style={[styles.popular, { color: colors.platinum }]}>{t('premium.bestValue')}</Text> : null}
             </Pressable>
           ))}
         </Row>
