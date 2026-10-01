@@ -1,5 +1,6 @@
 :root { --ink: #0a0a0c; --ink-2: #131317; --line: rgba(233,217,190,0.16); --text: #f3efe8; --muted: #a8a296; --champagne: #e9d9be; --gold: #c9a46a; --danger: #e5746a; color-scheme: dark; }
 * { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }
 body { background: var(--ink); color: var(--text); font: 15px/1.5 Jost, system-ui, -apple-system, 'Segoe UI', sans-serif; }
 header { display: flex; align-items: baseline; gap: 14px; padding: 18px 28px; border-bottom: 1px solid var(--line); }
 .mark { font: 500 22px Georgia, 'Times New Roman', serif; letter-spacing: 0.12em; }
@@ -30,7 +31,7 @@ input { font: inherit; padding: 12px 14px; border-radius: 10px; border: 1px soli
 .pics img { width: 96px; height: 128px; object-fit: cover; border-radius: 10px; background: #222; }
 .pics .selfie { outline: 2px solid var(--gold); outline-offset: 2px; }
 .who b { font: 500 22px Georgia, serif; display: block; }
-.who span { color: var(--muted); font-size: 13.5px; display: block; }
+.who > span { color: var(--muted); font-size: 13.5px; display: block; }
 .pose { color: var(--champagne); }
 .actions { display: grid; gap: 8px; }
 .empty { color: var(--muted); padding: 40px 0; text-align: center; }

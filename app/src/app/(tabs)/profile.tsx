@@ -48,6 +48,7 @@ export default function ProfileTab() {
           ) : null}
 
           <View style={styles.list}>
+            {!user.isVerified ? <Row icon="shield-checkmark-outline" label={t('verify.cta')} onPress={() => router.push('/verify')} /> : null}
             <Row icon="create-outline" label={t('profile.edit')} onPress={() => router.push('/edit-profile')} />
             <Row icon="eye-outline" label={t('profile.preview')} onPress={() => router.push({ pathname: '/user/[id]', params: { id: user.id } })} />
             <Row icon="options-outline" label={t('profile.settings')} onPress={() => router.push('/settings')} last />

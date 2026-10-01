@@ -47,7 +47,9 @@ export function createApp() {
   app.use('/me', requireAuth, meRouter);
   app.use('/matches', requireAuth, matchesRouter);
   app.use('/users', requireAuth, usersRouter);
-  app.use('/', requireAuth, discoverRouter);
+  // Discovery routes live at the root; only they require a session, so unknown paths still 404.
+  const discoveryPaths = ['/discover', '/swipes', '/likes', '/boost', '/top-picks'];
+  app.use((req, res, next) => (discoveryPaths.some((p) => req.path === p || req.path.startsWith(`${p}/`)) ? requireAuth(req, res, next) : next()), discoverRouter);
 
   app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
   app.use(errorHandler);

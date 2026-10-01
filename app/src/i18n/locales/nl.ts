@@ -124,7 +124,14 @@ const nl = {
     looking_for_someone: "Ik zoek iemand die",
     secretly_good_at: "Ik ben stiekem goed in",
   },
+  verify: {
+    title: "Laat je verifiëren", subtitle: "Doe het gebaar hieronder na in een selfie. Een moderator vergelijkt het met je foto’s. Hij verschijnt nooit op je profiel.", pose: "Je gebaar van vandaag", take: "Maak een selfie", choose: "Kies een selfie", retake: "Opnieuw", submit: "Ter controle sturen", pending: "In behandeling", pendingBody: "We controleren selfies meestal binnen 24 uur. Je zegel verschijnt zodra hij is goedgekeurd.", rejected: "Niet goedgekeurd", rejectedBody: "Je selfie komt niet overeen met je foto’s. Probeer het opnieuw met goed licht en je gezicht goed zichtbaar.", approved: "Je bent geverifieerd", approvedBody: "Je profiel heeft nu het verificatiezegel.", cta: "Laat je verifiëren",
+  },
+  poses: {
+    peace_sign: "Maak een peace-teken", thumbs_up: "Duim omhoog", touch_nose: "Raak je neus aan", hand_on_cheek: "Leg je hand op je wang", wave: "Zwaai naar de camera",
+  },
   errors: {
+    verification_pending: "Je selfie wordt al gecontroleerd.", already_verified: "Je bent al geverifieerd.",
     network_error: 'Lumi is niet bereikbaar. Controleer je verbinding en probeer het opnieuw.',
     invalid_credentials: 'Onjuist e-mailadres of wachtwoord.', email_taken: 'Er bestaat al een account met dit e-mailadres.',
     underage: 'Je moet 18 jaar of ouder zijn om Lumi te gebruiken.', invalid_birthdate: 'Voer een geldige geboortedatum in.',

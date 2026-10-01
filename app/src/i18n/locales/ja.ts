@@ -123,7 +123,14 @@ const ja = {
     looking_for_someone: "こんな人を探しています",
     secretly_good_at: "実はこれが得意",
   },
+  verify: {
+    title: "本人確認をする", subtitle: "下のポーズを真似してセルフィーを撮ってください。モデレーターがプロフィール写真と照合します。プロフィールには表示されません。", pose: "今日のポーズ", take: "セルフィーを撮る", choose: "セルフィーを選ぶ", retake: "撮り直す", submit: "審査に送る", pending: "審査中", pendingBody: "通常24時間以内に審査します。承認され次第、認証マークが表示されます。", rejected: "承認されませんでした", rejectedBody: "セルフィーが写真と一致しませんでした。明るい場所で顔全体が写るように撮り直してください。", approved: "本人確認済みです", approvedBody: "プロフィールに認証マークが付きました。", cta: "本人確認をする",
+  },
+  poses: {
+    peace_sign: "ピースサインをして", thumbs_up: "親指を立てて", touch_nose: "鼻に触れて", hand_on_cheek: "手を頬にあてて", wave: "カメラに手を振って",
+  },
   errors: {
+    verification_pending: "セルフィーはすでに審査中です。", already_verified: "すでに本人確認済みです。",
     network_error: 'Lumi に接続できません。接続を確認して再度お試しください。',
     invalid_credentials: 'メールアドレスまたはパスワードが正しくありません。', email_taken: 'このメールアドレスは既に登録されています。',
     underage: 'Lumi のご利用は18歳以上に限られます。', invalid_birthdate: '正しい生年月日を入力してください。',

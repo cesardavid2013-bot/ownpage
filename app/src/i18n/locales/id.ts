@@ -123,7 +123,14 @@ const id = {
     looking_for_someone: "Aku mencari seseorang yang",
     secretly_good_at: "Diam-diam aku jago",
   },
+  verify: {
+    title: "Verifikasi diri", subtitle: "Tiru pose di bawah dalam selfie. Moderator membandingkannya dengan fotomu. Selfie tidak pernah tampil di profil.", pose: "Pose kamu hari ini", take: "Ambil selfie", choose: "Pilih selfie", retake: "Ulangi", submit: "Kirim untuk ditinjau", pending: "Sedang ditinjau", pendingBody: "Kami biasanya meninjau selfie dalam 24 jam. Segelmu muncul begitu disetujui.", rejected: "Tidak disetujui", rejectedBody: "Selfie-mu tidak cocok dengan fotomu. Coba lagi dengan cahaya cukup dan wajah terlihat jelas.", approved: "Kamu terverifikasi", approvedBody: "Profilmu kini memiliki segel verifikasi.", cta: "Verifikasi diri",
+  },
+  poses: {
+    peace_sign: "Buat tanda damai", thumbs_up: "Acungkan jempol", touch_nose: "Sentuh hidungmu", hand_on_cheek: "Letakkan tangan di pipi", wave: "Lambaikan tangan ke kamera",
+  },
   errors: {
+    verification_pending: "Selfie-mu sedang ditinjau.", already_verified: "Kamu sudah terverifikasi.",
     network_error: 'Tidak dapat terhubung ke Lumi. Periksa koneksimu lalu coba lagi.',
     invalid_credentials: 'Email atau kata sandi salah.', email_taken: 'Sudah ada akun dengan email ini.',
     underage: 'Kamu harus berusia 18 tahun atau lebih untuk memakai Lumi.', invalid_birthdate: 'Masukkan tanggal lahir yang valid.',

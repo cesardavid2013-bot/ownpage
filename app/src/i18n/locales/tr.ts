@@ -123,7 +123,14 @@ const tr = {
     looking_for_someone: "Şöyle birini arıyorum",
     secretly_good_at: "Gizlice iyi olduğum şey",
   },
+  verify: {
+    title: "Doğrulan", subtitle: "Aşağıdaki pozu bir selfie’de tekrarla. Bir moderatör fotoğraflarınla karşılaştırır. Profilinde asla gösterilmez.", pose: "Bugünkü pozun", take: "Selfie çek", choose: "Selfie seç", retake: "Yeniden çek", submit: "İncelemeye gönder", pending: "İnceleniyor", pendingBody: "Selfie’leri genellikle 24 saat içinde inceleriz. Mühürün onaylanır onaylanmaz görünür.", rejected: "Onaylanmadı", rejectedBody: "Selfie’n fotoğraflarınla eşleşmedi. İyi ışıkta, yüzün tamamen görünür şekilde tekrar dene.", approved: "Doğrulandın", approvedBody: "Profilinde artık doğrulama mührü var.", cta: "Doğrulan",
+  },
+  poses: {
+    peace_sign: "Barış işareti yap", thumbs_up: "Başparmağını kaldır", touch_nose: "Burnuna dokun", hand_on_cheek: "Elini yanağına koy", wave: "Kameraya el salla",
+  },
   errors: {
+    verification_pending: "Selfie’n zaten inceleniyor.", already_verified: "Zaten doğrulandın.",
     network_error: 'Lumi’ye ulaşılamıyor. Bağlantını kontrol edip tekrar dene.',
     invalid_credentials: 'E-posta veya şifre hatalı.', email_taken: 'Bu e-postayla zaten bir hesap var.',
     underage: 'Lumi’yi kullanmak için 18 yaşında veya daha büyük olmalısın.', invalid_birthdate: 'Lütfen geçerli bir doğum tarihi gir.',

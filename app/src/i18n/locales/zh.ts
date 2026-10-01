@@ -123,7 +123,14 @@ const zh = {
     looking_for_someone: "我在寻找这样一个人",
     secretly_good_at: "我暗暗擅长的事",
   },
+  verify: {
+    title: "进行认证", subtitle: "用自拍模仿下面的手势。审核员会将其与你的照片比对。自拍不会显示在你的资料中。", pose: "今天的手势", take: "拍一张自拍", choose: "选择自拍", retake: "重拍", submit: "提交审核", pending: "审核中", pendingBody: "我们通常在 24 小时内完成审核。通过后会立即显示认证标识。", rejected: "未通过", rejectedBody: "自拍与你的照片不符。请在光线充足、面部清晰可见的情况下重试。", approved: "你已通过认证", approvedBody: "你的资料现在带有认证标识。", cta: "进行认证",
+  },
+  poses: {
+    peace_sign: "比个剪刀手", thumbs_up: "竖起大拇指", touch_nose: "摸摸鼻子", hand_on_cheek: "把手贴在脸颊上", wave: "对镜头挥手",
+  },
   errors: {
+    verification_pending: "你的自拍已在审核中。", already_verified: "你已经通过认证。",
     network_error: '无法连接到 Lumi。请检查网络后重试。',
     invalid_credentials: '邮箱或密码错误。', email_taken: '该邮箱已注册账号。',
     underage: '你必须年满 18 周岁才能使用 Lumi。', invalid_birthdate: '请输入有效的生日。',

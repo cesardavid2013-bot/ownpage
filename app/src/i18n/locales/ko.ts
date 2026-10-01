@@ -123,7 +123,14 @@ const ko = {
     looking_for_someone: "이런 사람을 찾고 있어요",
     secretly_good_at: "사실 나는 이걸 잘해요",
   },
+  verify: {
+    title: "인증받기", subtitle: "아래 포즈를 따라 셀피를 찍어 주세요. 모더레이터가 프로필 사진과 비교해요. 셀피는 프로필에 표시되지 않아요.", pose: "오늘의 포즈", take: "셀피 찍기", choose: "셀피 선택", retake: "다시 찍기", submit: "검토 요청", pending: "검토 중", pendingBody: "보통 24시간 안에 검토해요. 승인되면 바로 인증 마크가 표시돼요.", rejected: "승인되지 않음", rejectedBody: "셀피가 사진과 일치하지 않아요. 밝은 곳에서 얼굴이 잘 보이게 다시 시도해 주세요.", approved: "인증 완료", approvedBody: "이제 프로필에 인증 마크가 표시돼요.", cta: "인증받기",
+  },
+  poses: {
+    peace_sign: "브이를 해 주세요", thumbs_up: "엄지척 해 주세요", touch_nose: "코를 만져 주세요", hand_on_cheek: "손을 볼에 대 주세요", wave: "카메라에 손을 흔들어 주세요",
+  },
   errors: {
+    verification_pending: "셀피가 이미 검토 중이에요.", already_verified: "이미 인증되었어요.",
     network_error: 'Lumi에 연결할 수 없어요. 연결 상태를 확인하고 다시 시도하세요.',
     invalid_credentials: '이메일 또는 비밀번호가 올바르지 않아요.', email_taken: '이 이메일로 가입된 계정이 이미 있어요.',
     underage: 'Lumi는 만 18세 이상만 이용할 수 있어요.', invalid_birthdate: '올바른 생년월일을 입력하세요.',

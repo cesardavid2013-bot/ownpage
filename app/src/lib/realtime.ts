@@ -44,6 +44,9 @@ function connect(token: string) {
   socket.on('match:removed', () => useRealtime.getState().bump());
   socket.on('message:new', () => useRealtime.getState().bump());
   socket.on('message:read', () => useRealtime.getState().bump());
+  socket.on('verification:updated', () => {
+    import('./auth').then(({ useAuth }) => useAuth.getState().reload());
+  });
   socket.on('like:new', () => useRealtime.setState((s) => ({ newLikes: s.newLikes + 1 })));
 }
 

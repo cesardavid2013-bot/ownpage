@@ -53,6 +53,8 @@ describe('auth', () => {
   });
 
   it('protects routes', async () => {
+    await request(app).get('/favicon.ico').expect(404);
+    await request(app).get('/discover').expect(401);
     await request(app).get('/me').expect(401);
     await request(app).get('/me').set('Authorization', 'Bearer nope').expect(401);
   });

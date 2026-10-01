@@ -124,7 +124,14 @@ const pt = {
     looking_for_someone: "Procuro alguém que",
     secretly_good_at: "Sou secretamente bom(boa) em",
   },
+  verify: {
+    title: "Verifique-se", subtitle: "Copie o gesto abaixo numa selfie. Um moderador compara com suas fotos. Ela nunca aparece no seu perfil.", pose: "Seu gesto de hoje", take: "Tirar uma selfie", choose: "Escolher uma selfie", retake: "Tirar de novo", submit: "Enviar para revisão", pending: "Em revisão", pendingBody: "Costumamos revisar as selfies em até 24 horas. Seu selo aparece assim que for aprovado.", rejected: "Não aprovada", rejectedBody: "Sua selfie não corresponde às suas fotos. Tente de novo com boa luz e o rosto visível.", approved: "Você está verificado", approvedBody: "Seu perfil agora tem o selo de verificação.", cta: "Verifique-se",
+  },
+  poses: {
+    peace_sign: "Faça o sinal de paz", thumbs_up: "Faça um joinha", touch_nose: "Toque no nariz", hand_on_cheek: "Apoie a mão na bochecha", wave: "Acene para a câmera",
+  },
   errors: {
+    verification_pending: "Sua selfie já está em revisão.", already_verified: "Você já está verificado.",
     network_error: 'Não foi possível conectar ao Lumi. Verifique sua conexão e tente novamente.',
     invalid_credentials: 'E-mail ou senha incorretos.', email_taken: 'Já existe uma conta com este e-mail.',
     underage: 'Você precisa ter 18 anos ou mais para usar o Lumi.', invalid_birthdate: 'Informe uma data de nascimento válida.',

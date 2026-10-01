@@ -123,7 +123,14 @@ const vi = {
     looking_for_someone: "Tôi tìm một người",
     secretly_good_at: "Tôi giỏi một cách bí mật ở",
   },
+  verify: {
+    title: "Xác minh tài khoản", subtitle: "Làm theo tư thế bên dưới trong ảnh selfie. Người kiểm duyệt sẽ so với ảnh của bạn. Ảnh không bao giờ hiển thị trên hồ sơ.", pose: "Tư thế hôm nay", take: "Chụp selfie", choose: "Chọn ảnh selfie", retake: "Chụp lại", submit: "Gửi để duyệt", pending: "Đang duyệt", pendingBody: "Chúng tôi thường duyệt trong 24 giờ. Huy hiệu sẽ hiện ngay khi được duyệt.", rejected: "Chưa được duyệt", rejectedBody: "Ảnh selfie không khớp với ảnh của bạn. Hãy thử lại nơi đủ sáng và lộ rõ khuôn mặt.", approved: "Bạn đã được xác minh", approvedBody: "Hồ sơ của bạn giờ có huy hiệu xác minh.", cta: "Xác minh",
+  },
+  poses: {
+    peace_sign: "Giơ tay hình chữ V", thumbs_up: "Giơ ngón cái", touch_nose: "Chạm vào mũi", hand_on_cheek: "Đặt tay lên má", wave: "Vẫy tay với máy ảnh",
+  },
   errors: {
+    verification_pending: "Ảnh selfie của bạn đang được duyệt.", already_verified: "Bạn đã được xác minh.",
     network_error: 'Không thể kết nối với Lumi. Kiểm tra kết nối rồi thử lại.',
     invalid_credentials: 'Email hoặc mật khẩu không đúng.', email_taken: 'Email này đã có tài khoản.',
     underage: 'Bạn phải từ 18 tuổi trở lên để dùng Lumi.', invalid_birthdate: 'Vui lòng nhập ngày sinh hợp lệ.',

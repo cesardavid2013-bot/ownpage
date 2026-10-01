@@ -124,7 +124,14 @@ const de = {
     looking_for_someone: "Ich suche jemanden, der",
     secretly_good_at: "Ich bin heimlich gut in",
   },
+  verify: {
+    title: "Lass dich verifizieren", subtitle: "Mach die Geste unten in einem Selfie nach. Ein Moderator vergleicht es mit deinen Fotos. Es wird nie in deinem Profil gezeigt.", pose: "Deine Geste heute", take: "Selfie aufnehmen", choose: "Selfie auswählen", retake: "Neu aufnehmen", submit: "Zur Prüfung senden", pending: "In Prüfung", pendingBody: "Wir prüfen Selfies meist innerhalb von 24 Stunden. Dein Siegel erscheint, sobald es freigegeben ist.", rejected: "Nicht freigegeben", rejectedBody: "Dein Selfie passt nicht zu deinen Fotos. Versuch es mit gutem Licht und gut sichtbarem Gesicht.", approved: "Du bist verifiziert", approvedBody: "Dein Profil trägt jetzt das Verifizierungssiegel.", cta: "Verifizieren",
+  },
+  poses: {
+    peace_sign: "Mach das Peace-Zeichen", thumbs_up: "Daumen hoch", touch_nose: "Berühre deine Nase", hand_on_cheek: "Leg die Hand an die Wange", wave: "Wink in die Kamera",
+  },
   errors: {
+    verification_pending: "Dein Selfie wird bereits geprüft.", already_verified: "Du bist bereits verifiziert.",
     network_error: 'Lumi ist nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.',
     invalid_credentials: 'E-Mail oder Passwort falsch.', email_taken: 'Mit dieser E-Mail existiert bereits ein Konto.',
     underage: 'Du musst mindestens 18 Jahre alt sein, um Lumi zu nutzen.', invalid_birthdate: 'Bitte gib ein gültiges Geburtsdatum ein.',

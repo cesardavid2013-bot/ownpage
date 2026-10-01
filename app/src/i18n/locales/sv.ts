@@ -124,7 +124,14 @@ const sv = {
     looking_for_someone: "Jag söker någon som",
     secretly_good_at: "Jag är i hemlighet bra på",
   },
+  verify: {
+    title: "Bli verifierad", subtitle: "Härma posen nedan i en selfie. En moderator jämför den med dina bilder. Den visas aldrig på din profil.", pose: "Din pose i dag", take: "Ta en selfie", choose: "Välj en selfie", retake: "Ta om", submit: "Skicka för granskning", pending: "Granskas", pendingBody: "Vi granskar oftast selfies inom 24 timmar. Ditt sigill syns så fort den godkänts.", rejected: "Inte godkänd", rejectedBody: "Din selfie matchade inte dina bilder. Försök igen i bra ljus med hela ansiktet synligt.", approved: "Du är verifierad", approvedBody: "Din profil har nu verifieringssigillet.", cta: "Bli verifierad",
+  },
+  poses: {
+    peace_sign: "Gör ett fredstecken", thumbs_up: "Tummen upp", touch_nose: "Rör vid näsan", hand_on_cheek: "Vila handen mot kinden", wave: "Vinka mot kameran",
+  },
   errors: {
+    verification_pending: "Din selfie granskas redan.", already_verified: "Du är redan verifierad.",
     network_error: 'Kan inte nå Lumi. Kontrollera anslutningen och försök igen.',
     invalid_credentials: 'Fel e-post eller lösenord.', email_taken: 'Det finns redan ett konto med den här e-postadressen.',
     underage: 'Du måste vara minst 18 år för att använda Lumi.', invalid_birthdate: 'Ange ett giltigt födelsedatum.',
