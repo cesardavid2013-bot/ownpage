@@ -21,7 +21,14 @@ const DISTANCE_SQL = `(6371 * 2 * asin(sqrt(
  * Profiles `me` may see: mutual gender/age preferences, not swiped, not blocked, with a photo, within distance,
  * respecting incognito, plus the viewer's advanced filters when their plan includes them.
  */
-function candidatesSql(orderBy: string, limit: number) {
+// Inside a distance limit: a plain bounding box first (no OR, so Postgres can use the (lat, lng) index),
+// then the exact great-circle test. Global mode and members without a location skip it entirely
+// (the no-op clause only keeps $2/$3 typed so the parameter list stays the same).
+const GEO_BOUNDED = `AND u.lat BETWEEN $6::float8 AND $7::float8
+       AND ($8::float8 IS NULL OR u.lng BETWEEN $8::float8 AND $9::float8)
+       AND ${DISTANCE_SQL} <= me.max_distance_km`;
+
+function candidatesSql(orderBy: string, limit: number, geo: boolean) {
   return `SELECT u.*,
        EXISTS (SELECT 1 FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action = 'superlike') AS superliked_me,
        (SELECT s.note FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = $1 AND s.action = 'superlike') AS note
@@ -38,7 +45,7 @@ function candidatesSql(orderBy: string, limit: number) {
        AND EXISTS (SELECT 1 FROM photos p WHERE p.user_id = u.id)
        AND (NOT (u.incognito AND ${ACTIVE_PREMIUM('u', `'platinum'`)})
             OR EXISTS (SELECT 1 FROM swipes s WHERE s.swiper_id = u.id AND s.target_id = me.id AND s.action <> 'pass'))
-       AND ($2::float8 IS NULL OR me.global_mode OR (u.lat IS NOT NULL AND ${DISTANCE_SQL} <= me.max_distance_km))
+       ${geo ? GEO_BOUNDED : 'AND ($2::float8 IS NULL OR $3::float8 IS NULL OR true)'}
        AND (NOT $5::bool OR (
              (NOT me.filter_verified OR u.is_verified)
          AND (NOT me.filter_has_prompts OR jsonb_array_length(u.prompts) > 0)
@@ -47,11 +54,27 @@ function candidatesSql(orderBy: string, limit: number) {
      LIMIT ${limit}`;
 }
 
+/** Rectangle that contains every point within `km` of `loc`. Longitude is left unbounded near the poles or the date line. */
+export function boundingBox(loc: { lat: number; lng: number } | null, km: number) {
+  if (!loc) return { minLat: -90, maxLat: 90, minLng: null as number | null, maxLng: null as number | null };
+  const dLat = km / 111;
+  const dLng = km / (111 * Math.max(Math.cos((loc.lat * Math.PI) / 180), 0.01));
+  const wraps = loc.lng - dLng < -180 || loc.lng + dLng > 180 || Math.abs(loc.lat) + dLat > 85;
+  return {
+    minLat: loc.lat - dLat, maxLat: loc.lat + dLat,
+    minLng: wraps ? null : loc.lng - dLng, maxLng: wraps ? null : loc.lng + dLng,
+  };
+}
+
 async function candidates(me: UserRow, orderBy: string, limit: number, exclude: string[] = []) {
   const loc = viewerLocation(me);
-  const rows = await query<UserRow & { superliked_me: boolean; note: string | null }>(candidatesSql(orderBy, limit), [
-    me.id, loc?.lat ?? null, loc?.lng ?? null, exclude, entitlementsFor(me).advancedFilters,
-  ]);
+  const geo = !!loc && !me.global_mode;
+  const base = [me.id, loc?.lat ?? null, loc?.lng ?? null, exclude, entitlementsFor(me).advancedFilters];
+  const box = boundingBox(loc, me.max_distance_km);
+  const rows = await query<UserRow & { superliked_me: boolean; note: string | null }>(
+    candidatesSql(orderBy, limit, geo),
+    geo ? [...base, box.minLat, box.maxLat, box.minLng, box.maxLng] : base,
+  );
   const photos = await photosFor(rows.rows.map((r) => r.id));
   return rows.rows.map((u) => ({
     ...publicProfile(u, photos.get(u.id) ?? [], me),

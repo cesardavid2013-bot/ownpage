@@ -4,7 +4,7 @@ import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import { config } from '../config.js';
 import { one } from '../db/pool.js';
-import { ah, badRequest, conflict, unauthorized } from '../lib/errors.js';
+import { ah, badRequest, conflict, HttpError, unauthorized } from '../lib/errors.js';
 import { issueRefreshToken, revokeRefreshToken, rotateRefreshToken, signAccessToken } from '../lib/auth.js';
 import { ageFrom, getUser, privateProfile } from '../services/users.js';
 import { SUPPORTED_LOCALES } from '../locales.js';
@@ -28,6 +28,25 @@ const refreshLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: 'too_many_requests' },
 });
+
+/**
+ * Per-account brake on password guessing, on top of the per-IP limit: a distributed attack on one
+ * address is stopped after a handful of misses. In-memory, so it resets on restart (acceptable for one instance).
+ */
+const misses = new Map<string, { count: number; until: number }>();
+const MAX_MISSES = 8;
+const LOCK_MS = 15 * 60 * 1000;
+function lockedOut(email: string) {
+  const m = misses.get(email);
+  if (m && m.until < Date.now()) misses.delete(email);
+  return !!m && m.count >= MAX_MISSES && m.until > Date.now();
+}
+function recordMiss(email: string) {
+  const m = misses.get(email);
+  const fresh = !m || m.until < Date.now();
+  misses.set(email, { count: fresh ? 1 : m.count + 1, until: Date.now() + LOCK_MS });
+}
+export const resetLoginMisses = () => misses.clear();
 
 const registerSchema = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
@@ -71,7 +90,12 @@ authRouter.post('/login', limiter, ah(async (req, res) => {
     'SELECT id, password_hash, is_banned FROM users WHERE lower(email) = $1 AND deleted_at IS NULL',
     [body.email],
   );
-  if (!user || !(await bcrypt.compare(body.password, user.password_hash))) throw unauthorized('invalid_credentials');
+  if (lockedOut(body.email)) throw new HttpError(429, 'too_many_requests');
+  if (!user || !(await bcrypt.compare(body.password, user.password_hash))) {
+    recordMiss(body.email);
+    throw unauthorized('invalid_credentials');
+  }
+  misses.delete(body.email);
   if (user.is_banned) throw unauthorized('account_banned');
   res.json(await session(user.id));
 }));

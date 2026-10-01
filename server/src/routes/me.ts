@@ -15,6 +15,8 @@ import { INTEREST_IDS, MAX_INTERESTS } from '../interests.js';
 import { poseFor } from '../verification.js';
 import { processPhoto, removeStored } from '../lib/media.js';
 import { emitToUser } from '../realtime.js';
+import bcrypt from 'bcryptjs';
+import { issueRefreshToken, signAccessToken } from '../lib/auth.js';
 import { userLimiter } from '../lib/limits.js';
 
 export const meRouter = Router();
@@ -258,8 +260,27 @@ meRouter.post('/verification', uploadLimiter, selfieUpload.single('photo'), ah(a
   }
 }));
 
+// Sensitive account actions re-check the password, so a stolen unlocked phone or token isn't enough.
+const sensitiveLimiter = userLimiter('sensitive', 60 * 60 * 1000, 10);
+async function requirePassword(userId: string, password: unknown) {
+  const row = await one<{ password_hash: string }>('SELECT password_hash FROM users WHERE id = $1', [userId]);
+  if (typeof password !== 'string' || !row || !(await bcrypt.compare(password, row.password_hash))) throw forbidden('wrong_password');
+}
+
+meRouter.post('/password', sensitiveLimiter, ah(async (req, res) => {
+  const body = z.object({ current: z.string().max(128), next: z.string().min(8).max(128) }).parse(req.body);
+  await requirePassword(req.userId!, body.current);
+  if (body.current === body.next) throw badRequest('same_password');
+  const hash = await bcrypt.hash(body.next, config.isTest ? 4 : 11);
+  await query('UPDATE users SET password_hash = $2 WHERE id = $1', [req.userId, hash]);
+  // Every other device is signed out; this one gets a fresh session.
+  await query('UPDATE refresh_tokens SET revoked_at = now() WHERE user_id = $1 AND revoked_at IS NULL', [req.userId]);
+  res.json({ accessToken: signAccessToken(req.userId!), refreshToken: await issueRefreshToken(req.userId!) });
+}));
+
 /** Account deletion (required by Apple & Google): anonymises the user and removes their content. */
-meRouter.delete('/', ah(async (req, res) => {
+meRouter.delete('/', sensitiveLimiter, ah(async (req, res) => {
+  await requirePassword(req.userId!, req.body?.password);
   let ended: { id: string; other: string }[] = [];
   let selfies: string[] = [];
   const photos = await tx(async (c) => {

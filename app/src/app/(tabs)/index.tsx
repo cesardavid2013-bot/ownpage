@@ -73,6 +73,13 @@ export default function Discover() {
     }
   }, [settingsKey, load]));
 
+  // Warm the cache for the next cards so a swipe never waits on a photo: full image for the next
+  // two, and the second photo of the top card. Hidden profiles further down are not downloaded.
+  useEffect(() => {
+    const urls = [deck[0]?.photos[1]?.url, deck[1]?.photos[0]?.url, deck[2]?.photos[0]?.url].filter((u): u is string => !!u);
+    if (urls.length) Image.prefetch(urls).catch(() => {});
+  }, [deck]);
+
   useEffect(() => {
     if (!loading && deck.length < 4) load();
   }, [deck.length, loading, load]);

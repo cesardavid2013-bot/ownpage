@@ -6,6 +6,8 @@ import { config } from './config.js';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { query } from './db/pool.js';
 import { createApp } from './app.js';
+import { boundingBox } from './routes/discover.js';
+import { resetLoginMisses } from './routes/auth.js';
 import { app, closeDb, makeUser, PNG, resetDb } from './test-utils.js';
 
 beforeEach(resetDb);
@@ -372,7 +374,7 @@ describe('account deletion', () => {
   it('deletes the account and frees the email', async () => {
     const u = await makeUser();
     const email = (await request(app).get('/me').set(u.auth)).body.email;
-    await request(app).delete('/me').set(u.auth).expect(204);
+    await request(app).delete('/me').set(u.auth).send({ password: 'password123' }).expect(204);
     await request(app).get('/me').set(u.auth).expect(401);
     await request(app).post('/auth/refresh').send({ refreshToken: u.refreshToken }).expect(401);
     const again = await request(app).post('/auth/register').send({
@@ -481,6 +483,46 @@ describe('integrity, privacy and safety', () => {
     expect(seen.body.age).toBeGreaterThanOrEqual(18);
   });
 
+  it('protects the account: password re-check, change password, per-account lockout', async () => {
+    const u = await makeUser();
+    // Deleting needs the password; a stolen session alone can't do it.
+    await request(app).delete('/me').set(u.auth).expect(403);
+    await request(app).delete('/me').set(u.auth).send({ password: 'wrong-password' }).expect(403);
+    expect((await query('SELECT deleted_at FROM users WHERE id = $1', [u.id])).rows[0].deleted_at).toBeNull();
+
+    const other = await request(app).post('/auth/login').send({ email: (await query('SELECT email FROM users WHERE id = $1', [u.id])).rows[0].email, password: 'password123' });
+    const changed = await request(app).post('/me/password').set(u.auth).send({ current: 'password123', next: 'a-new-password-1' });
+    expect(changed.status).toBe(200);
+    // The old refresh token (another device) is dead; the new one works.
+    await request(app).post('/auth/refresh').send({ refreshToken: other.body.refreshToken }).expect(401);
+    await request(app).post('/auth/refresh').send({ refreshToken: changed.body.refreshToken }).expect(200);
+    await request(app).post('/me/password').set(u.auth).send({ current: 'password123', next: 'whatever-123' }).expect(403);
+    await request(app).post('/me/password').set(u.auth).send({ current: 'a-new-password-1', next: 'short' }).expect(400);
+
+    // Eight wrong guesses lock that address, even for the right password.
+    const email = (await query('SELECT email FROM users WHERE id = $1', [u.id])).rows[0].email;
+    for (let i = 0; i < 8; i++) await request(app).post('/auth/login').send({ email, password: 'nope-nope-nope' }).expect(401);
+    await request(app).post('/auth/login').send({ email, password: 'a-new-password-1' }).expect(429);
+    resetLoginMisses();
+    await request(app).post('/auth/login').send({ email, password: 'a-new-password-1' }).expect(200);
+  });
+
+  it('distance filtering: nearby only by default, everyone in global mode, date line handled', async () => {
+    const me = await makeUser({ gender: 'woman', interestedIn: ['man'], lat: 40.4168, lng: -3.7038 });
+    const near = await makeUser({ gender: 'man', interestedIn: ['woman'], lat: 40.45, lng: -3.69 });
+    const far = await makeUser({ gender: 'man', interestedIn: ['woman'], lat: 48.8566, lng: 2.3522 });
+    const ids = async () => (await request(app).get('/discover').set(me.auth)).body.profiles.map((p: { id: string }) => p.id);
+    expect(await ids()).toEqual([near.id]);
+    await request(app).patch('/me/settings').set(me.auth).send({ globalMode: true }).expect(200);
+    expect((await ids()).sort()).toEqual([near.id, far.id].sort());
+
+    expect(boundingBox({ lat: 40, lng: 0 }, 50)).toMatchObject({ minLng: expect.any(Number), maxLng: expect.any(Number) });
+    // Near the date line or a pole the longitude bound is dropped rather than excluding real neighbours.
+    expect(boundingBox({ lat: 0, lng: 179.9 }, 50).minLng).toBeNull();
+    expect(boundingBox({ lat: 89, lng: 10 }, 50).minLng).toBeNull();
+    expect(boundingBox(null, 50)).toMatchObject({ minLat: -90, maxLat: 90 });
+  });
+
   it('hides activity status when the member turns it off', async () => {
     const a = await makeUser();
     const b = await makeUser();
@@ -511,7 +553,7 @@ describe('integrity, privacy and safety', () => {
     await request(app).post('/swipes').set(a.auth).send({ targetId: b.id, action: 'like' });
     const m = await request(app).post('/swipes').set(b.auth).send({ targetId: a.id, action: 'like' });
     await request(app).post(`/matches/${m.body.match.id}/messages`).set(a.auth).send({ body: 'private words' }).expect(201);
-    await request(app).delete('/me').set(a.auth).expect(204);
+    await request(app).delete('/me').set(a.auth).send({ password: 'password123' }).expect(204);
     expect((await query('SELECT count(*)::int AS n FROM messages WHERE sender_id = $1', [a.id])).rows[0].n).toBe(0);
     expect((await request(app).get('/matches').set(b.auth)).body.matches).toHaveLength(0);
     await request(app).get(`/users/${a.id}`).set(b.auth).expect(404);

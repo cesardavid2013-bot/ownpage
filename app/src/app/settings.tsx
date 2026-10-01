@@ -6,9 +6,9 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Header, Screen } from '@/components/Screen';
 import { Sheet } from '@/components/Sheet';
-import { Button, Chip, Muted, PlanBadge, Title } from '@/components/ui';
+import { Button, Chip, ErrorText, Input, Muted, PlanBadge, Title } from '@/components/ui';
 import { LANGUAGES, currentLanguage, errorMessage } from '@/i18n';
-import { api } from '@/lib/api';
+import { api, tokens } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { SUPPORT_EMAIL } from '@/lib/config';
 import { confirm, notify } from '@/lib/notify';
@@ -70,13 +70,35 @@ export default function SettingsScreen() {
     }
   }
 
-  async function deleteAccount() {
-    if (!(await confirm(t('settings.deleteConfirm'), t('common.delete'), t('common.cancel')))) return;
+  // Both actions re-ask for the password: a lost, unlocked phone isn't enough to take the account over.
+  const [secure, setSecure] = useState<'password' | 'delete' | null>(null);
+  const [current, setCurrent] = useState('');
+  const [next, setNext] = useState('');
+  const [secureError, setSecureError] = useState<string | null>(null);
+  const [secureBusy, setSecureBusy] = useState(false);
+
+  function openSecure(kind: 'password' | 'delete') {
+    setCurrent(''); setNext(''); setSecureError(null); setSecure(kind);
+  }
+
+  async function submitSecure() {
+    setSecureBusy(true);
+    setSecureError(null);
     try {
-      await api('/me', { method: 'DELETE' });
-      await useAuth.getState().logout();
+      if (secure === 'delete') {
+        await api('/me', { method: 'DELETE', body: { password: current } });
+        setSecure(null);
+        await useAuth.getState().logout();
+      } else {
+        const res = await api<{ accessToken: string; refreshToken: string }>('/me/password', { body: { current, next } });
+        await tokens.set(res.accessToken, res.refreshToken);
+        setSecure(null);
+        notify(t('account.changed'));
+      }
     } catch (e) {
-      notify(errorMessage(e));
+      setSecureError(errorMessage(e));
+    } finally {
+      setSecureBusy(false);
     }
   }
 
@@ -147,6 +169,7 @@ export default function SettingsScreen() {
         ) : null}
         <Item label={t('settings.restore')} onPress={restore} />
         <Item label={user.email} icon="mail-outline" />
+        <Item label={t('account.changePassword')} icon="key-outline" onPress={() => openSecure('password')} chevron />
       </Section>
 
       <Section title={t('settings.help')}>
@@ -156,11 +179,22 @@ export default function SettingsScreen() {
 
       <View style={{ gap: space(3), marginTop: space(6) }}>
         <Button title={t('auth.logout')} variant="secondary" icon="log-out-outline" onPress={() => useAuth.getState().logout()} />
-        <Button title={t('settings.deleteAccount')} variant="ghost" onPress={deleteAccount} />
+        <Button title={t('settings.deleteAccount')} variant="ghost" onPress={() => openSecure('delete')} testID="delete-account" />
         <Muted style={{ textAlign: 'center', fontSize: 12, fontFamily: font.body }}>
           Lumi · {t('settings.version', { version: Constants.expoConfig?.version ?? '1.0.0' })}
         </Muted>
       </View>
+
+      <Sheet visible={secure !== null} onClose={() => !secureBusy && setSecure(null)}>
+        <Title style={{ fontSize: 24 }}>{secure === 'delete' ? t('account.deleteTitle') : t('account.changePassword')}</Title>
+        {secure === 'delete' ? <Muted>{t('account.deleteBody')}</Muted> : null}
+        <Input label={t('account.current')} value={current} onChangeText={setCurrent} secureTextEntry autoCapitalize="none" autoComplete="current-password" testID="secure-current" />
+        {secure === 'password' ? <Input label={t('account.new')} value={next} onChangeText={setNext} secureTextEntry autoCapitalize="none" autoComplete="new-password" testID="secure-new" /> : null}
+        <ErrorText message={secureError} />
+        <Button title={secure === 'delete' ? t('common.delete') : t('account.save')} variant={secure === 'delete' ? 'danger' : 'primary'}
+          onPress={submitSecure} loading={secureBusy} disabled={!current || (secure === 'password' && next.length < 8)} testID="secure-submit" />
+        <Button title={t('common.cancel')} variant="ghost" onPress={() => setSecure(null)} />
+      </Sheet>
 
       <Sheet visible={passportOpen} onClose={() => setPassportOpen(false)}>
         <Title style={{ fontSize: 22, fontFamily: font.body }}>{t('settings.passport')}</Title>

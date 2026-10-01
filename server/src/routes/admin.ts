@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Router, type NextFunction, type Request, type Response } from 'express';
+import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import { config } from '../config.js';
 import { one, query, tx } from '../db/pool.js';
@@ -19,6 +20,15 @@ function requireAdmin(req: Request, _res: Response, next: NextFunction) {
   const ok = expected.length >= 16 && got.length === expected.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(expected));
   next(ok ? undefined : unauthorized());
 }
+// Wrong tokens are throttled hard (successful requests don't count), so the token can't be guessed.
+adminRouter.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: config.isTest ? 10_000 : 20,
+  skipSuccessfulRequests: true,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'too_many_requests' },
+}));
 adminRouter.use(requireAdmin);
 
 const uuid = z.string().uuid();
