@@ -34,7 +34,7 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run check:i18n
-      - run: npx expo export --platform web
+      - run: npx expo export --clear --platform web
         env: { EXPO_PUBLIC_API_URL: same-origin, EXPO_NO_TELEMETRY: 1 }
       # The phone apps share this code; make sure both native bundles still compile.
       - run: npx expo export --platform ios --output-dir dist-ios

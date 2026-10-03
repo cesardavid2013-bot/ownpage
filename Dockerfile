@@ -11,7 +11,7 @@ COPY app/ ./
 ENV EXPO_PUBLIC_API_URL=same-origin EXPO_OFFLINE=1 EXPO_NO_TELEMETRY=1
 ARG EXPO_PUBLIC_REVENUECAT_IOS_KEY=""
 ARG EXPO_PUBLIC_REVENUECAT_ANDROID_KEY=""
-RUN npx expo export --platform web --output-dir dist
+RUN npx expo export --clear --platform web --output-dir dist
 
 # ---- API ----
 FROM node:22-slim AS api

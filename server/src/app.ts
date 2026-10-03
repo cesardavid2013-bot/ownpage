@@ -25,6 +25,8 @@ export function createApp({ webDir = config.webDir }: { webDir?: string } = {}) 
         // blob: is how the web app reads a picked photo before uploading it.
         'img-src': ["'self'", 'data:', 'blob:', 'https:'],
         'connect-src': ["'self'", 'blob:', 'ws:', 'wss:'],
+        // Local runs are plain http (including from a phone on the same Wi-Fi); upgrading would break every asset.
+        'upgrade-insecure-requests': config.isProd ? [] : null,
       },
     },
   }));
